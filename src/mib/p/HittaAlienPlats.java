@@ -164,7 +164,4 @@ public class HittaAlienPlats extends javax.swing.JPanel {
     private javax.swing.JTextArea txtaListadeAliens;
     // End of variables declaration//GEN-END:variables
 
-    private void initComponents() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
