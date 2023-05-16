@@ -2,6 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+
+/*
+ * Detta är en JPanel-klass som visar användaren en formulärsida för att befordra en agent till administratör. 
+ * Agenter som för närvarande inte har admin-status visas i en jComboBox.
+ * När användaren trycker på knappen "Befordra" sätts den valda agenten till Administratör i databasen. 
+ * Användaren kan också ta sig tillbaka till "Min sida" och "Admintjänster" med hjälp av knapparna på sidan.
+ */
 package mib.p;
 
 import javax.swing.JOptionPane;
