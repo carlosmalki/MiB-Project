@@ -179,9 +179,9 @@ public class RegisteraForm extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRegistrera)
-                .addGap(127, 127, 127)
+                .addGap(113, 113, 113)
                 .addComponent(btnMinSida)
-                .addContainerGap())
+                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
                 .addGap(226, 226, 226)
                 .addComponent(lblRegistreraAlien)
@@ -230,7 +230,7 @@ public class RegisteraForm extends javax.swing.JPanel {
                     .addComponent(txtLosenOrdReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrera)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMinSida)
@@ -240,7 +240,7 @@ public class RegisteraForm extends javax.swing.JPanel {
 
     private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
     String namn = txtNamnReg.getText();
-    String epost = txtEpostReg.getText();
+    String eposten = txtEpostReg.getText();
     String telnr = txtTelReg.getText();
     String datum = txtDatumReg.getText();
     String losenord = txtLosenOrdReg.getText();
@@ -298,13 +298,13 @@ if (!ValideringsKlass.validateTextFieldNotEmpty(losenord)) {
     plats = Integer.parseInt(txtPlatsReg.getText());
 
     // Kontrollerar om e-postadressen redan finns registrerad, då E-post används för att unikt identifiera varje Alien.
-    if (ValideringsKlass.checkEpost(epost)) {
+    if (ValideringsKlass.checkEpost(eposten)) {
         JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen.");
         return;
     }
 
     try {
-        idb.insert("INSERT INTO mibdb.alien VALUES (" + alienID + ", '" + datum + "', '" + epost + "', '" + losenord + "', '" + namn + "', '" + telnr + "', " + plats + ", " + ansvAgent + ")");
+        idb.insert("INSERT INTO mibdb.alien VALUES (" + alienID + ", '" + datum + "', '" + eposten + "', '" + losenord + "', '" + namn + "', '" + telnr + "', " + plats + ", " + ansvAgent + ")");
         JOptionPane.showMessageDialog(null, "Alien " + namn + " har registrerats i databasen.");
     } catch (InfException e) {
         JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av data.");

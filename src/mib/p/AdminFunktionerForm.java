@@ -4,17 +4,27 @@
  */
 package mib.p;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+
+
+
 /**
  *
  * @author ASUS
  */
 public class AdminFunktionerForm extends javax.swing.JPanel {
+    private String epost;
+    private String isAdmin;
 
     /**
      * Creates new form AdminFunktionerForm
      */
-    public AdminFunktionerForm() {
+    public AdminFunktionerForm(String epost,String isAdmin) {
         initComponents();
+        this.epost = epost;
+        this.isAdmin = isAdmin;
     }
 
     /**
@@ -26,19 +36,44 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+
+        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jButton1.setText("Befordra Agent");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jButton1)
+                .addContainerGap(334, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jButton1)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+                frame.setContentPane(new BefordraAgentForm(epost,isAdmin));
+                frame.revalidate();
+                frame.setTitle("Befordra Agent");
+                frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

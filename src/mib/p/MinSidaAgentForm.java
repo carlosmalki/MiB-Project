@@ -221,7 +221,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
        }}
     private void btnAdminFunktionerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminFunktionerActionPerformed
           JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new AdminFunktionerForm());
+                frame.setContentPane(new AdminFunktionerForm(epost,isAdmin));
                 frame.revalidate();
                 frame.setTitle("Administratörsfunktioner");
                 frame.repaint();
@@ -253,7 +253,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
     private void btnAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlienSokActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new AndraAlienInfoForm(epost,isAdmin));
+                frame.setContentPane(new AlienSokForm(epost,isAdmin));
                 frame.revalidate();
                 frame.setTitle("Sök Alien");
                 frame.repaint();
