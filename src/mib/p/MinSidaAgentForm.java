@@ -68,6 +68,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         btnAlienSok = new javax.swing.JButton();
         btnAndraLosenord = new javax.swing.JButton();
         btnAndraAlienInfo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -134,6 +135,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jButton1.setText("Aliens på en plats");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,9 +154,11 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addComponent(lblMinSida))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(187, 187, 187)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnListaRas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegisteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnListaRas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRegisteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(188, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -181,7 +192,9 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addComponent(lblMinSida)
                 .addGap(18, 18, 18)
                 .addComponent(lblValkommenNamn)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(5, 5, 5)
                 .addComponent(btnRegisteraAlien)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnListaRas)
@@ -191,7 +204,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addComponent(btnAlienSok)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAndraAlienInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdminFunktioner)
                     .addComponent(btnAndraLosenord))
@@ -262,6 +275,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 frame.repaint();
     }//GEN-LAST:event_btnAndraAlienInfoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+                frame.setContentPane(new HittaAlienPlats());
+                frame.revalidate();
+                frame.setTitle("Lista alla aliens på en angiven plats");
+                frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminFunktioner;
@@ -271,6 +292,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
     private javax.swing.JButton btnListaRas;
     private javax.swing.JButton btnRegisteraAlien;
     private javax.swing.JButton btnRegistreradeAliens;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblMinSida;
     private javax.swing.JLabel lblValkommenNamn;
     // End of variables declaration//GEN-END:variables
