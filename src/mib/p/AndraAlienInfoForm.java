@@ -345,6 +345,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             andraAnsvarigAgent(agentNamn, alienID);
             JOptionPane.showMessageDialog(null, "Ansvarig agent uppdaterades. Ny ansvarig agent: " + agentNamn);
         }
+        if (!jComboValjPlats.getSelectedItem().equals("Välj plats"))
+        { 
+          String nyPlats =jComboValjPlats.getSelectedItem().toString();
+          andraPlats(alienID);
+          JOptionPane.showMessageDialog(null, "Plats uppdaterades. Ny plats: " + nyPlats);
+          txtPlats.setText(nyPlats);
+        }
         jComboAgenter.setSelectedIndex(0);
         jComboValjPlats.setSelectedIndex(0);
         jComboValjRas.setSelectedIndex(0);
@@ -509,6 +516,19 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         txtRas.setText(nyRas);
 
     }
+    
+    public void andraPlats(int alienID) {
+    int platsID = hamtaPlatsID(jComboValjPlats.getSelectedItem().toString());
+    String query = "UPDATE mibdb.alien SET Plats = " + platsID + " WHERE Alien_ID = " + alienID;
+
+    try {
+        idb.update(query);
+    } catch (InfException e) {
+        
+       
+    }
+}
+    
 
     private void andraAnsvarigAgent(String agentNamn, int alienID) {
 
@@ -549,7 +569,19 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
         }
     }
-
+    
+    public int hamtaPlatsID(String plats) {
+        int platsID = 0;
+    try {
+        String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + plats + "'";
+        platsID = Integer.parseInt(idb.fetchSingle(query));
+        
+        
+    } catch (InfException e) {
+        System.out.println("Fel vid hämtning av plats ID: " + e.getMessage());
+    }
+    return platsID;
+}
     private void fyllAgentComboBox() {
         try {
             String query = "SELECT Namn FROM mibdb.agent";
