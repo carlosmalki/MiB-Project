@@ -35,7 +35,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txtAlienIdSok" min="-2" pref="118" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSok" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
@@ -48,7 +48,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btnAndraInfo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnMinSida" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -62,14 +62,14 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtAlienIdSok" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSok" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnMinSida" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -92,7 +92,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtAlienIdSok">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnSok">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Gothic" size="14" style="1"/>
@@ -100,7 +100,7 @@
         <Property name="text" type="java.lang.String" value="S&#xf6;k"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
@@ -121,41 +121,45 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="labRas" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="labTelefon" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="labRegDatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labAnsvAgent" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labNamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labLosenOrd" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtNamn" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtRas" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtTelefon" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtRegDatum" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtAnsvAgent" max="32767" attributes="0"/>
-                                  <Component id="txtPlats" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
-                                  <Component id="txtLosenOrd" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="labAnsvAgent" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labNamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labLosenOrd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtNamn" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtRas" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtTelefon" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtRegDatum" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtAnsvAgent" max="32767" attributes="0"/>
+                                          <Component id="txtPlats" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                                          <Component id="txtLosenOrd" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labRas" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtAndraRas" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtAndraTelefon" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtAndraAgent" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtAndraRegDatum" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtAndraPlats" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtAndraLosenOrd" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtAndraNamn" min="-2" pref="144" max="-2" attributes="0"/>
+                                      <Component id="txtAndraNamn" max="32767" attributes="0"/>
+                                      <Component id="jComboAgenter" alignment="0" pref="144" max="32767" attributes="0"/>
+                                      <Component id="jComboValjRas" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -183,7 +187,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtRas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labRas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtAndraRas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboValjRas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -199,9 +203,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtAndraAgent" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labAnsvAgent" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtAnsvAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboAgenter" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -261,8 +265,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtRegDatum">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtAndraAgent">
-        </Component>
         <Component class="javax.swing.JLabel" name="labNamn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -301,8 +303,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtAndraNamn">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtAndraRas">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtAndraTelefon">
         </Component>
         <Component class="javax.swing.JTextField" name="txtAndraRegDatum">
@@ -321,9 +321,37 @@
             <Property name="text" type="java.lang.String" value="Ny info"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JComboBox" name="jComboAgenter">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="V&#xe4;lj agent"/>
+              </StringArray>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboValjRas">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="V&#xe4;lj ras"/>
+                <StringItem index="1" value="Worm"/>
+                <StringItem index="2" value="Squid"/>
+                <StringItem index="3" value="Boglodite"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnMinSida">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Gothic" size="14" style="1"/>
@@ -331,7 +359,7 @@
         <Property name="text" type="java.lang.String" value="Min sida"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMinSidaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAndraInfo">
