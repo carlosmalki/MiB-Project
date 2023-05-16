@@ -71,11 +71,11 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         txtAndraTelefon = new javax.swing.JTextField();
         txtAndraRegDatum = new javax.swing.JTextField();
         txtAnsvAgent = new javax.swing.JTextField();
-        txtAndraPlats = new javax.swing.JTextField();
         txtAndraLosenOrd = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jComboAgenter = new javax.swing.JComboBox<>();
         jComboValjRas = new javax.swing.JComboBox<>();
+        jComboValjPlats = new javax.swing.JComboBox<>();
         btnMinSida = new javax.swing.JButton();
         btnAndraInfo = new javax.swing.JButton();
 
@@ -126,7 +126,9 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jComboAgenter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj agent" }));
         jComboAgenter.setToolTipText("");
 
-        jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Worm", "Squid", "Boglodite" }));
+        jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", " " }));
+
+        jComboValjPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj plats" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,14 +163,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAndraTelefon)
                             .addComponent(txtAndraRegDatum, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtAndraPlats)
                             .addComponent(txtAndraLosenOrd)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4)
                                     .addComponent(txtAndraNamn)
                                     .addComponent(jComboAgenter, 0, 144, Short.MAX_VALUE)
-                                    .addComponent(jComboValjRas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jComboValjRas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboValjPlats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -207,7 +209,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtAndraPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboValjPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,6 +284,8 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         txtRas.setText("");
         fyllAgentComboBox();
+        fyllValjPlatsCombo();
+        fyllValjRasComboBox();
         alienSok();
 
     }//GEN-LAST:event_btnSokActionPerformed
@@ -324,6 +328,9 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
 
         }
+        resetAgentComboBox();
+        resetValjPlatsComboBox();
+        resetValjRasComboBox();
     }//GEN-LAST:event_btnAndraInfoActionPerformed
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
@@ -478,7 +485,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
 
         txtRas.setText(nyRas);
-        
+
     }
 
     public void laggTillAlien(String nyRas, int alienID) {
@@ -488,7 +495,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             idb.insert(query);
 
             txtRas.setText(nyRas);
-            
+
         } catch (InfException e) {
             System.out.println("Åh nöööh");
 
@@ -510,21 +517,60 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         try {
             String query = "SELECT Namn FROM mibdb.agent";
             ArrayList<String> agentNamn = idb.fetchColumn(query);
-            for(String namn : agentNamn)
-            {
-            jComboAgenter.addItem(namn);
+            for (String namn : agentNamn) {
+                jComboAgenter.addItem(namn);
             }
         } catch (InfException e) {
-           
+
         }
 
     }
 
+    private void fyllValjPlatsCombo() {
+        try {
+            String query = "SELECT Benamning FROM mibdb.plats";
+            ArrayList<String> platser = idb.fetchColumn(query);
+            for (String plats : platser) {
+                jComboValjPlats.addItem(plats);
+            }
+        } catch (InfException e) {
+
+        }
+    }
+   
+    private void fyllValjRasComboBox()
+    {
+    jComboValjRas.addItem("Boglodite");
+    jComboValjRas.addItem("Squid");
+    jComboValjRas.addItem("Worm");
+    }
+    
+    private void resetValjRasComboBox()
+    {
+    jComboValjRas.removeAllItems();
+    jComboValjRas.addItem("Välj ras");
+    
+    }
+    
+    private void resetValjPlatsComboBox()
+    {
+    jComboValjPlats.removeAllItems();
+    jComboValjPlats.addItem("Välj plats");
+    
+    }
+    
+    private void resetAgentComboBox()
+    {
+    jComboAgenter.removeAllItems();
+    jComboAgenter.addItem("Välj agent");
+    
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfo;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnSok;
     private javax.swing.JComboBox<String> jComboAgenter;
+    private javax.swing.JComboBox<String> jComboValjPlats;
     private javax.swing.JComboBox<String> jComboValjRas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -540,7 +586,6 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtAlienIdSok;
     private javax.swing.JTextField txtAndraLosenOrd;
     private javax.swing.JTextField txtAndraNamn;
-    private javax.swing.JTextField txtAndraPlats;
     private javax.swing.JTextField txtAndraRegDatum;
     private javax.swing.JTextField txtAndraTelefon;
     private javax.swing.JTextField txtAnsvAgent;
