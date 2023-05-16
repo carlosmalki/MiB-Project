@@ -21,13 +21,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
+    private ValideringsKlass validera = new ValideringsKlass();
 
     /**
      * Creates new form AlienSokForm
      */
     public AndraAlienInfoForm(String epost, String isAdmin) {
         
-        this.isAdmin = isAdmin;
+       this.isAdmin = isAdmin;
         initComponents();
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -35,7 +36,8 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        this.epost=epost;
+        this.epost = epost;
+
         
     }
 
@@ -60,22 +62,23 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         labAnsvAgent = new javax.swing.JLabel();
         txtTelefon = new javax.swing.JTextField();
         txtRegDatum = new javax.swing.JTextField();
-        txtAnsvAgent = new javax.swing.JTextField();
+        txtAndraAgent = new javax.swing.JTextField();
         labNamn = new javax.swing.JLabel();
         txtPlats = new javax.swing.JTextField();
         txtLosenOrd = new javax.swing.JTextField();
         labLosenOrd = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtAndraNamn = new javax.swing.JTextField();
+        txtAndraRas = new javax.swing.JTextField();
+        txtAndraTelefon = new javax.swing.JTextField();
+        txtAndraRegDatum = new javax.swing.JTextField();
+        txtAnsvAgent = new javax.swing.JTextField();
+        txtAndraPlats = new javax.swing.JTextField();
+        txtAndraLosenOrd = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        btnAndraInfo = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -118,8 +121,6 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         jLabel1.setText("Nuvarande info");
 
-        jTextField7.setText("jTextField7");
-
         jLabel4.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         jLabel4.setText("Ny info");
 
@@ -140,40 +141,30 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(labLosenOrd))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNamn)
+                                .addComponent(txtRas)
+                                .addComponent(txtTelefon)
+                                .addComponent(txtRegDatum)
+                                .addComponent(txtAnsvAgent)
+                                .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAndraRas)
+                            .addComponent(txtAndraTelefon)
+                            .addComponent(txtAndraAgent, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAndraRegDatum, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAndraPlats)
+                            .addComponent(txtAndraLosenOrd)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField6))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtRegDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField4))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtAnsvAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtRas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(27, 123, Short.MAX_VALUE))
+                                    .addComponent(txtAndraNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,37 +176,37 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labNamn)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAndraNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labRas)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAndraRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labTelefon)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAndraTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRegDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labRegDatum)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAndraRegDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAnsvAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAndraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labAnsvAgent)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAnsvAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAndraPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labLosenOrd)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAndraLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -227,6 +218,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             }
         });
 
+        btnAndraInfo.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAndraInfo.setText("Uppdatera");
+        btnAndraInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,32 +233,42 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtAlienIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 64, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAndraInfo)
+                        .addGap(130, 130, 130)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtAlienIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAndraInfo)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -276,6 +285,38 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 frame.setTitle("Startsida: Agent");
                 frame.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnAndraInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraInfoActionPerformed
+       String stringId = txtAlienIdSok.getText();
+        int alienID = Integer.parseInt(stringId);
+        
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraNamn.getText())) {
+            andraNamn(alienID);
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraTelefon.getText())) {
+            andraTelefon(alienID);
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraLosenOrd.getText())) {
+            andraLosenOrd(alienID);
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraRegDatum.getText())) {
+            andraRegDatum(alienID);
+
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraRas.getText()) && ValideringsKlass.validateTextFieldNotEmpty(txtRas.getText())) {
+            String nuvarandeRas = txtRas.getText();
+            String nyRas = txtAndraRas.getText();
+            if (nyRas.equals("Worm") || nyRas.equals("Boglodite") || nyRas.equals("Squid")) {
+                andraRas(nuvarandeRas, nyRas, Integer.parseInt(txtAlienIdSok.getText()));
+            }
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraRas.getText()) && !ValideringsKlass.validateTextFieldNotEmpty(txtRas.getText())) {
+           String nyRas = txtAndraRas.getText();
+           laggTillAlien(nyRas,alienID);
+           JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
+        
+        }
+    }//GEN-LAST:event_btnAndraInfoActionPerformed
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
         txtRegDatum.setText(alienInfo.get("Registreringsdatum"));
@@ -355,8 +396,109 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid sökningen av alien.");
         }
     }
+    public void andraNamn(int alienID) {
+
+        String nyttNamn = txtAndraNamn.getText();
+        try {
+            String query = "UPDATE mibdb.alien SET Namn = '" + nyttNamn + "' WHERE Alien_ID = '" + alienID + "'";
+            idb.update(query);
+            JOptionPane.showMessageDialog(null, "Namnet uppdaterades. Nytt namn: " + nyttNamn);
+            txtNamn.setText(nyttNamn);
+            txtAndraNamn.setText("");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel inträffade vid uppdatering av data.");
+        }
+
+    }
+    
+    public void andraTelefon(int alienID) {
+        String nyttNummer = txtAndraTelefon.getText();
+        if (ValideringsKlass.valideraInt(nyttNummer)) {
+
+            try {
+                String query = "UPDATE mibdb.alien SET Telefon = '" + nyttNummer + "' WHERE Alien_ID = '" + alienID + "'";
+                idb.update(query);
+                JOptionPane.showMessageDialog(null, "Numret uppdaterades. Nytt nummer: " + nyttNummer);
+                txtTelefon.setText(nyttNummer);
+                txtAndraTelefon.setText("");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Ett fel inträffade vid uppdatering av data.");
+            }
+        }
+    }
+    
+    public void andraLosenOrd(int alienID) {
+        String nyttLosenOrd = txtAndraLosenOrd.getText();
+        {
+
+            try {
+                String query = "UPDATE mibdb.alien SET Losenord = '" + nyttLosenOrd + "' WHERE Alien_ID = '" + alienID + "'";
+                idb.update(query);
+                JOptionPane.showMessageDialog(null, "Lösenordet uppdaterades. Nytt lösenord: " + nyttLosenOrd);
+                txtLosenOrd.setText(nyttLosenOrd);
+                txtAndraLosenOrd.setText("");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Lösenord för långt. Välj max sex tecken.");
+            }
+        }
+
+    }
+    
+     public void andraRegDatum(int alienID) {
+        String nyttRegDatum = txtAndraRegDatum.getText();
+        if (ValideringsKlass.valideraDatum(nyttRegDatum)) {
+            try {
+                String query = "UPDATE mibdb.alien SET Registreringsdatum = '" + nyttRegDatum + "' WHERE Alien_ID = '" + alienID + "'";
+                idb.update(query);
+                JOptionPane.showMessageDialog(null, "Registreringsdatum uppdaterades. Nytt datum: " + nyttRegDatum);
+                txtRegDatum.setText(nyttRegDatum);
+                txtAndraRegDatum.setText("");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, " Ogiltigt registreringsdatum. Ange enligt YYYY-MM-DD");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, " Ogiltigt registreringsdatum uppdaterades. Ange enligt YYYY-MM-DD");
+        }
+    }
+     
+     private void andraRas(String nuvarandeRas, String nyRas, int alienID) {
+
+        taBortAlien(nuvarandeRas, alienID);
+        laggTillAlien(nyRas, alienID);
+        JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
+
+        txtRas.setText(nyRas);
+        txtAndraRas.setText("");
+    }
+
+    public void laggTillAlien(String nyRas, int alienID) {
+        try {
+
+            String query = "INSERT INTO mibdb." + nyRas + " (Alien_ID) VALUES (" + alienID + ")";
+            idb.insert(query);
+
+            txtRas.setText(nyRas);
+            txtAndraRas.setText("");
+        } catch (InfException e) {
+            System.out.println("Åh nöööh");
+
+        }
+    }
+
+    public void taBortAlien(String nuvarandeRas, int alienID) {
+        try {
+
+            String query = "DELETE FROM mibdb." + nuvarandeRas + " WHERE Alien_ID = " + alienID;
+            idb.delete(query);
+
+        } catch (InfException e) {
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraInfo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -364,13 +506,6 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel labAnsvAgent;
     private javax.swing.JLabel labLosenOrd;
     private javax.swing.JLabel labNamn;
@@ -378,6 +513,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private javax.swing.JLabel labRegDatum;
     private javax.swing.JLabel labTelefon;
     private javax.swing.JTextField txtAlienIdSok;
+    private javax.swing.JTextField txtAndraAgent;
+    private javax.swing.JTextField txtAndraLosenOrd;
+    private javax.swing.JTextField txtAndraNamn;
+    private javax.swing.JTextField txtAndraPlats;
+    private javax.swing.JTextField txtAndraRas;
+    private javax.swing.JTextField txtAndraRegDatum;
+    private javax.swing.JTextField txtAndraTelefon;
     private javax.swing.JTextField txtAnsvAgent;
     private javax.swing.JTextField txtLosenOrd;
     private javax.swing.JTextField txtNamn;
