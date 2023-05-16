@@ -328,9 +328,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
 
         }
-        resetAgentComboBox();
-        resetValjPlatsComboBox();
-        resetValjRasComboBox();
+        if (!jComboAgenter.getSelectedItem().equals("Välj agent")) {
+            String agentNamn = jComboAgenter.getSelectedItem().toString();
+            andraAnsvarigAgent(agentNamn, alienID);
+            JOptionPane.showMessageDialog(null, "Ansvarig agent uppdaterades. Ny ansvarig agent: " + agentNamn);
+        }
+        jComboAgenter.setSelectedIndex(0);
+        jComboValjPlats.setSelectedIndex(0);
+        jComboValjRas.setSelectedIndex(0);
     }//GEN-LAST:event_btnAndraInfoActionPerformed
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
@@ -488,6 +493,21 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    private void andraAnsvarigAgent(String agentNamn, int alienID) {
+
+        String query = "SELECT Agent_ID FROM mibdb.agent WHERE Namn = '" + agentNamn + "'";
+
+        try {
+            int agentID = Integer.parseInt(idb.fetchSingle(query));
+            String query2 = "UPDATE mibdb.alien SET Ansvarig_Agent = " + agentID + " WHERE Alien_ID = " + alienID;
+            idb.update(query2);
+            txtAnsvAgent.setText(agentNamn);
+        } catch (InfException e) {
+         System.out.println("hmm");
+        }
+
+    }
+
     public void laggTillAlien(String nyRas, int alienID) {
         try {
 
@@ -537,33 +557,29 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
         }
     }
-   
-    private void fyllValjRasComboBox()
-    {
-    jComboValjRas.addItem("Boglodite");
-    jComboValjRas.addItem("Squid");
-    jComboValjRas.addItem("Worm");
+
+    private void fyllValjRasComboBox() {
+        jComboValjRas.addItem("Boglodite");
+        jComboValjRas.addItem("Squid");
+        jComboValjRas.addItem("Worm");
     }
-    
-    private void resetValjRasComboBox()
-    {
-    jComboValjRas.removeAllItems();
-    jComboValjRas.addItem("Välj ras");
-    
+
+    private void resetValjRasComboBox() {
+        jComboValjRas.removeAllItems();
+        jComboValjRas.addItem("Välj ras");
+
     }
-    
-    private void resetValjPlatsComboBox()
-    {
-    jComboValjPlats.removeAllItems();
-    jComboValjPlats.addItem("Välj plats");
-    
+
+    private void resetValjPlatsComboBox() {
+        jComboValjPlats.removeAllItems();
+        jComboValjPlats.addItem("Välj plats");
+
     }
-    
-    private void resetAgentComboBox()
-    {
-    jComboAgenter.removeAllItems();
-    jComboAgenter.addItem("Välj agent");
-    
+
+    private void resetAgentComboBox() {
+        jComboAgenter.removeAllItems();
+        jComboAgenter.addItem("Välj agent");
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfo;
