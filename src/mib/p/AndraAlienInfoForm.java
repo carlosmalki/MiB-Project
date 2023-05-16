@@ -78,6 +78,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jComboValjPlats = new javax.swing.JComboBox<>();
         btnMinSida = new javax.swing.JButton();
         btnAndraInfo = new javax.swing.JButton();
+        btnRensa = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -234,31 +235,43 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             }
         });
 
+        btnRensa.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRensa.setText("Rensa");
+        btnRensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRensaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnMinSida))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
+                                .addGap(80, 80, 80)
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(28, 28, 28)
                                 .addComponent(txtAlienIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSok))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSok, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 64, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAndraInfo)
-                        .addGap(130, 130, 130)
-                        .addComponent(btnMinSida)))
+                        .addGap(0, 64, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addComponent(btnAndraInfo)
+                .addGap(18, 18, 18)
+                .addComponent(btnRensa)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,13 +283,12 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                     .addComponent(btnSok))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(btnMinSida))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAndraInfo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndraInfo)
+                    .addComponent(btnRensa))
+                .addGap(5, 5, 5)
+                .addComponent(btnMinSida)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -337,6 +349,11 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jComboValjPlats.setSelectedIndex(0);
         jComboValjRas.setSelectedIndex(0);
     }//GEN-LAST:event_btnAndraInfoActionPerformed
+
+    private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
+       resetComboBoxes();
+       resetTextFalt();
+    }//GEN-LAST:event_btnRensaActionPerformed
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
         txtRegDatum.setText(alienInfo.get("Registreringsdatum"));
@@ -564,26 +581,41 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jComboValjRas.addItem("Worm");
     }
 
-    private void resetValjRasComboBox() {
+    private void resetComboBoxes() {
         jComboValjRas.removeAllItems();
         jComboValjRas.addItem("Välj ras");
-
-    }
-
-    private void resetValjPlatsComboBox() {
         jComboValjPlats.removeAllItems();
         jComboValjPlats.addItem("Välj plats");
-
-    }
-
-    private void resetAgentComboBox() {
         jComboAgenter.removeAllItems();
         jComboAgenter.addItem("Välj agent");
 
+
     }
+    private void resetTextFalt()
+    {
+    txtAlienIdSok.setText("");
+    txtNamn.setText("");
+    txtTelefon.setText("");
+    txtLosenOrd.setText("");
+    txtRegDatum.setText("");
+    txtAndraNamn.setText("");
+    txtAndraTelefon.setText("");
+    txtAndraLosenOrd.setText("");
+    txtAndraRegDatum.setText("");
+    txtAnsvAgent.setText("");
+    txtPlats.setText("");
+    txtRas.setText("");
+
+    }
+            
+
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfo;
     private javax.swing.JButton btnMinSida;
+    private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnSok;
     private javax.swing.JComboBox<String> jComboAgenter;
     private javax.swing.JComboBox<String> jComboValjPlats;
