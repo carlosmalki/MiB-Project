@@ -76,13 +76,10 @@ public class ListaAlienForm extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Alien ID", "Title 2"
+                "Alien ID", "Namn"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

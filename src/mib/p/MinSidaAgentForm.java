@@ -264,7 +264,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
                 frame.setContentPane(new RegistreradeAliensForm());
                 frame.revalidate();
-                frame.setTitle("Sök Registreradde Aliens");
+                frame.setTitle("Sök Registrerade Aliens");
                 frame.repaint();
     }//GEN-LAST:event_btnRegistreradeAliensActionPerformed
 
