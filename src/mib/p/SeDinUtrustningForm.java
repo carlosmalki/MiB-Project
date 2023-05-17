@@ -25,6 +25,9 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      private ArrayList<String> vapen;
      private ArrayList<String> teknik;
      private ArrayList<String> kommunikation;
+     private String vapenNamn;
+     private String teknikNamn;
+     private String kommNamn;
     /**
      * Creates new form SeDinUtrustningForm
      */
@@ -41,10 +44,12 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         this.epost = epost;
         this.isAdmin = isAdmin;
         agentID = getAgentID();
+        
         getAllUtrustning();
         getVapenNamn();
         getTeknikNamn();
         getKommunikationNamn();
+        doljInfo();
        
         fyllVapenComboBox();
         fyllTeknikComboBox();
@@ -67,9 +72,17 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         jComboVapen = new javax.swing.JComboBox<>();
         jComboTeknik = new javax.swing.JComboBox<>();
         jComboKommunikation = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblVapen = new javax.swing.JLabel();
+        lblTeknik = new javax.swing.JLabel();
+        lblKommunikation = new javax.swing.JLabel();
+        btnVapenInfo = new javax.swing.JButton();
+        btnTeknikInfo = new javax.swing.JButton();
+        btnKommInfo = new javax.swing.JButton();
+        txtVarierande = new javax.swing.JTextField();
+        txtUtKvittDatum = new javax.swing.JTextField();
+        lblVarierande = new javax.swing.JLabel();
+        lblVarierande2 = new javax.swing.JLabel();
+        lblUtkvitterad = new javax.swing.JLabel();
 
         setFocusTraversalPolicyProvider(true);
         setMaximumSize(new java.awt.Dimension(550, 343));
@@ -86,14 +99,47 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 24)); // NOI18N
         lblUtrustning.setText("Din utkvitterade utrustning:");
 
-        jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel2.setText("Vapen:");
+        lblVapen.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblVapen.setText("Vapen:");
 
-        jLabel3.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel3.setText("Teknik");
+        lblTeknik.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblTeknik.setText("Teknik:");
 
-        jLabel4.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel4.setText("Kommunikation:");
+        lblKommunikation.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblKommunikation.setText("Kommunikation:");
+
+        btnVapenInfo.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnVapenInfo.setText("Visa info");
+        btnVapenInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVapenInfoActionPerformed(evt);
+            }
+        });
+
+        btnTeknikInfo.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnTeknikInfo.setText("Visa info");
+        btnTeknikInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeknikInfoActionPerformed(evt);
+            }
+        });
+
+        btnKommInfo.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnKommInfo.setText("Visa info");
+        btnKommInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKommInfoActionPerformed(evt);
+            }
+        });
+
+        lblVarierande.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblVarierande.setText("Varierande");
+
+        lblVarierande2.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblVarierande2.setText("Varierande:");
+
+        lblUtkvitterad.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblUtkvitterad.setText("Utkvitterad:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -106,43 +152,78 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(3, 3, 3)))
-                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboKommunikation, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboVapen, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblVapen)
+                                        .addComponent(lblTeknik))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblKommunikation)
+                                        .addGap(3, 3, 3)))
+                                .addGap(43, 43, 43))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblUtkvitterad)
+                                    .addComponent(lblVarierande2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTeknikInfo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboVapen, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVapenInfo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtVarierande, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboKommunikation, javax.swing.GroupLayout.Alignment.LEADING, 0, 190, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnKommInfo))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(lblUtrustning)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                        .addGap(90, 90, 90)
+                        .addComponent(lblUtrustning))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(lblVarierande)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(lblUtrustning)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboVapen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(lblVapen)
+                    .addComponent(btnVapenInfo))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboKommunikation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
-                .addComponent(btnMinSida)
+                    .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTeknik)
+                    .addComponent(btnTeknikInfo))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblKommunikation)
+                    .addComponent(jComboKommunikation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnKommInfo))
+                .addGap(25, 25, 25)
+                .addComponent(lblVarierande)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblVarierande2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMinSida)
+                    .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUtkvitterad))
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -154,6 +235,42 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
                 frame.setTitle("Startsida: Agent");
                 frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
+
+    private void btnVapenInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenInfoActionPerformed
+        if(!jComboVapen.getSelectedItem().toString().equals(""))
+        {
+            vapenNamn= jComboVapen.getSelectedItem().toString();
+        setUtkvittDatum(vapenNamn);
+        txtVarierande.setText(setKaliber());
+        lblVarierande2.setText("Kaliber:");
+        lblVarierande.setText(vapenNamn);
+        visaInfo();
+        }
+    }//GEN-LAST:event_btnVapenInfoActionPerformed
+
+    private void btnTeknikInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikInfoActionPerformed
+        if(!jComboTeknik.getSelectedItem().toString().equals(""))
+        {  
+            teknikNamn = jComboTeknik.getSelectedItem().toString();
+        setUtkvittDatum(teknikNamn);
+        txtVarierande.setText(setKraftKalla());
+        lblVarierande2.setText("Kraftkälla:");
+        lblVarierande.setText(teknikNamn);
+        visaInfo();
+        }
+    }//GEN-LAST:event_btnTeknikInfoActionPerformed
+
+    private void btnKommInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommInfoActionPerformed
+        if(!jComboKommunikation.getSelectedItem().toString().equals(""))
+        {
+            kommNamn = jComboKommunikation.getSelectedItem().toString();
+        setUtkvittDatum(kommNamn);
+        txtVarierande.setText(setOverForingsTeknik());
+        lblVarierande2.setText("Överföringsteknik:");
+        lblVarierande.setText(kommNamn);
+        visaInfo();
+        }
+    }//GEN-LAST:event_btnKommInfoActionPerformed
   
    private int getAgentID() {
        
@@ -246,6 +363,115 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
    
    }
     
+    public void setUtkvittDatum(String utrustningNamn) {
+   String query = "SELECT Utkvitteringsdatum " +
+               "FROM mibdb.innehar_utrustning " +
+               "WHERE Agent_ID = " + agentID + " " +
+               "AND mibdb.innehar_utrustning.Utrustnings_ID IN " +
+               "(SELECT mibdb.utrustning.Utrustnings_ID " +
+               "FROM mibdb.utrustning " +
+               "WHERE Benamning = '" + utrustningNamn + "')";
+    
+    try {
+       
+        txtUtKvittDatum.setText( idb.fetchSingle(query));
+    } catch (InfException ex) {
+       System.out.println("OJOJOJ");
+        ex.printStackTrace();
+    }
+    }
+    
+    
+    public String setKraftKalla() {
+        
+     String kraftKalla = null;
+    String query = "SELECT Kraftkalla " +
+                   "FROM mibdb.teknik " +
+                   "WHERE mibdb.teknik.Utrustnings_ID IN (" +
+                   "    SELECT mibdb.utrustning.Utrustnings_ID " +
+                   "    FROM mibdb.utrustning " +
+                   "    WHERE Benamning = '" + teknikNamn + "'" +
+                   ");";
+    
+    try {
+        kraftKalla = idb.fetchSingle(query);
+        
+    } catch (InfException e) {
+        
+        e.printStackTrace();
+    }
+    
+    return kraftKalla;
+}
+    
+   public String setKaliber()
+   {
+   
+   String kaliber = null;
+    String query = "SELECT Kaliber " +
+                   "FROM mibdb.vapen " +
+                   "WHERE mibdb.vapen.Utrustnings_ID IN (" +
+                   "    SELECT mibdb.utrustning.Utrustnings_ID " +
+                   "    FROM mibdb.utrustning " +
+                   "    WHERE Benamning = '" + vapenNamn + "'" +
+                   ");";
+    
+    try {
+        kaliber = idb.fetchSingle(query);
+        
+    } catch (InfException e) {
+        
+        e.printStackTrace();
+    }
+    
+    return kaliber;
+   
+   }
+
+   
+   public String setOverForingsTeknik()
+   {
+   
+   String teknik = null;
+    String query = "SELECT Overforingsteknik " +
+                   "FROM mibdb.kommunikation " +
+                   "WHERE mibdb.kommunikation.Utrustnings_ID IN (" +
+                   "    SELECT mibdb.utrustning.Utrustnings_ID " +
+                   "    FROM mibdb.utrustning " +
+                   "    WHERE Benamning = '" + kommNamn + "'" +
+                   ");";
+    
+    try {
+        teknik = idb.fetchSingle(query);
+        
+    } catch (InfException e) {
+        
+        e.printStackTrace();
+    }
+    
+    return teknik;
+   
+   }
+   
+   private void doljInfo()
+   {
+   lblVarierande.setVisible(false);
+   lblVarierande2.setVisible(false);
+   lblUtkvitterad.setVisible(false);
+   txtVarierande.setVisible(false);
+   txtUtKvittDatum.setVisible(false);
+   
+   }
+   
+   public void visaInfo()
+   {
+   lblVarierande.setVisible(true);
+   lblVarierande2.setVisible(true);
+   lblUtkvitterad.setVisible(true);
+   txtVarierande.setVisible(true);
+   txtUtKvittDatum.setVisible(true);
+   
+   }
     public void omIngenUtrustning()
     {
     if(vapen.isEmpty()|| teknik.isEmpty()||kommunikation.isEmpty())
@@ -254,13 +480,21 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
     }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKommInfo;
     private javax.swing.JButton btnMinSida;
+    private javax.swing.JButton btnTeknikInfo;
+    private javax.swing.JButton btnVapenInfo;
     private javax.swing.JComboBox<String> jComboKommunikation;
     private javax.swing.JComboBox<String> jComboTeknik;
     private javax.swing.JComboBox<String> jComboVapen;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblKommunikation;
+    private javax.swing.JLabel lblTeknik;
+    private javax.swing.JLabel lblUtkvitterad;
     private javax.swing.JLabel lblUtrustning;
+    private javax.swing.JLabel lblVapen;
+    private javax.swing.JLabel lblVarierande;
+    private javax.swing.JLabel lblVarierande2;
+    private javax.swing.JTextField txtUtKvittDatum;
+    private javax.swing.JTextField txtVarierande;
     // End of variables declaration//GEN-END:variables
 }
