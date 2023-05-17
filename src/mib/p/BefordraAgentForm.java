@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 
-/*
+ /*
  * Detta är en JPanel-klass som visar användaren en formulärsida för att befordra en agent till administratör. 
  * Agenter som för närvarande inte har admin-status visas i en jComboBox.
  * När användaren trycker på knappen "Befordra" sätts den valda agenten till Administratör i databasen. 
@@ -37,7 +37,9 @@ public class BefordraAgentForm extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+            if (!jComboEjAdmin.getSelectedItem().toString().equals("Agenter")) {
+                System.out.println("Internt felmeddelande" + ex.getMessage());
+            }
         }
         this.epost = epost;
         this.isAdmin = isAdmin;
@@ -135,21 +137,24 @@ public class BefordraAgentForm extends javax.swing.JPanel {
             namn = jComboEjAdmin.getSelectedItem().toString();
         }
         String query = "UPDATE mibdb.agent SET Administrator = 'J' WHERE Namn = '" + namn + "'";
-
+        
         try {
             idb.update(query);
             resetEjAdminComboBox();
             setEjAdminComboBox();
+            if(namn!=null)
+            {
             JOptionPane.showMessageDialog(null, namn + " har nu fått administratörstatus");
-            
+            }
+
         } catch (InfException e) {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     public void resetEjAdminComboBox() {
-      jComboEjAdmin.removeAllItems();
-      jComboEjAdmin.addItem("Agenter");
-      jComboEjAdmin.setSelectedIndex(0);
+        jComboEjAdmin.removeAllItems();
+        jComboEjAdmin.addItem("Agenter");
+        jComboEjAdmin.setSelectedIndex(0);
     }
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(BefordraAgentForm.this);
@@ -179,7 +184,7 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         }
         for (String agent : ejAdminAgenter) {
             jComboEjAdmin.addItem(agent);
-            
+
         }
 
     }
