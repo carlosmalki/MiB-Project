@@ -21,6 +21,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     private String epost;
     private String isAdmin;
     private ArrayList<String> omrade;
+    private ArrayList<String> kontor;
 
     /**
      * Creates new form HanteraCheferForm
@@ -30,6 +31,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         this.epost = epost;
         this.isAdmin = isAdmin;
         ArrayList<String> omrade = new ArrayList<>();
+        ArrayList<String> kontor = new ArrayList<>();
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -37,8 +39,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        fyllOmradesArrayList();
-        fyllOmradesComboBox();
+        fyllArrayListor();
+        fyllComboBoxar();
 
     }
 
@@ -65,9 +67,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         jTextField3 = new javax.swing.JTextField();
         lblKontor = new javax.swing.JLabel();
         jComboKontor = new javax.swing.JComboBox<>();
-        btnHittaChef1 = new javax.swing.JButton();
+        btnHittaChefKontor = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtNuvarandeChef1 = new javax.swing.JTextField();
+        txtNuvarandeChefKontor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnAdminsida = new javax.swing.JButton();
@@ -153,11 +155,11 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         jComboKontor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj kontor" }));
 
-        btnHittaChef1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnHittaChef1.setText("Hitta chef");
-        btnHittaChef1.addActionListener(new java.awt.event.ActionListener() {
+        btnHittaChefKontor.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnHittaChefKontor.setText("Hitta chef");
+        btnHittaChefKontor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHittaChef1ActionPerformed(evt);
+                btnHittaChefKontorActionPerformed(evt);
             }
         });
 
@@ -177,10 +179,10 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField3)
                     .addComponent(jComboKontor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNuvarandeChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNuvarandeChefKontor, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnHittaChef1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHittaChefKontor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBytChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -191,11 +193,11 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblKontor)
                     .addComponent(jComboKontor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHittaChef1))
+                    .addComponent(btnHittaChefKontor))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtNuvarandeChef1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNuvarandeChefKontor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBytChef1)
@@ -261,16 +263,16 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHittaChefActionPerformed
 
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraCheferForm.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraCheferForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
-    private void btnHittaChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChef1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHittaChef1ActionPerformed
+    private void btnHittaChefKontorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefKontorActionPerformed
+       txtNuvarandeChefKontor.setText(getChefsNamnKontor(jComboKontor.getSelectedItem().toString()));
+    }//GEN-LAST:event_btnHittaChefKontorActionPerformed
 
     public int getAgentID(String omrade) {
         int agent = 0;
@@ -316,11 +318,29 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         }
         return chefsNamn;
     }
-
-    private void fyllOmradesArrayList() {
+  private String getChefsNamnKontor(String kontor) {
+    String kontorsChef = null ;
+    try {
+        String query = "SELECT namn " +
+                       "FROM mibdb.agent " +
+                       "WHERE mibdb.agent.Agent_ID IN ( " +
+                       "    SELECT mibdb.kontorschef.Agent_ID " +
+                       "    FROM mibdb.kontorschef " +
+                       "    WHERE Kontorsbeteckning = '" + kontor + "' " +
+                       ")";
+        kontorsChef = idb.fetchSingle(query);
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Något gick fel!");
+        System.out.println("Internt felmeddelande: " + e.getMessage());
+    }
+    return kontorsChef;
+}
+    private void fyllArrayListor() {
         try {
             String query = "SELECT Benamning FROM mibdb.omrade";
             omrade = idb.fetchColumn(query);
+            String query2 = "SELECT Kontorsbeteckning FROM mibdb.kontorschef";
+            kontor = idb.fetchColumn(query2);
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
@@ -329,18 +349,23 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     }
 
-    private void fyllOmradesComboBox() {
+    private void fyllComboBoxar() {
         for (String omradet : omrade) {
             jComboOmradeChef.addItem(omradet);
         }
-
+        for (String kontor : kontor)
+        {
+           jComboKontor.addItem(kontor);
+        }
     }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminsida;
     private javax.swing.JButton btnBytChef;
     private javax.swing.JButton btnBytChef1;
     private javax.swing.JButton btnHittaChef;
-    private javax.swing.JButton btnHittaChef1;
+    private javax.swing.JButton btnHittaChefKontor;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JComboBox<String> jComboKontor;
     private javax.swing.JComboBox<String> jComboOmradeChef;
@@ -355,6 +380,6 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblKontor;
     private javax.swing.JLabel lblOmrade;
     private javax.swing.JTextField txtNuvarandeChef;
-    private javax.swing.JTextField txtNuvarandeChef1;
+    private javax.swing.JTextField txtNuvarandeChefKontor;
     // End of variables declaration//GEN-END:variables
 }
