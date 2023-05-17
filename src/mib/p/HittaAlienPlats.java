@@ -27,6 +27,8 @@ public class HittaAlienPlats extends javax.swing.JPanel {
      */
     public HittaAlienPlats(String epost,String isAdmin) {
         initComponents();
+        this.epost = epost;
+        this.isAdmin = isAdmin;
         
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");

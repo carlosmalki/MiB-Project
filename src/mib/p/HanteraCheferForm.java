@@ -311,9 +311,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 + ")";
         try {
             chefsNamn = idb.fetchSingle(query);
-        } catch (InfException ex) {
+        } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
+            System.out.println("Internt felmeddelande: " + e.getMessage());
             return null; // Returnera null vid fel
         }
         return chefsNamn;
@@ -353,9 +353,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         for (String omradet : omrade) {
             jComboOmradeChef.addItem(omradet);
         }
-        for (String kontor : kontor)
+        for (String kontoret : kontor)
         {
-           jComboKontor.addItem(kontor);
+           jComboKontor.addItem(kontoret);
         }
     }
 

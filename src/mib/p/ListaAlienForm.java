@@ -62,7 +62,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         setName(""); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel1.setText("Sök ras:");
+        jLabel1.setText("Ras:");
 
         jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Squid", "Worm", "Boglodite", " " }));
 
@@ -102,16 +102,16 @@ public class ListaAlienForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
+                        .addGap(94, 94, 94)
                         .addComponent(jLabel1)
-                        .addGap(31, 31, 31)
-                        .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
+                        .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addComponent(btnSokRas))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnMinSida)
