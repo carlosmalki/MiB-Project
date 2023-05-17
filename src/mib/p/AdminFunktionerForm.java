@@ -25,6 +25,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
+       
     }
 
     /**
@@ -36,13 +37,22 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnBefordaAgent = new javax.swing.JButton();
+        btnHanteraChef = new javax.swing.JButton();
 
-        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jButton1.setText("Befordra Agent");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBefordaAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnBefordaAgent.setText("Befordra Agent");
+        btnBefordaAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBefordaAgentActionPerformed(evt);
+            }
+        });
+
+        btnHanteraChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnHanteraChef.setText("Hantera chefer");
+        btnHanteraChef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHanteraChefActionPerformed(evt);
             }
         });
 
@@ -52,28 +62,41 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnHanteraChef)
+                    .addComponent(btnBefordaAgent))
                 .addContainerGap(334, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(jButton1)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addComponent(btnBefordaAgent)
+                .addGap(38, 38, 38)
+                .addComponent(btnHanteraChef)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBefordaAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordaAgentActionPerformed
          JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
                 frame.setContentPane(new BefordraAgentForm(epost,isAdmin));
                 frame.revalidate();
                 frame.setTitle("Befordra Agent");
                 frame.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBefordaAgentActionPerformed
+
+    private void btnHanteraChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraChefActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+                frame.setContentPane(new HanteraCheferForm(epost,isAdmin));
+                frame.revalidate();
+                frame.setTitle("Hantera chefer");
+                frame.repaint();
+    }//GEN-LAST:event_btnHanteraChefActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBefordaAgent;
+    private javax.swing.JButton btnHanteraChef;
     // End of variables declaration//GEN-END:variables
 }

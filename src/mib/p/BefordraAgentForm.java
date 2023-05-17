@@ -37,9 +37,7 @@ public class BefordraAgentForm extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            if (!jComboEjAdmin.getSelectedItem().toString().equals("Agenter")) {
-                System.out.println("Internt felmeddelande" + ex.getMessage());
-            }
+            System.out.println("Internt felmeddelande" + ex.getMessage());
         }
         this.epost = epost;
         this.isAdmin = isAdmin;
