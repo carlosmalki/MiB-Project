@@ -85,7 +85,7 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         });
 
         btnAdminTjanster.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnAdminTjanster.setText("Admintjänster");
+        btnAdminTjanster.setText("Adminsida");
         btnAdminTjanster.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminTjansterActionPerformed(evt);
