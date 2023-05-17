@@ -64,7 +64,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Sök ras:");
 
-        jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Squid", "Worm", "Boglodite", " " }));
+        jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Squid", "Worm", "Boglodite", " " }));
 
         btnSokRas.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSokRas.setText("Sök");
