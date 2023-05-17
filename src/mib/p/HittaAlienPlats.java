@@ -142,7 +142,7 @@ public class HittaAlienPlats extends javax.swing.JPanel {
         txtaListadeAliens.setEditable(false);
         fyllScrollPane();
         try {
-            String fraga = "select alien.namn, alien_id from alien join plats on alien.plats = plats_id where plats.BENAMNING = '" + plats + "'";
+            String fraga = "select alien.namn, alien.alien_id from alien join plats on alien.plats = plats.plats_id where plats.BENAMNING = '" + plats + "'";
             ArrayList<HashMap<String,String>>  alienLista = idb.fetchRows(fraga);
             for (HashMap<String,String> enMap : alienLista){
             String id = enMap.get("ALIEN_ID");
