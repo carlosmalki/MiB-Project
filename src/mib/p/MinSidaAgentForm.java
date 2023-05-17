@@ -69,6 +69,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         btnAndraLosenord = new javax.swing.JButton();
         btnAndraAlienInfo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnUtrustning = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -143,6 +144,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
             }
         });
 
+        btnUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnUtrustning.setText("Utrustning");
+        btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUtrustningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,8 +190,10 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addGap(212, 212, 212)
                         .addComponent(btnAlienSok))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(btnAndraAlienInfo)))
+                        .addGap(211, 211, 211)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnUtrustning)
+                            .addComponent(btnAndraAlienInfo))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -204,11 +215,17 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addComponent(btnAlienSok)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAndraAlienInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdminFunktioner)
-                    .addComponent(btnAndraLosenord))
-                .addGap(29, 29, 29))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdminFunktioner)
+                            .addComponent(btnAndraLosenord))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnUtrustning)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
  private void setValkommen()
@@ -283,6 +300,14 @@ JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
                 frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+                frame.setContentPane(new SeDinUtrustningForm(epost,isAdmin));
+                frame.revalidate();
+                frame.setTitle("Din utrustning");
+                frame.repaint();
+    }//GEN-LAST:event_btnUtrustningActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminFunktioner;
@@ -292,6 +317,7 @@ JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
     private javax.swing.JButton btnListaRas;
     private javax.swing.JButton btnRegisteraAlien;
     private javax.swing.JButton btnRegistreradeAliens;
+    private javax.swing.JButton btnUtrustning;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblMinSida;
     private javax.swing.JLabel lblValkommenNamn;
