@@ -62,7 +62,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         setName(""); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel1.setText("Ras:");
+        jLabel1.setText("Sök ras:");
 
         jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Squid", "Worm", "Boglodite", " " }));
 
@@ -82,12 +82,12 @@ public class ListaAlienForm extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Alien ID", "Namn"
+                "Alien ID", "Title 2"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,16 +102,16 @@ public class ListaAlienForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addGap(81, 81, 81)
                         .addComponent(jLabel1)
-                        .addGap(40, 40, 40)
+                        .addGap(31, 31, 31)
                         .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(40, 40, 40)
                         .addComponent(btnSokRas))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnMinSida)
@@ -120,15 +120,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-<<<<<<< Updated upstream
-                .addContainerGap(12, Short.MAX_VALUE)
-=======
-<<<<<<< HEAD
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-=======
-                .addContainerGap(12, Short.MAX_VALUE)
->>>>>>> 795a78bac510cf32166fce243ed129c75a42c4ac
->>>>>>> Stashed changes
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,7 +172,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ListaAlienForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
         frame.revalidate();
-        frame.setTitle("Startsida: Agent");
+        frame.setTitle("Sök ras");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
