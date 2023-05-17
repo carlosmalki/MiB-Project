@@ -4,11 +4,16 @@
  */
 package mib.p;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,13 +76,20 @@ public class RegistreradeAliensForm extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "Alien ID", "Namn"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
+
+        txtDatum1.setText("2009-03-03");
+
+        txtDatum2.setText("2023-03-06");
 
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min Sida");
@@ -86,27 +98,31 @@ public class RegistreradeAliensForm extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(388, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(388, Short.MAX_VALUE)
+                        .addComponent(btnMinSida))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSokDatum)
-                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFran, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTill))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDatum2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                            .addComponent(txtDatum1))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSok)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(lblSokDatum)
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFran, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTill))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDatum2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                    .addComponent(txtDatum1))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSok))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,37 +142,54 @@ public class RegistreradeAliensForm extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTill)
                             .addComponent(txtDatum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(btnMinSida)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
-            String Datum1 = txtDatum1.getText();
-            String Datum2 = txtDatum2.getText();
+            
         try {
             
-            DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn"});
-            jTable1.setModel(model);
+            // Datum 1 och 2 från txtfälten.
+            String textdatum1 = txtDatum1.getText();
+            String textdatum2 = txtDatum2.getText();
             
-            ArrayList<HashMap<String, String>> rows;
-            String query = "SELECT mibdb.alien.Alien_ID, mibdb.alien.Namn FROM mibdb.alien WHERE Registreringsdatum BETWEEN '"+Datum1+"' AND '"+Datum2+"'";
-            
-            rows = idb.fetchRows(query);
-            
-            for (HashMap<String, String> item : rows) {
-                String alienId = item.get("Alien_ID");
-                String namn = item.get("Namn");
-                model.addRow(new Object[]{alienId, namn});
+            // Datum 1 och 2 konverteras till date för att kunna supporta SQL frågan.
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date datedatum1 = format.parse(textdatum1);
+            Date datedatum2 = format.parse(textdatum2);
+      
+            if(textdatum1.contains("-") && textdatum2.contains("-")) {
+                
+                DefaultTableModel model = new DefaultTableModel();
+                model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn"});
+                jTable1.setModel(model);
+                
+                ArrayList<HashMap<String, String>> row;
+                String query;
+                query = ("SELECT mibdb.alien.Alien_ID, mibdb.alien.Namn FROM mibdb.alien WHERE Registreringsdatum BETWEEN '"+datedatum1+"' AND '"+datedatum2+"'");
+                
+                row = idb.fetchRows(query);
+
+                for (HashMap<String, String> item : row) {
+                    String alienid = item.get("Alien_ID");
+                    String namn = item.get("Namn");
+                    model.addRow(new Object[]{alienid, namn});
+                }
+                jTable1.setVisible(true);
             }
-            jTable1.setVisible(true);
-           
+          
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(RegistreradeAliensForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
+            
         }
         
        

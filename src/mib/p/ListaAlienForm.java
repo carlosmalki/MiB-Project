@@ -82,7 +82,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Alien ID", "Title 2"
+                "Alien ID", "Namn"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -120,7 +120,15 @@ public class ListaAlienForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap(12, Short.MAX_VALUE)
+=======
+<<<<<<< HEAD
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                .addContainerGap(12, Short.MAX_VALUE)
+>>>>>>> 795a78bac510cf32166fce243ed129c75a42c4ac
+>>>>>>> Stashed changes
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
