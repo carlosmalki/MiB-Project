@@ -19,29 +19,30 @@ import oru.inf.InfException;
 public class HittaAlienPlats extends javax.swing.JPanel {
 
     private static InfDB idb;
+    private String epost;
+    private String isAdmin;
+    
     /**
      * Creates new form HittaAlienPlats
      */
-    public HittaAlienPlats() {
+    public HittaAlienPlats(String epost,String isAdmin) {
         initComponents();
-        fyllComboBox();
-        fyllScrollPane();
+        
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
+        fyllComboBox();
+        fyllScrollPane();
     }
     
-
-    private void fyllScrollPane(){
+    private void fyllScrollPane() {
         txtaListadeAliens.append("ID: \t");
         txtaListadeAliens.append("NAMN: \n");
-    }
-    
+    }    
     private void fyllComboBox() {
-
         ArrayList<String> platser;
         try {
             platser = idb.fetchColumn("select benamning from plats");
@@ -53,6 +54,7 @@ public class HittaAlienPlats extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
         }
     
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,7 +125,7 @@ public class HittaAlienPlats extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HittaAlienPlats.this);
                 frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
@@ -164,8 +166,6 @@ public class HittaAlienPlats extends javax.swing.JPanel {
     private javax.swing.JTextArea txtaListadeAliens;
     // End of variables declaration//GEN-END:variables
 
-    private void initComponents() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
 }

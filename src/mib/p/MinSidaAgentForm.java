@@ -277,7 +277,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new HittaAlienPlats());
+                frame.setContentPane(new HittaAlienPlats(epost,isAdmin));
                 frame.revalidate();
                 frame.setTitle("Lista alla aliens på en angiven plats");
                 frame.repaint();
