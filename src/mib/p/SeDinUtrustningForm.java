@@ -11,51 +11,53 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
 
-
 /**
- *
+ *Klassen SeDinUtrustningForm är en jPanel som används för att visa information
+ * om vilken utrustning en viss användare för tillfället har utkvitterad
+ * och ge denne användare lite kort information om varje utrustning.
+ * 
  * @author ASUS
  */
 public class SeDinUtrustningForm extends javax.swing.JPanel {
-     private String epost;
-     private String isAdmin;
-     private static InfDB idb;
-     private int agentID;
-     private ArrayList<String> allUtrustning;
-     private ArrayList<String> vapen;
-     private ArrayList<String> teknik;
-     private ArrayList<String> kommunikation;
-     private String vapenNamn;
-     private String teknikNamn;
-     private String kommNamn;
+
+    private String epost;
+    private String isAdmin;
+    private static InfDB idb;
+    private int agentID;
+    private ArrayList<String> allUtrustning;
+    private ArrayList<String> vapen;
+    private ArrayList<String> teknik;
+    private ArrayList<String> kommunikation;
+    private String vapenNamn;
+    private String teknikNamn;
+    private String kommNamn;
+
     /**
      * Creates new form SeDinUtrustningForm
      */
-    public SeDinUtrustningForm(String epost,String isAdmin) {
+    public SeDinUtrustningForm(String epost, String isAdmin) {
         initComponents();
-         try {
+        try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        
-        
+
         this.epost = epost;
         this.isAdmin = isAdmin;
         agentID = getAgentID();
-        
+
         getAllUtrustning();
         getVapenNamn();
         getTeknikNamn();
         getKommunikationNamn();
         doljInfo();
-       
+
         fyllVapenComboBox();
         fyllTeknikComboBox();
         fyllKommunikationComboBox();
-      
-        
+
     }
 
     /**
@@ -227,257 +229,348 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+   /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SeDinUtrustningForm.this);
-                frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SeDinUtrustningForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+    /**
+     * Metod kopplad till btnVapenInfo som sätter varierande textfält och labels
+     * till lämpliga värden med hjälp av metoderna setUtkvittDatum() och
+     * setKaliber() baserat på valt alternativ i jComboVapen, och visar sedan
+     * informationen med visaInfo()-metoden.
+     *
+     * @param evt
+     */
     private void btnVapenInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenInfoActionPerformed
-        if(!jComboVapen.getSelectedItem().toString().equals(""))
-        {
-            vapenNamn= jComboVapen.getSelectedItem().toString();
-        setUtkvittDatum(vapenNamn);
-        txtVarierande.setText(setKaliber());
-        lblVarierande2.setText("Kaliber:");
-        lblVarierande.setText(vapenNamn);
-        visaInfo();
+        if (!jComboVapen.getSelectedItem().toString().equals("")) {
+            vapenNamn = jComboVapen.getSelectedItem().toString();
+            setUtkvittDatum(vapenNamn);
+            txtVarierande.setText(setKaliber());
+            lblVarierande2.setText("Kaliber:");
+            lblVarierande.setText(vapenNamn);
+            visaInfo();
         }
     }//GEN-LAST:event_btnVapenInfoActionPerformed
-
+    /**
+     * Metod kopplad till btnTeknikInfo som sätter varierande textfält och
+     * labels till lämpliga värden med hjälp av metoderna setUtkvittDatum() och
+     * setKraftKalla() baserat på valt alternativ i jComboTeknik, och visar
+     * sedan informationen med visaInfo()-metoden.
+     *
+     * @param evt
+     */
     private void btnTeknikInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikInfoActionPerformed
-        if(!jComboTeknik.getSelectedItem().toString().equals(""))
-        {  
+        if (!jComboTeknik.getSelectedItem().toString().equals("")) {
             teknikNamn = jComboTeknik.getSelectedItem().toString();
-        setUtkvittDatum(teknikNamn);
-        txtVarierande.setText(setKraftKalla());
-        lblVarierande2.setText("Kraftkälla:");
-        lblVarierande.setText(teknikNamn);
-        visaInfo();
+            setUtkvittDatum(teknikNamn);
+            txtVarierande.setText(setKraftKalla());
+            lblVarierande2.setText("Kraftkälla:");
+            lblVarierande.setText(teknikNamn);
+            visaInfo();
         }
     }//GEN-LAST:event_btnTeknikInfoActionPerformed
-
+    /**
+     * Metod kopplad till btnKommInfo som sätter varierande textfält och labels
+     * till lämpliga värden med hjälp av metoderna setUtkvittDatum() och
+     * setOverForingsTeknik() baserat på valt alternativ i jComboKommunikation,
+     * och visar sedan informationen med visaInfo()-metoden.
+     *
+     * @param evt
+     */
     private void btnKommInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommInfoActionPerformed
-        if(!jComboKommunikation.getSelectedItem().toString().equals(""))
-        {
+        if (!jComboKommunikation.getSelectedItem().toString().equals("")) {
             kommNamn = jComboKommunikation.getSelectedItem().toString();
-        setUtkvittDatum(kommNamn);
-        txtVarierande.setText(setOverForingsTeknik());
-        lblVarierande2.setText("Överföringsteknik:");
-        lblVarierande.setText(kommNamn);
-        visaInfo();
+            setUtkvittDatum(kommNamn);
+            txtVarierande.setText(setOverForingsTeknik());
+            lblVarierande2.setText("Överföringsteknik:");
+            lblVarierande.setText(kommNamn);
+            visaInfo();
         }
     }//GEN-LAST:event_btnKommInfoActionPerformed
-  
-   private int getAgentID() {
-       
-    String query = "SELECT Agent_ID FROM mibdb.agent WHERE Epost = '" + epost + "'";
-    try {
-        String agentIDString = idb.fetchSingle(query);
-        return Integer.parseInt(agentIDString);
-    } catch (InfException ex) {
-      
-    }
-    return -1;
-  }
-  private void getAllUtrustning() {
-    String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN " +
-                   "(SELECT mibdb.innehar_utrustning.Utrustnings_ID FROM mibdb.innehar_utrustning " +
-                   "WHERE mibdb.innehar_utrustning.Agent_ID = " + agentID + ")";
-    try {
-        allUtrustning = idb.fetchColumn(query);
-        
-    } catch (InfException ex) {
-        // Hantera undantag här
-        ex.printStackTrace();
-    }
-    
-}
-  
-  
-  
-  private void getVapenNamn() {
-    String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.vapen);";
-    try {
-        vapen = idb.fetchColumn(query);
-    } catch (InfException ex) {
-        
-        ex.printStackTrace();
-    }
-}
-  
-  private void getTeknikNamn()
-  {
-  String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.teknik);";
-    try {
-        teknik = idb.fetchColumn(query);
-    } catch (InfException ex) {
-        
-        ex.printStackTrace();
-    }
-  }
-  private void getKommunikationNamn()
-  {
-  String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.kommunikation);";
-    try {
-        kommunikation = idb.fetchColumn(query);
-    } catch (InfException ex) {
-       
-        ex.printStackTrace();
-    }
-  }
-   private void fyllVapenComboBox()
-   {
-    for(String vapen : vapen)
-    {
-    if(allUtrustning.contains(vapen))
-    {
-     jComboVapen.addItem(vapen);
-    }
-    }
-   
-   }
-   private void fyllTeknikComboBox()
-   {
-   for(String teknik : teknik)
-    {
-    if(allUtrustning.contains(teknik))
-    {
-     jComboTeknik.addItem(teknik);
-    }
-    }
-   
-   }
-    private void fyllKommunikationComboBox()
-   {
-   for(String kom : kommunikation)
-    {
-    if(allUtrustning.contains(kom))
-    {
-     jComboKommunikation.addItem(kom);
-    }
-    }
-   
-   }
-    
-    public void setUtkvittDatum(String utrustningNamn) {
-   String query = "SELECT Utkvitteringsdatum " +
-               "FROM mibdb.innehar_utrustning " +
-               "WHERE Agent_ID = " + agentID + " " +
-               "AND mibdb.innehar_utrustning.Utrustnings_ID IN " +
-               "(SELECT mibdb.utrustning.Utrustnings_ID " +
-               "FROM mibdb.utrustning " +
-               "WHERE Benamning = '" + utrustningNamn + "')";
-    
-    try {
-       
-        txtUtKvittDatum.setText( idb.fetchSingle(query));
-    } catch (InfException ex) {
-       System.out.println("OJOJOJ");
-        ex.printStackTrace();
-    }
-    }
-    
-    
-    public String setKraftKalla() {
-        
-     String kraftKalla = null;
-    String query = "SELECT Kraftkalla " +
-                   "FROM mibdb.teknik " +
-                   "WHERE mibdb.teknik.Utrustnings_ID IN (" +
-                   "    SELECT mibdb.utrustning.Utrustnings_ID " +
-                   "    FROM mibdb.utrustning " +
-                   "    WHERE Benamning = '" + teknikNamn + "'" +
-                   ");";
-    
-    try {
-        kraftKalla = idb.fetchSingle(query);
-        
-    } catch (InfException e) {
-        
-        e.printStackTrace();
-    }
-    
-    return kraftKalla;
-}
-    
-   public String setKaliber()
-   {
-   
-   String kaliber = null;
-    String query = "SELECT Kaliber " +
-                   "FROM mibdb.vapen " +
-                   "WHERE mibdb.vapen.Utrustnings_ID IN (" +
-                   "    SELECT mibdb.utrustning.Utrustnings_ID " +
-                   "    FROM mibdb.utrustning " +
-                   "    WHERE Benamning = '" + vapenNamn + "'" +
-                   ");";
-    
-    try {
-        kaliber = idb.fetchSingle(query);
-        
-    } catch (InfException e) {
-        
-        e.printStackTrace();
-    }
-    
-    return kaliber;
-   
-   }
+    /**
+     * Metod som hämtar ut Agent_ID utifrån den i applikationen unika
+     * E-postadressen som följer med som variabel mellan alla olika vyer,
+     * returnerar Agent_ID som int.
+     *
+     * @return
+     */
+    private int getAgentID() {
 
-   
-   public String setOverForingsTeknik()
-   {
-   
-   String teknik = null;
-    String query = "SELECT Overforingsteknik " +
-                   "FROM mibdb.kommunikation " +
-                   "WHERE mibdb.kommunikation.Utrustnings_ID IN (" +
-                   "    SELECT mibdb.utrustning.Utrustnings_ID " +
-                   "    FROM mibdb.utrustning " +
-                   "    WHERE Benamning = '" + kommNamn + "'" +
-                   ");";
-    
-    try {
-        teknik = idb.fetchSingle(query);
-        
-    } catch (InfException e) {
-        
-        e.printStackTrace();
+        String query = "SELECT Agent_ID FROM mibdb.agent WHERE Epost = '" + epost + "'";
+        try {
+            String agentIDString = idb.fetchSingle(query);
+            return Integer.parseInt(agentIDString);
+        } catch (InfException ex) {
+
+        }
+        return -1;
     }
-    
-    return teknik;
-   
-   }
-   
-   private void doljInfo()
-   {
-   lblVarierande.setVisible(false);
-   lblVarierande2.setVisible(false);
-   lblUtkvitterad.setVisible(false);
-   txtVarierande.setVisible(false);
-   txtUtKvittDatum.setVisible(false);
-   
-   }
-   
-   public void visaInfo()
-   {
-   lblVarierande.setVisible(true);
-   lblVarierande2.setVisible(true);
-   lblUtkvitterad.setVisible(true);
-   txtVarierande.setVisible(true);
-   txtUtKvittDatum.setVisible(true);
-   
-   }
-    public void omIngenUtrustning()
-    {
-    if(vapen.isEmpty()|| teknik.isEmpty()||kommunikation.isEmpty())
-    {
-    lblUtrustning.setText("Du har ingen utrustning utkvitterad.");
+
+    /**
+     * Metod som utifrån variabeln agentID som ges värde i metoden getAgentID()
+     * hämtar hem all utrustning aktuell inloggada Agent för tillfället har
+     * utkvitterad ock skapar en ArrayList<String> av det genom InfDB-metoden
+     * fetchColumn().
+     */
+    private void getAllUtrustning() {
+        String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN "
+                + "(SELECT mibdb.innehar_utrustning.Utrustnings_ID FROM mibdb.innehar_utrustning "
+                + "WHERE mibdb.innehar_utrustning.Agent_ID = " + agentID + ")";
+        try {
+            allUtrustning = idb.fetchColumn(query);
+
+        } catch (InfException ex) {
+           
+            ex.printStackTrace();
+        }
+
     }
+
+    /**
+     * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
+     * "Utrustning", där Utrustnings_ID också finns i tabellen "vapen", och
+     * skapar en ArrayList<String> av dessa via InfDB-metoden fetchColumn().
+     */
+    private void getVapenNamn() {
+        String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.vapen);";
+        try {
+            vapen = idb.fetchColumn(query);
+        } catch (InfException ex) {
+
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
+     * "Utrustning", där Utrustnings_ID också finns i tabellen "teknik", och
+     * skapar en ArrayList<String> av dessa via InfDB-metoden fetchColumn().
+     */
+    private void getTeknikNamn() {
+        String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.teknik);";
+        try {
+            teknik = idb.fetchColumn(query);
+        } catch (InfException ex) {
+
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
+     * "Utrustning", där Utrustnings_ID också finns i tabellen "kommunikation",
+     * och skapar en ArrayList<String> av dessa via InfDB-metoden fetchColumn().
+     */
+    private void getKommunikationNamn() {
+        String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.kommunikation);";
+        try {
+            kommunikation = idb.fetchColumn(query);
+        } catch (InfException ex) {
+
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Metod som fyller upp jComboVapen med värden genom en for each loop av
+     * ArrayListan "vapen" som skapats i metoden getVapenNamn().
+     */
+    private void fyllVapenComboBox() {
+        for (String vapen : vapen) {
+            if (allUtrustning.contains(vapen)) {
+                jComboVapen.addItem(vapen);
+            }
+        }
+
+    }
+
+    /**
+     * Metod som fyller upp jComboTeknik med värden genom en for each loop av
+     * ArrayListan "teknik" som skapats i metoden getTeknikNamn().
+     */
+
+    private void fyllTeknikComboBox() {
+        for (String teknik : teknik) {
+            if (allUtrustning.contains(teknik)) {
+                jComboTeknik.addItem(teknik);
+            }
+        }
+
+    }
+
+    /**
+     * Metod som fyller upp jComboKommunikation med värden genom en for each
+     * loop av ArrayListan "kommunikation" som skapats i metoden
+     * getKommunikationNamn().
+     */
+    private void fyllKommunikationComboBox() {
+        for (String kom : kommunikation) {
+            if (allUtrustning.contains(kom)) {
+                jComboKommunikation.addItem(kom);
+            }
+        }
+
+    }
+
+    /**
+     * Metod som hämtar ut information om utkvitteringsdatum baserat på Agentens
+     * Agent_ID och utrustningens namn som kommer med som String-parameter från
+     * metoderna satta på Info-knapparna.
+     *
+     * @param utrustningNamn
+     */
+    public void setUtkvittDatum(String utrustningNamn) {
+        String query = "SELECT Utkvitteringsdatum "
+                + "FROM mibdb.innehar_utrustning "
+                + "WHERE Agent_ID = " + agentID + " "
+                + "AND mibdb.innehar_utrustning.Utrustnings_ID IN "
+                + "(SELECT mibdb.utrustning.Utrustnings_ID "
+                + "FROM mibdb.utrustning "
+                + "WHERE Benamning = '" + utrustningNamn + "')";
+
+        try {
+
+            txtUtKvittDatum.setText(idb.fetchSingle(query));
+        } catch (InfException ex) {
+
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Metod som hämtar info om Kraftkällan för en vald teknikutrustning med
+     * hjälp av variabeln "teknikNamn" som ges värde i metoden kopplad till
+     * knappen btnTeknikInfo, och returnerar det som String.
+     *
+     * @return
+     */
+    public String setKraftKalla() {
+
+        String kraftKalla = null;
+        String query = "SELECT Kraftkalla "
+                + "FROM mibdb.teknik "
+                + "WHERE mibdb.teknik.Utrustnings_ID IN ("
+                + "    SELECT mibdb.utrustning.Utrustnings_ID "
+                + "    FROM mibdb.utrustning "
+                + "    WHERE Benamning = '" + teknikNamn + "'"
+                + ");";
+
+        try {
+            kraftKalla = idb.fetchSingle(query);
+
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+
+        return kraftKalla;
+    }
+
+    /**
+     * Metod som hämtar ut information om Kaliber hos ett valt vapen med hjälp
+     * av variabeln "vapenNamn" som ges värde i metoden kopplad till knappen
+     * btnVapenInfo, och returnerar kalibern som String.
+     *
+     * @return
+     */
+    public String setKaliber() {
+
+        String kaliber = null;
+        String query = "SELECT Kaliber "
+                + "FROM mibdb.vapen "
+                + "WHERE mibdb.vapen.Utrustnings_ID IN ("
+                + "    SELECT mibdb.utrustning.Utrustnings_ID "
+                + "    FROM mibdb.utrustning "
+                + "    WHERE Benamning = '" + vapenNamn + "'"
+                + ");";
+
+        try {
+            kaliber = idb.fetchSingle(query);
+
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+
+        return kaliber;
+
+    }
+
+    /**
+     * Metod som hämtar ut information om Överföringsteknik hos en vald
+     * kommunikationsutrustning med hjälp av variabeln "kommNamn" som ges värde
+     * i metoden kopplad till knappen btnKommInfo, och returnerar det som
+     * String.
+     *
+     * @return
+     */
+    public String setOverForingsTeknik() {
+
+        String teknik = null;
+        String query = "SELECT Overforingsteknik "
+                + "FROM mibdb.kommunikation "
+                + "WHERE mibdb.kommunikation.Utrustnings_ID IN ("
+                + "    SELECT mibdb.utrustning.Utrustnings_ID "
+                + "    FROM mibdb.utrustning "
+                + "    WHERE Benamning = '" + kommNamn + "'"
+                + ");";
+
+        try {
+            teknik = idb.fetchSingle(query);
+
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+
+        return teknik;
+
+    }
+
+    /**
+     * Metod som vid instansiering av klassen döljer info-fälten.
+     */
+    private void doljInfo() {
+        lblVarierande.setVisible(false);
+        lblVarierande2.setVisible(false);
+        lblUtkvitterad.setVisible(false);
+        txtVarierande.setVisible(false);
+        txtUtKvittDatum.setVisible(false);
+
+    }
+
+    /**
+     * Metod som gör info-fälten om valt objekt synliga.
+     */
+    public void visaInfo() {
+        lblVarierande.setVisible(true);
+        lblVarierande2.setVisible(true);
+        lblUtkvitterad.setVisible(true);
+        txtVarierande.setVisible(true);
+        txtUtKvittDatum.setVisible(true);
+
+    }
+
+    /**
+     * Metod som visar meddelande om att inget utrustning finns utkvitterad om
+     * en agent utan utrustning kommer in på sidan.
+     */
+    public void omIngenUtrustning() {
+        if (vapen.isEmpty() || teknik.isEmpty() || kommunikation.isEmpty()) {
+            lblUtrustning.setText("Du har ingen utrustning utkvitterad.");
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKommInfo;
