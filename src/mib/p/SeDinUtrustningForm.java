@@ -85,6 +85,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblVarierande = new javax.swing.JLabel();
         lblVarierande2 = new javax.swing.JLabel();
         lblUtkvitterad = new javax.swing.JLabel();
+        btnRegistreraUtrustning = new javax.swing.JButton();
 
         setFocusTraversalPolicyProvider(true);
         setMaximumSize(new java.awt.Dimension(550, 343));
@@ -100,6 +101,12 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
         lblUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 24)); // NOI18N
         lblUtrustning.setText("Din utkvitterade utrustning:");
+
+        jComboVapen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboVapenActionPerformed(evt);
+            }
+        });
 
         lblVapen.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblVapen.setText("Vapen:");
@@ -143,74 +150,88 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblUtkvitterad.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblUtkvitterad.setText("Utkvitterad:");
 
+        btnRegistreraUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRegistreraUtrustning.setText("Registrera utrustning");
+        btnRegistreraUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraUtrustningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
-                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblVapen)
-                                        .addComponent(lblTeknik))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblKommunikation)
-                                        .addGap(3, 3, 3)))
-                                .addGap(43, 43, 43))
+                                .addComponent(lblUtkvitterad)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblUtkvitterad)
-                                    .addComponent(lblVarierande2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                    .addComponent(lblKommunikation)
+                                    .addComponent(lblTeknik))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboVapen, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jComboKommunikation, 0, 190, Short.MAX_VALUE)
+                                        .addComponent(jComboTeknik, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTeknikInfo))
+                                .addComponent(btnKommInfo)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboVapen, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnVapenInfo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtVarierande, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboKommunikation, javax.swing.GroupLayout.Alignment.LEADING, 0, 190, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnKommInfo))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(75, 75, 75)
+                                        .addComponent(btnMinSida))
+                                    .addComponent(btnTeknikInfo))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(lblVarierande2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addComponent(btnRegistreraUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(lblVarierande))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(lblUtrustning))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(lblVarierande)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblVapen)
+                                .addGap(208, 208, 208)
+                                .addComponent(btnVapenInfo))
+                            .addComponent(lblUtrustning))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(lblUtrustning)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboVapen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblVapen)
                     .addComponent(btnVapenInfo))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTeknik)
+                    .addComponent(jComboTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTeknikInfo))
-                .addGap(36, 36, 36)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblKommunikation)
                     .addComponent(jComboKommunikation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,12 +241,13 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVarierande2))
+                    .addComponent(lblVarierande2)
+                    .addComponent(btnRegistreraUtrustning))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMinSida)
-                    .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUtkvitterad))
+                    .addComponent(lblUtkvitterad)
+                    .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -299,6 +321,18 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             visaInfo();
         }
     }//GEN-LAST:event_btnKommInfoActionPerformed
+
+    private void jComboVapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboVapenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboVapenActionPerformed
+        // Denna knapp skickar användaren till RegistreraUtrustning sidan.
+    private void btnRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraUtrustningActionPerformed
+         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SeDinUtrustningForm.this);
+                frame.setContentPane(new RegistreraUtrustning(epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle(" Registrera Utrustning");
+                frame.repaint();
+    }//GEN-LAST:event_btnRegistreraUtrustningActionPerformed
     /**
      * Metod som hämtar ut Agent_ID utifrån den i applikationen unika
      * E-postadressen som följer med som variabel mellan alla olika vyer,
@@ -575,6 +609,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKommInfo;
     private javax.swing.JButton btnMinSida;
+    private javax.swing.JButton btnRegistreraUtrustning;
     private javax.swing.JButton btnTeknikInfo;
     private javax.swing.JButton btnVapenInfo;
     private javax.swing.JComboBox<String> jComboKommunikation;
