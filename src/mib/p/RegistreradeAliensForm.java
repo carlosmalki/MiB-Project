@@ -10,6 +10,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,12 +19,18 @@ import javax.swing.table.DefaultTableModel;
  * @author carlo
  */
 public class RegistreradeAliensForm extends javax.swing.JPanel {
+     String epost;
+    String isAdmin;
     private static InfDB idb;
 
     /**
      * Creates new form RegistreradeAliensForm
      */
-    public RegistreradeAliensForm() {
+    public RegistreradeAliensForm(String epost, String isAdmin) {
+        
+        this.epost= epost;
+        this.isAdmin = isAdmin;
+        
         initComponents();
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -83,6 +91,11 @@ public class RegistreradeAliensForm extends javax.swing.JPanel {
 
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min Sida");
+        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinSidaActionPerformed(evt);
+            }
+        });
 
         lblbFormat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblbFormat.setText("YYYY-MM-DD");
@@ -106,9 +119,8 @@ public class RegistreradeAliensForm extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblbFormat, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDatum2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                                .addComponent(txtDatum1)))
+                            .addComponent(txtDatum2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(txtDatum1))
                         .addGap(18, 18, 18)
                         .addComponent(btnSok)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -188,6 +200,14 @@ public class RegistreradeAliensForm extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnSokActionPerformed
+
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
+         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreradeAliensForm.this);
+                frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
+                frame.revalidate();
+                frame.setTitle("Startsida: Agent");
+                frame.repaint();
+    }//GEN-LAST:event_btnMinSidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
