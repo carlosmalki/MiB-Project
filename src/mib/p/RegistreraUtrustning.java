@@ -44,11 +44,11 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
+        blbRegistreraUtrustning = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel3.setText("Registrera Utrustning");
+        blbRegistreraUtrustning.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        blbRegistreraUtrustning.setText("Registrera Utrustning");
 
         btnTillbaka.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnTillbaka.setText("Tillbaka");
@@ -69,14 +69,14 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
                         .addComponent(btnTillbaka)
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(blbRegistreraUtrustning)
                         .addGap(88, 88, 88))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(blbRegistreraUtrustning)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
                 .addGap(26, 26, 26))
@@ -94,7 +94,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel blbRegistreraUtrustning;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
