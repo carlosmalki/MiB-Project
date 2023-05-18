@@ -43,7 +43,8 @@ public class HittaAlienPlats extends javax.swing.JPanel {
     private void fyllScrollPane() {
         txtaListadeAliens.append("ID: \t");
         txtaListadeAliens.append("NAMN: \n");
-    }    
+    }
+    
     private void fyllComboBox() {
         ArrayList<String> platser;
         try {
