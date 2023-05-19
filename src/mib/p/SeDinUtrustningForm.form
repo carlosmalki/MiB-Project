@@ -73,7 +73,7 @@
                       <Component id="lblVarierande2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtVarierande" min="-2" pref="190" max="-2" attributes="0"/>
-                      <EmptySpace pref="76" max="32767" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
                       <Component id="btnRegistreraUtrustning" min="-2" pref="201" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
@@ -112,7 +112,7 @@
                   <Component id="lblVapen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVapenInfo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTeknik" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboTeknik" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,10 +133,12 @@
                   <Component id="btnRegistreraUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnMinSida" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblUtkvitterad" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtUtKvittDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnMinSida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUtKvittDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>

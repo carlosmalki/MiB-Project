@@ -23,7 +23,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     private ArrayList<String> omrade;
     private ArrayList<String> kontor;
     private ArrayList<String> nyOmradesChef;
-    private ArrayList<String> agentIDs;
+
     private boolean omradePushed;
 
     /**
@@ -33,8 +33,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
-        ArrayList<String> omrade = new ArrayList<>();
-        ArrayList<String> kontor = new ArrayList<>();
+
         omradePushed = false;
 
         try {
@@ -44,7 +43,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
         fyllArrayListor();
-        fyllComboBoxar();
+        fyllComboBoxOmrade();
+        fyllComboBoxKontor();
 
     }
 
@@ -308,14 +308,16 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void btnHittaChefKontorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefKontorActionPerformed
+        rensaNyKontorsChefComboBox();
         txtNuvarandeChefKontor.setText(getChefsNamnKontor(cbKontorsChef.getSelectedItem().toString()));
-        fyllNyOmradesChefComboBox();
+        fyllNyKontorsChefComboBox();
         taBortValdChefKontor();
     }//GEN-LAST:event_btnHittaChefKontorActionPerformed
 
     private void btnBytChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytChefActionPerformed
         omradePushed = true;
         bytChefOmrade();
+        
 
     }//GEN-LAST:event_btnBytChefActionPerformed
 
@@ -395,8 +397,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             kontor = idb.fetchColumn(query2);
             String query3 = "SELECT Namn FROM mibdb.agent";
             nyOmradesChef = idb.fetchColumn(query3);
-            String query4 = "SELECT Agent_ID FROM mibdb.omradeschef";
-            agentIDs = idb.fetchColumn(query4);
+
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
@@ -405,10 +406,14 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     }
 
-    private void fyllComboBoxar() {
+    private void fyllComboBoxOmrade() {
         for (String omradet : omrade) {
             cbOmradesChef.addItem(omradet);
         }
+
+    }
+
+    private void fyllComboBoxKontor() {
         for (String kontoret : kontor) {
             cbKontorsChef.addItem(kontoret);
         }
@@ -421,12 +426,15 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 cbNyOmradesChef.addItem(nyOchef);
             }
         }
-        for(String nyKchef : nyOmradesChef)
-        {
-        if (!cbNyKontorsChef.getSelectedItem().toString().equals(txtNuvarandeChefKontor.getText()))
-            cbNyKontorsChef.addItem(nyKchef);
-        }
 
+    }
+
+    public void fyllNyKontorsChefComboBox() {
+        for (String nyKchef : nyOmradesChef) {
+            if (!cbNyKontorsChef.getSelectedItem().toString().equals(txtNuvarandeChefKontor.getText())) {
+                cbNyKontorsChef.addItem(nyKchef);
+            }
+        }
     }
 
     public void bytChefOmrade() {
@@ -442,7 +450,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 omradePushed = false;
                 txtNuvarandeChef.setText("");
                 JOptionPane.showMessageDialog(null, cbNyOmradesChef.getSelectedItem().toString() + " är ny chef över " + cbOmradesChef.getSelectedItem().toString());
-                
+
             } catch (InfException e) {
 
                 JOptionPane.showMessageDialog(null, cbNyOmradesChef.getSelectedItem().toString() + " har redan titeln områdeschef. Välj annan agent.");
@@ -453,14 +461,20 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     public void taBortValdChef() {
         cbNyOmradesChef.removeItem(txtNuvarandeChef.getText());
     }
-    
-    public void taBortValdChefKontor()
-    {
-     cbNyKontorsChef.removeItem(txtNuvarandeChef.getText());
+
+    public void taBortValdChefKontor() {
+        cbNyKontorsChef.removeItem(txtNuvarandeChef.getText());
     }
+
     public void rensaNyOmradesChefComboBox() {
         cbNyOmradesChef.removeAllItems();
         cbNyOmradesChef.addItem("Agenter");
+    }
+
+    public void rensaNyKontorsChefComboBox() {
+
+        cbNyKontorsChef.removeAllItems();
+        cbNyKontorsChef.addItem("Agenter");
     }
 
     public void bytKontorsChef() {
@@ -468,7 +482,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             int agentID = getAgentID();
             String query = "UPDATE mibdb.kontorschef SET Agent_ID = " + agentID + ";";
             idb.update(query);
-            JOptionPane.showMessageDialog(null, cbNyKontorsChef.getSelectedItem().toString() + " är ny chef över " + cbKontorsChef.getSelectedItem().toString());System.out.println("Ny chef");
+            JOptionPane.showMessageDialog(null, cbNyKontorsChef.getSelectedItem().toString() + " är ny chef över " + cbKontorsChef.getSelectedItem().toString());
+            txtNuvarandeChefKontor.setText("");
         } catch (InfException e) {
 
             e.printStackTrace();
