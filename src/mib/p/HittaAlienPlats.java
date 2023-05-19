@@ -21,15 +21,15 @@ public class HittaAlienPlats extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
-    
+
     /**
      * Creates new form HittaAlienPlats
      */
-    public HittaAlienPlats(String epost,String isAdmin) {
+    public HittaAlienPlats(String epost, String isAdmin) {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
-        
+
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
@@ -39,12 +39,12 @@ public class HittaAlienPlats extends javax.swing.JPanel {
         fyllComboBox();
         fyllScrollPane();
     }
-    
+
     private void fyllScrollPane() {
         txtaListadeAliens.append("ID: \t");
         txtaListadeAliens.append("NAMN: \n");
     }
-    
+
     private void fyllComboBox() {
         ArrayList<String> platser;
         try {
@@ -56,8 +56,9 @@ public class HittaAlienPlats extends javax.swing.JPanel {
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
         }
-    
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,35 +129,47 @@ public class HittaAlienPlats extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HittaAlienPlats.this);
-                frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HittaAlienPlats.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnVisaAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaAliensActionPerformed
         String plats = cbValjPlats.getSelectedItem().toString();
+        ArrayList<HashMap<String, String>> alienLista = new ArrayList<>();
         txtaListadeAliens.setText("");
         txtaListadeAliens.setEditable(false);
         fyllScrollPane();
         try {
-            String fraga = "select alien.namn, alien.alien_id from alien join plats on alien.plats = plats.plats_id where plats.BENAMNING = '" + plats + "'";
-            ArrayList<HashMap<String,String>>  alienLista = idb.fetchRows(fraga);
-            for (HashMap<String,String> enMap : alienLista){
-            String id = enMap.get("ALIEN_ID");
-            String namn =enMap.get("NAMN");
-            txtaListadeAliens.append(id + "\t");
-            txtaListadeAliens.append(namn + "\n");
-            
+            String fraga = "SELECT mibdb.alien.namn, mibdb.alien.alien_id "
+                    + "FROM mibdb.alien "
+                    + "JOIN mibdb.plats ON mibdb.alien.plats = mibdb.plats.plats_id "
+                    + "WHERE mibdb.plats.BENAMNING = '" + plats + "'";
+            alienLista = idb.fetchRows(fraga);
+            for (HashMap<String, String> enMap : alienLista) {
+                String id = enMap.get("ALIEN_ID");
+                String namn = enMap.get("NAMN");
+                
+
+                txtaListadeAliens.append(id + "\t");
+                txtaListadeAliens.append(namn + "\n");
+                
+
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
         } catch (NullPointerException npe) {
             txtaListadeAliens.append("Det finns inga aliens på denna plats...");
         }
+        for (HashMap<String, String> enMap : alienLista) {
+    for (String key : enMap.keySet()) {
+        String value = enMap.get(key);
+        System.out.println(key + ": " + value);
+    }}
     }//GEN-LAST:event_btnVisaAliensActionPerformed
 
 
@@ -168,7 +181,5 @@ public class HittaAlienPlats extends javax.swing.JPanel {
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JTextArea txtaListadeAliens;
     // End of variables declaration//GEN-END:variables
-
-    
 
 }
