@@ -5,6 +5,8 @@
 package mib.p;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -19,6 +21,8 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
     String epost;
     String isAdmin;
      private static InfDB idb;
+     
+     
 
     /**
      * Creates new form RegistreraUtrustning
@@ -33,6 +37,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
+        
     }
 
     /**
@@ -46,6 +51,11 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
 
         blbRegistreraUtrustning = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
+        btnRegistrera = new javax.swing.JButton();
+        lblUtrustningsID = new javax.swing.JLabel();
+        txtUtrustningsID = new javax.swing.JTextField();
+        lblBenamning = new javax.swing.JLabel();
+        txtBenamning = new javax.swing.JTextField();
 
         blbRegistreraUtrustning.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         blbRegistreraUtrustning.setText("Registrera Utrustning");
@@ -58,28 +68,65 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
             }
         });
 
+        btnRegistrera.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRegistrera.setText("Registrera");
+        btnRegistrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraActionPerformed(evt);
+            }
+        });
+
+        lblUtrustningsID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblUtrustningsID.setText("Utrustnings ID:");
+
+        lblBenamning.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblBenamning.setText("Benämning:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 92, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(blbRegistreraUtrustning)
-                        .addGap(88, 88, 88))))
+                        .addGap(88, 88, 88))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnTillbaka)
+                        .addGap(34, 34, 34))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblBenamning)
+                            .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUtrustningsID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUtrustningsID)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(btnRegistrera)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(blbRegistreraUtrustning)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addComponent(lblUtrustningsID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtUtrustningsID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblBenamning)
+                .addGap(8, 8, 8)
+                .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistrera)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
         
@@ -92,9 +139,34 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
                 frame.repaint();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
+        // Tilldelar variabeln benamning texten/värdet som skrivs in i textfältet för benämning.
+        String benamning = txtBenamning.getText();
+        // Tar siffran i textfälet txtUtrustningsID.
+        String utrustningsIDString = txtUtrustningsID.getText();
+        // Omvandlar String versionen av siffran till integer version. 
+        int utrustningsIDInt = Integer.parseInt(utrustningsIDString);
+        
+        try {
+            // värdena som skrivs in i textfälten registreras i databasen mibdb.utrustning.
+            idb.insert("INSERT INTO mibdb.utrustning (Utrustnings_ID, Benamning) VALUES ("+utrustningsIDInt+", '"+benamning+"')");
+             JOptionPane.showMessageDialog(null, "Din nya utrustning har registrerats!");
+             
+        } catch (InfException ex) {
+            Logger.getLogger(RegistreraUtrustning.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
+        }
+        
+    }//GEN-LAST:event_btnRegistreraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel blbRegistreraUtrustning;
+    private javax.swing.JButton btnRegistrera;
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JLabel lblBenamning;
+    private javax.swing.JLabel lblUtrustningsID;
+    private javax.swing.JTextField txtBenamning;
+    private javax.swing.JTextField txtUtrustningsID;
     // End of variables declaration//GEN-END:variables
 }
