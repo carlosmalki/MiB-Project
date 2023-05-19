@@ -252,6 +252,11 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         btnAdminsida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAdminsida.setText("Adminsida");
+        btnAdminsida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminsidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -277,7 +282,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,6 +329,14 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     private void btnBytChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytChef1ActionPerformed
         bytKontorsChef();
     }//GEN-LAST:event_btnBytChef1ActionPerformed
+    // Denna knapp en skickar till AdminSidan. "AdminFunktionerForm".
+    private void btnAdminsidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsidaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraCheferForm.this);
+        frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Administratörsfunktioner");
+        frame.repaint();
+    }//GEN-LAST:event_btnAdminsidaActionPerformed
 
     public int getAgentID() {
         String agentNamn;

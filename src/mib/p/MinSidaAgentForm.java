@@ -231,7 +231,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addComponent(btnUtrustning)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnHittaOmradesChef)
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                        .addContainerGap(53, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
  private void setValkommen()
