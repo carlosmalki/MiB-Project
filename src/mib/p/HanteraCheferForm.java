@@ -22,6 +22,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     private String isAdmin;
     private ArrayList<String> omrade;
     private ArrayList<String> kontor;
+    private ArrayList<String> nyOmradesChef;
+    private ArrayList<String> agentIDs;
+    private boolean omradePushed;
 
     /**
      * Creates new form HanteraCheferForm
@@ -32,6 +35,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         this.isAdmin = isAdmin;
         ArrayList<String> omrade = new ArrayList<>();
         ArrayList<String> kontor = new ArrayList<>();
+        omradePushed = false;
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -56,22 +60,23 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         btnMinSida = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnBytChef = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
         lblOmrade = new javax.swing.JLabel();
-        jComboOmradeChef = new javax.swing.JComboBox<>();
-        btnHittaChef = new javax.swing.JButton();
+        cbOmradesChef = new javax.swing.JComboBox<>();
+        btnHittaChefOmrade = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtNuvarandeChef = new javax.swing.JTextField();
+        cbNyOmradesChef = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnBytChef1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
         lblKontor = new javax.swing.JLabel();
-        jComboKontor = new javax.swing.JComboBox<>();
+        cbKontorsChef = new javax.swing.JComboBox<>();
         btnHittaChefKontor = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtNuvarandeChefKontor = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cbNyKontorsChef = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         btnAdminsida = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
@@ -89,42 +94,61 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         btnBytChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnBytChef.setText("Byt chef");
+        btnBytChef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBytChefActionPerformed(evt);
+            }
+        });
 
         lblOmrade.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblOmrade.setText("Område:");
 
-        jComboOmradeChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område" }));
+        cbOmradesChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område" }));
 
-        btnHittaChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnHittaChef.setText("Hitta chef");
-        btnHittaChef.addActionListener(new java.awt.event.ActionListener() {
+        btnHittaChefOmrade.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnHittaChefOmrade.setText("Hitta chef");
+        btnHittaChefOmrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHittaChefActionPerformed(evt);
+                btnHittaChefOmradeActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel2.setText("Chef:");
 
+        cbNyOmradesChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agenter" }));
+
+        jLabel5.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel5.setText("Välj ny chef:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(lblOmrade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jComboOmradeChef, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNuvarandeChef, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnHittaChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBytChef, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblOmrade)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbNyOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBytChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHittaChefOmrade, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtNuvarandeChef, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,16 +156,17 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOmrade)
-                    .addComponent(jComboOmradeChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHittaChef))
+                    .addComponent(cbOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHittaChefOmrade))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNuvarandeChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBytChef)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbNyOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(btnBytChef))
                 .addGap(30, 30, 30))
         );
 
@@ -149,11 +174,16 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         btnBytChef1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnBytChef1.setText("Byt chef");
+        btnBytChef1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBytChef1ActionPerformed(evt);
+            }
+        });
 
         lblKontor.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblKontor.setText("Kontor:");
 
-        jComboKontor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj kontor" }));
+        cbKontorsChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj kontor" }));
 
         btnHittaChefKontor.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnHittaChefKontor.setText("Hitta chef");
@@ -166,25 +196,36 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel4.setText("Chef:");
 
+        jLabel6.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel6.setText("Välj ny chef:");
+
+        cbNyKontorsChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agenter" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(lblKontor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
-                    .addComponent(jComboKontor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNuvarandeChefKontor, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnHittaChefKontor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBytChef1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(lblKontor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNuvarandeChefKontor)
+                            .addComponent(cbNyKontorsChef, 0, 138, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBytChef1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHittaChefKontor, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(56, 56, 56))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +233,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblKontor)
-                    .addComponent(jComboKontor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHittaChefKontor))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -201,15 +242,13 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBytChef1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(cbNyKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel1.setText("Byt områdeschef:");
-
-        jLabel3.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel3.setText("Byt kontorschef:");
+        jLabel1.setText("Sök och byt chef:");
 
         btnAdminsida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAdminsida.setText("Adminsida");
@@ -219,23 +258,21 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdminsida)
+                .addGap(95, 95, 95)
+                .addComponent(btnMinSida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdminsida)
-                            .addComponent(btnMinSida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,22 +282,22 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAdminsida)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMinSida)
-                        .addGap(9, 9, 9)))
-                .addGap(15, 15, 15))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdminsida)
+                    .addComponent(btnMinSida))
+                .addGap(8, 8, 8))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHittaChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefActionPerformed
-        txtNuvarandeChef.setText(getChefsNamn(jComboOmradeChef.getSelectedItem().toString()));
-    }//GEN-LAST:event_btnHittaChefActionPerformed
+    private void btnHittaChefOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefOmradeActionPerformed
+        rensaNyOmradesChefComboBox();
+
+        txtNuvarandeChef.setText(getChefsNamnOmrade(cbOmradesChef.getSelectedItem().toString()));
+        fyllNyOmradesChefComboBox();
+        taBortValdChef();
+    }//GEN-LAST:event_btnHittaChefOmradeActionPerformed
 
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraCheferForm.this);
@@ -271,32 +308,45 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void btnHittaChefKontorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefKontorActionPerformed
-       txtNuvarandeChefKontor.setText(getChefsNamnKontor(jComboKontor.getSelectedItem().toString()));
+        txtNuvarandeChefKontor.setText(getChefsNamnKontor(cbKontorsChef.getSelectedItem().toString()));
+        fyllNyOmradesChefComboBox();
+        taBortValdChefKontor();
     }//GEN-LAST:event_btnHittaChefKontorActionPerformed
 
-    public int getAgentID(String omrade) {
+    private void btnBytChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytChefActionPerformed
+        omradePushed = true;
+        bytChefOmrade();
+
+    }//GEN-LAST:event_btnBytChefActionPerformed
+
+    private void btnBytChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytChef1ActionPerformed
+        bytKontorsChef();
+    }//GEN-LAST:event_btnBytChef1ActionPerformed
+
+    public int getAgentID() {
+        String agentNamn;
         int agent = 0;
-        String query = "SELECT Agent_ID "
-                + "FROM mibdb.omradeschef "
-                + "WHERE omrade IN "
-                + "(SELECT Omrades_ID "
-                + "FROM mibdb.omrade "
-                + "WHERE Benamning = '" + omrade + "')";
+        if (omradePushed) {
+            agentNamn = cbNyOmradesChef.getSelectedItem().toString();
+        } else {
+            agentNamn = cbNyKontorsChef.getSelectedItem().toString();
+        }
+        String query = "SELECT Agent_ID FROM mibdb.agent WHERE namn = '" + agentNamn + "';";
 
         try {
             agent = Integer.parseInt(idb.fetchSingle(query));
         } catch (NumberFormatException e) {
 
-            System.err.println("Fel vid konvertering av Agent_ID till heltal: " + e.getMessage());
+            System.out.println("Fel vid konvertering av Agent_ID till heltal: " + e.getMessage());
         } catch (InfException e) {
 
-            System.err.println("Fel vid databasåtkomst: " + e.getMessage());
+            System.out.println("Fel vid databasåtkomst: " + e.getMessage());
         }
 
         return agent;
     }
 
-    private String getChefsNamn(String omrade) {
+    private String getChefsNamnOmrade(String omrade) {
         String chefsNamn;
         String query = "SELECT Namn "
                 + "FROM mibdb.agent "
@@ -314,33 +364,39 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande: " + e.getMessage());
-            return null; // Returnera null vid fel
+            return null;
         }
         return chefsNamn;
     }
-  private String getChefsNamnKontor(String kontor) {
-    String kontorsChef = null ;
-    try {
-        String query = "SELECT namn " +
-                       "FROM mibdb.agent " +
-                       "WHERE mibdb.agent.Agent_ID IN ( " +
-                       "    SELECT mibdb.kontorschef.Agent_ID " +
-                       "    FROM mibdb.kontorschef " +
-                       "    WHERE Kontorsbeteckning = '" + kontor + "' " +
-                       ")";
-        kontorsChef = idb.fetchSingle(query);
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Något gick fel!");
-        System.out.println("Internt felmeddelande: " + e.getMessage());
+
+    private String getChefsNamnKontor(String kontor) {
+        String kontorsChef = null;
+        try {
+            String query = "SELECT namn "
+                    + "FROM mibdb.agent "
+                    + "WHERE mibdb.agent.Agent_ID IN ( "
+                    + "    SELECT mibdb.kontorschef.Agent_ID "
+                    + "    FROM mibdb.kontorschef "
+                    + "    WHERE Kontorsbeteckning = '" + kontor + "' "
+                    + ")";
+            kontorsChef = idb.fetchSingle(query);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
+        }
+        return kontorsChef;
     }
-    return kontorsChef;
-}
+
     private void fyllArrayListor() {
         try {
             String query = "SELECT Benamning FROM mibdb.omrade";
             omrade = idb.fetchColumn(query);
             String query2 = "SELECT Kontorsbeteckning FROM mibdb.kontorschef";
             kontor = idb.fetchColumn(query2);
+            String query3 = "SELECT Namn FROM mibdb.agent";
+            nyOmradesChef = idb.fetchColumn(query3);
+            String query4 = "SELECT Agent_ID FROM mibdb.omradeschef";
+            agentIDs = idb.fetchColumn(query4);
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
@@ -351,32 +407,93 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     private void fyllComboBoxar() {
         for (String omradet : omrade) {
-            jComboOmradeChef.addItem(omradet);
+            cbOmradesChef.addItem(omradet);
         }
-        for (String kontoret : kontor)
+        for (String kontoret : kontor) {
+            cbKontorsChef.addItem(kontoret);
+        }
+
+    }
+
+    public void fyllNyOmradesChefComboBox() {
+        for (String nyOchef : nyOmradesChef) {
+            if (!cbNyOmradesChef.getSelectedItem().toString().equals(txtNuvarandeChef.getText())) {
+                cbNyOmradesChef.addItem(nyOchef);
+            }
+        }
+        for(String nyKchef : nyOmradesChef)
         {
-           jComboKontor.addItem(kontoret);
+        if (!cbNyKontorsChef.getSelectedItem().toString().equals(txtNuvarandeChefKontor.getText()))
+            cbNyKontorsChef.addItem(nyKchef);
+        }
+
+    }
+
+    public void bytChefOmrade() {
+        String omradesNamn;
+        if (!cbOmradesChef.getSelectedItem().toString().equals("Välj område")) {
+            omradesNamn = cbOmradesChef.getSelectedItem().toString();
+            int agentID = getAgentID();
+            String query = "UPDATE mibdb.omradeschef "
+                    + "SET Agent_ID = " + agentID + " "
+                    + "WHERE Omrade IN (SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omradesNamn + "');";
+            try {
+                idb.update(query);
+                omradePushed = false;
+                txtNuvarandeChef.setText("");
+                JOptionPane.showMessageDialog(null, cbNyOmradesChef.getSelectedItem().toString() + " är ny chef över " + cbOmradesChef.getSelectedItem().toString());
+                
+            } catch (InfException e) {
+
+                JOptionPane.showMessageDialog(null, cbNyOmradesChef.getSelectedItem().toString() + " har redan titeln områdeschef. Välj annan agent.");
+            }
         }
     }
 
+    public void taBortValdChef() {
+        cbNyOmradesChef.removeItem(txtNuvarandeChef.getText());
+    }
     
+    public void taBortValdChefKontor()
+    {
+     cbNyKontorsChef.removeItem(txtNuvarandeChef.getText());
+    }
+    public void rensaNyOmradesChefComboBox() {
+        cbNyOmradesChef.removeAllItems();
+        cbNyOmradesChef.addItem("Agenter");
+    }
+
+    public void bytKontorsChef() {
+        try {
+            int agentID = getAgentID();
+            String query = "UPDATE mibdb.kontorschef SET Agent_ID = " + agentID + ";";
+            idb.update(query);
+            JOptionPane.showMessageDialog(null, cbNyKontorsChef.getSelectedItem().toString() + " är ny chef över " + cbKontorsChef.getSelectedItem().toString());System.out.println("Ny chef");
+        } catch (InfException e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminsida;
     private javax.swing.JButton btnBytChef;
     private javax.swing.JButton btnBytChef1;
-    private javax.swing.JButton btnHittaChef;
     private javax.swing.JButton btnHittaChefKontor;
+    private javax.swing.JButton btnHittaChefOmrade;
     private javax.swing.JButton btnMinSida;
-    private javax.swing.JComboBox<String> jComboKontor;
-    private javax.swing.JComboBox<String> jComboOmradeChef;
+    private javax.swing.JComboBox<String> cbKontorsChef;
+    private javax.swing.JComboBox<String> cbNyKontorsChef;
+    private javax.swing.JComboBox<String> cbNyOmradesChef;
+    private javax.swing.JComboBox<String> cbOmradesChef;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblKontor;
     private javax.swing.JLabel lblOmrade;
     private javax.swing.JTextField txtNuvarandeChef;
