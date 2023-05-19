@@ -22,6 +22,9 @@ public class ListaAlienForm extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
+    private String sokMetod;
+    public boolean datumSok;
+    
 
     /**
      * Creates new form testFormTabell
@@ -38,7 +41,13 @@ public class ListaAlienForm extends javax.swing.JPanel {
         jTable1.setVisible(false);
         this.epost = epost;
         this.isAdmin = isAdmin;
-
+        cbValj.setVisible(false);
+        jLabel1.setVisible(false);
+        btnSokKnapp.setVisible(false);
+        btnSokKnapp.setEnabled(false);
+        datumSok = true;
+        visaDoljDatumSok();
+        
     }
 
     /**
@@ -51,11 +60,21 @@ public class ListaAlienForm extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboValjRas = new javax.swing.JComboBox<>();
-        btnSokRas = new javax.swing.JButton();
+        cbValj = new javax.swing.JComboBox<>();
+        btnSokKnapp = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnMinSida = new javax.swing.JButton();
+        btnSokPlats = new javax.swing.JButton();
+        btnSokRas = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtFranDatum = new javax.swing.JTextField();
+        lblDatumSok = new javax.swing.JLabel();
+        lblFran = new javax.swing.JLabel();
+        lblTill = new javax.swing.JLabel();
+        btnDatumSok = new javax.swing.JButton();
+        txtTillDatum = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -64,13 +83,13 @@ public class ListaAlienForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Sök ras:");
 
-        jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Squid", "Worm", "Boglodite", " " }));
+        cbValj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        btnSokRas.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnSokRas.setText("Sök");
-        btnSokRas.addActionListener(new java.awt.event.ActionListener() {
+        btnSokKnapp.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnSokKnapp.setText("Sök");
+        btnSokKnapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSokRasActionPerformed(evt);
+                btnSokKnappActionPerformed(evt);
             }
         });
 
@@ -84,11 +103,53 @@ public class ListaAlienForm extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMinSidaActionPerformed(evt);
+            }
+        });
+
+        btnSokPlats.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnSokPlats.setText("Plats-sök");
+        btnSokPlats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokPlatsActionPerformed(evt);
+            }
+        });
+
+        btnSokRas.setFont(new java.awt.Font("MS PGothic", 1, 14)); // NOI18N
+        btnSokRas.setText("Ras-sök");
+        btnSokRas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokRasActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setText("Datum-sök");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel2.setText("Sökmetod:");
+
+        lblDatumSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblDatumSok.setText("Datumsök:");
+
+        lblFran.setText("Från:");
+
+        lblTill.setText("Till:");
+
+        btnDatumSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnDatumSok.setText("Sök");
+        btnDatumSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatumSokActionPerformed(evt);
             }
         });
 
@@ -97,41 +158,127 @@ public class ListaAlienForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbValj, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnSokKnapp)
+                .addGap(73, 73, 73))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel1)
-                        .addGap(31, 31, 31)
-                        .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnSokRas))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(87, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSokRas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSokPlats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(15, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(66, 66, 66)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnMinSida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDatumSok)
+                    .addComponent(lblFran)
+                    .addComponent(lblTill)
+                    .addComponent(btnDatumSok, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFranDatum)
+                    .addComponent(txtTillDatum))
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSokRas))
+                .addGap(96, 96, 96)
+                .addComponent(jLabel2)
+                .addGap(26, 26, 26)
+                .addComponent(btnSokPlats)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMinSida)
-                .addGap(8, 8, 8))
+                .addComponent(btnSokRas)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(8, 106, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbValj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnSokKnapp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDatumSok)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFran)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFranDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(lblTill)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtTillDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDatumSok)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnMinSida)))
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokKnappActionPerformed
+     if(sokMetod.equals("Ras"))
+     { sokRas();}
+     if(sokMetod.equals("Plats"))
+     {
+      sokPlats();
+     }
+
+    }//GEN-LAST:event_btnSokKnappActionPerformed
+    
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ListaAlienForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Sök ras");
+        frame.repaint();
+    }//GEN-LAST:event_btnMinSidaActionPerformed
+
     private void btnSokRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokRasActionPerformed
-        String ras = (String) jComboValjRas.getSelectedItem();
+        sokMetod = "Ras";
+        visaDoljDatumSok();
+        cbValj.setVisible(true);
+        jLabel1.setText("Sök alien av ras:");
+        jLabel1.setVisible(true);
+        visaSokKnapp();
+        fyllComboBoxRas();
+    }//GEN-LAST:event_btnSokRasActionPerformed
+
+    private void btnSokPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokPlatsActionPerformed
+        
+        sokMetod = "Plats";
+        visaDoljDatumSok();
+        cbValj.setVisible(true);
+        jLabel1.setVisible(true);
+        jLabel1.setText("Sök alien i:");
+        visaSokKnapp();
+        fyllComboBoxPlats();
+    }//GEN-LAST:event_btnSokPlatsActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       visaDoljDatumSok();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
+      datumSok();
+    }//GEN-LAST:event_btnDatumSokActionPerformed
+
+private void sokRas()
+{
+String ras = (String) cbValj.getSelectedItem();
 
         if (ras.equals("Squid") || ras.equals("Worm") || ras.equals("Boglodite")) {
             try {
@@ -163,23 +310,159 @@ public class ListaAlienForm extends javax.swing.JPanel {
 
             jTable1.setVisible(true);
 
-    }//GEN-LAST:event_btnSokRasActionPerformed
-    }
-    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ListaAlienForm.this);
-        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
-        frame.revalidate();
-        frame.setTitle("Sök ras");
-        frame.repaint();
-    }//GEN-LAST:event_btnMinSidaActionPerformed
+    }        
 
+}
+private void sokPlats()
+{String plats = cbValj.getSelectedItem().toString();
+        ArrayList<HashMap<String, String>> alienLista = new ArrayList<>();
+      DefaultTableModel model = new DefaultTableModel();
+                model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn"});
+                jTable1.setModel(model);
+        try {
+            String fraga = "SELECT mibdb.alien.namn, mibdb.alien.alien_id "
+                    + "FROM mibdb.alien "
+                    + "JOIN mibdb.plats ON mibdb.alien.plats = mibdb.plats.plats_id "
+                    + "WHERE mibdb.plats.BENAMNING = '" + plats + "'";
+            alienLista = idb.fetchRows(fraga);
+           for (HashMap<String, String> item : alienLista) {
+                    String alienId = item.get("Alien_ID");
+                    String namn = item.get("Namn");
+                    model.addRow(new Object[]{alienId, namn});
+                    jTable1.setVisible(true);
+                
+
+                
+                
+
+            }
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        } catch (NullPointerException npe) {
+            
+        }
+        for (HashMap<String, String> enMap : alienLista) {
+    for (String key : enMap.keySet()) {
+        String value = enMap.get(key);
+        System.out.println(key + ": " + value);
+    }}
+    }       
+private void fyllComboBoxPlats() {
+        ArrayList<String> platser;
+        try {
+            platser = idb.fetchColumn("select benamning from plats");
+            cbValj.removeAllItems();
+            cbValj.addItem("Välj plats");
+            for (String enPlats : platser) {
+                cbValj.addItem(enPlats);
+            }
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+
+    }
+
+
+private void visaSokKnapp()
+{
+btnSokKnapp.setVisible(true);
+btnSokKnapp.setEnabled(true);
+}
+
+private void fyllComboBoxRas()
+{
+cbValj.removeAllItems();    
+cbValj.addItem("Välj ras");
+cbValj.addItem("Boglodite");
+cbValj.addItem("Squid");
+cbValj.addItem("Worm");
+
+}
+
+private void visaDoljDatumSok()
+{
+    if(datumSok)
+    {
+lblFran.setVisible(false);
+lblTill.setVisible(false);
+btnDatumSok.setVisible(false);
+lblDatumSok.setVisible(false);
+txtTillDatum.setVisible(false);
+txtFranDatum.setVisible(false);
+datumSok = false;
+    }
+    else
+    {
+    lblFran.setVisible(true);
+lblTill.setVisible(true);
+btnDatumSok.setVisible(true);
+lblDatumSok.setVisible(true);
+txtTillDatum.setVisible(true);
+txtFranDatum.setVisible(true);
+datumSok = true;
+    }
+
+}
+
+public void datumSok()
+{
+try {
+
+            // Datum 1 och 2 från txtfälten.
+            String Datum1 = txtFranDatum.getText();
+            String Datum2 = txtTillDatum.getText();
+
+            if (Datum1.contains("-") && Datum2.contains("-")) {
+
+                DefaultTableModel model = new DefaultTableModel();
+                model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn", "Registreringsdatum"});
+                jTable1.setModel(model);
+
+                ArrayList<HashMap<String, String>> rows;
+                String query;
+
+                query = ("SELECT mibdb.alien.Alien_ID, mibdb.alien.Namn, mibdb.alien.Registreringsdatum FROM mibdb.alien WHERE "
+                        + "Registreringsdatum BETWEEN '" + Datum1 + "' AND '" + Datum2 + "' ORDER BY Registreringsdatum ");
+
+                rows = idb.fetchRows(query);
+
+                for (HashMap<String, String> item : rows) {
+                    String alienId = item.get("Alien_ID");
+                    String namn = item.get("Namn");
+                    String registreringsdatum = item.get("Registreringsdatum");
+                    model.addRow(new Object[]{alienId, namn, registreringsdatum});
+                }
+
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
+            }
+
+            jTable1.setVisible(true);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
+
+        }
+
+
+    }       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDatumSok;
     private javax.swing.JButton btnMinSida;
+    private javax.swing.JButton btnSokKnapp;
+    private javax.swing.JButton btnSokPlats;
     private javax.swing.JButton btnSokRas;
-    private javax.swing.JComboBox<String> jComboValjRas;
+    private javax.swing.JComboBox<String> cbValj;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblDatumSok;
+    private javax.swing.JLabel lblFran;
+    private javax.swing.JLabel lblTill;
+    private javax.swing.JTextField txtFranDatum;
+    private javax.swing.JTextField txtTillDatum;
     // End of variables declaration//GEN-END:variables
 }
