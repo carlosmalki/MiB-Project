@@ -6,7 +6,9 @@ package mib.p;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -78,6 +80,11 @@ public class Top3 extends javax.swing.JPanel {
         cbValjOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnVisaTopp3.setText("Visa topp 3");
+        btnVisaTopp3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaTopp3ActionPerformed(evt);
+            }
+        });
 
         txtaListadeAgenter.setColumns(20);
         txtaListadeAgenter.setRows(5);
@@ -124,6 +131,14 @@ public class Top3 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Top3.this);
+                frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Startsida: Agent");
+                frame.repaint();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnVisaTopp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaTopp3ActionPerformed
         String omrade = cbValjOmrade.getSelectedItem().toString();
         txtaListadeAgenter.setText("");
         txtaListadeAgenter.setEditable(false);
@@ -143,7 +158,7 @@ public class Top3 extends javax.swing.JPanel {
         } catch (NullPointerException npe) {
             txtaListadeAgenter.append("Det finns inga agenter på denna plats...");
         }
-    }//GEN-LAST:event_btnTillbakaActionPerformed
+    }//GEN-LAST:event_btnVisaTopp3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -70,6 +70,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         btnAndraAlienInfo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnUtrustning = new javax.swing.JButton();
+        btnHittaOmradesChef = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -152,6 +153,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
             }
         });
 
+        btnHittaOmradesChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnHittaOmradesChef.setText("Hitta områdeschef");
+        btnHittaOmradesChef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHittaOmradesChefActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,7 +173,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addComponent(btnListaRas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegisteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,14 +188,16 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addGap(73, 73, 73))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(168, 168, 168)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAndraAlienInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnRegistreradeAliens, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                            .addComponent(btnAlienSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnAndraAlienInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnRegistreradeAliens, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                .addComponent(btnAlienSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnHittaOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,7 +229,9 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addComponent(btnAndraAlienInfo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUtrustning)
-                        .addContainerGap(42, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHittaOmradesChef)
+                        .addContainerGap(14, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
  private void setValkommen()
@@ -301,12 +314,21 @@ JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
                 frame.repaint();
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
+    private void btnHittaOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaOmradesChefActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+                frame.setContentPane(new HittaOmradesChef(epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Startsida: Agent");
+                frame.repaint();
+    }//GEN-LAST:event_btnHittaOmradesChefActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminFunktioner;
     private javax.swing.JButton btnAlienSok;
     private javax.swing.JButton btnAndraAlienInfo;
     private javax.swing.JButton btnAndraLosenord;
+    private javax.swing.JButton btnHittaOmradesChef;
     private javax.swing.JButton btnListaRas;
     private javax.swing.JButton btnRegisteraAlien;
     private javax.swing.JButton btnRegistreradeAliens;
