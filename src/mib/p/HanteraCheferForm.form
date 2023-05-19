@@ -114,7 +114,7 @@
                           </Group>
                           <EmptySpace pref="63" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnBytChef" alignment="1" min="-2" pref="107" max="-2" attributes="0"/>
+                              <Component id="btnBytOmradesChef" alignment="1" min="-2" pref="107" max="-2" attributes="0"/>
                               <Component id="btnHittaChefOmrade" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
@@ -145,7 +145,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbNyOmradesChef" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnBytChef" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBytOmradesChef" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
@@ -153,7 +153,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnBytChef">
+        <Component class="javax.swing.JButton" name="btnBytOmradesChef">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="MS Gothic" size="14" style="1"/>
@@ -161,7 +161,7 @@
             <Property name="text" type="java.lang.String" value="Byt chef"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBytChefActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBytOmradesChefActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblOmrade">
@@ -264,7 +264,7 @@
                   </Group>
                   <EmptySpace pref="67" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnBytChef1" alignment="1" min="-2" pref="107" max="-2" attributes="0"/>
+                      <Component id="btnBytKontorsChef" alignment="1" min="-2" pref="107" max="-2" attributes="0"/>
                       <Component id="btnHittaChefKontor" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
@@ -287,7 +287,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnBytChef1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBytKontorsChef" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbNyKontorsChef" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -297,7 +297,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnBytChef1">
+        <Component class="javax.swing.JButton" name="btnBytKontorsChef">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="MS Gothic" size="14" style="1"/>
@@ -305,7 +305,7 @@
             <Property name="text" type="java.lang.String" value="Byt chef"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBytChef1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBytKontorsChefActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblKontor">

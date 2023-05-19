@@ -59,7 +59,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         btnMinSida = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        btnBytChef = new javax.swing.JButton();
+        btnBytOmradesChef = new javax.swing.JButton();
         lblOmrade = new javax.swing.JLabel();
         cbOmradesChef = new javax.swing.JComboBox<>();
         btnHittaChefOmrade = new javax.swing.JButton();
@@ -68,7 +68,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         cbNyOmradesChef = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnBytChef1 = new javax.swing.JButton();
+        btnBytKontorsChef = new javax.swing.JButton();
         lblKontor = new javax.swing.JLabel();
         cbKontorsChef = new javax.swing.JComboBox<>();
         btnHittaChefKontor = new javax.swing.JButton();
@@ -92,11 +92,11 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
 
-        btnBytChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnBytChef.setText("Byt chef");
-        btnBytChef.addActionListener(new java.awt.event.ActionListener() {
+        btnBytOmradesChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnBytOmradesChef.setText("Byt chef");
+        btnBytOmradesChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBytChefActionPerformed(evt);
+                btnBytOmradesChefActionPerformed(evt);
             }
         });
 
@@ -143,7 +143,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                             .addComponent(cbNyOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBytChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHittaChefOmrade, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(56, 56, 56))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -166,17 +166,17 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbNyOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(btnBytChef))
+                    .addComponent(btnBytOmradesChef))
                 .addGap(30, 30, 30))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
 
-        btnBytChef1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnBytChef1.setText("Byt chef");
-        btnBytChef1.addActionListener(new java.awt.event.ActionListener() {
+        btnBytKontorsChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnBytKontorsChef.setText("Byt chef");
+        btnBytKontorsChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBytChef1ActionPerformed(evt);
+                btnBytKontorsChefActionPerformed(evt);
             }
         });
 
@@ -223,7 +223,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                             .addComponent(cbNyKontorsChef, 0, 138, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBytChef1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHittaChefKontor, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(56, 56, 56))
         );
@@ -241,7 +241,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                     .addComponent(txtNuvarandeChefKontor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBytChef1)
+                    .addComponent(btnBytKontorsChef)
                     .addComponent(jLabel6)
                     .addComponent(cbNyKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
@@ -290,7 +290,14 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addGap(8, 8, 8))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Metod för att hitta namnet på områdeschefen över valt område; txtNuvarandeChefOmrade sätts med Agentens namn som
+     * tas fram med metoden getChefsNamnOmrade().
+     * Metoden kör först rensaNyOmradesChefComboBox()-metoden för att tömma comboboxen så inte samma
+     * agent-namn läggs till igen vid framtida sökningar, sedan sätts områdeschefsnamnet och comboxen fylls
+     * med agent-namn igen och nuvarande chef tas bort med taBortValdChef()-metoden.
+     * @param evt 
+     */
     private void btnHittaChefOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefOmradeActionPerformed
         rensaNyOmradesChefComboBox();
 
@@ -306,28 +313,52 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+    /**
+     * Metod för att hitta namnet på kontorschefen; txtNuvarandeChefKontor sätts med Agentens namn som
+     * tas fram med metoden getChegsNamnkontor().
+     * Metoden kör först rensaNyKontorsChefComboBox()-metoden för att tömma comboboxen så inte samma
+     * agent-namn läggs till igen vid framtida sökningar, sedan sätts kontorschefsnamnet och comboxen fylls
+     * med agent-namn igen och nuvarande chef tas bort med taBortValdChefKontor()-metoden.
+     * @param evt 
+     */
     private void btnHittaChefKontorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefKontorActionPerformed
         rensaNyKontorsChefComboBox();
         txtNuvarandeChefKontor.setText(getChefsNamnKontor(cbKontorsChef.getSelectedItem().toString()));
         fyllNyKontorsChefComboBox();
         taBortValdChefKontor();
     }//GEN-LAST:event_btnHittaChefKontorActionPerformed
-
-    private void btnBytChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytChefActionPerformed
+   /**
+    * Metod kopplad till btnBytOmradesChef; när den trycks sätts boolean-variabeln
+    * omradePushed till true, så rätt Agent_ID returneras när getAgentID()-metoden körs
+    * inuti bytChefOmrade som sedan körs när btnBytOmradesChef blir tryckt.
+    * @param evt 
+    */
+    private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
         omradePushed = true;
         bytChefOmrade();
-        
 
-    }//GEN-LAST:event_btnBytChefActionPerformed
 
-    private void btnBytChef1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytChef1ActionPerformed
+    }//GEN-LAST:event_btnBytOmradesChefActionPerformed
+/**
+ * Metod kopplad till btnBytKontorschef; när den trycks körs metoden bytKontorsChef()
+ * (beskriven längre ner)
+ * som i sin tur utför själva bytet.
+ * @param evt 
+ */
+    private void btnBytKontorsChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytKontorsChefActionPerformed
         bytKontorsChef();
-    }//GEN-LAST:event_btnBytChef1ActionPerformed
-
+    }//GEN-LAST:event_btnBytKontorsChefActionPerformed
+    /**
+     * Metod för att få Agent_ID på den agent man vill välja som ny områdes-
+     * eller kontorschef; boolean-variablen omradePueshed håller reda på om det
+     * är områdes- eller kontorsknappen som tryckts på och väljer namn för
+     * ID-sök därefter, och agenID returneras i form av int.
+     *
+     * @return
+     */
     public int getAgentID() {
         String agentNamn;
-        int agent = 0;
+        int agentID = 0;
         if (omradePushed) {
             agentNamn = cbNyOmradesChef.getSelectedItem().toString();
         } else {
@@ -336,7 +367,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         String query = "SELECT Agent_ID FROM mibdb.agent WHERE namn = '" + agentNamn + "';";
 
         try {
-            agent = Integer.parseInt(idb.fetchSingle(query));
+            agentID = Integer.parseInt(idb.fetchSingle(query));
         } catch (NumberFormatException e) {
 
             System.out.println("Fel vid konvertering av Agent_ID till heltal: " + e.getMessage());
@@ -345,9 +376,17 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             System.out.println("Fel vid databasåtkomst: " + e.getMessage());
         }
 
-        return agent;
+        return agentID;
     }
 
+    /**
+     * Metod för att få namnet på nuvarande områdes-chefen för valt område;
+     * metoden tar in områdesnamnet som String-parameter och ger tillbara en
+     * String med Agentens namn.
+     *
+     * @param omrade
+     * @return
+     */
     private String getChefsNamnOmrade(String omrade) {
         String chefsNamn;
         String query = "SELECT Namn "
@@ -371,6 +410,13 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         return chefsNamn;
     }
 
+    /**
+     * Metod för att få namnet på nuvarande kontorschefen; metoden tar in
+     * kontorsnamnet som String-parameter och ger Agentens namn i return.
+     *
+     * @param kontor
+     * @return
+     */
     private String getChefsNamnKontor(String kontor) {
         String kontorsChef = null;
         try {
@@ -389,6 +435,10 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         return kontorsChef;
     }
 
+    /**
+     * Metod som fyller upp ArrayListor med värden över områden, kontor och
+     * agent-namn.
+     */
     private void fyllArrayListor() {
         try {
             String query = "SELECT Benamning FROM mibdb.omrade";
@@ -406,6 +456,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som fyller upp comboboxen över tillgängliga områden.
+     */
     private void fyllComboBoxOmrade() {
         for (String omradet : omrade) {
             cbOmradesChef.addItem(omradet);
@@ -413,6 +466,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som fyller upp comboboxen över tillgängliga kontor.
+     */
     private void fyllComboBoxKontor() {
         for (String kontoret : kontor) {
             cbKontorsChef.addItem(kontoret);
@@ -420,6 +476,10 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som fyller cbNyOmrådesChef-comboboxen med namnen över de Agenter
+     * som finns i databasen.
+     */
     public void fyllNyOmradesChefComboBox() {
         for (String nyOchef : nyOmradesChef) {
             if (!cbNyOmradesChef.getSelectedItem().toString().equals(txtNuvarandeChef.getText())) {
@@ -429,6 +489,10 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som fyller cbNykontorsChef-comboboxen med namnen över de Agenter
+     * som finns i databasen.
+     */
     public void fyllNyKontorsChefComboBox() {
         for (String nyKchef : nyOmradesChef) {
             if (!cbNyKontorsChef.getSelectedItem().toString().equals(txtNuvarandeChefKontor.getText())) {
@@ -437,6 +501,13 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod för att byta ut den nuvarande områdesschefen; inuti metoden körs
+     * getAgentID-metoden för att få Agent_ID på den person man vill ska vara
+     * chef, och databsen uppdateras sedan med det ID-numret i kolumnen Benäming
+     * i Områdes-tabellen.
+     *
+     */
     public void bytChefOmrade() {
         String omradesNamn;
         if (!cbOmradesChef.getSelectedItem().toString().equals("Välj område")) {
@@ -458,25 +529,48 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som tar bort den nuvarande områdeschefen från listan över agenter
+     * att välja som ny chef.
+     */
     public void taBortValdChef() {
         cbNyOmradesChef.removeItem(txtNuvarandeChef.getText());
     }
 
+    /**
+     * Metod som tar bort den nuvarande kontorschefen från listan över agenter
+     * att välja som ny chef.
+     */
     public void taBortValdChefKontor() {
         cbNyKontorsChef.removeItem(txtNuvarandeChef.getText());
     }
 
+    /**
+     * Metod som tömmer cbNyOmradesChef-comboboxen och återställer den med enda
+     * värdet "Agenter", inför nya sökningar.
+     */
     public void rensaNyOmradesChefComboBox() {
         cbNyOmradesChef.removeAllItems();
         cbNyOmradesChef.addItem("Agenter");
     }
 
+    /**
+     * Metod som tömmer cbNyKontorsChef-comboboxen och återställer den med enda
+     * värdet "Agenter", inför nya sökningar.
+     */
     public void rensaNyKontorsChefComboBox() {
 
         cbNyKontorsChef.removeAllItems();
         cbNyKontorsChef.addItem("Agenter");
     }
 
+    /**
+     * Metod för att byta ut den nuvarande kontorschefen; Inuti metoden körs
+     * getAgentID-metoden för att få Agent_ID på den person man vill ska vara
+     * chef, och databsen uppdateras sedan med det ID-numret i tabellen för
+     * Kontorschef.
+     *
+     */
     public void bytKontorsChef() {
         try {
             int agentID = getAgentID();
@@ -493,8 +587,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminsida;
-    private javax.swing.JButton btnBytChef;
-    private javax.swing.JButton btnBytChef1;
+    private javax.swing.JButton btnBytKontorsChef;
+    private javax.swing.JButton btnBytOmradesChef;
     private javax.swing.JButton btnHittaChefKontor;
     private javax.swing.JButton btnHittaChefOmrade;
     private javax.swing.JButton btnMinSida;
