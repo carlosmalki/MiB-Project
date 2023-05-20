@@ -95,7 +95,7 @@ public class RegisteraForm extends javax.swing.JPanel {
             }
         });
 
-        lblRegistreraAlien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRegistreraAlien.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblRegistreraAlien.setText("Registrera Alien");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(153, 153, 153), null, null));

@@ -41,6 +41,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
         btnHanteraChef = new javax.swing.JButton();
         btnAndraInfoOmAgent = new javax.swing.JButton();
         btnSokAgent = new javax.swing.JButton();
+        btnRegistreraAgent = new javax.swing.JButton();
 
         btnBefordaAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnBefordaAgent.setText("Befordra Agent");
@@ -74,6 +75,14 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
             }
         });
 
+        btnRegistreraAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRegistreraAgent.setText("Registrera Agent");
+        btnRegistreraAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,7 +93,8 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                     .addComponent(btnHanteraChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBefordaAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAndraInfoOmAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSokAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSokAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegistreraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(296, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,7 +108,9 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                 .addComponent(btnAndraInfoOmAgent)
                 .addGap(29, 29, 29)
                 .addComponent(btnSokAgent)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnRegistreraAgent)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,11 +146,20 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                 frame.repaint();
     }//GEN-LAST:event_btnSokAgentActionPerformed
 
+    private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+                frame.setContentPane(new RegisteraAgentForm(epost,isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera ny Agent");
+                frame.repaint();
+    }//GEN-LAST:event_btnRegistreraAgentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfoOmAgent;
     private javax.swing.JButton btnBefordaAgent;
     private javax.swing.JButton btnHanteraChef;
+    private javax.swing.JButton btnRegistreraAgent;
     private javax.swing.JButton btnSokAgent;
     // End of variables declaration//GEN-END:variables
 }
