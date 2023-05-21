@@ -291,12 +291,15 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 /**
-     * Metod för att hitta namnet på områdeschefen över valt område; txtNuvarandeChefOmrade sätts med Agentens namn som
-     * tas fram med metoden getChefsNamnOmrade().
-     * Metoden kör först rensaNyOmradesChefComboBox()-metoden för att tömma comboboxen så inte samma
-     * agent-namn läggs till igen vid framtida sökningar, sedan sätts områdeschefsnamnet och comboxen fylls
-     * med agent-namn igen och nuvarande chef tas bort med taBortValdChef()-metoden.
-     * @param evt 
+     * Metod för att hitta namnet på områdeschefen över valt område;
+     * txtNuvarandeChefOmrade sätts med Agentens namn som tas fram med metoden
+     * getChefsNamnOmrade(). Metoden kör först
+     * rensaNyOmradesChefComboBox()-metoden för att tömma comboboxen så inte
+     * samma agent-namn läggs till igen vid framtida sökningar, sedan sätts
+     * områdeschefsnamnet och comboxen fylls med agent-namn igen och nuvarande
+     * chef tas bort med taBortValdChef()-metoden.
+     *
+     * @param evt
      */
     private void btnHittaChefOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefOmradeActionPerformed
         rensaNyOmradesChefComboBox();
@@ -314,12 +317,14 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
     /**
-     * Metod för att hitta namnet på kontorschefen; txtNuvarandeChefKontor sätts med Agentens namn som
-     * tas fram med metoden getChegsNamnkontor().
-     * Metoden kör först rensaNyKontorsChefComboBox()-metoden för att tömma comboboxen så inte samma
-     * agent-namn läggs till igen vid framtida sökningar, sedan sätts kontorschefsnamnet och comboxen fylls
-     * med agent-namn igen och nuvarande chef tas bort med taBortValdChefKontor()-metoden.
-     * @param evt 
+     * Metod för att hitta namnet på kontorschefen; txtNuvarandeChefKontor sätts
+     * med Agentens namn som tas fram med metoden getChegsNamnkontor(). Metoden
+     * kör först rensaNyKontorsChefComboBox()-metoden för att tömma comboboxen
+     * så inte samma agent-namn läggs till igen vid framtida sökningar, sedan
+     * sätts kontorschefsnamnet och comboxen fylls med agent-namn igen och
+     * nuvarande chef tas bort med taBortValdChefKontor()-metoden.
+     *
+     * @param evt
      */
     private void btnHittaChefKontorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaChefKontorActionPerformed
         rensaNyKontorsChefComboBox();
@@ -327,24 +332,26 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         fyllNyKontorsChefComboBox();
         taBortValdChefKontor();
     }//GEN-LAST:event_btnHittaChefKontorActionPerformed
-   /**
-    * Metod kopplad till btnBytOmradesChef; när den trycks sätts boolean-variabeln
-    * omradePushed till true, så rätt Agent_ID returneras när getAgentID()-metoden körs
-    * inuti bytChefOmrade som sedan körs när btnBytOmradesChef blir tryckt.
-    * @param evt 
-    */
+    /**
+     * Metod kopplad till btnBytOmradesChef; när den trycks sätts
+     * boolean-variabeln omradePushed till true, så rätt Agent_ID returneras när
+     * getAgentID()-metoden körs inuti bytChefOmrade som sedan körs när
+     * btnBytOmradesChef blir tryckt.
+     *
+     * @param evt
+     */
     private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
         omradePushed = true;
         bytChefOmrade();
 
 
     }//GEN-LAST:event_btnBytOmradesChefActionPerformed
-/**
- * Metod kopplad till btnBytKontorschef; när den trycks körs metoden bytKontorsChef()
- * (beskriven längre ner)
- * som i sin tur utför själva bytet.
- * @param evt 
- */
+    /**
+     * Metod kopplad till btnBytKontorschef; när den trycks körs metoden
+     * bytKontorsChef() (beskriven längre ner) som i sin tur utför själva bytet.
+     *
+     * @param evt
+     */
     private void btnBytKontorsChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytKontorsChefActionPerformed
         bytKontorsChef();
     }//GEN-LAST:event_btnBytKontorsChefActionPerformed
@@ -352,7 +359,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
      * Metod för att få Agent_ID på den agent man vill välja som ny områdes-
      * eller kontorschef; boolean-variablen omradePueshed håller reda på om det
      * är områdes- eller kontorsknappen som tryckts på och väljer namn för
-     * ID-sök därefter, och agenID returneras i form av int.
+     * ID-sök därefter, och agentID returneras i form av int.
      *
      * @return
      */
@@ -568,13 +575,21 @@ public class HanteraCheferForm extends javax.swing.JPanel {
      * Metod för att byta ut den nuvarande kontorschefen; Inuti metoden körs
      * getAgentID-metoden för att få Agent_ID på den person man vill ska vara
      * chef, och databsen uppdateras sedan med det ID-numret i tabellen för
-     * Kontorschef.
+     * Kontorschef, och den föregående kontorschefen sätts till "Fältagent" via
+     * metoden kontorsChefTillFaltAgent().
      *
      */
     public void bytKontorsChef() {
+       
         try {
             int agentID = getAgentID();
+            taBortFaltAgent();
+            kontorsChefTillFaltAgent();
+
             String query = "UPDATE mibdb.kontorschef SET Agent_ID = " + agentID + ";";
+
+            
+
             idb.update(query);
             JOptionPane.showMessageDialog(null, cbNyKontorsChef.getSelectedItem().toString() + " är ny chef över " + cbKontorsChef.getSelectedItem().toString());
             txtNuvarandeChefKontor.setText("");
@@ -584,7 +599,39 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         }
     }
+/**
+ * Metod som tar den nuvarande kontorschefen och sätter dennes Agent ID i tabellen
+ * för fältagent när en ny kontorschef tillsätts.
+ */
+    private void kontorsChefTillFaltAgent() {
+        try {
+            String kontorsbeteckning = cbKontorsChef.getSelectedItem().toString();
+            String query = "SELECT agent_id FROM mibdb.kontorschef WHERE Kontorsbeteckning = '" + kontorsbeteckning + "';";
+            
+            int agentID2 = Integer.parseInt(idb.fetchSingle(query));
+            String query2 = "INSERT INTO mibdb.faltagent (Agent_ID) VALUES (" + agentID2 + ");";
+            idb.insert(query2);
+        } catch (InfException e) {
 
+            e.printStackTrace();
+
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hantering av kontorschef till fältagent: " + e.getMessage());
+        }
+    }
+    /**
+     * Metod som tar bort den valda agenten från fältagent-tabellen när hen blir
+     * kontorschef.
+     */
+   private void taBortFaltAgent() {
+    try {
+        int agentID = getAgentID();
+        String query = "DELETE FROM mibdb.faltagent WHERE Agent_ID = " + agentID;
+        idb.delete(query);
+    } catch (InfException e) {
+        
+        e.printStackTrace();
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminsida;
     private javax.swing.JButton btnBytKontorsChef;

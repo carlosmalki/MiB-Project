@@ -123,6 +123,8 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         lblVarierande.setText("Telefon:");
 
         cbAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Nej", "Ja" }));
+        cbAdmin.setMinimumSize(new java.awt.Dimension(64, 22));
+        cbAdmin.setPreferredSize(new java.awt.Dimension(64, 22));
 
         lblNamn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNamn.setText("Namn:");
@@ -144,6 +146,10 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         lblLosenord.setText("Lösenord:");
 
         cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område", " " }));
+        cbOmrade.setMinimumSize(new java.awt.Dimension(64, 22));
+        cbOmrade.setName(""); // NOI18N
+        cbOmrade.setOpaque(true);
+        cbOmrade.setPreferredSize(new java.awt.Dimension(64, 22));
 
         lblRegDatum.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRegDatum.setText("Anst-datum:");
@@ -172,7 +178,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
                             .addComponent(lblNamn)
                             .addComponent(lblVarierande)
                             .addComponent(lblTelefon))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cbOmrade, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -257,7 +263,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
                 .addComponent(lblRegistreraAlien)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnMinSida)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,7 +272,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblRegistreraAlien)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,7 +345,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av data.");
             return;
         }
-
+        setFaltAgent();
         clearTextFalt();
         setAgentID();
     }//GEN-LAST:event_btnRegistreraActionPerformed
@@ -471,6 +477,16 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         }
 
     }
+    
+   private void setFaltAgent() {
+    try {
+        String query = "INSERT INTO mibdb.faltagent (Agent_ID) VALUES (" + agentID + ");";
+        idb.insert(query);
+    } catch (InfException e) {
+      
+        e.printStackTrace();
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
