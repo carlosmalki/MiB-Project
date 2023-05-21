@@ -75,5 +75,41 @@ public class ValideringsKlass {
         }
         return korrektDatumInput;
     }
+    
+    //Kontrollera att ett värde finns i databasen - används t.ex. i registrera utrustning
+    public static boolean vardeFinns(String varde, ArrayList<String> column) {
+        boolean finns = false;
+        for (String ettVarde : column) {
+            if (varde.equals(ettVarde)) {
+                finns = true;
+            }
+        }
+        return finns;
+    }
+    
+    //Kontrollerar att angivet namn i registrerautrustning är okej
+    public static boolean giltigtNamn(String ettNamn)
+    {
+        boolean giltigt = false;
+        if(!isLongBenamning(ettNamn) && validateTextFieldNotEmpty(ettNamn))
+        {
+            giltigt = true;
+        }
+        
+        return giltigt;
+    }
+    
+    //Används i metoden ovan
+    private static boolean isLongBenamning(String enBenamning)
+    {
+        boolean isLong = false;
+        if(enBenamning.length() > 20)
+        {
+            isLong = true;
+            JOptionPane.showMessageDialog(null, "Namnet är för långt! (Max 20 tecken)");
+            
+        }
+        return isLong;
+    }
 
 }
