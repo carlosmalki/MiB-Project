@@ -601,7 +601,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     }
 /**
  * Metod som tar den nuvarande kontorschefen och sätter dennes Agent ID i tabellen
- * för fältagent när en ny kontorschef tillsätts.
+ * för fältagent när en ny kontorschef tillsätts, metoden körs i bytKontorsChef()-metoden.
  */
     private void kontorsChefTillFaltAgent() {
         try {
@@ -620,7 +620,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     }
     /**
      * Metod som tar bort den valda agenten från fältagent-tabellen när hen blir
-     * kontorschef.
+     * kontorschef, metoden körs i bytKontorsChef()-metoden.
      */
    private void taBortFaltAgent() {
     try {
