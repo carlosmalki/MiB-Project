@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -20,8 +21,10 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
     private static InfDB idb;
     private int agentID;
     private String epost;
-    String isAdmin;
+    private String isAdmin;
     ValideringsKlass validering = new ValideringsKlass();
+    private ArrayList<String> agentNamn;
+    Random rand = new Random();
 
     /**
      * Creates new form RegisteraForm
@@ -39,9 +42,12 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         }
         setAgentID();
         fyllOmradesComboBox();
+        fyllNamnArrayList();
         txtNamnReg.requestFocus();
         this.epost = epost;
         this.isAdmin = isAdmin;
+        txtEpost.setEditable(false);
+        txtNamnReg.setEditable(false);
 
     }
 
@@ -54,50 +60,33 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblNamn = new javax.swing.JLabel();
-        lblTelefon = new javax.swing.JLabel();
-        lblRegDatum = new javax.swing.JLabel();
-        lblPlats = new javax.swing.JLabel();
-        txtEpost = new javax.swing.JTextField();
-        txtDatumReg = new javax.swing.JTextField();
-        btnRegistrera = new javax.swing.JButton();
-        txtLosenOrdReg = new javax.swing.JTextField();
-        lblLosenord = new javax.swing.JLabel();
-        txtNamnReg = new javax.swing.JTextField();
         btnMinSida = new javax.swing.JButton();
-        lblRas = new javax.swing.JLabel();
-        cbOmrade = new javax.swing.JComboBox<>();
-        txtTelefon = new javax.swing.JTextField();
-        lblVarierande = new javax.swing.JLabel();
         lblRegistreraAlien = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        txtNamnReg = new javax.swing.JTextField();
+        lblPlats = new javax.swing.JLabel();
+        lblRas = new javax.swing.JLabel();
+        btnSkapaEpost = new javax.swing.JButton();
+        txtEpost = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtTelefon = new javax.swing.JTextField();
+        txtDatumReg = new javax.swing.JTextField();
+        lblVarierande = new javax.swing.JLabel();
         cbAdmin = new javax.swing.JComboBox<>();
+        lblNamn = new javax.swing.JLabel();
+        cbValdBokstav = new javax.swing.JComboBox<>();
+        lblTelefon = new javax.swing.JLabel();
+        txtLosenOrdReg = new javax.swing.JTextField();
+        btnSkapaNamn = new javax.swing.JButton();
+        lblLosenord = new javax.swing.JLabel();
+        cbOmrade = new javax.swing.JComboBox<>();
+        lblRegDatum = new javax.swing.JLabel();
+        btnRegistrera = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
         setPreferredSize(new java.awt.Dimension(550, 343));
-
-        lblNamn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNamn.setText("Namn:");
-
-        lblTelefon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblTelefon.setText("Epost:");
-
-        lblRegDatum.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRegDatum.setText("Anst-datum(YYYY-MM-DD):");
-
-        lblPlats.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPlats.setText("Administratör:");
-
-        btnRegistrera.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnRegistrera.setText("Registrera");
-        btnRegistrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistreraActionPerformed(evt);
-            }
-        });
-
-        lblLosenord.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblLosenord.setText("Lösenord:");
 
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         btnMinSida.setText("Min sida");
@@ -107,112 +96,183 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             }
         });
 
+        lblRegistreraAlien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRegistreraAlien.setText("Registrera Agent");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(102, 102, 102), null, null));
+
+        txtNamnReg.setText("Agent");
+
+        lblPlats.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPlats.setText("Administratör:");
+
         lblRas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRas.setText("Område:");
 
-        cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område", " " }));
-        cbOmrade.addActionListener(new java.awt.event.ActionListener() {
+        btnSkapaEpost.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnSkapaEpost.setText("Skapa E-post");
+        btnSkapaEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOmradeActionPerformed(evt);
+                btnSkapaEpostActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("+");
 
         lblVarierande.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblVarierande.setText("Telefon:");
 
-        lblRegistreraAlien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRegistreraAlien.setText("Registrera Agent");
+        cbAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Nej", "Ja" }));
 
-        cbAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nej", "Ja" }));
+        lblNamn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblNamn.setText("Namn:");
+
+        cbValdBokstav.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö" }));
+
+        lblTelefon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTelefon.setText("Epost:");
+
+        btnSkapaNamn.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnSkapaNamn.setText("Skapa namn");
+        btnSkapaNamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaNamnActionPerformed(evt);
+            }
+        });
+
+        lblLosenord.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblLosenord.setText("Lösenord:");
+
+        cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område", " " }));
+
+        lblRegDatum.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRegDatum.setText("Anst-datum:");
+
+        btnRegistrera.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRegistrera.setText("Registrera");
+        btnRegistrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("(YYYY-MM-DD)");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRas)
+                            .addComponent(lblNamn)
+                            .addComponent(lblVarierande)
+                            .addComponent(lblTelefon))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbOmrade, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtNamnReg, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbValdBokstav, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEpost)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPlats)
+                            .addComponent(lblRegDatum)
+                            .addComponent(lblLosenord))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDatumReg, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbAdmin, 0, 164, Short.MAX_VALUE)
+                            .addComponent(txtLosenOrdReg))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSkapaNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSkapaEpost)
+                    .addComponent(jLabel2))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(btnRegistrera)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblRas)
+                    .addComponent(cbOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNamn)
+                    .addComponent(jLabel1)
+                    .addComponent(cbValdBokstav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSkapaNamn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVarierande)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelefon)
+                    .addComponent(btnSkapaEpost))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPlats)
+                    .addComponent(cbAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRegDatum)
+                    .addComponent(txtDatumReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblLosenord))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLosenOrdReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrera)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblVarierande)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblRegDatum)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtDatumReg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblLosenord)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtLosenOrdReg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTelefon)
-                                            .addComponent(lblPlats))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtEpost, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                            .addComponent(cbAdmin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblNamn)
-                                        .addComponent(lblRas))
-                                    .addGap(116, 116, 116)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cbOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(lblRegistreraAlien)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(225, 225, 225)
+                .addComponent(lblRegistreraAlien)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegistrera)
-                .addGap(107, 107, 107)
-                .addComponent(btnMinSida)
-                .addGap(25, 25, 25))
+                .addContainerGap(60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMinSida)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addComponent(lblRegistreraAlien)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRas)
-                    .addComponent(cbOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNamn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblVarierande)
-                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTelefon))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPlats)
-                    .addComponent(cbAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRegDatum)
-                    .addComponent(txtDatumReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLosenOrdReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLosenord))
-                .addGap(18, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMinSida)
-                    .addComponent(btnRegistrera))
-                .addGap(34, 34, 34))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMinSida)
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -223,17 +283,18 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         String datum = txtDatumReg.getText();
         String losenord = txtLosenOrdReg.getText();
         String admin;
-        int omrade = getOmradesID();
-        if(cbAdmin.getSelectedItem().toString().equals("Ja"))
-        {
-          admin = "J";
+        int omrade;
+        if (!cbOmrade.getSelectedItem().toString().equals("Välj område")) {
+            omrade = getOmradesID();
+        } else {
+            JOptionPane.showMessageDialog(null, "Områdesfältet får inte vara tomt.");
+            return;
         }
-        else
-        {
-        admin = "N";
+        if (cbAdmin.getSelectedItem().toString().equals("Ja")) {
+            admin = "J";
+        } else {
+            admin = "N";
         }
-        
-       
 
         if (!ValideringsKlass.validateTextFieldNotEmpty(namn)) {
             JOptionPane.showMessageDialog(null, "Namnetfältet får inte vara tomt.");
@@ -265,9 +326,9 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             return;
         }
 
-        // Kontrollerar om e-postadressen redan finns registrerad, då E-post används för att unikt identifiera varje Alien.
+        // Kontrollerar om e-postadressen redan finns registrerad, då E-post används för att unikt identifiera varje Agent.
         if (ValideringsKlass.checkEpost(eposten)) {
-            JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen.");
+            JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen. Klicka 'Skapa namn' för att få ett nytt namn, och sedan 'Skapa E-post' igen");
             return;
         }
 
@@ -278,9 +339,6 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av data.");
             return;
         }
-
-        
-
 
         clearTextFalt();
         setAgentID();
@@ -300,35 +358,47 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
     private void clearTextFalt() {
 
         txtTelefon.setText("");
-        txtNamnReg.setText("");
 
         txtEpost.setText("");
+        txtNamnReg.setText("Agent");
+
         txtLosenOrdReg.setText("");
 
         txtDatumReg.setText("");
 
         cbOmrade.setSelectedIndex(0);
+        cbValdBokstav.setSelectedIndex(0);
+        cbAdmin.setSelectedIndex(0);
 
     }
 
-   private int getOmradesID() {
-    String omrade = cbOmrade.getSelectedItem().toString();
-    String query = "SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "';";
-    int omradesID = 0;
-    
-    try {
-        omradesID = Integer.parseInt(idb.fetchSingle(query));
-    
-    } catch (InfException e) {
-        
-        e.printStackTrace();
-    }
-    
-    return omradesID;
-}
-    private void cbOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOmradeActionPerformed
+    private int getOmradesID() {
+        String omrade = cbOmrade.getSelectedItem().toString();
+        String query = "SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "';";
+        int omradesID = 0;
 
-    }//GEN-LAST:event_cbOmradeActionPerformed
+        try {
+            omradesID = Integer.parseInt(idb.fetchSingle(query));
+
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+
+        return omradesID;
+    }
+    private void btnSkapaEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaEpostActionPerformed
+        if (txtNamnReg.getText().equals("Agent")) {
+            JOptionPane.showMessageDialog(null, "Skapa agent-namn innan E-post");
+
+        } else {
+            skapaEpost();
+        }
+    }//GEN-LAST:event_btnSkapaEpostActionPerformed
+
+    private void btnSkapaNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNamnActionPerformed
+        skapaNamn();
+    }//GEN-LAST:event_btnSkapaNamnActionPerformed
     private void setAgentID() {
         try {
             String agentIDStr = idb.getAutoIncrement("agent", "Agent_ID");
@@ -339,30 +409,79 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid generering av Alien-ID. Vänligen försök igen.");
         }
     }
-    
-    private void fyllOmradesComboBox() {
-    String query = "SELECT Benamning FROM mibdb.omrade;";
-    ArrayList<String> omraden = new ArrayList<>();
 
-    try {
-        omraden = idb.fetchColumn(query);
-        for(String omrade : omraden)
-        {
-        cbOmrade.addItem(omrade);
-        
+    private void fyllOmradesComboBox() {
+        String query = "SELECT Benamning FROM mibdb.omrade;";
+        ArrayList<String> omraden = new ArrayList<>();
+
+        try {
+            omraden = idb.fetchColumn(query);
+            for (String omrade : omraden) {
+                cbOmrade.addItem(omrade);
+
+            }
+        } catch (InfException e) {
+
+            e.printStackTrace();
         }
-    } catch (InfException e) {
-        
-        e.printStackTrace();
+
     }
 
-    
-}
+    public void skapaNamn() {
+        String valdBokstav = cbValdBokstav.getSelectedItem().toString();
+        String onskatNamn = "Agent " + valdBokstav;
+        String namnet;
+
+        if (!agentNamn.contains(onskatNamn)) {
+            namnet = "Agent " + valdBokstav;
+            JOptionPane.showMessageDialog(null, "Nytt agentnamn: " + namnet);
+        } else {
+            int namnSiffra = rand.nextInt(9);
+            namnet = "Agent " + valdBokstav + namnSiffra;
+            JOptionPane.showMessageDialog(null, "Agent " + valdBokstav + " finns redan i databasen. Nytt agentnamn blir: " + namnet);
+        }
+
+        txtNamnReg.setText(namnet);
+    }
+
+    public void skapaEpost() {
+        String namnet = txtNamnReg.getText();
+        String eposten;
+        String sistaBokstav = namnet.substring(namnet.length() - 1).toLowerCase();
+        if (!ValideringsKlass.valideraInt(sistaBokstav)) {
+            eposten = "a" + sistaBokstav + "@mib.net";
+        } else {
+            String nastSistaBokstav = namnet.substring(namnet.length() - 2).toLowerCase();
+            eposten = "a" + nastSistaBokstav + "@mib.net";
+        }
+        txtEpost.setText(eposten);
+    }
+
+    private void fyllNamnArrayList() {
+        String query = "select namn from mibdb.agent;";
+
+        try {
+            agentNamn = idb.fetchColumn(query);
+            for (String namn : agentNamn) {
+                System.out.println(namn);
+            }
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
+    private javax.swing.JButton btnSkapaEpost;
+    private javax.swing.JButton btnSkapaNamn;
     private javax.swing.JComboBox<String> cbAdmin;
     private javax.swing.JComboBox<String> cbOmrade;
+    private javax.swing.JComboBox<String> cbValdBokstav;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblPlats;
