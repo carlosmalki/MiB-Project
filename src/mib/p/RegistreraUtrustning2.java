@@ -173,7 +173,8 @@ public class RegistreraUtrustning2 extends javax.swing.JPanel {
         } else if (utrustningsTyp.equals("Teknik")) {
             new RegistreraTeknik(id, epost, isAdmin).setVisible(true);
         }
-        //dispose(); funkar inte ??
+        //dispose(); funkar inte ?? kanske inte behövs
+        // - kolla vad som händer när sidan tar dig vidare till nästa steg, stängs detta?
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
