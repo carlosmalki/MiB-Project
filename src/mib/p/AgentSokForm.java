@@ -245,16 +245,25 @@ public class AgentSokForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
    /**
-    * Metod som först återställer texten på fältet txtAdmin till "", för att sedan köra
-    * agentSok()-metoden och genom det få info om vald agent.
-    * @param evt 
-    */
+     * Metod som först återställer texten på fältet txtAdmin till "", för att
+     * sedan köra agentSok()-metoden och genom det få info om vald agent.
+     *
+     * @param evt
+     */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         txtAdmin.setText("");
         agentSok();
 
     }//GEN-LAST:event_btnSokActionPerformed
-
+    /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AgentSokForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
@@ -262,7 +271,16 @@ public class AgentSokForm extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+    /**
+     * Metod kopplad till btnAdminSida som fyller upp JFrame med en ny instans
+     * av AdminFunktionerForm för att användaren ska kunna ta sig tillbaka till
+     * adminsidan, epost och isAdmin skickas med som parametrar för att
+     * initialisera en ny "Admin-sida", fönster-titeln sätts till
+     * "Administratörsfunktioner" och fönstret "målas om" för att visa
+     * "Admin-sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AgentSokForm.this);
         frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
@@ -271,9 +289,10 @@ public class AgentSokForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnAdminSidaActionPerformed
     /**
-     * Metod som körs inifrån agentSok()metoden och sätter text på
-     * valda textfält utifrån värden i HashMapen agentInfo.
-     * @param agentInfo 
+     * Metod som körs inifrån agentSok()metoden och sätter text på valda
+     * textfält utifrån värden i HashMapen agentInfo.
+     *
+     * @param agentInfo
      */
     private void setTextFalt(HashMap<String, String> agentInfo) {
         txtNamn.setText(agentInfo.get("Namn"));
@@ -283,11 +302,14 @@ public class AgentSokForm extends javax.swing.JPanel {
         txtTelefon.setText(agentInfo.get("Telefon"));
 
     }
-   /**
-    * Metod som utifrån Agent_ID hämtar info om namnet på det område en viss agent tillhör,
-    * detta genom InfDB-metoden fetchSingle, sedan sätts texten på textfältet txtOmrade.
-    * @param agentID 
-    */
+
+    /**
+     * Metod som utifrån Agent_ID hämtar info om namnet på det område en viss
+     * agent tillhör, detta genom InfDB-metoden fetchSingle, sedan sätts texten
+     * på textfältet txtOmrade.
+     *
+     * @param agentID
+     */
     private void setOmrade(int agentID) {
         try {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID IN (SELECT Omrade FROM mibdb.agent WHERE Agent_ID = " + agentID + ")");
@@ -297,12 +319,13 @@ public class AgentSokForm extends javax.swing.JPanel {
         }
 
     }
-  /** 
-   * Metod som genom InfDB-metoden fetchRow skapar en HashMap raden för valt agentID i tabellen
-   * Agent, sedan körs setTextFalt-metoden för att skriva värdena från HashMapen på
-   * tilldelade textfält, och även setOmrade() och SetAdmin() för att skriva 
-   * också dessa värden på respektive textfält.
-   */
+
+    /**
+     * Metod som genom InfDB-metoden fetchRow skapar en HashMap raden för valt
+     * agentID i tabellen Agent, sedan körs setTextFalt-metoden för att skriva
+     * värdena från HashMapen på tilldelade textfält, och även setOmrade() och
+     * SetAdmin() för att skriva också dessa värden på respektive textfält.
+     */
     private void agentSok() {
         int agentID;
         if (ValideringsKlass.valideraInt(txtAgentIdSok.getText())) {
@@ -323,35 +346,37 @@ public class AgentSokForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid sökningen av alien.");
         }
     }
-  /**
-   * Metod som genom InfDB-metoden fetchSingle() hämtar uppgift om vald agent
-   * är administratör eller ej, och skriver sedan ut det i textfältet txtAdmin,
-   * skulle valt Agent_ID inte finnas i databasen lämnas felmeddelande om detta.
-   */
+
+    /**
+     * Metod som genom InfDB-metoden fetchSingle() hämtar uppgift om vald agent
+     * är administratör eller ej, och skriver sedan ut det i textfältet
+     * txtAdmin, skulle valt Agent_ID inte finnas i databasen lämnas
+     * felmeddelande om detta.
+     */
     public void setAdmin() {
-    int agentID;
-    if (ValideringsKlass.valideraInt(txtAgentIdSok.getText())) {
-        try {
-            agentID = Integer.parseInt(txtAgentIdSok.getText());
-            String admin;
-            String query = "SELECT Administrator FROM mibdb.agent WHERE Agent_ID = " + agentID + ";";
-            if (idb.fetchSingle(query).equals("J")) {
-                admin = "Ja";
-            } else {
-                admin = "Nej";
+        int agentID;
+        if (ValideringsKlass.valideraInt(txtAgentIdSok.getText())) {
+            try {
+                agentID = Integer.parseInt(txtAgentIdSok.getText());
+                String admin;
+                String query = "SELECT Administrator FROM mibdb.agent WHERE Agent_ID = " + agentID + ";";
+                if (idb.fetchSingle(query).equals("J")) {
+                    admin = "Ja";
+                } else {
+                    admin = "Nej";
+                }
+                txtAdmin.setText(admin);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Vänligen ange heltalssiffra för ID-sökning.");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
+                e.printStackTrace();
             }
-            txtAdmin.setText(admin);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Vänligen ange heltalssiffra för ID-sökning.");
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
-            e.printStackTrace();
         }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminSida;
     private javax.swing.JButton btnMinSida;
