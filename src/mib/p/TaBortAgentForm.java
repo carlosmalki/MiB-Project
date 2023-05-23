@@ -188,20 +188,36 @@ public class TaBortAgentForm extends javax.swing.JPanel {
         taBortAgent(agentensNamn);
     }
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
-
+   /**
+     * Metod kopplad till btnAdminSida som fyller upp JFrame med en ny instans av
+     * AdminFunktionerForm för att användaren ska kunna ta sig tillbaka till sin
+     * adminsida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Admin-sida", fönster-titeln sätts till "Administratörsfunktioner" och fönstret
+     * "målas om" för att visa "Admin-sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortAgentForm.this);
-        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
-        frame.revalidate();
-        frame.setTitle("Startsida: Agent");
-        frame.repaint();
-    }//GEN-LAST:event_btnAdminSidaActionPerformed
-
-    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortAgentForm.this);
         frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Administratörsfunktioner");
+        frame.repaint();
+    }//GEN-LAST:event_btnAdminSidaActionPerformed
+  /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortAgentForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
     /**
