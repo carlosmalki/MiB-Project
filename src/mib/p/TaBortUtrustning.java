@@ -4,17 +4,37 @@
  */
 package mib.p;
 
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author samsung
  */
 public class TaBortUtrustning extends javax.swing.JPanel {
+    private static InfDB idb;
+    private String epost;
+    private String isAdmin;
 
     /**
      * Creates new form TaBortUtrustning
      */
-    public TaBortUtrustning() {
+    public TaBortUtrustning(String epost, String isAdmin) {
         initComponents();
+        this.epost = epost;
+        this.isAdmin = isAdmin;
+        fyllComboBox();
+
+        try {
+            idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+        }
     }
 
     /**
@@ -26,19 +46,116 @@ public class TaBortUtrustning extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblRubrik = new javax.swing.JLabel();
+        cbValjUtrustning = new javax.swing.JComboBox<>();
+        btnTaBort = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
+
+        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblRubrik.setText("Ta bort utrustning:");
+
+        cbValjUtrustning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnTaBort.setText("Ta bort");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblRubrik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbValjUtrustning, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTaBort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTillbaka))))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(lblRubrik)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbValjUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnTaBort)
+                .addGap(18, 18, 18)
+                .addComponent(btnTillbaka)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        String valdUtrustning = cbValjUtrustning.getSelectedItem().toString();
+        try {
+            String valtUtrustningsID = idb.fetchSingle("select utrustnings_id from utrustning where benamning = '" + valdUtrustning + "'");
+            idb.delete("delete from utrustning where utrustnings_id = " + valtUtrustningsID);
+            idb.delete("delete from innehar_utrustning where utrustnings_id = " + valtUtrustningsID);
+            taBortFranUtrustningsTyp(valtUtrustningsID);
+            JOptionPane.showMessageDialog(null, "Utrustningen har tagits bort!");
+            
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortUtrustning.this);
+            frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+            frame.revalidate();
+            frame.setTitle("Startsida: Agent");
+            frame.repaint();
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+    }//GEN-LAST:event_btnTaBortActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortUtrustning.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void fyllComboBox() {
+        cbValjUtrustning.removeAllItems();
+        try {
+            ArrayList<String> utrustningsBenamningar = idb.fetchColumn("select benamning from utrustning");
+            for (String enBenamning : utrustningsBenamningar) {
+                cbValjUtrustning.addItem(enBenamning);
+            }
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+    }
+    
+    private void taBortFranUtrustningsTyp(String valtUtrustningsID) {
+        try {
+            idb.delete("delete from vapen where utrustnings_id = " + valtUtrustningsID);
+            idb.delete("delete from kommunikation where utrustnings_id = " + valtUtrustningsID);
+            idb.delete("delete from teknik where utrustnings_id = " + valtUtrustningsID);
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnTillbaka;
+    private javax.swing.JComboBox<String> cbValjUtrustning;
+    private javax.swing.JLabel lblRubrik;
     // End of variables declaration//GEN-END:variables
 }
