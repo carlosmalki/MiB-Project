@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
-
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -21,6 +21,9 @@ public class AgentSokForm extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
+    private ArrayList<String> omradesChef;
+    private ArrayList<String> kontorsChef;
+    private boolean idExists;
 
     /**
      * Creates new form AlienSokForm
@@ -36,6 +39,8 @@ public class AgentSokForm extends javax.swing.JPanel {
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
         this.epost = epost;
+        idExists = true;
+        fyllArrayLists();
 
     }
 
@@ -67,6 +72,8 @@ public class AgentSokForm extends javax.swing.JPanel {
         txtLosenOrd = new javax.swing.JTextField();
         labLosenOrd = new javax.swing.JLabel();
         lblOmrade = new javax.swing.JLabel();
+        txtChefEllerInte = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         btnMinSida = new javax.swing.JButton();
         btnAdminSida = new javax.swing.JButton();
 
@@ -111,6 +118,9 @@ public class AgentSokForm extends javax.swing.JPanel {
         lblOmrade.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblOmrade.setText("Område:");
 
+        jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        jLabel1.setText("Chef:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,10 +133,6 @@ public class AgentSokForm extends javax.swing.JPanel {
                         .addGap(92, 92, 92))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labLosenOrd)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -142,7 +148,15 @@ public class AgentSokForm extends javax.swing.JPanel {
                                     .addComponent(txtTelefon)
                                     .addComponent(txtRegDatum)
                                     .addComponent(txtAdmin)
-                                    .addComponent(txtOmrade, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
+                                    .addComponent(txtOmrade, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labLosenOrd)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtChefEllerInte)
+                                    .addComponent(txtLosenOrd, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
                         .addGap(28, 28, 28))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,7 +192,11 @@ public class AgentSokForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labLosenOrd))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtChefEllerInte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
@@ -206,15 +224,15 @@ public class AgentSokForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(btnSok))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAngeAgentId)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnAdminSida)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtAngeAgentId)))))
+                                    .addComponent(btnSok))))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 45, Short.MAX_VALUE))
@@ -228,16 +246,17 @@ public class AgentSokForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(txtAngeAgentId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSok)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(btnSok)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMinSida)
                     .addComponent(btnAdminSida))
@@ -253,6 +272,7 @@ public class AgentSokForm extends javax.swing.JPanel {
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         txtAdmin.setText("");
         agentSok();
+        chefEllerInte();
 
     }//GEN-LAST:event_btnSokActionPerformed
     /**
@@ -371,16 +391,90 @@ public class AgentSokForm extends javax.swing.JPanel {
             } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
                 e.printStackTrace();
+
+                txtChefEllerInte.setText("");
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
+                idExists = false;
+                txtChefEllerInte.setText("");
+
                 e.printStackTrace();
             }
         }
+    }
+/**
+ * Metod som via InfDB-metoden fetchColumn skapar arraylistor av områderschefer
+ * och kontorschefer för att använda för att kontrollera om vald agent är chef eller inte.
+ */
+    private void fyllArrayLists() {
+        try {
+            String query = "SELECT Agent_ID FROM mibdb.omradeschef";
+            omradesChef = idb.fetchColumn(query);
+            String query2 = "SELECT Agent_ID FROM mibdb.kontorschef";
+            kontorsChef = idb.fetchColumn(query2);
+
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+
+        }
+
+    }
+   /**
+    * Metod som kollar upp om vald agent är chef eller inte, genom att söka genom
+    * arraylistorna omradesChef och kontorsChef, om sökningen gjorts på ett Agent_ID
+    * som inte existerar i datbasen kommer idExists vara false när metoden körs och då
+    * görs inget annat än att idExists sätts till true inför fortsatta sökningar, annars
+    * sätts texten i txtChefEller inte med relevant information.
+    */
+    private void chefEllerInte() {
+        int agentID;
+        String omrade = "";
+
+        String agentIDString = "";
+        if (ValideringsKlass.valideraInt(txtAgentIdSok.getText())) {
+            agentID = Integer.parseInt(txtAgentIdSok.getText());
+            agentIDString = Integer.toString(agentID);
+            omrade = getOmrade(agentID);
+        } else {
+            JOptionPane.showMessageDialog(null, "Felaktig inmatning. Ange ett giltigt Agent-ID.");
+
+        }
+        if (idExists) {
+            if (omradesChef.contains(agentIDString)) {
+                txtChefEllerInte.setText("Område: " + omrade);
+            } else if (kontorsChef.contains(agentIDString)) {
+                txtChefEllerInte.setText("Kontorschef: Örebro");
+            } else {
+                txtChefEllerInte.setText("Nej");
+            }
+        }
+        idExists = true;
+    }
+   /**
+    * Metod som hämtar benämningen på det område en agent är chef för, med hjälp av dennes Agent_ID
+    * via InfDB-metoden fetchSingle, metoden returnerar områdesnamnet som String.
+    * @param agentID
+    * @return 
+    */
+    private String getOmrade(int agentID) {
+        String omrade = "";
+        String query = "SELECT Benamning "
+                + "FROM mibdb.omrade "
+                + "WHERE Omrades_ID IN (SELECT Omrade FROM mibdb.omradeschef WHERE Agent_ID = " + agentID + ");";
+        try {
+            omrade = idb.fetchSingle(query);
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+        return omrade;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminSida;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnSok;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labAnsvAgent;
     private javax.swing.JLabel labEpost;
@@ -393,6 +487,7 @@ public class AgentSokForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtAdmin;
     private javax.swing.JTextField txtAgentIdSok;
     private javax.swing.JLabel txtAngeAgentId;
+    private javax.swing.JTextField txtChefEllerInte;
     private javax.swing.JTextField txtEpost;
     private javax.swing.JTextField txtLosenOrd;
     private javax.swing.JTextField txtNamn;

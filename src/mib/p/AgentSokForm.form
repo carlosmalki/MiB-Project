@@ -30,17 +30,17 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                              <Component id="btnSok" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtAgentIdSok" min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Component id="txtAngeAgentId" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="btnAdminSida" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="txtAgentIdSok" min="-2" pref="118" max="-2" attributes="0"/>
-                                      <Component id="txtAngeAgentId" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnSok" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -62,19 +62,20 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       <Component id="txtAngeAgentId" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtAgentIdSok" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSok" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnMinSida" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAdminSida" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -131,11 +132,6 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="labLosenOrd" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtLosenOrd" min="-2" pref="190" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="labTelefon" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="labAnsvAgent" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -152,6 +148,17 @@
                                       <Component id="txtRegDatum" max="32767" attributes="0"/>
                                       <Component id="txtAdmin" max="32767" attributes="0"/>
                                       <Component id="txtOmrade" alignment="0" pref="190" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="labLosenOrd" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtChefEllerInte" max="32767" attributes="0"/>
+                                      <Component id="txtLosenOrd" pref="190" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -201,7 +208,12 @@
                       <Component id="txtLosenOrd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labLosenOrd" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="10" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtChefEllerInte" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -283,6 +295,16 @@
               <Font name="MS Gothic" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Omr&#xe5;de:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtChefEllerInte">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="MS Gothic" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Chef:"/>
           </Properties>
         </Component>
       </SubComponents>
