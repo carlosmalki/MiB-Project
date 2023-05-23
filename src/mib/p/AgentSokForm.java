@@ -68,6 +68,7 @@ public class AgentSokForm extends javax.swing.JPanel {
         labLosenOrd = new javax.swing.JLabel();
         lblOmrade = new javax.swing.JLabel();
         btnMinSida = new javax.swing.JButton();
+        btnAdminSida = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -188,6 +189,14 @@ public class AgentSokForm extends javax.swing.JPanel {
             }
         });
 
+        btnAdminSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAdminSida.setText("Adminsida");
+        btnAdminSida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminSidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,13 +206,15 @@ public class AgentSokForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAngeAgentId)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
-                                .addComponent(btnSok)))
+                                .addComponent(btnSok))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAdminSida)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtAngeAgentId)))))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 45, Short.MAX_VALUE))
@@ -226,12 +237,18 @@ public class AgentSokForm extends javax.swing.JPanel {
                         .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSok)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMinSida)
+                    .addComponent(btnAdminSida))
+                .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+   /**
+    * Metod som först återställer texten på fältet txtAdmin till "", för att sedan köra
+    * agentSok()-metoden och genom det få info om vald agent.
+    * @param evt 
+    */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         txtAdmin.setText("");
         agentSok();
@@ -245,6 +262,19 @@ public class AgentSokForm extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
+
+    private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AgentSokForm.this);
+        frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Administratörsfunktioner");
+        frame.repaint();
+    }//GEN-LAST:event_btnAdminSidaActionPerformed
+    /**
+     * Metod som körs inifrån agentSok()metoden och sätter text på
+     * valda textfält utifrån värden i HashMapen agentInfo.
+     * @param agentInfo 
+     */
     private void setTextFalt(HashMap<String, String> agentInfo) {
         txtNamn.setText(agentInfo.get("Namn"));
         txtRegDatum.setText(agentInfo.get("Anstallningsdatum"));
@@ -253,7 +283,11 @@ public class AgentSokForm extends javax.swing.JPanel {
         txtTelefon.setText(agentInfo.get("Telefon"));
 
     }
-
+   /**
+    * Metod som utifrån Agent_ID hämtar info om namnet på det område en viss agent tillhör,
+    * detta genom InfDB-metoden fetchSingle, sedan sätts texten på textfältet txtOmrade.
+    * @param agentID 
+    */
     private void setOmrade(int agentID) {
         try {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID IN (SELECT Omrade FROM mibdb.agent WHERE Agent_ID = " + agentID + ")");
@@ -263,7 +297,12 @@ public class AgentSokForm extends javax.swing.JPanel {
         }
 
     }
-
+  /** 
+   * Metod som genom InfDB-metoden fetchRow skapar en HashMap raden för valt agentID i tabellen
+   * Agent, sedan körs setTextFalt-metoden för att skriva värdena från HashMapen på
+   * tilldelade textfält, och även setOmrade() och SetAdmin() för att skriva 
+   * också dessa värden på respektive textfält.
+   */
     private void agentSok() {
         int agentID;
         if (ValideringsKlass.valideraInt(txtAgentIdSok.getText())) {
@@ -284,7 +323,10 @@ public class AgentSokForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid sökningen av alien.");
         }
     }
-
+  /**
+   * Metod som genom InfDB-metoden fetchSingle() hämtar uppgift om vald agent
+   * är administratör eller ej, och skriver sedan ut det i textfältet txtAdmin.
+   */
     public void setAdmin() {
     int agentID;
     if (ValideringsKlass.valideraInt(txtAgentIdSok.getText())) {
@@ -310,6 +352,7 @@ public class AgentSokForm extends javax.swing.JPanel {
     }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminSida;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnSok;
     private javax.swing.JPanel jPanel1;
