@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ValideringsKlass {
 
@@ -111,7 +112,14 @@ public class ValideringsKlass {
         }
         return isLong;
     }
-
+   public static boolean valideraComboBox(JComboBox box)
+   { boolean boxEmpty = false;
+     if (box.getItemCount() == 0)
+     {
+     boxEmpty = true;
+     }
+    return boxEmpty;
+   }
 
 
 }

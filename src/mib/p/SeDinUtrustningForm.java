@@ -11,6 +11,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
 
+
 /**
  * Klassen SeDinUtrustningForm är en jPanel som används för att visa information
  * om vilken utrustning en viss användare för tillfället har utkvitterad och ge
@@ -31,6 +32,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
     private String vapenNamn;
     private String teknikNamn;
     private String kommNamn;
+    private ValideringsKlass validering;
 
     /**
      * Creates new form SeDinUtrustningForm
@@ -59,6 +61,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblUtkvitterad.setVisible(false);
 
         lblVarierande2.setVisible(false);
+        validering = new ValideringsKlass();
 
         fyllVapenComboBox();
         fyllTeknikComboBox();
@@ -281,7 +284,11 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnVapenInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenInfoActionPerformed
-        testaComboBoxVapen();
+       if( ValideringsKlass.valideraComboBox(cbVapen))
+       {
+       JOptionPane.showMessageDialog(null, "Du har för tillfället inga utkvitterade vapen.");
+       }
+           
         if (!cbVapen.getSelectedItem().toString().equals("")) {
             vapenNamn = cbVapen.getSelectedItem().toString();
             setUtkvittDatum(vapenNamn);
@@ -300,7 +307,10 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnTeknikInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikInfoActionPerformed
-        testaComboBoxTeknik();
+      if( ValideringsKlass.valideraComboBox(cbTeknik))
+       {
+       JOptionPane.showMessageDialog(null, "Du har för tillfället ingen utkvitterad teknikutrustning.");
+       }
         if (!cbTeknik.getSelectedItem().toString().equals("")) {
             teknikNamn = cbTeknik.getSelectedItem().toString();
             setUtkvittDatum(teknikNamn);
@@ -320,7 +330,10 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnKommInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommInfoActionPerformed
-        testaComboBoxKomm();
+        if( ValideringsKlass.valideraComboBox(cbKommunikation))
+       {
+       JOptionPane.showMessageDialog(null, "Du har för tillfället ingen utkvitterad kommunikationsutrustning.");
+       }
         if (!cbKommunikation.getSelectedItem().toString().equals("")) {
             kommNamn = cbKommunikation.getSelectedItem().toString();
             setUtkvittDatum(kommNamn);
@@ -610,49 +623,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             lblUtrustning.setText("Du har ingen utrustning utkvitterad.");
         }
     }
-   /**
-  * Metod för att testa om teknik-comboboxen har något innehåll isig, om inte så
-  * meddelas användaren om detta.
-  */
-    public void testaComboBoxTeknik() {
-        try {
-            if (cbTeknik.getItemCount() == 0) {
-                throw new NumberFormatException();
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Du har för tillfället ingen utkvitterad teknikutrustning.");
-        }
-    }
-    /**
-  * Metod för att testa om vapen-comboboxen har något innehåll isig, om inte så
-  * meddelas användaren om detta.
-  */
-    public void testaComboBoxVapen() {
-        try {
-            if (cbVapen.getItemCount() == 0) {
-                throw new NumberFormatException();
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Du har för tillfället inga utkvitterade vapen.");
-        }
-    }
- /**
-  * Metod för att testa om Kommunikations-comboboxen har något innehåll isig, om inte så
-  * meddelas användaren om detta.
-  */
-    public void testaComboBoxKomm() {
-        try {
-            if (cbKommunikation.getItemCount() == 0) {
-                throw new NumberFormatException();
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Du har för tillfället ingen utkvitterad kommunikationsutrustning.");
-        }
-    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKommInfo;
     private javax.swing.JButton btnMinSida;
