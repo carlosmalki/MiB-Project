@@ -325,7 +325,8 @@ public class AgentSokForm extends javax.swing.JPanel {
     }
   /**
    * Metod som genom InfDB-metoden fetchSingle() hämtar uppgift om vald agent
-   * är administratör eller ej, och skriver sedan ut det i textfältet txtAdmin.
+   * är administratör eller ej, och skriver sedan ut det i textfältet txtAdmin,
+   * skulle valt Agent_ID inte finnas i databasen lämnas felmeddelande om detta.
    */
     public void setAdmin() {
     int agentID;

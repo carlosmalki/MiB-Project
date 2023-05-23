@@ -24,7 +24,6 @@ public class ListaAlienForm extends javax.swing.JPanel {
     private String isAdmin;
     private String sokMetod;
     public boolean datumSok;
-    
 
     /**
      * Creates new form testFormTabell
@@ -41,13 +40,9 @@ public class ListaAlienForm extends javax.swing.JPanel {
         jTable1.setVisible(false);
         this.epost = epost;
         this.isAdmin = isAdmin;
-        cbValj.setVisible(false);
-        jLabel1.setVisible(false);
-        btnSokKnapp.setVisible(false);
-        btnSokKnapp.setEnabled(false);
-        datumSok = true;
-        visaDoljDatumSok();
-        
+        doljSokFalt();
+        doljDatumSok();
+
     }
 
     /**
@@ -67,7 +62,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         btnMinSida = new javax.swing.JButton();
         btnSokPlats = new javax.swing.JButton();
         btnSokRas = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnValjDatumSok = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtFranDatum = new javax.swing.JTextField();
         lblDatumSok = new javax.swing.JLabel();
@@ -112,7 +107,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         });
 
         btnSokPlats.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnSokPlats.setText("Plats-sök");
+        btnSokPlats.setText("Plats");
         btnSokPlats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokPlatsActionPerformed(evt);
@@ -120,18 +115,18 @@ public class ListaAlienForm extends javax.swing.JPanel {
         });
 
         btnSokRas.setFont(new java.awt.Font("MS PGothic", 1, 14)); // NOI18N
-        btnSokRas.setText("Ras-sök");
+        btnSokRas.setText("Ras");
         btnSokRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokRasActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setText("Datum-sök");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnValjDatumSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnValjDatumSok.setText("Datum");
+        btnValjDatumSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnValjDatumSokActionPerformed(evt);
             }
         });
 
@@ -166,18 +161,15 @@ public class ListaAlienForm extends javax.swing.JPanel {
                 .addComponent(btnSokKnapp)
                 .addGap(73, 73, 73))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSokPlats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(btnSokRas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSokRas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSokPlats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(15, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(66, 66, 66)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addComponent(btnValjDatumSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -193,15 +185,15 @@ public class ListaAlienForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel2)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(btnSokPlats)
                 .addGap(18, 18, 18)
                 .addComponent(btnSokRas)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addGap(8, 106, Short.MAX_VALUE))
+                .addComponent(btnValjDatumSok)
+                .addGap(8, 108, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -228,17 +220,21 @@ public class ListaAlienForm extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+  /**
+   * Metod som utifrån texten på fältet sokMetod, kör anting sokRas()-metoden eller
+   * sokPlats()-metoden för att ge relevanta resultat.
+   * @param evt 
+   */
     private void btnSokKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokKnappActionPerformed
-     if(sokMetod.equals("Ras"))
-     { sokRas();}
-     if(sokMetod.equals("Plats"))
-     {
-      sokPlats();
-     }
+        if (sokMetod.equals("Ras")) {
+            sokRas();
+        }
+        if (sokMetod.equals("Plats")) {
+            sokPlats();
+        }
 
     }//GEN-LAST:event_btnSokKnappActionPerformed
-    
+
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ListaAlienForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
@@ -246,39 +242,68 @@ public class ListaAlienForm extends javax.swing.JPanel {
         frame.setTitle("Sök ras");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+    /**
+     * Metod som (om synligt) döljer sökfälten för datumsökning, och istället
+     * visar fälten för plats-och ras sök, och sätter texterna så att det passar
+     * vald sökmetod.
+     *
+     * @param evt
+     */
     private void btnSokRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokRasActionPerformed
         sokMetod = "Ras";
-        visaDoljDatumSok();
+        doljDatumSok();
         cbValj.setVisible(true);
         jLabel1.setText("Sök alien av ras:");
         jLabel1.setVisible(true);
         visaSokKnapp();
         fyllComboBoxRas();
     }//GEN-LAST:event_btnSokRasActionPerformed
-
+    /**
+     * Metod som (om synligt) döljer sökfälten för datumsökning, och istället
+     * visar fälten för plats-och ras sök, och sätter texterna så att det passar
+     * vald sökmetod.
+     *
+     * @param evt
+     */
     private void btnSokPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokPlatsActionPerformed
-        
+        doljDatumSok();
         sokMetod = "Plats";
-        visaDoljDatumSok();
+
         cbValj.setVisible(true);
         jLabel1.setVisible(true);
         jLabel1.setText("Sök alien i:");
         visaSokKnapp();
         fyllComboBoxPlats();
     }//GEN-LAST:event_btnSokPlatsActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       visaDoljDatumSok();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+    /**
+     * Metod kopplad till val-knappen för Datumsök, som (om synliga) döljer
+     * sökfälten för ras och plats, och istället visar datum-sökfälten.
+     *
+     * @param evt
+     */
+    private void btnValjDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjDatumSokActionPerformed
+        doljSokFalt();
+        visaDatumSok();
+    }//GEN-LAST:event_btnValjDatumSokActionPerformed
+    /**
+     * Metod kopplad till btnDatumSok,som när den trycks kör metoden datumSok().
+     *
+     * @param evt
+     */
     private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
-      datumSok();
+        datumSok();
     }//GEN-LAST:event_btnDatumSokActionPerformed
-
-private void sokRas()
-{
-String ras = (String) cbValj.getSelectedItem();
+    /**
+     * Metod som först anpassar SQL-query efter vald ras, och sedan anpassar
+     * jTable1-tabellen med hjälp av DefaultTableModel, så att den kan fyllas på
+     * dynamiskt med både kolumner och rader som passar den aktuella sökningen,
+     * via InfDB-metoden fetchRows skapas en ArrayList fylld med HashMaps, och
+     * denna ArrayList loopas sedan igenom och för varje HashMap i listan läggs
+     * värdena för nycklarna "Alien_ID" och "Namn" till i tabellen, som sedan
+     * görs synlig.
+     */
+    private void sokRas() {
+        String ras = (String) cbValj.getSelectedItem();
 
         if (ras.equals("Squid") || ras.equals("Worm") || ras.equals("Boglodite")) {
             try {
@@ -286,7 +311,7 @@ String ras = (String) cbValj.getSelectedItem();
                 model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn"});
                 jTable1.setModel(model);
 
-                ArrayList<HashMap<String, String>> rows;
+                ArrayList<HashMap<String, String>> alienInfo;
                 String query;
 
                 if (ras.equals("Squid")) {
@@ -297,9 +322,9 @@ String ras = (String) cbValj.getSelectedItem();
                     query = "SELECT mibdb.alien.Alien_ID, namn FROM mibdb.alien WHERE mibdb.alien.Alien_ID IN (SELECT mibdb.boglodite.Alien_ID FROM mibdb.boglodite)";
                 }
 
-                rows = idb.fetchRows(query);
+                alienInfo = idb.fetchRows(query);
 
-                for (HashMap<String, String> item : rows) {
+                for (HashMap<String, String> item : alienInfo) {
                     String alienId = item.get("Alien_ID");
                     String namn = item.get("Namn");
                     model.addRow(new Object[]{alienId, namn});
@@ -310,47 +335,56 @@ String ras = (String) cbValj.getSelectedItem();
 
             jTable1.setVisible(true);
 
-    }        
+        }
 
-}
-private void sokPlats()
-{String plats = cbValj.getSelectedItem().toString();
-        ArrayList<HashMap<String, String>> alienLista = new ArrayList<>();
-      DefaultTableModel model = new DefaultTableModel();
-                model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn"});
-                jTable1.setModel(model);
+    }
+
+    /**
+     * Metod där jTable1-tabellen anpassas med hjälp av DefaultTableModel, så
+     * att den kan fyllas på dynamiskt med både kolumner och rader som passar
+     * den aktuella sökningen, via InfDB-metoden fetchRows skapas en ArrayList
+     * fylld med HashMaps, och denna ArrayList loopas sedan igenom och för varje
+     * HashMap i listan läggs värdena för nycklarna "Alien_ID" och "Namn" till i
+     * tabellen, som sedan görs synlig.
+     *
+     */
+    private void sokPlats() {
+        String plats = cbValj.getSelectedItem().toString();
+        ArrayList<HashMap<String, String>> alienLista;
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn"});
+        jTable1.setModel(model);
         try {
             String fraga = "SELECT mibdb.alien.namn, mibdb.alien.alien_id "
                     + "FROM mibdb.alien "
                     + "JOIN mibdb.plats ON mibdb.alien.plats = mibdb.plats.plats_id "
                     + "WHERE mibdb.plats.BENAMNING = '" + plats + "'";
             alienLista = idb.fetchRows(fraga);
-           for (HashMap<String, String> item : alienLista) {
-                    String alienId = item.get("Alien_ID");
-                    String namn = item.get("Namn");
-                    model.addRow(new Object[]{alienId, namn});
-                    jTable1.setVisible(true);
-                
-
-                
-                
+            for (HashMap<String, String> item : alienLista) {
+                String alienId = item.get("Alien_ID");
+                String namn = item.get("Namn");
+                model.addRow(new Object[]{alienId, namn});
+                jTable1.setVisible(true);
 
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
         } catch (NullPointerException npe) {
-            
+
         }
-        for (HashMap<String, String> enMap : alienLista) {
-    for (String key : enMap.keySet()) {
-        String value = enMap.get(key);
-        System.out.println(key + ": " + value);
-    }}
-    }       
-private void fyllComboBoxPlats() {
+
+    }
+
+    /**
+     * Metod som först tömmer cbValj-comboboxen, och sedan fyller upp den med
+     * platsnamn med hjälp av InfDB-metoden fetchColumn() som skapar en
+     * ArrayList av platsnamnen, som sedan iterereras igenom och varje plats får
+     * en rad i comboboxen.
+     */
+    private void fyllComboBoxPlats() {
         ArrayList<String> platser;
         try {
-            platser = idb.fetchColumn("select benamning from plats");
+            platser = idb.fetchColumn("SELECT Benamning from mibdb.plats");
             cbValj.removeAllItems();
             cbValj.addItem("Välj plats");
             for (String enPlats : platser) {
@@ -362,51 +396,59 @@ private void fyllComboBoxPlats() {
 
     }
 
-
-private void visaSokKnapp()
-{
-btnSokKnapp.setVisible(true);
-btnSokKnapp.setEnabled(true);
-}
-
-private void fyllComboBoxRas()
-{
-cbValj.removeAllItems();    
-cbValj.addItem("Välj ras");
-cbValj.addItem("Boglodite");
-cbValj.addItem("Squid");
-cbValj.addItem("Worm");
-
-}
-
-private void visaDoljDatumSok()
-{
-    if(datumSok)
-    {
-lblFran.setVisible(false);
-lblTill.setVisible(false);
-btnDatumSok.setVisible(false);
-lblDatumSok.setVisible(false);
-txtTillDatum.setVisible(false);
-txtFranDatum.setVisible(false);
-datumSok = false;
-    }
-    else
-    {
-    lblFran.setVisible(true);
-lblTill.setVisible(true);
-btnDatumSok.setVisible(true);
-lblDatumSok.setVisible(true);
-txtTillDatum.setVisible(true);
-txtFranDatum.setVisible(true);
-datumSok = true;
+    /**
+     * Metod som sökknappen synlig när metod har valts.
+     *
+     */
+    private void visaSokKnapp() {
+        btnSokKnapp.setVisible(true);
+        btnSokKnapp.setEnabled(true);
     }
 
-}
+    /**
+     * Metod som först tömmer cbValj-comboxen och sedan fyller upp dem med namn
+     * på alien-raserna, när ras-sökfuktionen valts.
+     */
+    private void fyllComboBoxRas() {
+        cbValj.removeAllItems();
+        cbValj.addItem("Välj ras");
+        cbValj.addItem("Boglodite");
+        cbValj.addItem("Squid");
+        cbValj.addItem("Worm");
 
-public void datumSok()
-{
-try {
+    }
+
+    /**
+     * Metod som döljer fälten för datumsökning innan den metoden valts, eller
+     * när annan sökmetod är vald.
+     */
+    private void doljDatumSok() {
+
+        lblFran.setVisible(false);
+        lblTill.setVisible(false);
+        btnDatumSok.setVisible(false);
+        lblDatumSok.setVisible(false);
+        txtTillDatum.setVisible(false);
+        txtFranDatum.setVisible(false);
+
+    }
+
+    /**
+     * Metod som visar fälten för datumsökning, när den metoden valts.
+     */
+    private void visaDatumSok() {
+
+        lblFran.setVisible(true);
+        lblTill.setVisible(true);
+        btnDatumSok.setVisible(true);
+        lblDatumSok.setVisible(true);
+        txtTillDatum.setVisible(true);
+        txtFranDatum.setVisible(true);
+
+    }
+
+    public void datumSok() {
+        try {
 
             // Datum 1 och 2 från txtfälten.
             String Datum1 = txtFranDatum.getText();
@@ -433,8 +475,7 @@ try {
                     model.addRow(new Object[]{alienId, namn, registreringsdatum});
                 }
 
-            }
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
             }
 
@@ -444,8 +485,17 @@ try {
 
         }
 
+    }
 
-    }       
+    /**
+     * Metod som döljer sökfälten innan användare valt sökmetod.
+     */
+    private void doljSokFalt() {
+        cbValj.setVisible(false);
+        jLabel1.setVisible(false);
+        btnSokKnapp.setVisible(false);
+        btnSokKnapp.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatumSok;
@@ -453,8 +503,8 @@ try {
     private javax.swing.JButton btnSokKnapp;
     private javax.swing.JButton btnSokPlats;
     private javax.swing.JButton btnSokRas;
+    private javax.swing.JButton btnValjDatumSok;
     private javax.swing.JComboBox<String> cbValj;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
