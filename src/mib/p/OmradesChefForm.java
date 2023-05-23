@@ -137,7 +137,15 @@ public class OmradesChefForm extends javax.swing.JPanel {
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+ /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Alien" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
          JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(OmradesChefForm.this);
                 frame.setContentPane(new MinSidaAlienForm(epost));
@@ -145,7 +153,10 @@ public class OmradesChefForm extends javax.swing.JPanel {
                 frame.setTitle("Startsida: Alien");
                 frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+/**
+ * Metod som sätter textfälten genom att använda sig av nycklarna och värdena
+ * i HashMapen chefInfo som skickas med som parameter in i metoden.
+ */
 private void setInfo()
 {
   lblChefRubrik.setText("Områdeschef: "+omrade);
