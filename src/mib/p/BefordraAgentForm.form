@@ -30,9 +30,9 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jComboEjAdmin" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Component id="cbEjAdmin" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBefordra" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="185" max="32767" attributes="0"/>
@@ -53,8 +53,8 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboEjAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbEjAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBefordra" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="177" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -67,7 +67,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JComboBox" name="jComboEjAdmin">
+    <Component class="javax.swing.JComboBox" name="cbEjAdmin">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
@@ -87,7 +87,7 @@
         <Property name="text" type="java.lang.String" value="V&#xe4;lj agent att g&#xf6;ra till admin:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnBefordra">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Gothic" size="12" style="1"/>
@@ -95,7 +95,7 @@
         <Property name="text" type="java.lang.String" value="Befordra"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBefordraActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnMinSida">

@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 
- /*
- * Detta är en JPanel-klass som visar användaren en formulärsida för att befordra en agent till administratör. 
- * Agenter som för närvarande inte har admin-status visas i en jComboBox.
- * När användaren trycker på knappen "Befordra" sätts den valda agenten till Administratör i databasen. 
+ /**
+ * Detta är en JPanel-klass som visar användaren en formulärsida för att befordra en agent till administratör,
+ * Agenter som för närvarande inte har admin-status visas i en jComboBox,
+ * När användaren trycker på knappen "Befordra" sätts den valda agenten till Administratör i databasen,
  * Användaren kan också ta sig tillbaka till "Min sida" och "Admintjänster" med hjälp av knapparna på sidan.
  */
 package mib.p;
@@ -41,7 +41,7 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         }
         this.epost = epost;
         this.isAdmin = isAdmin;
-        setEjAdminComboBox();
+        fyllEjAdminComboBox();
     }
 
     /**
@@ -53,9 +53,9 @@ public class BefordraAgentForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboEjAdmin = new javax.swing.JComboBox<>();
+        cbEjAdmin = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBefordra = new javax.swing.JButton();
         btnMinSida = new javax.swing.JButton();
         btnAdminTjanster = new javax.swing.JButton();
 
@@ -63,16 +63,16 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(550, 343));
         setName(""); // NOI18N
 
-        jComboEjAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agenter" }));
+        cbEjAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agenter" }));
 
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Välj agent att göra till admin:");
 
-        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
-        jButton1.setText("Befordra");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBefordra.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnBefordra.setText("Befordra");
+        btnBefordra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBefordraActionPerformed(evt);
             }
         });
 
@@ -101,9 +101,9 @@ public class BefordraAgentForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboEjAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbEjAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(btnBefordra)))
                 .addContainerGap(185, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(16, 16, 16)
@@ -119,8 +119,8 @@ public class BefordraAgentForm extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboEjAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(cbEjAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBefordra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMinSida)
@@ -128,18 +128,24 @@ public class BefordraAgentForm extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+/**
+ * Metod kopplad till btnBefordra som med hjälp av InfDB-metoden update()
+ * uppdaterar Administrator-kolumnen i agent-tabellen för vald agent, från "N" till "J",
+ * seda körs metoderna resetEjAdminComboBox() och fyllEjAdminComboBox
+ * för att återställa cbEjAdmin.
+ * @param evt 
+ */
+    private void btnBefordraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraActionPerformed
         String namn = null;
-        if (!jComboEjAdmin.getSelectedItem().toString().equals("Agenter")) {
-            namn = jComboEjAdmin.getSelectedItem().toString();
+        if (!cbEjAdmin.getSelectedItem().toString().equals("Agenter")) {
+            namn = cbEjAdmin.getSelectedItem().toString();
         }
         String query = "UPDATE mibdb.agent SET Administrator = 'J' WHERE Namn = '" + namn + "'";
         
         try {
             idb.update(query);
             resetEjAdminComboBox();
-            setEjAdminComboBox();
+            fyllEjAdminComboBox();
             if(namn!=null)
             {
             JOptionPane.showMessageDialog(null, namn + " har nu fått administratörstatus");
@@ -148,12 +154,25 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         } catch (InfException e) {
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBefordraActionPerformed
+    /**
+     * Metod som återställer cbEjAdmin genom att ta bort allt innehåll och 
+     * sedan lägga in "Agenter" på index 0.
+     */
     public void resetEjAdminComboBox() {
-        jComboEjAdmin.removeAllItems();
-        jComboEjAdmin.addItem("Agenter");
-        jComboEjAdmin.setSelectedIndex(0);
+        cbEjAdmin.removeAllItems();
+        cbEjAdmin.addItem("Agenter");
+        cbEjAdmin.setSelectedIndex(0);
     }
+    /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(BefordraAgentForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
@@ -169,8 +188,13 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         frame.setTitle("Administratörsfunktioner");
         frame.repaint();
     }//GEN-LAST:event_btnAdminTjansterActionPerformed
-
-    private void setEjAdminComboBox() {
+     /**
+      * Fyller upp cbEjAdmin med namn på agenter som för tillfället inte har
+      * admin-status, genom InfDB-metoden fetchColumn() som skapar en arraylist
+      * med agent-namn som har "N" i Administrator-kolumnen, och denna arraylist
+      * loopas sedan genom och agentnamnen läggs till im comboboxen.
+      */
+    private void fyllEjAdminComboBox() {
         String query = "SELECT namn FROM mibdb.agent WHERE Administrator = 'N'";
         ArrayList<String> ejAdminAgenter = null;
 
@@ -181,16 +205,16 @@ public class BefordraAgentForm extends javax.swing.JPanel {
             System.out.println("Fel vid hämtning av ej-administratörer: " + e.getMessage());
         }
         for (String agent : ejAdminAgenter) {
-            jComboEjAdmin.addItem(agent);
+            cbEjAdmin.addItem(agent);
 
         }
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminTjanster;
+    private javax.swing.JButton btnBefordra;
     private javax.swing.JButton btnMinSida;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboEjAdmin;
+    private javax.swing.JComboBox<String> cbEjAdmin;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
