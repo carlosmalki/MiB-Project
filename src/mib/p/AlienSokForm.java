@@ -64,11 +64,11 @@ public class AlienSokForm extends javax.swing.JPanel {
         txtRegDatum = new javax.swing.JTextField();
         txtAnsvAgent = new javax.swing.JTextField();
         labNamn = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblAlienInfo = new javax.swing.JLabel();
         txtPlats = new javax.swing.JTextField();
         txtLosenOrd = new javax.swing.JTextField();
         labLosenOrd = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblPlats = new javax.swing.JLabel();
         btnMinSida = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
@@ -106,14 +106,14 @@ public class AlienSokForm extends javax.swing.JPanel {
         labNamn.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         labNamn.setText("Namn:");
 
-        jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel1.setText("Alien-information:");
+        lblAlienInfo.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblAlienInfo.setText("Alien-information:");
 
         labLosenOrd.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         labLosenOrd.setText("Lösenord:");
 
-        jLabel3.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
-        jLabel3.setText("Plats:");
+        lblPlats.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblPlats.setText("Plats:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,7 +123,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblAlienInfo)
                         .addGap(92, 92, 92))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -139,7 +139,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                                     .addComponent(labEpost, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labRas, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labNamn, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(lblPlats, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNamn)
@@ -155,7 +155,7 @@ public class AlienSokForm extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblAlienInfo)
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +183,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(lblPlats))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,9 +374,7 @@ public class AlienSokForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlienSok;
     private javax.swing.JButton btnMinSida;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labAnsvAgent;
     private javax.swing.JLabel labEpost;
@@ -385,6 +383,8 @@ public class AlienSokForm extends javax.swing.JPanel {
     private javax.swing.JLabel labRas;
     private javax.swing.JLabel labRegDatum;
     private javax.swing.JLabel labTelefon;
+    private javax.swing.JLabel lblAlienInfo;
+    private javax.swing.JLabel lblPlats;
     private javax.swing.JTextField txtAlienIdSok;
     private javax.swing.JTextField txtAnsvAgent;
     private javax.swing.JTextField txtEpost;

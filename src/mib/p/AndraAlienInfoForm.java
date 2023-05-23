@@ -292,7 +292,11 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metod kopplad till btnSok som först fyller upp alla comboxar genom respektive
+     * box-metod, och sedan kör alienSok() för att få fram info om vald alien.
+     * @param evt 
+     */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         txtRas.setText("");
         fyllAgentComboBox();
@@ -301,7 +305,15 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         alienSok();
 
     }//GEN-LAST:event_btnSokActionPerformed
-
+    /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraAlienInfoForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
@@ -309,7 +321,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+    /**
+     * Metod kopplad till btnAndraInfo som genom metoder från valideringsklassen
+     * testar all input från användaren och sedan utfrån det antingen ger
+     * felmeddelande eller fortsätter med de olika metoderna för att utföra
+     * ändringarna.
+     *
+     * @param evt
+     */
     private void btnAndraInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraInfoActionPerformed
         String stringId = txtAlienIdSok.getText();
         int alienID = Integer.parseInt(stringId);
@@ -345,22 +364,33 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             andraAnsvarigAgent(agentNamn, alienID);
             JOptionPane.showMessageDialog(null, "Ansvarig agent uppdaterades. Ny ansvarig agent: " + agentNamn);
         }
-        if (!jComboValjPlats.getSelectedItem().equals("Välj plats"))
-        { 
-          String nyPlats =jComboValjPlats.getSelectedItem().toString();
-          andraPlats(alienID);
-          JOptionPane.showMessageDialog(null, "Plats uppdaterades. Ny plats: " + nyPlats);
-          txtPlats.setText(nyPlats);
+        if (!jComboValjPlats.getSelectedItem().equals("Välj plats")) {
+            String nyPlats = jComboValjPlats.getSelectedItem().toString();
+            andraPlats(alienID);
+            JOptionPane.showMessageDialog(null, "Plats uppdaterades. Ny plats: " + nyPlats);
+            txtPlats.setText(nyPlats);
         }
         jComboAgenter.setSelectedIndex(0);
         jComboValjPlats.setSelectedIndex(0);
         jComboValjRas.setSelectedIndex(0);
     }//GEN-LAST:event_btnAndraInfoActionPerformed
-
+    /**
+     * Metod kopplat till btnRensa, som först återställer comboboxarna med
+     * metoden resetComboBoxes(), och sedan återställer textfälten med
+     * resetTextFalt().
+     *
+     * @param evt
+     */
     private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
-       resetComboBoxes();
-       resetTextFalt();
+        resetComboBoxes();
+        resetTextFalt();
     }//GEN-LAST:event_btnRensaActionPerformed
+    /**
+     * Metod som tar emot en HashMap och utifrån dess nycklar sätter respektive
+     * textfält med värdena från HashMapen.
+     *
+     * @param alienInfo
+     */
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
         txtRegDatum.setText(alienInfo.get("Registreringsdatum"));
@@ -370,6 +400,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som genom InfDB-metoden fetchSingle() hämtar namnet på den agent
+     * som vald alien har som ansvarig agent, utifrån dennes Alien_ID, och
+     * txtAnsvAgent sätts sedan med aktuell Agent..
+     *
+     * @param alienID
+     */
     private void setAgent(int alienID) {
         try {
             String agentNamn = idb.fetchSingle("SELECT namn FROM mibdb.agent WHERE Agent_ID IN (SELECT Ansvarig_Agent FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
@@ -379,6 +416,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som genom InfDB-metoden fetchSingle() hämtar benämningen på den
+     * plats där vald alien är registrerad, utifrån dennes Alien_ID, och
+     * txtPlats sätts sedan med aktuell plats.
+     *
+     * @param alienID
+     */
     private void setPlats(int alienID) {
         try {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.plats WHERE Plats_ID IN (SELECT Plats FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
@@ -389,6 +433,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som genom InfDB-metoden fetchColumn skapar ArrayListor av Alien_ID
+     * för de olika raserna, och sedan letas dessa listor igenom efter valt
+     * Alien_ID och rasen sätts utifrån vilken lista det hittades i, och txtRas
+     * sätts sedan med aktuell ras.
+     *
+     * @param alienID
+     */
     private void setRas(int alienID) {
 
         String alienIdString = Integer.toString(alienID);
@@ -420,6 +472,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som söker upp nuvarande uppgifter om vald alien utifrån dennes
+     * Alien_ID, och med hjälp av InfDB-metoden fetchRow skapar en HashMap som
+     * sedan körs genom setTextFalt()-metoden för att sätta text på aktuella
+     * fält, metoderna setAgent(), setPlats() och setRas() körs också för att
+     * rätta text på respektive fält.
+     */
     private void alienSok() {
         int alienID;
         if (ValideringsKlass.valideraInt(txtAlienIdSok.getText())) {
@@ -441,6 +500,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumnen Namn i
+     * alien-tabellen där aktuellt Alien_ID hittas,txtNamn sätts till till det
+     * nya namnet, och txtAndraNamn återställs till "".
+     *
+     * @param alienID
+     */
     public void andraNamn(int alienID) {
 
         String nyttNamn = txtAndraNamn.getText();
@@ -456,6 +522,14 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumnen telefon i
+     * alien-tabellen där aktuellt Alien_ID hittas, efter att inputen validerats
+     * som int, txtTelefon sätts sedan till det nyta telefonnumret, och
+     * txtAndraTelefon återställs till "".
+     *
+     * @param alienID
+     */
     public void andraTelefon(int alienID) {
         String nyttNummer = txtAndraTelefon.getText();
         if (ValideringsKlass.valideraInt(nyttNummer)) {
@@ -472,6 +546,13 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumnen Losenord i
+     * alien-tabellen där aktuellt Alien_ID hittas, txtLosenord sätts sedan till
+     * det nyta lösenordet, och txtAndraLosenOrd återställs till "".
+     *
+     * @param alienID
+     */
     public void andraLosenOrd(int alienID) {
         String nyttLosenOrd = txtAndraLosenOrd.getText();
         {
@@ -489,6 +570,15 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som först kontrollerar att inskrivet datum är ett godkänt sådant,
+     * genom valideringsklass-metoden valideraDatum(), och sedan använder
+     * InfDB-metoden update() för att uppdatera registreringsdatum för den alien
+     * där aktuellt Alien_ID hittas, txtRegDatum sätts med nytt datum och
+     * txtAndraRegDatum återställs till "".
+     *
+     * @param alienID
+     */
     public void andraRegDatum(int alienID) {
         String nyttRegDatum = txtAndraRegDatum.getText();
         if (ValideringsKlass.valideraDatum(nyttRegDatum)) {
@@ -507,6 +597,15 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som byter ras på vald alien genom att först köra metoden
+     * taBortAlien() och sedan laggTillAlien() och sätta txtRas med den nya
+     * rasen.
+     *
+     * @param nuvarandeRas
+     * @param nyRas
+     * @param alienID
+     */
     private void andraRas(String nuvarandeRas, String nyRas, int alienID) {
 
         taBortAlien(nuvarandeRas, alienID);
@@ -516,20 +615,35 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         txtRas.setText(nyRas);
 
     }
-    
+
+    /**
+     * Metod som med hjälp av InfDB-metoden update() uppdaterar platsen en alien
+     * befinner sig på genom att använda metoden hamtaPlatsID() och sedan
+     * uppdatera Plats-kolumnen i alien-tabellen med hämtat Plats_ID, där
+     * aktuellt Alien_ID hittas.
+     *
+     * @param alienID
+     */
     public void andraPlats(int alienID) {
-    int platsID = hamtaPlatsID(jComboValjPlats.getSelectedItem().toString());
-    String query = "UPDATE mibdb.alien SET Plats = " + platsID + " WHERE Alien_ID = " + alienID;
+        int platsID = hamtaPlatsID(jComboValjPlats.getSelectedItem().toString());
+        String query = "UPDATE mibdb.alien SET Plats = " + platsID + " WHERE Alien_ID = " + alienID;
 
-    try {
-        idb.update(query);
-    } catch (InfException e) {
-        
-       
+        try {
+            idb.update(query);
+        } catch (InfException e) {
+
+        }
     }
-}
-    
 
+    /**
+     * Metod som byter ansvarig agent genom att först med hjälp av InfDB-metoden
+     * fetchSingle() hämta ut Agent_ID utfrån agentens namn och sedan används
+     * InfDB-metoden update() för att uppdatera Ansvarig_Agent med detta värde
+     * där valt Alien_ID finns.
+     *
+     * @param agentNamn
+     * @param alienID
+     */
     private void andraAnsvarigAgent(String agentNamn, int alienID) {
 
         String query = "SELECT Agent_ID FROM mibdb.agent WHERE Namn = '" + agentNamn + "'";
@@ -540,11 +654,18 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             idb.update(query2);
             txtAnsvAgent.setText(agentNamn);
         } catch (InfException e) {
-         System.out.println("hmm");
+
         }
 
     }
 
+    /**
+     * Metod som använder InfDB-metoden insert() för att lägga till aktuellt
+     * Alien_ID i tabellen för den nyvalda rasen.
+     *
+     * @param nyRas
+     * @param alienID
+     */
     public void laggTillAlien(String nyRas, int alienID) {
         try {
 
@@ -554,11 +675,18 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             txtRas.setText(nyRas);
 
         } catch (InfException e) {
-            System.out.println("Åh nöööh");
 
         }
     }
 
+    /**
+     * Metod som tar bort en alien från tabellen över nuvarande ras, inför att
+     * sedan kunna lägga till Alien_ID i den nyvalda rasen, med metoden
+     * laggTillAlien().
+     *
+     * @param nuvarandeRas
+     * @param alienID
+     */
     public void taBortAlien(String nuvarandeRas, int alienID) {
         try {
 
@@ -569,19 +697,31 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
         }
     }
-    
+
+    /**
+     * Metod som med hjälp av en plats namn hämtar info om dess Plats_ID, genom
+     * InfDB- metoden fetchSingle, och detta värde returneras som int.
+     *
+     * @param plats
+     * @return
+     */
     public int hamtaPlatsID(String plats) {
         int platsID = 0;
-    try {
-        String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + plats + "'";
-        platsID = Integer.parseInt(idb.fetchSingle(query));
-        
-        
-    } catch (InfException e) {
-        System.out.println("Fel vid hämtning av plats ID: " + e.getMessage());
+        try {
+            String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + plats + "'";
+            platsID = Integer.parseInt(idb.fetchSingle(query));
+
+        } catch (InfException e) {
+            System.out.println("Fel vid hämtning av plats ID: " + e.getMessage());
+        }
+        return platsID;
     }
-    return platsID;
-}
+
+    /**
+     * Metod som fyller upp agent-comboboxen med hjälp av InfDB-metoden
+     * fetchColumn, som skapar en arraylist av Namn från tabellen agent, och
+     * sedan loopas denna arraylist genom och värdena läggs till i comboboxen.
+     */
     private void fyllAgentComboBox() {
         try {
             String query = "SELECT Namn FROM mibdb.agent";
@@ -595,6 +735,12 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som fyller upp plats-comboboxen med hjälp av InfDB-metoden
+     * fetchColumn, som skapar en arraylist av Benämningarna från tabellen
+     * plats, och sedan loopas denna arraylist genom och värdena läggs till i
+     * comboboxen.
+     */
     private void fyllValjPlatsCombo() {
         try {
             String query = "SELECT Benamning FROM mibdb.plats";
@@ -607,12 +753,21 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som fyller upp comboboxen för att välja ras, med de olika raser som
+     * finns.
+     */
     private void fyllValjRasComboBox() {
         jComboValjRas.addItem("Boglodite");
         jComboValjRas.addItem("Squid");
         jComboValjRas.addItem("Worm");
     }
 
+    /**
+     * Metod som återställer ComboBoxarna för Ras, Plats, och Agenter, och
+     * lägger in "Välj"- ras, plats,agent på index0 i respektive box.
+     *
+     */
     private void resetComboBoxes() {
         jComboValjRas.removeAllItems();
         jComboValjRas.addItem("Välj ras");
@@ -621,29 +776,28 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jComboAgenter.removeAllItems();
         jComboAgenter.addItem("Välj agent");
 
+    }
+
+    /**
+     * Metod som rensar alla textfält och återställer formuläret.
+     */
+    private void resetTextFalt() {
+        txtAlienIdSok.setText("");
+        txtNamn.setText("");
+        txtTelefon.setText("");
+        txtLosenOrd.setText("");
+        txtRegDatum.setText("");
+        txtAndraNamn.setText("");
+        txtAndraTelefon.setText("");
+        txtAndraLosenOrd.setText("");
+        txtAndraRegDatum.setText("");
+        txtAnsvAgent.setText("");
+        txtPlats.setText("");
+        txtRas.setText("");
 
     }
-    private void resetTextFalt()
-    {
-    txtAlienIdSok.setText("");
-    txtNamn.setText("");
-    txtTelefon.setText("");
-    txtLosenOrd.setText("");
-    txtRegDatum.setText("");
-    txtAndraNamn.setText("");
-    txtAndraTelefon.setText("");
-    txtAndraLosenOrd.setText("");
-    txtAndraRegDatum.setText("");
-    txtAnsvAgent.setText("");
-    txtPlats.setText("");
-    txtRas.setText("");
 
-    }
-            
 
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfo;
     private javax.swing.JButton btnMinSida;
