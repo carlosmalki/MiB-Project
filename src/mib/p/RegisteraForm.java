@@ -15,32 +15,32 @@ import oru.inf.InfException;
  * @author ASUS
  */
 public class RegisteraForm extends javax.swing.JPanel {
-     private static InfDB idb;
+
+    private static InfDB idb;
     private int alienID;
     private String epost;
     String isAdmin;
     ValideringsKlass validering = new ValideringsKlass();
-    
+
     /**
      * Creates new form RegisteraForm
+     *
      * @param epost
      * @param isAdmin
      */
-    public RegisteraForm(String epost,String isAdmin) {
-       initComponents();
-         try {
+    public RegisteraForm(String epost, String isAdmin) {
+        initComponents();
+        try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-      setAlienID();
-      txtNamnReg.requestFocus();
-      this.epost = epost;
-      this.isAdmin = isAdmin;
-    
-      
-                 
+        setAlienID();
+        txtNamnReg.requestFocus();
+        this.epost = epost;
+        this.isAdmin = isAdmin;
+
     }
 
     /**
@@ -66,7 +66,7 @@ public class RegisteraForm extends javax.swing.JPanel {
         lblAnsvarigAgent = new javax.swing.JLabel();
         lblRas = new javax.swing.JLabel();
         txtTelReg = new javax.swing.JTextField();
-        jComboBoxValjRas = new javax.swing.JComboBox<>();
+        cbValjRas = new javax.swing.JComboBox<>();
         txtEpostReg = new javax.swing.JTextField();
         txtVarierande = new javax.swing.JTextField();
         txtDatumReg = new javax.swing.JTextField();
@@ -121,10 +121,10 @@ public class RegisteraForm extends javax.swing.JPanel {
         lblRas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRas.setText("Ras:");
 
-        jComboBoxValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Boglodite\t", "Squid", "Worm" }));
-        jComboBoxValjRas.addActionListener(new java.awt.event.ActionListener() {
+        cbValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Boglodite\t", "Squid", "Worm" }));
+        cbValjRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxValjRasActionPerformed(evt);
+                cbValjRasActionPerformed(evt);
             }
         });
 
@@ -147,7 +147,7 @@ public class RegisteraForm extends javax.swing.JPanel {
                         .addGap(124, 124, 124)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblPlats)
@@ -183,7 +183,7 @@ public class RegisteraForm extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRas)
-                    .addComponent(jComboBoxValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,168 +253,198 @@ public class RegisteraForm extends javax.swing.JPanel {
                 .addGap(351, 351, 351))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metod kopplad till btnRegistrera som utför själva registeringen
+ * efter att först kontrollerat värdena som användaren skrivit i med hjälp av metoder
+ * från valideringsklassen, klarar alla värden kontrollen så används InfDB-metoden insert()
+ * för att lägga till en ny alien i alien-tabellen, och sedan körts metoden setRas() utifrån
+ * vald ras, så det nya Alien_ID hamnar i tabell för rätt ras.
+ * @param evt 
+ */
     private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
-    String namn = txtNamnReg.getText();
-    String eposten = txtEpostReg.getText();
-    String telnr = txtTelReg.getText();
-    String datum = txtDatumReg.getText();
-    String losenord = txtLosenOrdReg.getText();
-    int ansvAgent;
-    int plats;
-    
-    if (!ValideringsKlass.validateTextFieldNotEmpty(namn)) {
-    JOptionPane.showMessageDialog(null, "Namnetfältet får inte vara tomt.");
-    return;
-}
+        String namn = txtNamnReg.getText();
+        String eposten = txtEpostReg.getText();
+        String telnr = txtTelReg.getText();
+        String datum = txtDatumReg.getText();
+        String losenord = txtLosenOrdReg.getText();
+        int ansvAgent;
+        int plats;
 
-if (!ValideringsKlass.validateTextFieldNotEmpty(epost)) {
-    JOptionPane.showMessageDialog(null, "E-postfältet får inte vara tom.");
-    return;
-}
+        if (!ValideringsKlass.validateTextFieldNotEmpty(namn)) {
+            JOptionPane.showMessageDialog(null, "Namnetfältet får inte vara tomt.");
+            return;
+        }
 
-if (!ValideringsKlass.validateTextFieldNotEmpty(telnr)) {
-    JOptionPane.showMessageDialog(null, "Telefonnummerfältet får inte vara tomt.");
-    return;
-}
+        if (!ValideringsKlass.validateTextFieldNotEmpty(epost)) {
+            JOptionPane.showMessageDialog(null, "E-postfältet får inte vara tom.");
+            return;
+        }
 
-if (!ValideringsKlass.validateTextFieldNotEmpty(datum)) {
-    JOptionPane.showMessageDialog(null, "Datumefältet får inte vara tomt.");
-    return;
-}
+        if (!ValideringsKlass.validateTextFieldNotEmpty(telnr)) {
+            JOptionPane.showMessageDialog(null, "Telefonnummerfältet får inte vara tomt.");
+            return;
+        }
 
-if (!ValideringsKlass.validateTextFieldNotEmpty(losenord)) {
-    JOptionPane.showMessageDialog(null, "Lösenordsfältet får inte vara tomt.");
-    return;
-}
+        if (!ValideringsKlass.validateTextFieldNotEmpty(datum)) {
+            JOptionPane.showMessageDialog(null, "Datumefältet får inte vara tomt.");
+            return;
+        }
 
-    if (!ValideringsKlass.valideraInt(txtVarierande.getText())) {
-        JOptionPane.showMessageDialog(null, "Ange heltalssiffror för" + lblVarierande.getText());
-        return;
-    }
-    
-    if(!ValideringsKlass.valideraDatum(datum))
-    {
-     JOptionPane.showMessageDialog(null, "Ange datum enligt format: YYYY-MM-DD.");
-        return;
-    }
+        if (!ValideringsKlass.validateTextFieldNotEmpty(losenord)) {
+            JOptionPane.showMessageDialog(null, "Lösenordsfältet får inte vara tomt.");
+            return;
+        }
 
-    // Validerar så att Ansvarig Agent anges med heltalsvärde.
-    if (!ValideringsKlass.valideraInt(txtAnsvAgent.getText())) {
-        JOptionPane.showMessageDialog(null, "Ange heltalssiffra för Ansvarig Agent.");
-        return;
-    }
-    ansvAgent = Integer.parseInt(txtAnsvAgent.getText());
+        if (!ValideringsKlass.valideraInt(txtVarierande.getText())) {
+            JOptionPane.showMessageDialog(null, "Ange heltalssiffror för" + lblVarierande.getText());
+            return;
+        }
 
-    // Validerar så att plats anges med heltalsvärde.
-    if (!ValideringsKlass.valideraInt(txtPlatsReg.getText())) {
-        JOptionPane.showMessageDialog(null, "Ange heltalssiffra för Plats.");
-        return;
-    }
-    plats = Integer.parseInt(txtPlatsReg.getText());
+        if (!ValideringsKlass.valideraDatum(datum)) {
+            JOptionPane.showMessageDialog(null, "Ange datum enligt format: YYYY-MM-DD.");
+            return;
+        }
 
-    // Kontrollerar om e-postadressen redan finns registrerad, då E-post används för att unikt identifiera varje Alien.
-    if (ValideringsKlass.checkEpost(eposten)) {
-        JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen.");
-        return;
-    }
+        // Validerar så att Ansvarig Agent anges med heltalsvärde.
+        if (!ValideringsKlass.valideraInt(txtAnsvAgent.getText())) {
+            JOptionPane.showMessageDialog(null, "Ange heltalssiffra för Ansvarig Agent.");
+            return;
+        }
+        ansvAgent = Integer.parseInt(txtAnsvAgent.getText());
 
-    try {
-        idb.insert("INSERT INTO mibdb.alien VALUES (" + alienID + ", '" + datum + "', '" + eposten + "', '" + losenord + "', '" + namn + "', '" + telnr + "', " + plats + ", " + ansvAgent + ")");
-        JOptionPane.showMessageDialog(null, "Alien " + namn + " har registrerats i databasen.");
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av data.");
-        return;
-    }
+        // Validerar så att plats anges med heltalsvärde.
+        if (!ValideringsKlass.valideraInt(txtPlatsReg.getText())) {
+            JOptionPane.showMessageDialog(null, "Ange heltalssiffra för Plats.");
+            return;
+        }
+        plats = Integer.parseInt(txtPlatsReg.getText());
 
-    String valdRas = jComboBoxValjRas.getSelectedItem().toString();
+        // Kontrollerar om e-postadressen redan finns registrerad, då E-post används för att unikt identifiera varje Alien.
+        if (ValideringsKlass.checkEpost(eposten)) {
+            JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen.");
+            return;
+        }
 
-    if (valdRas.equals("Squid")) {
-        setRas("Squid", alienID, "Antal_Armar");
-    } else if (valdRas.equals("Worm")) {
-        setRas("Worm", alienID, "Langd");
-    } else if (valdRas.equals("Boglodite")) {
-        setRas("Boglodite", alienID, "Antal_Boogies");
-    }
+        try {
+            idb.insert("INSERT INTO mibdb.alien VALUES (" + alienID + ", '" + datum + "', '" + eposten + "', '" + losenord + "', '" + namn + "', '" + telnr + "', " + plats + ", " + ansvAgent + ")");
+            JOptionPane.showMessageDialog(null, "Alien " + namn + " har registrerats i databasen.");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av data.");
+            return;
+        }
 
-    clearTextFalt();
-    setAlienID();
+        String valdRas = cbValjRas.getSelectedItem().toString();
+
+        if (valdRas.equals("Squid")) {
+            setRas("Squid", alienID, "Antal_Armar");
+        } else if (valdRas.equals("Worm")) {
+            setRas("Worm", alienID, "Langd");
+        } else if (valdRas.equals("Boglodite")) {
+            setRas("Boglodite", alienID, "Antal_Boogies");
+        }
+
+        clearTextFalt();
+        setAlienID();
     }//GEN-LAST:event_btnRegistreraActionPerformed
-
+    /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegisteraForm.this);
-                frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegisteraForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     /**
      * Återställer textfälten och comboBoxen.
      */
-    private void clearTextFalt()
-    {
-     lblVarierande.setText("....");
-     txtVarierande.setText("");
-     txtNamnReg.setText("");
-     txtPlatsReg.setText("");
-     txtTelReg.setText("");
-     txtLosenOrdReg.setText("");
-     txtEpostReg.setText("");
-     txtDatumReg.setText("");
-     txtAnsvAgent.setText("");
-     jComboBoxValjRas.setSelectedIndex(0);
-     
-    }
-    
-     private boolean setRas(String ras, int alienID, String varierandeColumn) {
-    if (!ValideringsKlass.valideraInt(txtVarierande.getText())) {
-        JOptionPane.showMessageDialog(null, "Ange " + varierandeColumn + " med en giltig datatyp.");
-        return false;
+    private void clearTextFalt() {
+        lblVarierande.setText("....");
+        txtVarierande.setText("");
+        txtNamnReg.setText("");
+        txtPlatsReg.setText("");
+        txtTelReg.setText("");
+        txtLosenOrdReg.setText("");
+        txtEpostReg.setText("");
+        txtDatumReg.setText("");
+        txtAnsvAgent.setText("");
+        cbValjRas.setSelectedIndex(0);
+
     }
 
-    try {
-        int varierande = Integer.parseInt(txtVarierande.getText());
-        String insertQuery = "INSERT INTO mibdb." + ras.toLowerCase() + " (Alien_ID, " + varierandeColumn + ") VALUES (" + alienID + ", " + varierande + ")";
-        System.out.println(ras + " insert query: " + insertQuery);
-        idb.insert(insertQuery);
-        return true;
-        
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av " + ras + "-raden: " + e.getMessage());
-        return false;
-    }
-}
-    
-    private void jComboBoxValjRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxValjRasActionPerformed
-        String ras = ((String) jComboBoxValjRas.getSelectedItem()).trim();
-    
-    if (ras.equals("Squid")) {
-        lblVarierande.setText("Antal armar:");
-    } else if (ras.equals("Worm")) {
-        lblVarierande.setText("Längd:");
-    } else if (ras.equals("Boglodite")) {
-        lblVarierande.setText("Antal boogies:");
-    }
-    }//GEN-LAST:event_jComboBoxValjRasActionPerformed
-private void setAlienID()
-{
+    /**
+     * Metod som utifrån vald ras sätter värdet för de unika egenskaperna hos
+     * varje ras (Antal armar, antal boogies, längd) och via InfDB-metoden
+     * insert() lägger in dessa värden i respektive tabell.
+     *
+     * @param ras
+     * @param alienID
+     * @param varierandeKolumn
+     * @return
+     */
+    private boolean setRas(String ras, int alienID, String varierandeKolumn) {
+        if (!ValideringsKlass.valideraInt(txtVarierande.getText())) {
+            JOptionPane.showMessageDialog(null, "Ange " + varierandeKolumn + " med en giltig datatyp.");
+            return false;
+        }
+
         try {
-    String alienIDStr = idb.getAutoIncrement("alien", "Alien_ID");
-    alienID = Integer.parseInt(alienIDStr);
-    
-    
+            int varierande = Integer.parseInt(txtVarierande.getText());
+            String insertQuery = "INSERT INTO mibdb." + ras.toLowerCase() + " (Alien_ID, " + varierandeKolumn + ") VALUES (" + alienID + ", " + varierande + ")";
 
-  
-} catch (InfException e) {
-    // Hantera undantag vid frågefel
-    JOptionPane.showMessageDialog(null, "Ett fel uppstod vid generering av Alien-ID. Vänligen försök igen.");
-}
-}
+            idb.insert(insertQuery);
+            return true;
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av " + ras + "-raden: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Metod som utifrån valt alternativ i cbValjRas sätter ett varierande
+     * textfält med aktuell text utifrån de olika ras-egenskaperna.
+     *
+     * @param evt
+     */
+    private void cbValjRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjRasActionPerformed
+        String ras = ((String) cbValjRas.getSelectedItem()).trim();
+
+        if (ras.equals("Squid")) {
+            lblVarierande.setText("Antal armar:");
+        } else if (ras.equals("Worm")) {
+            lblVarierande.setText("Längd:");
+        } else if (ras.equals("Boglodite")) {
+            lblVarierande.setText("Antal boogies:");
+        }
+    }//GEN-LAST:event_cbValjRasActionPerformed
+    /**
+     * Metod som genom InfDB-metoden getAutoIncrement väljer ut ett nytt
+     * Alien_ID som är ett högre än det för tillfället högsta Alien_ID-värdet i
+     * databasen, detta värde omvandlas sedan tll int och sätts som alienID.
+     */
+    private void setAlienID() {
+        try {
+            String alienIDStr = idb.getAutoIncrement("alien", "Alien_ID");
+            alienID = Integer.parseInt(alienIDStr);
+
+        } catch (InfException e) {
+
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid generering av Alien-ID. Vänligen försök igen.");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
-    private javax.swing.JComboBox<String> jComboBoxValjRas;
+    private javax.swing.JComboBox<String> cbValjRas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAnsvarigAgent;
     private javax.swing.JLabel lblEpost;
