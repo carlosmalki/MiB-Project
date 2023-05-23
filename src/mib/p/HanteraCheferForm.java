@@ -359,7 +359,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
      * Metod för att få Agent_ID på den agent man vill välja som ny områdes-
      * eller kontorschef; boolean-variablen omradePueshed håller reda på om det
      * är områdes- eller kontorsknappen som tryckts på och väljer namn för
-     * ID-sök därefter, och agentID returneras i form av int.
+     * ID-sök därefter, och agentID returneras i form av int, via metoden fetchSingle
+     * från InfDB.
      *
      * @return
      */
@@ -389,7 +390,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     /**
      * Metod för att få namnet på nuvarande områdes-chefen för valt område;
      * metoden tar in områdesnamnet som String-parameter och ger tillbara en
-     * String med Agentens namn.
+     * String med Agentens namn, via metoden fetchSingle
+     * från InfDB.
      *
      * @param omrade
      * @return
@@ -419,7 +421,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     /**
      * Metod för att få namnet på nuvarande kontorschefen; metoden tar in
-     * kontorsnamnet som String-parameter och ger Agentens namn i return.
+     * kontorsnamnet som String-parameter och ger Agentens namn i return, via metoden fetchSingle
+     * från InfDB.
      *
      * @param kontor
      * @return
@@ -444,7 +447,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
     /**
      * Metod som fyller upp ArrayListor med värden över områden, kontor och
-     * agent-namn.
+     * agent-namn genom att använda InfDB-metoden fetchColumn som skapar arraylistor
+     * över de olika valda kolumnerna.
      */
     private void fyllArrayListor() {
         try {
@@ -512,7 +516,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
      * Metod för att byta ut den nuvarande områdesschefen; inuti metoden körs
      * getAgentID-metoden för att få Agent_ID på den person man vill ska vara
      * chef, och databsen uppdateras sedan med det ID-numret i kolumnen Benäming
-     * i Områdes-tabellen.
+     * i Områdes-tabellen via InfDB-metoden update().
      *
      */
     public void bytChefOmrade() {
@@ -575,7 +579,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
      * Metod för att byta ut den nuvarande kontorschefen; Inuti metoden körs
      * getAgentID-metoden för att få Agent_ID på den person man vill ska vara
      * chef, och databsen uppdateras sedan med det ID-numret i tabellen för
-     * Kontorschef, och den föregående kontorschefen sätts till "Fältagent" via
+     * Kontorschef, med hjälp av InfDB-metoden update(), och den föregående kontorschefen sätts till "Fältagent" via
      * metoden kontorsChefTillFaltAgent().
      *
      */
@@ -600,8 +604,10 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         }
     }
 /**
- * Metod som tar den nuvarande kontorschefen och sätter dennes Agent ID i tabellen
- * för fältagent när en ny kontorschef tillsätts, metoden körs i bytKontorsChef()-metoden.
+ * Metod som tar den nuvarande kontorschefen och sätter dennes Agent_ID i tabellen
+ * för fältagent när en ny kontorschef tillsätts, metoden körs i bytKontorsChef()-metoden
+ * och använder sig av InfDB-metoderna fetchSingle() och insert() för att 
+ * hämta Agent_ID för kontorschefen för valt kontor och sedan inserta det i faltagent-tabellen.
  */
     private void kontorsChefTillFaltAgent() {
         try {
@@ -620,7 +626,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     }
     /**
      * Metod som tar bort den valda agenten från fältagent-tabellen när hen blir
-     * kontorschef, metoden körs i bytKontorsChef()-metoden.
+     * kontorschef, metoden körs i bytKontorsChef()-metoden, och använder sig av
+     * InfDB-metoden delete() för att ta bort vald agent från tabellen faltagent, 
+     * baserat på Agent_ID som hämtas med hjälp av getAgentID()-metoden.
      */
    private void taBortFaltAgent() {
     try {
