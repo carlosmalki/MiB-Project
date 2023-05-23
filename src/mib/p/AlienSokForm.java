@@ -50,7 +50,7 @@ public class AlienSokForm extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
         txtAlienIdSok = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnAlienSok = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labRas = new javax.swing.JLabel();
         labEpost = new javax.swing.JLabel();
@@ -69,7 +69,7 @@ public class AlienSokForm extends javax.swing.JPanel {
         txtLosenOrd = new javax.swing.JTextField();
         labLosenOrd = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnMinSida = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -78,11 +78,11 @@ public class AlienSokForm extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel2.setText("Ange Alien ID:");
 
-        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jButton1.setText("Sök");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlienSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAlienSok.setText("Sök");
+        btnAlienSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAlienSokActionPerformed(evt);
             }
         });
 
@@ -191,11 +191,11 @@ public class AlienSokForm extends javax.swing.JPanel {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        jButton2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jButton2.setText("Min sida");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnMinSida.setText("Min sida");
+        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnMinSidaActionPerformed(evt);
             }
         });
 
@@ -213,8 +213,8 @@ public class AlienSokForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))))
+                            .addComponent(btnMinSida)
+                            .addComponent(btnAlienSok))))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -232,25 +232,42 @@ public class AlienSokForm extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtAlienIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btnAlienSok)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(btnMinSida)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ /**
+  * Metod kopplad till btnAlienSok som när den trycks kör metoden alienSok() för att
+  * hämta hem uppgifter om vald alien.
+  * @param evt 
+  */
+    private void btnAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlienSokActionPerformed
         alienSok();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAlienSokActionPerformed
+   /**
+     * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
+     * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
+     * sida, epost och isAdmin skickas med som parametrar för att initialiera en
+     * ny "Min Sida", fönster-titeln sätts till "Startida: Agent" och fönstret
+     * "målas om" för att visa "Min Sida"-panelen.
+     *
+     * @param evt
+     */
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AlienSokForm.this);
                 frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
                 frame.revalidate();
                 frame.setTitle("Startsida: Agent");
                 frame.repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnMinSidaActionPerformed
+    /**
+     * Metod som hämtar ut värdena för de valda nycklarna i alienInfo HashMapen,
+     * och sedan sätter respektive textfält med rätt värde.
+     * @param alienInfo 
+     */
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
         txtRegDatum.setText(alienInfo.get("Registreringsdatum"));
@@ -259,7 +276,13 @@ public class AlienSokForm extends javax.swing.JPanel {
         txtTelefon.setText(alienInfo.get("Telefon"));
 
     }
-
+   /**
+    * Metod som genom InfDB-metoden fetchSingle() hämtar namnet på den
+    * agent som vald alien har som ansvarig agent, utifrån dennes Alien_ID, och txtAnsvAgent
+    * sätts sedan med aktuell Agent..
+    * 
+    * @param alienID 
+    */
     private void setAgent(int alienID) {
         try {
             String agentNamn = idb.fetchSingle("SELECT namn FROM mibdb.agent WHERE Agent_ID IN (SELECT Ansvarig_Agent FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
@@ -268,7 +291,13 @@ public class AlienSokForm extends javax.swing.JPanel {
 
         }
     }
-
+   /**
+    * Metod som genom InfDB-metoden fetchSingle() hämtar benämningen på den
+    * plats där vald alien är registrerad, utifrån dennes Alien_ID, och txtPlats
+    * sätts sedan med aktuell plats.
+    * 
+    * @param alienID 
+    */
     private void setPlats(int alienID) {
         try {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.plats WHERE Plats_ID IN (SELECT Plats FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
@@ -278,7 +307,13 @@ public class AlienSokForm extends javax.swing.JPanel {
         }
 
     }
-
+/**
+ * Metod som genom InfDB-metoden fetchColumn skapar ArrayListor av Alien_ID 
+ * för de olika raserna, och sedan letas dessa listor igenom efter valt Alien_ID
+ * och rasen sätts utifrån vilken lista det hittades i, och txtRas sätts sedan
+ * med aktuell ras.
+ * @param alienID 
+ */
     private void setRas(int alienID) {
 
         String alienIdString = Integer.toString(alienID);
@@ -309,7 +344,12 @@ public class AlienSokForm extends javax.swing.JPanel {
         }
 
     }
-
+    /**
+     * Metod som genom InfDB-metoden fetchRow skapar en HashMap av raden för valt
+     * Alien_ID i tabellen alien, sedan körs setTextFalt-metoden för att skriva
+     * värdena från HashMapen på tilldelade textfält, och även setAgent(), setRas() och
+     * SetPlats() för att skriva också dessa värden på respektive textfält.
+     */
     private void alienSok() {
         int alienID;
         if (ValideringsKlass.valideraInt(txtAlienIdSok.getText())) {
@@ -332,8 +372,8 @@ public class AlienSokForm extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAlienSok;
+    private javax.swing.JButton btnMinSida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
