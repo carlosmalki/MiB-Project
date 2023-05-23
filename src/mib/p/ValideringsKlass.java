@@ -112,4 +112,6 @@ public class ValideringsKlass {
         return isLong;
     }
 
+
+
 }
