@@ -274,8 +274,12 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         String telnr = txtTelReg.getText();
         String datum = txtDatumReg.getText();
         String losenord = txtLosenOrdReg.getText();
+        testaComboBoxar();
+        
         int ansvAgent = getAnsvAgentID();
         int plats = getPlatsID();
+        testaComboBoxar();
+        
 
         if (!ValideringsKlass.validateTextFieldNotEmpty(namn)) {
             JOptionPane.showMessageDialog(null, "Namnetfältet får inte vara tomt.");
@@ -510,6 +514,28 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
     fyllAgentComboBox();
     
     }
+    /**
+     * Metod som testar om comboboxarna har något valt alternativ 
+     * genom att testa så att texten i boxen inte är start-alternativen
+     * som ber användaren välja, om inget annat alternativ är valt
+     * ombeds användaren välja innan registrering.
+     * 
+     */
+    public void testaComboBoxar() {
+    try {
+        if (cbPlats.getSelectedItem().toString().equals("Välj plats")) {
+            throw new NumberFormatException();
+        }
+        if (cbAnsvAgent.getSelectedItem().toString().equals("Välj agent")) {
+            throw new NumberFormatException();
+        }
+        if (cbValjRas.getSelectedItem().toString().equals("Välj ras")) {
+            throw new NumberFormatException();
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Var god välj ras, plats och ansvarig agent.");
+    }
+}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
