@@ -145,7 +145,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         lblLosenord.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLosenord.setText("Lösenord:");
 
-        cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område", " " }));
+        cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område" }));
         cbOmrade.setMinimumSize(new java.awt.Dimension(64, 22));
         cbOmrade.setName(""); // NOI18N
         cbOmrade.setOpaque(true);
@@ -544,6 +544,9 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         e.printStackTrace();
     }
 }
+   
+   
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
