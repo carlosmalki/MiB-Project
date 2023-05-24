@@ -76,7 +76,7 @@ public class ValideringsKlass {
         }
         return korrektDatumInput;
     }
-    
+
     //Kontrollera att ett värde finns i databasen - används t.ex. i registrera utrustning
     public static boolean vardeFinns(String varde, ArrayList<String> column) {
         boolean finns = false;
@@ -87,39 +87,53 @@ public class ValideringsKlass {
         }
         return finns;
     }
-    
+
     //Kontrollerar att angivet namn i registrerautrustning är okej
-    public static boolean giltigtNamn(String ettNamn)
-    {
+    public static boolean giltigtNamn(String ettNamn) {
         boolean giltigt = false;
-        if(!isLongBenamning(ettNamn) && validateTextFieldNotEmpty(ettNamn))
-        {
+        if (!isLongBenamning(ettNamn) && validateTextFieldNotEmpty(ettNamn)) {
             giltigt = true;
         }
-        
+
         return giltigt;
     }
-    
+
     //Används i metoden ovan
-    private static boolean isLongBenamning(String enBenamning)
-    {
+    private static boolean isLongBenamning(String enBenamning) {
         boolean isLong = false;
-        if(enBenamning.length() > 20)
-        {
+        if (enBenamning.length() > 20) {
             isLong = true;
             JOptionPane.showMessageDialog(null, "Namnet är för långt! (Max 20 tecken)");
-            
+
         }
         return isLong;
+        /**
+         * Valideringsmetod som kontrollerar om en cobobox är tom eller inte, är
+         * den tom returneras true, annars false.
+         */
     }
-   public static boolean valideraComboBox(JComboBox box)
-   { boolean boxEmpty = false;
-     if (box.getItemCount() == 0)
-     {
-     boxEmpty = true;
-     }
-    return boxEmpty;
-   }
 
+    public static boolean valideraComboBox(JComboBox box) {
+        boolean boxEmpty = false;
+        if (box.getItemCount() == 0) {
+            boxEmpty = true;
+        }
+        return boxEmpty;
+    }
+   /**
+    * Metod för att kontrollera comboboxar med ett standardalternativ inlagt från början
+    * (ex, "Välj agent") för att se om ett aktivt val har gjorts i boxen,
+    * är index av valt alternativ noll returneras false, inget aktivt val har gjorts,
+    * annars true.
+    * @param box
+    * @return 
+    */
+    public static boolean valideraComboBoxAktivtVal(JComboBox box) {
+        boolean aktivtVal = true;
+        if (box.getSelectedIndex() == 0) {
+           aktivtVal = false;
+        }
+        return aktivtVal;
+    }
 
 }
