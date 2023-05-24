@@ -137,16 +137,63 @@ public class ValideringsKlass {
         }
         return aktivtVal;
     }
+  
+    public static boolean arArrayListTom(ArrayList lista) {
+        boolean isEmpty = false;
+        if (lista.isEmpty()) {
+            isEmpty = true;
+        }
+        return isEmpty;
+    }
+/**
+   * Metod för att validera om ett telefonnummer är giltigt, här har kriterierna sats till:
+   * numret får enbart innehålla siffor och max ett bindestreck, som ej får vara på första
+   * eller sista plats i strängen,uppfylls alla de kraven returneras true, annars false.
+   * @param telefon
+   * @return 
+   */
+    public static boolean valideraTelefonNummer(String telefon) {
+    boolean giltigtNr = true;
+    int antalBindestreck = 0;
+    int bindestreckIndex = -1;
 
+    for (int i = 0; i < telefon.length(); i++) {
+        if (telefon.charAt(i) == '-') {
+            antalBindestreck++;
+            bindestreckIndex = i;
+        }
+    }
 
-   public static boolean arArrayListTom(ArrayList lista)
-   {
-   boolean isEmpty = false;
-   if(lista.isEmpty())
-   {
-   isEmpty = true;
-   }
-   return isEmpty;
-   }
+    if (antalBindestreck > 1) {
+        giltigtNr = false; 
+    } else if (bindestreckIndex == 0 || bindestreckIndex == telefon.length() - 1) {
+        giltigtNr = false; 
+    } else if (antalBindestreck == 1) {
+        String forstaDel = telefon.substring(0, bindestreckIndex);
+        String andraDel = telefon.substring(bindestreckIndex + 1);
 
+        
+        try {
+            int forstaDelNummer = Integer.parseInt(forstaDel);
+            int andraDelNummer = Integer.parseInt(andraDel);
+            
+          
+
+        } catch (NumberFormatException e) {
+            giltigtNr = false; 
+        }
+    } else {
+       
+        try {
+            int telefonNummer = Integer.parseInt(telefon);
+            
+            
+
+        } catch (NumberFormatException e) {
+            giltigtNr = false; 
+        }
+    }
+
+    return giltigtNr;
+}
 }

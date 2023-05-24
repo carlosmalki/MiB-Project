@@ -275,11 +275,10 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         String datum = txtDatumReg.getText();
         String losenord = txtLosenOrdReg.getText();
         testaComboBoxar();
-        
+
         int ansvAgent = getAnsvAgentID();
         int plats = getPlatsID();
         testaComboBoxar();
-        
 
         if (!ValideringsKlass.validateTextFieldNotEmpty(namn)) {
             JOptionPane.showMessageDialog(null, "Namnetfältet får inte vara tomt.");
@@ -295,7 +294,11 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Telefonnummerfältet får inte vara tomt.");
             return;
         }
+        if (!ValideringsKlass.valideraTelefonNummer(telnr)) {
+            JOptionPane.showMessageDialog(null, "Felaktigt format. Telefonnumret får innehålla enbart siffor plus max ett bindestreck, som ej får vara på första eller sista plats.");
+            return;
 
+        }
         if (!ValideringsKlass.validateTextFieldNotEmpty(datum)) {
             JOptionPane.showMessageDialog(null, "Datumefältet får inte vara tomt.");
             return;
@@ -471,71 +474,70 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
     }
 
     public int getAnsvAgentID() {
-    String ansvAgent = "";
-    if (!cbAnsvAgent.getSelectedItem().toString().equals("Välj agent")) {
-        ansvAgent = cbAnsvAgent.getSelectedItem().toString();
+        String ansvAgent = "";
+        if (!cbAnsvAgent.getSelectedItem().toString().equals("Välj agent")) {
+            ansvAgent = cbAnsvAgent.getSelectedItem().toString();
+        }
+        String query = "SELECT Agent_ID FROM mibdb.agent WHERE Namn = '" + ansvAgent + "';";
+        int ansvAgentID = 0;
+        try {
+            ansvAgentID = Integer.parseInt(idb.fetchSingle(query));
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+        return ansvAgentID;
     }
-    String query = "SELECT Agent_ID FROM mibdb.agent WHERE Namn = '" + ansvAgent + "';";
-    int ansvAgentID = 0; 
-    try {
-        ansvAgentID = Integer.parseInt(idb.fetchSingle(query));
-    } catch (InfException e) {
-       
-        e.printStackTrace();
+
+    public int getPlatsID() {
+        String platsNamn = "";
+        if (!cbPlats.getSelectedItem().toString().equals("Välj plats")) {
+            platsNamn = cbPlats.getSelectedItem().toString();
+        }
+        String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + platsNamn + "';";
+        int platsID = 0;
+        try {
+            platsID = Integer.parseInt(idb.fetchSingle(query));
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+        return platsID;
+
     }
-    return ansvAgentID;
-}
-    
-    public int getPlatsID()
-    {
-     String platsNamn = "";
-    if (!cbPlats.getSelectedItem().toString().equals("Välj plats")) {
-        platsNamn = cbPlats.getSelectedItem().toString();
+
+    public void aterStallComboBoxar() {
+        cbPlats.removeAllItems();
+        cbPlats.addItem("Välj plats");
+        fyllValjPlatsCombo();
+        cbAnsvAgent.removeAllItems();
+        cbAnsvAgent.addItem("Välj agent");
+        fyllAgentComboBox();
+
     }
-    String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + platsNamn + "';";
-    int platsID = 0; 
-    try {
-        platsID = Integer.parseInt(idb.fetchSingle(query));
-    } catch (InfException e) {
-       
-        e.printStackTrace();
-    }
-    return platsID;
-    
-    }
-    
-    public void aterStallComboBoxar()
-    {
-    cbPlats.removeAllItems();
-    cbPlats.addItem("Välj plats");
-    fyllValjPlatsCombo();
-    cbAnsvAgent.removeAllItems();
-    cbAnsvAgent.addItem("Välj agent");
-    fyllAgentComboBox();
-    
-    }
+
     /**
-     * Metod som testar om comboboxarna har något aktivt valt alternativ
-     * förutom det förinställda "Välj X", genom en metod i ValideringsKlassen 
-     * som kontrollerar om det valda alternativet är på index 0 eller inte.
-     * 
+     * Metod som testar om comboboxarna har något aktivt valt alternativ förutom
+     * det förinställda "Välj X", genom en metod i ValideringsKlassen som
+     * kontrollerar om det valda alternativet är på index 0 eller inte.
+     *
      */
     public void testaComboBoxar() {
-    try {
-        if (!ValideringsKlass.valideraComboBoxAktivtVal(cbPlats)) {
-            throw new NullPointerException();
+        try {
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbPlats)) {
+                throw new NullPointerException();
+            }
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbAnsvAgent)) {
+                throw new NullPointerException();
+            }
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbRas)) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Var god välj ras, plats och ansvarig agent.");
         }
-        if (!ValideringsKlass.valideraComboBoxAktivtVal(cbAnsvAgent)) {
-            throw new NullPointerException();
-        }
-        if (!ValideringsKlass.valideraComboBoxAktivtVal(cbRas))  {
-            throw new NullPointerException();
-        }
-    } catch (NullPointerException e) {
-        JOptionPane.showMessageDialog(null, "Var god välj ras, plats och ansvarig agent.");
     }
-}
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
