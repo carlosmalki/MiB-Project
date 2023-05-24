@@ -49,13 +49,14 @@ public class OmradesChefForm extends javax.swing.JPanel {
     private void initComponents() {
 
         lblChefRubrik = new javax.swing.JLabel();
-        lblChefNamn = new javax.swing.JLabel();
-        lblChefTelefon = new javax.swing.JLabel();
-        lblChefEpost = new javax.swing.JLabel();
+        btnMinSida = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         lblNamn = new javax.swing.JLabel();
         lblTelefon = new javax.swing.JLabel();
         lblEpost = new javax.swing.JLabel();
-        btnMinSida = new javax.swing.JButton();
+        txtTelefon = new javax.swing.JTextField();
+        txtNamn = new javax.swing.JTextField();
+        txtEpost = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -63,14 +64,15 @@ public class OmradesChefForm extends javax.swing.JPanel {
         lblChefRubrik.setFont(new java.awt.Font("MS Gothic", 1, 36)); // NOI18N
         lblChefRubrik.setText("Områdeschef: Norrland");
 
-        lblChefNamn.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
-        lblChefNamn.setText("Namn:             ");
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnMinSida.setText("Min sida");
+        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinSidaActionPerformed(evt);
+            }
+        });
 
-        lblChefTelefon.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
-        lblChefTelefon.setText("Telefon:               ");
-
-        lblChefEpost.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
-        lblChefEpost.setText("Epost:                   ");
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102), null, null));
 
         lblNamn.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblNamn.setText("Namn:");
@@ -81,60 +83,71 @@ public class OmradesChefForm extends javax.swing.JPanel {
         lblEpost.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblEpost.setText("Epost:");
 
-        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnMinSida.setText("Min sida");
-        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinSidaActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lblEpost)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEpost))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblTelefon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNamn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNamn))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelefon)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEpost)
+                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(lblChefRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNamn)
-                            .addComponent(lblTelefon)
-                            .addComponent(lblEpost))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblChefTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblChefNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblChefEpost))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMinSida)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
-                .addGap(70, 70, 70))
+                .addContainerGap(60, Short.MAX_VALUE)
+                .addComponent(lblChefRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addComponent(lblChefRubrik)
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblChefNamn)
-                    .addComponent(lblNamn))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTelefon)
-                    .addComponent(lblChefTelefon))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEpost)
-                    .addComponent(lblChefEpost))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMinSida)
-                .addGap(21, 21, 21))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
  /**
@@ -160,18 +173,19 @@ public class OmradesChefForm extends javax.swing.JPanel {
 private void setInfo()
 {
   lblChefRubrik.setText("Områdeschef: "+omrade);
-  lblChefNamn.setText(chefInfo.get("Namn"));
-  lblChefTelefon.setText(chefInfo.get("Telefon"));
-  lblChefEpost.setText(chefInfo.get("Epost"));
+  txtNamn.setText(chefInfo.get("Namn"));
+  txtTelefon.setText(chefInfo.get("Telefon"));
+  txtEpost.setText(chefInfo.get("Epost"));
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
-    private javax.swing.JLabel lblChefEpost;
-    private javax.swing.JLabel lblChefNamn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblChefRubrik;
-    private javax.swing.JLabel lblChefTelefon;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblTelefon;
+    private javax.swing.JTextField txtEpost;
+    private javax.swing.JTextField txtNamn;
+    private javax.swing.JTextField txtTelefon;
     // End of variables declaration//GEN-END:variables
 }

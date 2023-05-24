@@ -221,16 +221,25 @@ public class ListaAlienForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
   /**
-   * Metod som utifrån texten på fältet sokMetod, kör anting sokRas()-metoden eller
-   * sokPlats()-metoden för att ge relevanta resultat.
-   * @param evt 
-   */
+     * Metod som utifrån texten på fältet sokMetod, kör anting sokRas()-metoden
+     * eller sokPlats()-metoden för att ge relevanta resultat, efter att 
+     * först ha testat cbValj boxen så att ett aktivt val har gjorts, genom metod
+     * från ValiderinsKlass.
+     *
+     * @param evt
+     */
     private void btnSokKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokKnappActionPerformed
-        if (sokMetod.equals("Ras")) {
-            sokRas();
-        }
-        if (sokMetod.equals("Plats")) {
-            sokPlats();
+
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbValj)) {
+            if (sokMetod.equals("Ras")) {
+                sokRas();
+            }
+            if (sokMetod.equals("Plats")) {
+                sokPlats();
+            }
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Var god välj sökobjekt.");
         }
 
     }//GEN-LAST:event_btnSokKnappActionPerformed
@@ -476,12 +485,12 @@ public class ListaAlienForm extends javax.swing.JPanel {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
+                JOptionPane.showMessageDialog(null, "Vara god ange datum enligt format: YYYY-MM-DD");
             }
 
             jTable1.setVisible(true);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Ett fel inträffade vid hämtning av data.");
+            JOptionPane.showMessageDialog(null, "Vara god ange datum enligt format: YYYY-MM-DD");
 
         }
 

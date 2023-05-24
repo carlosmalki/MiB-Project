@@ -69,7 +69,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         lblAnsvarigAgent = new javax.swing.JLabel();
         lblRas = new javax.swing.JLabel();
         txtTelReg = new javax.swing.JTextField();
-        cbValjRas = new javax.swing.JComboBox<>();
+        cbRas = new javax.swing.JComboBox<>();
         txtEpostReg = new javax.swing.JTextField();
         txtVarierande = new javax.swing.JTextField();
         txtDatumReg = new javax.swing.JTextField();
@@ -124,10 +124,10 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         lblRas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRas.setText("Ras:");
 
-        cbValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Boglodite\t", "Squid", "Worm" }));
-        cbValjRas.addActionListener(new java.awt.event.ActionListener() {
+        cbRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Boglodite\t", "Squid", "Worm" }));
+        cbRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbValjRasActionPerformed(evt);
+                cbRasActionPerformed(evt);
             }
         });
 
@@ -154,7 +154,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
                         .addGap(124, 124, 124)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbRas, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblLosenord)
@@ -188,7 +188,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRas)
-                    .addComponent(cbValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNamnReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,8 +274,11 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         String telnr = txtTelReg.getText();
         String datum = txtDatumReg.getText();
         String losenord = txtLosenOrdReg.getText();
+        testaComboBoxar();
+
         int ansvAgent = getAnsvAgentID();
         int plats = getPlatsID();
+        testaComboBoxar();
 
         if (!ValideringsKlass.validateTextFieldNotEmpty(namn)) {
             JOptionPane.showMessageDialog(null, "Namnetfältet får inte vara tomt.");
@@ -291,7 +294,11 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Telefonnummerfältet får inte vara tomt.");
             return;
         }
+        if (!ValideringsKlass.valideraTelefonNummer(telnr)) {
+            JOptionPane.showMessageDialog(null, "Felaktigt format. Telefonnumret får innehålla enbart siffor plus max ett bindestreck, som ej får vara på första eller sista plats.");
+            return;
 
+        }
         if (!ValideringsKlass.validateTextFieldNotEmpty(datum)) {
             JOptionPane.showMessageDialog(null, "Datumefältet får inte vara tomt.");
             return;
@@ -327,7 +334,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             return;
         }
 
-        String valdRas = cbValjRas.getSelectedItem().toString();
+        String valdRas = cbRas.getSelectedItem().toString();
 
         if (valdRas.equals("Squid")) {
             setRas("Squid", alienID, "Antal_Armar");
@@ -370,7 +377,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         txtEpostReg.setText("");
         txtDatumReg.setText("");
 
-        cbValjRas.setSelectedIndex(0);
+        cbRas.setSelectedIndex(0);
 
     }
 
@@ -409,8 +416,8 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
      *
      * @param evt
      */
-    private void cbValjRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjRasActionPerformed
-        String ras = ((String) cbValjRas.getSelectedItem()).trim();
+    private void cbRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRasActionPerformed
+        String ras = ((String) cbRas.getSelectedItem()).trim();
 
         if (ras.equals("Squid")) {
             lblVarierande.setText("Antal armar:");
@@ -419,7 +426,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         } else if (ras.equals("Boglodite")) {
             lblVarierande.setText("Antal boogies:");
         }
-    }//GEN-LAST:event_cbValjRasActionPerformed
+    }//GEN-LAST:event_cbRasActionPerformed
     /**
      * Metod som genom InfDB-metoden getAutoIncrement väljer ut ett nytt
      * Alien_ID som är ett högre än det för tillfället högsta Alien_ID-värdet i
@@ -467,56 +474,76 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
     }
 
     public int getAnsvAgentID() {
-    String ansvAgent = "";
-    if (!cbAnsvAgent.getSelectedItem().toString().equals("Välj agent")) {
-        ansvAgent = cbAnsvAgent.getSelectedItem().toString();
+        String ansvAgent = "";
+        if (!cbAnsvAgent.getSelectedItem().toString().equals("Välj agent")) {
+            ansvAgent = cbAnsvAgent.getSelectedItem().toString();
+        }
+        String query = "SELECT Agent_ID FROM mibdb.agent WHERE Namn = '" + ansvAgent + "';";
+        int ansvAgentID = 0;
+        try {
+            ansvAgentID = Integer.parseInt(idb.fetchSingle(query));
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+        return ansvAgentID;
     }
-    String query = "SELECT Agent_ID FROM mibdb.agent WHERE Namn = '" + ansvAgent + "';";
-    int ansvAgentID = 0; 
-    try {
-        ansvAgentID = Integer.parseInt(idb.fetchSingle(query));
-    } catch (InfException e) {
-       
-        e.printStackTrace();
+
+    public int getPlatsID() {
+        String platsNamn = "";
+        if (!cbPlats.getSelectedItem().toString().equals("Välj plats")) {
+            platsNamn = cbPlats.getSelectedItem().toString();
+        }
+        String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + platsNamn + "';";
+        int platsID = 0;
+        try {
+            platsID = Integer.parseInt(idb.fetchSingle(query));
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
+        return platsID;
+
     }
-    return ansvAgentID;
-}
-    
-    public int getPlatsID()
-    {
-     String platsNamn = "";
-    if (!cbPlats.getSelectedItem().toString().equals("Välj plats")) {
-        platsNamn = cbPlats.getSelectedItem().toString();
+
+    public void aterStallComboBoxar() {
+        cbPlats.removeAllItems();
+        cbPlats.addItem("Välj plats");
+        fyllValjPlatsCombo();
+        cbAnsvAgent.removeAllItems();
+        cbAnsvAgent.addItem("Välj agent");
+        fyllAgentComboBox();
+
     }
-    String query = "SELECT Plats_ID FROM mibdb.plats WHERE Benamning = '" + platsNamn + "';";
-    int platsID = 0; 
-    try {
-        platsID = Integer.parseInt(idb.fetchSingle(query));
-    } catch (InfException e) {
-       
-        e.printStackTrace();
+
+    /**
+     * Metod som testar om comboboxarna har något aktivt valt alternativ förutom
+     * det förinställda "Välj X", genom en metod i ValideringsKlassen som
+     * kontrollerar om det valda alternativet är på index 0 eller inte.
+     *
+     */
+    public void testaComboBoxar() {
+        try {
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbPlats)) {
+                throw new NullPointerException();
+            }
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbAnsvAgent)) {
+                throw new NullPointerException();
+            }
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbRas)) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Var god välj ras, plats och ansvarig agent.");
+        }
     }
-    return platsID;
-    
-    }
-    
-    public void aterStallComboBoxar()
-    {
-    cbPlats.removeAllItems();
-    cbPlats.addItem("Välj plats");
-    fyllValjPlatsCombo();
-    cbAnsvAgent.removeAllItems();
-    cbAnsvAgent.addItem("Välj agent");
-    fyllAgentComboBox();
-    
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
     private javax.swing.JComboBox<String> cbAnsvAgent;
     private javax.swing.JComboBox<String> cbPlats;
-    private javax.swing.JComboBox<String> cbValjRas;
+    private javax.swing.JComboBox<String> cbRas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAnsvarigAgent;
     private javax.swing.JLabel lblEpost;

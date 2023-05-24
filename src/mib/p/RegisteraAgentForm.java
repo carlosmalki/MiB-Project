@@ -145,7 +145,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         lblLosenord.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLosenord.setText("Lösenord:");
 
-        cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område", " " }));
+        cbOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj område" }));
         cbOmrade.setMinimumSize(new java.awt.Dimension(64, 22));
         cbOmrade.setName(""); // NOI18N
         cbOmrade.setOpaque(true);
@@ -282,11 +282,12 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
   /**
-   * Metod kopplad till btnRegistrera, som utför själva registreringen genom InfDB-metoden
-   * insert, efter att först ha kontrollerat att alla fält har text och giltig input via metoder från
-   * valideringsklassen.
-   * @param evt 
-   */
+     * Metod kopplad till btnRegistrera, som utför själva registreringen genom
+     * InfDB-metoden insert, efter att först ha kontrollerat att alla fält har
+     * text och giltig input via metoder från valideringsklassen.
+     *
+     * @param evt
+     */
     private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
         String namn = txtNamnReg.getText();
         String eposten = txtEpost.getText();
@@ -321,6 +322,11 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Telefonnummerfältet får inte vara tomt.");
             return;
         }
+        if (!ValideringsKlass.valideraTelefonNummer(telnr)) {
+            JOptionPane.showMessageDialog(null, "Felaktigt format. Telefonnumret får innehålla enbart siffor plus max ett bindestreck, som ej får vara på första eller sista plats.");
+            return;
+
+        }
 
         if (!ValideringsKlass.validateTextFieldNotEmpty(datum)) {
             JOptionPane.showMessageDialog(null, "Datumefältet får inte vara tomt.");
@@ -337,7 +343,6 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             return;
         }
 
-       
         if (ValideringsKlass.checkEpost(eposten)) {
             JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen. Klicka 'Skapa namn' för att få ett nytt namn, och sedan 'Skapa E-post' igen");
             return;
@@ -354,7 +359,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         clearTextFalt();
         setAgentID();
     }//GEN-LAST:event_btnRegistreraActionPerformed
- /**
+    /**
      * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
      * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
      * sida, epost och isAdmin skickas med som parametrar för att initialiera en
@@ -390,12 +395,14 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         cbAdmin.setSelectedIndex(0);
 
     }
-  /**
-   * Metod som hämtar ut Omrades_ID från området valt i cbOmrade-comboboxen via
-   * InfDB-metoden fetchSingel, och sedan returnerar det i form av ett int-värde
-   * efter att först ha använt Integer.parseInt på hämtat värde.
-   * @return 
-   */
+
+    /**
+     * Metod som hämtar ut Omrades_ID från området valt i cbOmrade-comboboxen
+     * via InfDB-metoden fetchSingel, och sedan returnerar det i form av ett
+     * int-värde efter att först ha använt Integer.parseInt på hämtat värde.
+     *
+     * @return
+     */
     private int getOmradesID() {
         String omrade = cbOmrade.getSelectedItem().toString();
         String query = "SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "';";
@@ -411,13 +418,15 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
 
         return omradesID;
     }
+
     /**
-     * Metod kopplad till btnSkapaEpost som först kollar så att txtNamnReg har ett
-     * giltigt namn och om det har det körs metoden skapaEpost() för att generera en epost-
-     * adress.
-     * @param evt 
+     * Metod kopplad till btnSkapaEpost som först kollar så att txtNamnReg har
+     * ett giltigt namn och om det har det körs metoden skapaEpost() för att
+     * generera en epost- adress.
+     *
+     * @param evt
      */
-    
+
     private void btnSkapaEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaEpostActionPerformed
         if (txtNamnReg.getText().equals("Agent")) {
             JOptionPane.showMessageDialog(null, "Skapa agent-namn innan E-post");
@@ -426,36 +435,37 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             skapaEpost();
         }
     }//GEN-LAST:event_btnSkapaEpostActionPerformed
-/**
- * Metod kopplad till btnSkapaNamn, som när den trycks kör metoden skapaNamn()
- * för att generera ett namn till agenten.
- * 
- *
- * @param evt 
- */
+    /**
+     * Metod kopplad till btnSkapaNamn, som när den trycks kör metoden
+     * skapaNamn() för att generera ett namn till agenten.
+     *
+     *
+     * @param evt
+     */
     private void btnSkapaNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNamnActionPerformed
         skapaNamn();
     }//GEN-LAST:event_btnSkapaNamnActionPerformed
-   /**
-    * Metod som använder sig av InfDB-metoden getAutoIncrement() för att välja ut nästkommande
-    *värde ur kolumnen Agent_ID i tabellen agent, och detta värde görs sedan om till
-    * int via Integer.parseInt.
-    */
+    /**
+     * Metod som använder sig av InfDB-metoden getAutoIncrement() för att välja
+     * ut nästkommande värde ur kolumnen Agent_ID i tabellen agent, och detta
+     * värde görs sedan om till int via Integer.parseInt.
+     */
     private void setAgentID() {
         try {
             String agentIDStr = idb.getAutoIncrement("agent", "Agent_ID");
             agentID = Integer.parseInt(agentIDStr);
 
         } catch (InfException e) {
-           
+
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid generering av Alien-ID. Vänligen försök igen.");
         }
     }
-/**
- * Metod som fyller upp cbOmrade genom att via InfDB-metoden fetchColumn skapa 
- * en arraylist av Benamning från omrade-tabellen, och denna arraylist loopas
- * sedan igenom och varje objekt läggs till i cbOmrade-comboboxen.
- */
+
+    /**
+     * Metod som fyller upp cbOmrade genom att via InfDB-metoden fetchColumn
+     * skapa en arraylist av Benamning från omrade-tabellen, och denna arraylist
+     * loopas sedan igenom och varje objekt läggs till i cbOmrade-comboboxen.
+     */
     private void fyllOmradesComboBox() {
         String query = "SELECT Benamning FROM mibdb.omrade;";
         ArrayList<String> omraden = new ArrayList<>();
@@ -472,12 +482,14 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         }
 
     }
-/**
- * Skapar automatiskt ett namn åt agenten utifrån vald bokstav i cbValdBokstav,
- * om önskat namn inte finns i listan över registrerade agenter så sätts namnet till
- * "Agent +vald bokstav", och om namnet redan finns meddelas detta, och en slumpmässig
- * siffra 0-9 väljs ut via Random-metoden nextInt() och läggs till efter "Agent + vald bokstav".
- */
+
+    /**
+     * Skapar automatiskt ett namn åt agenten utifrån vald bokstav i
+     * cbValdBokstav, om önskat namn inte finns i listan över registrerade
+     * agenter så sätts namnet till "Agent +vald bokstav", och om namnet redan
+     * finns meddelas detta, och en slumpmässig siffra 0-9 väljs ut via
+     * Random-metoden nextInt() och läggs till efter "Agent + vald bokstav".
+     */
     public void skapaNamn() {
         String valdBokstav = cbValdBokstav.getSelectedItem().toString();
         String onskatNamn = "Agent " + valdBokstav;
@@ -494,12 +506,14 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
 
         txtNamnReg.setText(namnet);
     }
-/**
- * Skapar automatiskt en epost-adress till agenten utifrån dennes namn, är sista tecknet
- * i namnet en bokstav används a+sista bokstaven + @mib.net för att skapa adressen,
- * om sista tecket är en siffra används istället a+ de två sista bokstäverna + mib.net,
- * dessa utvärderingar görs via valideringsklassens valideraInt()-metod.
- */
+
+    /**
+     * Skapar automatiskt en epost-adress till agenten utifrån dennes namn, är
+     * sista tecknet i namnet en bokstav används a+sista bokstaven + @mib.net
+     * för att skapa adressen, om sista tecket är en siffra används istället a+
+     * de två sista bokstäverna + mib.net, dessa utvärderingar görs via
+     * valideringsklassens valideraInt()-metod.
+     */
     public void skapaEpost() {
         String namnet = txtNamnReg.getText();
         String eposten;
@@ -512,18 +526,19 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         }
         txtEpost.setText(eposten);
     }
- /**
-  * Skapar en lista över alla registrerade agenter via InfDb-metoden fetchColumn,
-  * för att kunna ha att jämföra med när nya agenter får namn, så det inte
-  * blir dubbletter.
-  */
+
+    /**
+     * Skapar en lista över alla registrerade agenter via InfDb-metoden
+     * fetchColumn, för att kunna ha att jämföra med när nya agenter får namn,
+     * så det inte blir dubbletter.
+     */
     private void fyllNamnArrayList() {
         String query = "select namn from mibdb.agent;";
 
         try {
             agentNamn = idb.fetchColumn(query);
             for (String namn : agentNamn) {
-               
+
             }
         } catch (InfException e) {
 
@@ -531,19 +546,22 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         }
 
     }
+
     /**
-     * Metod som gör den nyregistrerade agenten till fältagent genom att via InfDB-metoden insert()
-     * lägga till dennes Agent_ID i faltagent-tabellen.
+     * Metod som gör den nyregistrerade agenten till fältagent genom att via
+     * InfDB-metoden insert() lägga till dennes Agent_ID i faltagent-tabellen.
      */
-   private void setFaltAgent() {
-    try {
-        String query = "INSERT INTO mibdb.faltagent (Agent_ID) VALUES (" + agentID + ");";
-        idb.insert(query);
-    } catch (InfException e) {
-      
-        e.printStackTrace();
+    private void setFaltAgent() {
+        try {
+            String query = "INSERT INTO mibdb.faltagent (Agent_ID) VALUES (" + agentID + ");";
+            idb.insert(query);
+        } catch (InfException e) {
+
+            e.printStackTrace();
+        }
     }
-}
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;

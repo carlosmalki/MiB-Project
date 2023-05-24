@@ -298,6 +298,11 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
      * @param evt 
      */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        String alienIDString = txtAlienIdSok.getText();
+        if(!ValideringsKlass.existerarAlienID(alienIDString)&&ValideringsKlass.valideraInt(alienIDString))
+        {
+        JOptionPane.showMessageDialog(null, "Valt Alien-ID existerar inte i databasen. Försök igen.");
+        }
         txtRas.setText("");
         fyllAgentComboBox();
         fyllValjPlatsCombo();

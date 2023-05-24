@@ -244,6 +244,11 @@ public class AlienSokForm extends javax.swing.JPanel {
   * @param evt 
   */
     private void btnAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlienSokActionPerformed
+        String alienIDString = txtAlienIdSok.getText();
+        if(!ValideringsKlass.existerarAlienID(alienIDString)&&ValideringsKlass.valideraInt(alienIDString))
+        {
+        JOptionPane.showMessageDialog(null, "Valt Alien-ID existerar inte i databasen. Försök igen.");
+        }
         alienSok();
 
     }//GEN-LAST:event_btnAlienSokActionPerformed
