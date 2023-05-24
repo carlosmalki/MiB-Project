@@ -28,6 +28,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
     private String epost;
     private String isAdmin;
     private String mittNamn;
+    private boolean tomLista;
 
     /**
      * Creates new form TaBortAgent2
@@ -44,8 +45,8 @@ public class TaBortAgentForm extends javax.swing.JPanel {
         this.isAdmin = isAdmin;
         ejChefer = new ArrayList();
         rand = new Random();
-        mittNamn =  getMittEgetNamn();
-
+        mittNamn = getMittEgetNamn();
+      tomLista = false;
         fyllAgentArrayList();
         fyllOmradesChefArrayList();
 
@@ -174,26 +175,30 @@ public class TaBortAgentForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
-       String agentensNamn = cbAgentNamn.getSelectedItem().toString();
-    if (agentensNamn.equals(mittNamn)) {
-        JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv ur databasen. Välj annan agent för borttagning.");
-    } else if (omradesChefer.contains(agentensNamn)) {
-        taBortOmradesChef(agentensNamn);
-    } else if (kontorsChefer.contains(agentensNamn)) {
-        taBortKontorsChef(agentensNamn);
-    } else {
-        bytAnsvarigAgent(agentensNamn);
-        taBortFaltAgent(agentensNamn);
-        taBortFranUtrustning(agentensNamn);
-        taBortAgent(agentensNamn);
-    }
+        String agentensNamn = cbAgentNamn.getSelectedItem().toString();
+        testaEjChefArrayList();
+        if(!tomLista)
+        {testaComboBox();}
+        if (agentensNamn.equals(mittNamn)) {
+            JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv ur databasen. Välj annan agent för borttagning.");
+        } else if (omradesChefer.contains(agentensNamn)) {
+            taBortOmradesChef(agentensNamn);
+        } else if (kontorsChefer.contains(agentensNamn)) {
+            taBortKontorsChef(agentensNamn);
+        } else {
+            bytAnsvarigAgent(agentensNamn);
+            taBortFaltAgent(agentensNamn);
+            taBortFranUtrustning(agentensNamn);
+            taBortAgent(agentensNamn);
+        }
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
-   /**
-     * Metod kopplad till btnAdminSida som fyller upp JFrame med en ny instans av
-     * AdminFunktionerForm för att användaren ska kunna ta sig tillbaka till sin
-     * adminsida, epost och isAdmin skickas med som parametrar för att initialiera en
-     * ny "Admin-sida", fönster-titeln sätts till "Administratörsfunktioner" och fönstret
-     * "målas om" för att visa "Admin-sida"-panelen.
+    /**
+     * Metod kopplad till btnAdminSida som fyller upp JFrame med en ny instans
+     * av AdminFunktionerForm för att användaren ska kunna ta sig tillbaka till
+     * sin adminsida, epost och isAdmin skickas med som parametrar för att
+     * initialiera en ny "Admin-sida", fönster-titeln sätts till
+     * "Administratörsfunktioner" och fönstret "målas om" för att visa
+     * "Admin-sida"-panelen.
      *
      * @param evt
      */
@@ -204,7 +209,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
         frame.setTitle("Administratörsfunktioner");
         frame.repaint();
     }//GEN-LAST:event_btnAdminSidaActionPerformed
-  /**
+    /**
      * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
      * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
      * sida, epost och isAdmin skickas med som parametrar för att initialiera en
@@ -557,20 +562,45 @@ public class TaBortAgentForm extends javax.swing.JPanel {
      * sig själv.
      */
     private String getMittEgetNamn() {
-       String mNamn= "";
+        String mNamn = "";
         try {
             String query = "SELECT namn FROM mibdb.agent WHERE Epost = '" + epost + "';";
-             mNamn = idb.fetchSingle(query);
+            mNamn = idb.fetchSingle(query);
         } catch (InfException ex) {
 
             ex.printStackTrace();
-            
+
         }
         return mNamn;
     }
+
+    public void testaComboBox() {
+        try {
+            if (!ValideringsKlass.valideraComboBoxAktivtVal(cbAgentNamn)) {
+                throw new NullPointerException();
+            }
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Var god välj agent för borttagning.");
+        }
+    }
+
+    public void testaEjChefArrayList() {
+       
+        try {
+            if (ValideringsKlass.arArrayListTom(ejChefer)) {
+                
+                throw new NumberFormatException();
+                
+            }
+
+        } catch (NumberFormatException e) {
+            tomLista = true;
+            String meddelande = "<html>Agenten har chefsstatus och kan inte tas bort utan att platsen tillsätts.<br>För närvarande finns inga agenter utan chefsstatus som kan befordras.<br>Registrera ny agent och försök igen.</html>";
+            JOptionPane.showMessageDialog(null, meddelande);
+        }
     
-    public void setTextArea(String agentensNamn,String omradeKontor)
-    {}
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

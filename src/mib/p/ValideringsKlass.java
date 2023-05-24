@@ -120,20 +120,33 @@ public class ValideringsKlass {
         }
         return boxEmpty;
     }
-   /**
-    * Metod för att kontrollera comboboxar med ett standardalternativ inlagt från början
-    * (ex, "Välj agent") för att se om ett aktivt val har gjorts i boxen,
-    * är index av valt alternativ noll returneras false, inget aktivt val har gjorts,
-    * annars true.
-    * @param box
-    * @return 
-    */
+
+    /**
+     * Metod för att kontrollera comboboxar med ett standardalternativ inlagt
+     * från början (ex, "Välj agent") för att se om ett aktivt val har gjorts i
+     * boxen, är index av valt alternativ noll returneras false, inget aktivt
+     * val har gjorts, annars true.
+     *
+     * @param box
+     * @return
+     */
     public static boolean valideraComboBoxAktivtVal(JComboBox box) {
         boolean aktivtVal = true;
         if (box.getSelectedIndex() == 0) {
-           aktivtVal = false;
+            aktivtVal = false;
         }
         return aktivtVal;
     }
+
+
+   public static boolean arArrayListTom(ArrayList lista)
+   {
+   boolean isEmpty = false;
+   if(lista.isEmpty())
+   {
+   isEmpty = true;
+   }
+   return isEmpty;
+   }
 
 }
