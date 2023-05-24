@@ -24,6 +24,7 @@ public class AgentSokForm extends javax.swing.JPanel {
     private ArrayList<String> omradesChef;
     private ArrayList<String> kontorsChef;
     private boolean idExists;
+    private ValideringsKlass validering;
 
     /**
      * Creates new form AlienSokForm
@@ -40,6 +41,7 @@ public class AgentSokForm extends javax.swing.JPanel {
         }
         this.epost = epost;
         idExists = true;
+        validering = new ValideringsKlass();
         fyllArrayLists();
 
     }
@@ -270,6 +272,11 @@ public class AgentSokForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        String agentIDString = txtAgentIdSok.getText();
+        if(!ValideringsKlass.existerarAgentID(agentIDString)&&ValideringsKlass.valideraInt(agentIDString))
+        {
+        JOptionPane.showMessageDialog(null, "Valt Agent-ID existerar inte i databasen. Försök igen.");
+        }
         txtAdmin.setText("");
         agentSok();
         chefEllerInte();
@@ -394,7 +401,7 @@ public class AgentSokForm extends javax.swing.JPanel {
 
                 txtChefEllerInte.setText("");
             } catch (NullPointerException e) {
-                JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
+                
                 idExists = false;
                 txtChefEllerInte.setText("");
 

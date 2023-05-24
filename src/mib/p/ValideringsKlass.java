@@ -204,9 +204,29 @@ public class ValideringsKlass {
 
     try {
         allaIDs = idb.fetchColumn(query);
-        for(String id : allaIDs)
-        {System.out.println(id);}
+       
+        
         if(allaIDs.contains(alienID))
+        {
+            
+          idExisterar = true;
+        }
+    } catch (InfException e) {
+        
+    }
+
+    return idExisterar;
+}
+     
+     public static boolean existerarAgentID(String alienID) {
+    boolean idExisterar = false;
+    String query = "SELECT Agent_ID FROM mibdb.agent;";
+    ArrayList<String> allaAgentIDs = new ArrayList<>();
+
+    try {
+        allaAgentIDs = idb.fetchColumn(query);
+       
+        if(allaAgentIDs.contains(alienID))
         {
             
           idExisterar = true;
