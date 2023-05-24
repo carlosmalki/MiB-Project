@@ -196,4 +196,25 @@ public class ValideringsKlass {
 
     return giltigtNr;
 }
+    
+     public static boolean existerarAlienID(String alienID) {
+    boolean idExisterar = false;
+    String query = "SELECT Alien_ID FROM mibdb.alien;";
+    ArrayList<String> allaIDs = new ArrayList<>();
+
+    try {
+        allaIDs = idb.fetchColumn(query);
+        for(String id : allaIDs)
+        {System.out.println(id);}
+        if(allaIDs.contains(alienID))
+        {
+            
+          idExisterar = true;
+        }
+    } catch (InfException e) {
+        
+    }
+
+    return idExisterar;
+}
 }
