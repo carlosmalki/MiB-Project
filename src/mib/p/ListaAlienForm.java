@@ -222,7 +222,9 @@ public class ListaAlienForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
   /**
      * Metod som utifrån texten på fältet sokMetod, kör anting sokRas()-metoden
-     * eller sokPlats()-metoden för att ge relevanta resultat.
+     * eller sokPlats()-metoden för att ge relevanta resultat, efter att 
+     * först ha testat cbValj boxen så att ett aktivt val har gjorts, genom metod
+     * från ValiderinsKlass.
      *
      * @param evt
      */
