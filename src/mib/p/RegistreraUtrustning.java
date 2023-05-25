@@ -4,40 +4,42 @@
  */
 package mib.p;
 
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
- * @author carlo
+ * @author samsung
  */
 public class RegistreraUtrustning extends javax.swing.JPanel {
-    String epost;
-    String isAdmin;
-     private static InfDB idb;
-     
-     
+    private String epost;
+    private String isAdmin;
+    private static InfDB idb;
 
     /**
      * Creates new form RegistreraUtrustning
      */
     public RegistreraUtrustning(String epost, String isAdmin) {
         initComponents();
-        this.epost= epost;
+        this.epost = epost;
         this.isAdmin = isAdmin;
+        fyllTypLista();
+        
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        
     }
 
     /**
@@ -49,18 +51,30 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        blbRegistreraUtrustning = new javax.swing.JLabel();
+        lblRubrik = new javax.swing.JLabel();
+        lblValjTyp = new javax.swing.JLabel();
+        cbUtrustningsTyp = new javax.swing.JComboBox<>();
+        lblValjTyp1 = new javax.swing.JLabel();
+        tfAngivetNamn = new javax.swing.JTextField();
+        btnLaggTill = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
-        btnRegistrera = new javax.swing.JButton();
-        lblUtrustningsID = new javax.swing.JLabel();
-        txtUtrustningsID = new javax.swing.JTextField();
-        lblBenamning = new javax.swing.JLabel();
-        txtBenamning = new javax.swing.JTextField();
 
-        blbRegistreraUtrustning.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        blbRegistreraUtrustning.setText("Registrera Utrustning");
+        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblRubrik.setText("Registrera utrustning");
 
-        btnTillbaka.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblValjTyp.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblValjTyp.setText("Välj typ:");
+
+        lblValjTyp1.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblValjTyp1.setText("Namnge:");
+
+        btnLaggTill.setText("Lägg till");
+        btnLaggTill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillActionPerformed(evt);
+            }
+        });
+
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,105 +82,118 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
             }
         });
 
-        btnRegistrera.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnRegistrera.setText("Registrera");
-        btnRegistrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistreraActionPerformed(evt);
-            }
-        });
-
-        lblUtrustningsID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUtrustningsID.setText("Utrustnings ID:");
-
-        lblBenamning.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblBenamning.setText("Benämning:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(blbRegistreraUtrustning)
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addGap(34, 34, 34))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
+                        .addGap(158, 158, 158)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBenamning)
-                            .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUtrustningsID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUtrustningsID)))
+                            .addComponent(btnTillbaka)
+                            .addComponent(btnLaggTill)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(btnRegistrera)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(114, 114, 114)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(lblValjTyp))
+                            .addComponent(cbUtrustningsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAngivetNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(lblValjTyp1))
+                            .addComponent(lblRubrik))))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(blbRegistreraUtrustning)
-                .addGap(38, 38, 38)
-                .addComponent(lblUtrustningsID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUtrustningsID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblBenamning)
-                .addGap(8, 8, 8)
-                .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(lblRubrik)
+                .addGap(26, 26, 26)
+                .addComponent(lblValjTyp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbUtrustningsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnRegistrera)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addComponent(lblValjTyp1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfAngivetNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnLaggTill)
+                .addGap(18, 18, 18)
                 .addComponent(btnTillbaka)
-                .addContainerGap())
+                .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-        
-    // Denna knapp "Tillbaka" tar användaren tillbaka till "SeDinUtrustningForm" sidan.
+    
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
-                frame.setContentPane(new SeDinUtrustningForm(epost,isAdmin));
+                frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
                 frame.revalidate();
-                frame.setTitle("Din utrustning");
+                frame.setTitle("Startsida: Agent");
                 frame.repaint();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
-        // Tilldelar variabeln benamning texten/värdet som skrivs in i textfältet för benämning.
-        String benamning = txtBenamning.getText();
-        // Tar siffran i textfälet txtUtrustningsID.
-        String utrustningsIDString = txtUtrustningsID.getText();
-        // Omvandlar String versionen av siffran till integer version. 
-        int utrustningsIDInt = Integer.parseInt(utrustningsIDString);
+    private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
         
-        try {
-            // värdena som skrivs in i textfälten registreras i databasen mibdb.utrustning.
-            idb.insert("INSERT INTO mibdb.utrustning (Utrustnings_ID, Benamning) VALUES ("+utrustningsIDInt+", '"+benamning+"')");
-             JOptionPane.showMessageDialog(null, "Din nya utrustning har registrerats!");
-             
-        } catch (InfException ex) {
-            Logger.getLogger(RegistreraUtrustning.class.getName()).log(Level.SEVERE, null, ex);
-             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
+        String utrustningsTyp = cbUtrustningsTyp.getSelectedItem().toString();
+        String benamning = tfAngivetNamn.getText();
+        if (ValideringsKlass.giltigtNamn(benamning)) {
+            try {
+                ArrayList<String> existerandeUtrustningsBenamningar = idb.fetchColumn("select benamning from utrustning");
+                if (!ValideringsKlass.vardeFinns(benamning, existerandeUtrustningsBenamningar)) {
+                    String id = idb.getAutoIncrement("utrustning", "utrustnings_id");
+                    idb.insert("insert into utrustning values (" + id + ", " + "'" + benamning + "')");
+                    kollaTyp(utrustningsTyp, id);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Det finns redan utrustning registrerad med angiven benamning!");
+                }
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel!");
+            }
         }
-        
-    }//GEN-LAST:event_btnRegistreraActionPerformed
+    }//GEN-LAST:event_btnLaggTillActionPerformed
 
+    private void fyllTypLista() {
+        cbUtrustningsTyp.removeAllItems();
+        cbUtrustningsTyp.addItem("Vapen");
+        cbUtrustningsTyp.addItem("Kommunikation");
+        cbUtrustningsTyp.addItem("Teknik");
+    }
+    
+    private void kollaTyp(String utrustningsTyp, String id) {
+        if (utrustningsTyp.equals("Vapen")) {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+                frame.setContentPane(new RegistreraVapen(id, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera vapen");
+                frame.repaint();
+        } else if (utrustningsTyp.equals("Kommunikation")) {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+                frame.setContentPane(new RegistreraKommunikation(id, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera kommunikation");
+                frame.repaint();
+        } else if (utrustningsTyp.equals("Teknik")) {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+                frame.setContentPane(new RegistreraTeknik(id, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera teknik");
+                frame.repaint();
+        }
+        //dispose(); funkar inte ?? kanske inte behövs
+        // - kolla vad som händer när sidan tar dig vidare till nästa steg, stängs detta?
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel blbRegistreraUtrustning;
-    private javax.swing.JButton btnRegistrera;
+    private javax.swing.JButton btnLaggTill;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JLabel lblBenamning;
-    private javax.swing.JLabel lblUtrustningsID;
-    private javax.swing.JTextField txtBenamning;
-    private javax.swing.JTextField txtUtrustningsID;
+    private javax.swing.JComboBox<String> cbUtrustningsTyp;
+    private javax.swing.JLabel lblRubrik;
+    private javax.swing.JLabel lblValjTyp;
+    private javax.swing.JLabel lblValjTyp1;
+    private javax.swing.JTextField tfAngivetNamn;
     // End of variables declaration//GEN-END:variables
 }
