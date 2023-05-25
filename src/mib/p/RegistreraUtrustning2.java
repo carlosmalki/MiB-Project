@@ -65,8 +65,6 @@ public class RegistreraUtrustning2 extends javax.swing.JPanel {
         lblValjTyp.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblValjTyp.setText("Välj typ:");
 
-        cbUtrustningsTyp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lblValjTyp1.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblValjTyp1.setText("Namnge:");
 

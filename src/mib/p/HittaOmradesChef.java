@@ -56,8 +56,6 @@ public class HittaOmradesChef extends javax.swing.JPanel {
 
         lblRubrik.setText("Välj kontor:");
 
-        cbKontor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnVisaOmradesChef.setText("Visa områdeschef");
         btnVisaOmradesChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

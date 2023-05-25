@@ -76,8 +76,6 @@ public class TaBortAlienForm extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.darkGray, null, null));
 
-        cbValjAlien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lblValjAlien.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblValjAlien.setText("Välj alien:");
 

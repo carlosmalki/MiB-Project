@@ -77,8 +77,6 @@ public class HittaAlienPlats extends javax.swing.JPanel {
 
         lblRubrik.setText("Välj plats:");
 
-        cbValjPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnVisaAliens.setText("Visa aliens");
         btnVisaAliens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
