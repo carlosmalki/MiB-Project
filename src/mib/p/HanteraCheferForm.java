@@ -12,7 +12,11 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *HanteraCheferForm är en JPanel-klass där användaren kan
+ * söka fram vilka agenter som är områdes-och kontorschefer
+ * och om de så vill byta ut dessa mot andra agenter,
+ * klassen tar in String epost, och String isAdmin som håller
+ * reda på vilken agent som är inloggad, och om denne är admin.
  * @author ASUS
  */
 public class HanteraCheferForm extends javax.swing.JPanel {

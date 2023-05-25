@@ -12,6 +12,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * OmradesChefInfoForm är en JPanel-klass som visar upp information (namn, telefon,
+ * epost) om chefen över aktuellt område, som valts vid en sökning på områdeschef i klasen
+ * HittaOmradesChef.
  *
  * @author ASUS
  */

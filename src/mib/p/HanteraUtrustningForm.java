@@ -7,7 +7,11 @@ package mib.p;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-/**
+/**HanteraUtrustningForm är en JPanel-klass där användaren får olika
+ * alternativ gällande utrustning, beroende på om man är Admin eller inte
+ * så visas olika alternativ upp,
+ * klassen tar in String epost, och String isAdmin som håller
+ * reda på vilken agent som är inloggad, och om denne är admin.
  *
  * @author ASUS
  */

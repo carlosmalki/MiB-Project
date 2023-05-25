@@ -13,7 +13,13 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *HittaOmradesChef är en JPanel-klass där användaren utifrån valt område (valt i
+ * en combobox)  kan söka upp Områderschefen och se hens namn,
+ * vidare kan man trycka på en Jbutton, som tar användaren vidare 
+ * till en panel med lite mer information om chefen,
+ * klassen tar in String epost, och String isAdmin som håller
+ * reda på vilken agent som är inloggad, och om denne är admin.
+ * 
  * @author samsung
  */
 public class HittaOmradesChef extends javax.swing.JPanel {
@@ -188,7 +194,7 @@ public class HittaOmradesChef extends javax.swing.JPanel {
         cbOmrade.removeAllItems();
         try {
             kontor = idb.fetchColumn("select benamning from omrade");
-            //cbKontor.removeAllItems();
+        
             for (String ettKontor : kontor) {
                 cbOmrade.addItem(ettKontor);
             }

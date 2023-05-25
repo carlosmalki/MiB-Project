@@ -12,6 +12,10 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * RegistreraAlienForm är en JPanel-klass för att nyregistrera aliens i
+ * databasen, Ras, Plats, och Ansvarig Agent väljs genom comboboxar med förvalda
+ * alternativ, överiga uppgifter väljer användaren själv, och dessa valideras
+ * innan alien kan registreras.
  *
  * @author ASUS
  */

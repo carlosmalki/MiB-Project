@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package mib.p;
+
 import java.util.HashMap;
 import javax.swing.JFrame;
 
@@ -12,20 +13,26 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * OmradesChefForm är en JPanel-klass som visar upp information (namn, telefon,
+ * epost) om chefen över aktuellt område, när en alien klickar sig vidare från
+ * sin hemsida för att se info.
  *
  * @author ASUS
  */
 public class OmradesChefForm extends javax.swing.JPanel {
-     private static InfDB idb;
-     private HashMap<String,String> chefInfo;
-     private String omrade;
-     private String epost;
+
+    private static InfDB idb;
+    private HashMap<String, String> chefInfo;
+    private String omrade;
+    private String epost;
+
     /**
      * Creates new form OmradesChefForm
+     *
      * @param chefInfo
      * @param omrade
      */
-    public OmradesChefForm(HashMap<String,String> chefInfo,String omrade,String epost) {
+    public OmradesChefForm(HashMap<String, String> chefInfo, String omrade, String epost) {
         initComponents();
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -153,30 +160,29 @@ public class OmradesChefForm extends javax.swing.JPanel {
  /**
      * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
      * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
-     * sida, epost skickas med som parametrar för att initialiera en
-     * ny "Min Sida", fönster-titeln sätts till "Startida: Alien" och fönstret
-     * "målas om" för att visa "Min Sida"-panelen.
+     * sida, epost skickas med som parametrar för att initialiera en ny "Min
+     * Sida", fönster-titeln sätts till "Startida: Alien" och fönstret "målas
+     * om" för att visa "Min Sida"-panelen.
      *
      * @param evt
      */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(OmradesChefForm.this);
-                frame.setContentPane(new MinSidaAlienForm(epost));
-                frame.revalidate();
-                frame.setTitle("Startsida: Alien");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(OmradesChefForm.this);
+        frame.setContentPane(new MinSidaAlienForm(epost));
+        frame.revalidate();
+        frame.setTitle("Startsida: Alien");
+        frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-/**
- * Metod som sätter textfälten genom att använda sig av nycklarna och värdena
- * i HashMapen chefInfo som skickas med som parameter in i metoden.
- */
-private void setInfo()
-{
-  lblChefRubrik.setText("Områdeschef: "+omrade);
-  txtNamn.setText(chefInfo.get("Namn"));
-  txtTelefon.setText(chefInfo.get("Telefon"));
-  txtEpost.setText(chefInfo.get("Epost"));
-}
+    /**
+     * Metod som sätter textfälten genom att använda sig av nycklarna och
+     * värdena i HashMapen chefInfo som skickas med som parameter in i metoden.
+     */
+    private void setInfo() {
+        lblChefRubrik.setText("Områdeschef: " + omrade);
+        txtNamn.setText(chefInfo.get("Namn"));
+        txtTelefon.setText(chefInfo.get("Telefon"));
+        txtEpost.setText(chefInfo.get("Epost"));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JPanel jPanel1;

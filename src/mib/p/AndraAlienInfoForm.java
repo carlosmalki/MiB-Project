@@ -13,8 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
- *
+ * AndraAlienInfoForm är en JPanel-klass som visar en panel över ett formulär 
+ * för att utifrån Alien ID söka upp information om aliens registrerade i 
+ * databasen, och sedan ändra den informationen som man tycker behöver 
+ * uppdateras,
+ * klassen tar in String epost, och String isAdmin som håller
+ * reda på vilken agent som är inloggad, och om denne är admin.
  * @author ASUS
+ * 
+ * 
  */
 public class AndraAlienInfoForm extends javax.swing.JPanel {
 

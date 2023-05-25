@@ -11,7 +11,11 @@ import oru.inf.InfException;
 import java.util.HashMap;
 
 /**
- *
+ *MinSidaAlienForm är en JPanel-klass som visar hemsidan för en alien
+ * när denne loggar in i systemet, den får info om kontakt-agent,
+ * aktuellt område denne alien tillhör, och namn på områdeschefen,
+ * Alien kan välja att se mer information om chefen, eller ändra sitt lösenord.
+ * 
  * @author ASUS
  */
 public class MinSidaAlienForm extends javax.swing.JPanel {

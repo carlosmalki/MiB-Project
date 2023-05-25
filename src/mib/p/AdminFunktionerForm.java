@@ -7,25 +7,26 @@ package mib.p;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-
-
-
 /**
+ * AdminFunktionerForm är en JPanel-klass för att visa alternativen som en
+ * inloggad admin har, dessa alternativ kan väljas genom JButtons, som tar admin
+ * vidare till vald funktion.
  *
  * @author ASUS
  */
 public class AdminFunktionerForm extends javax.swing.JPanel {
+
     private String epost;
     private String isAdmin;
 
     /**
      * Creates new form AdminFunktionerForm
      */
-    public AdminFunktionerForm(String epost,String isAdmin) {
+    public AdminFunktionerForm(String epost, String isAdmin) {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
-       
+
     }
 
     /**
@@ -141,59 +142,59 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBefordaAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordaAgentActionPerformed
-         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new BefordraAgentForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Befordra Agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+        frame.setContentPane(new BefordraAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Befordra Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnBefordaAgentActionPerformed
 
     private void btnHanteraChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraChefActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new HanteraCheferForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Hantera chefer");
-                frame.repaint();
+        frame.setContentPane(new HanteraCheferForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Hantera chefer");
+        frame.repaint();
     }//GEN-LAST:event_btnHanteraChefActionPerformed
 
     private void btnAndraInfoOmAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraInfoOmAgentActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new AndraInfoOmAgent(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Ändra Information om Agent");
-                frame.repaint();
+        frame.setContentPane(new AndraInfoOmAgent(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Ändra Information om Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnAndraInfoOmAgentActionPerformed
 
     private void btnSokAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokAgentActionPerformed
-         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new AgentSokForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Sök agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+        frame.setContentPane(new AgentSokForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Sök agent");
+        frame.repaint();
     }//GEN-LAST:event_btnSokAgentActionPerformed
 
     private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new RegisteraAgentForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Registrera ny Agent");
-                frame.repaint();
+        frame.setContentPane(new RegisteraAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Registrera ny Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnRegistreraAgentActionPerformed
 
     private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
-         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new TaBortAgentForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Avregistrera Agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+        frame.setContentPane(new TaBortAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Avregistrera Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
 
     private void btnAvRegAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvRegAlienActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
-                frame.setContentPane(new TaBortAlienForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Avregistrera Alien");
-                frame.repaint();
+        frame.setContentPane(new TaBortAlienForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Avregistrera Alien");
+        frame.repaint();
     }//GEN-LAST:event_btnAvRegAlienActionPerformed
 
 

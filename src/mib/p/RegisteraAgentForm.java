@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * RegistreraAgentForm är en JPanel-klass för att registrera nya Agenter i
+ * databasen, anvädaren får välja vissa uppgifter och andra (Namn och epost)
+ * genereras automatiskt.
  *
  * @author ASUS
  */
@@ -461,7 +464,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSkapaNamnActionPerformed
 
     private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
-         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegisteraAgentForm.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegisteraAgentForm.this);
         frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Administratörsfunktioner");

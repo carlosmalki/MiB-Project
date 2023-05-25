@@ -6,7 +6,11 @@ import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-/**
+/**InloggSidanForm är en JPanel-klass där användaren 
+ * loggar in i systemet, epost och lösenord används
+ * vid inloggningen, sidan tar in String AlienOrAgent
+ * utifrån knapptryck på HuvudSidan, för att
+ * hålla reda på om användaren är alien eller agent.
  *
  * @author ASUS
  * 
@@ -258,7 +262,9 @@ public class InloggSidanForm extends javax.swing.JPanel {
                 frame.setTitle("Startsida: Admin");
                 frame.repaint();  
     }//GEN-LAST:event_jButton3ActionPerformed
-  private void setAlienOrAgent()
+  
+  
+    private void setAlienOrAgent()
   {
    lblAlienOrAgent.setText(AlienOrAgent);
    

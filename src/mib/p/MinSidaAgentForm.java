@@ -11,44 +11,45 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * MinSidaAgentForm är en JPanel-klass som visar Agenternas hemsida i systemet,
+ * den sida de kommer till vid inloggning, olika JButtons kan ta användaren till
+ * andra delar av systemet.
  *
  * @author ASUS
  */
 public class MinSidaAgentForm extends javax.swing.JPanel {
+
     private static InfDB idb;
     private final String epost;
     private final String isAdmin;
 
     /**
      * Creates new form MinSidaAgentForm
+     *
      * @param epost
      * @param isAdmin
      */
-    public MinSidaAgentForm(String epost,String isAdmin) {
+    public MinSidaAgentForm(String epost, String isAdmin) {
         initComponents();
-        
-         try {
+
+        try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-         this.epost = epost;
-         this.isAdmin = isAdmin;
-        
-         
-         btnAdminFunktioner.setVisible(false);
-         btnAdminFunktioner.setEnabled(false);
-         if(isAdmin.equals("J"))
-         {
-         btnAdminFunktioner.setVisible(true);
-         btnAdminFunktioner.setEnabled(true);
-         }
-         setValkommen();
-         
-    }
+        this.epost = epost;
+        this.isAdmin = isAdmin;
 
- 
+        btnAdminFunktioner.setVisible(false);
+        btnAdminFunktioner.setEnabled(false);
+        if (isAdmin.equals("J")) {
+            btnAdminFunktioner.setVisible(true);
+            btnAdminFunktioner.setEnabled(true);
+        }
+        setValkommen();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,76 +222,75 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
- private void setValkommen()
-   {
-       try {
-           lblAgentNamn.setText(idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Epost = '"+epost+"'"));
-   }
-       catch(InfException e) {
+ private void setValkommen() {
+        try {
+            lblAgentNamn.setText(idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Epost = '" + epost + "'"));
+        } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
-       }}
+        }
+    }
     private void btnAdminFunktionerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminFunktionerActionPerformed
-          JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new AdminFunktionerForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Administratörsfunktioner");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+        frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Administratörsfunktioner");
+        frame.repaint();
     }//GEN-LAST:event_btnAdminFunktionerActionPerformed
 
     private void btnRegisteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisteraAlienActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new RegisteraAlienForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Registrera ny Alien");
-                frame.repaint();
+        frame.setContentPane(new RegisteraAlienForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Registrera ny Alien");
+        frame.repaint();
     }//GEN-LAST:event_btnRegisteraAlienActionPerformed
 
     private void btnSokFunktionerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokFunktionerActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new SokFunktionerForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Sök ras");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+        frame.setContentPane(new SokFunktionerForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Sök ras");
+        frame.repaint();
     }//GEN-LAST:event_btnSokFunktionerActionPerformed
 
     private void btnAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosenordActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new AndraLosenOrdAgentForm(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Ändra lösenord");
-                frame.repaint();
+        frame.setContentPane(new AndraLosenOrdAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Ändra lösenord");
+        frame.repaint();
     }//GEN-LAST:event_btnAndraLosenordActionPerformed
 
     private void btnAndraAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraAlienInfoActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new AndraAlienInfoForm(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Uppdatera Alien-information.");
-                frame.repaint();
+        frame.setContentPane(new AndraAlienInfoForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Uppdatera Alien-information.");
+        frame.repaint();
     }//GEN-LAST:event_btnAndraAlienInfoActionPerformed
 
     private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new HanteraUtrustningForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Hantera utrustning");
-                frame.repaint();
+        frame.setContentPane(new HanteraUtrustningForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Hantera utrustning");
+        frame.repaint();
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
     private void btnHittaOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHittaOmradesChefActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new HittaOmradesChef(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();
+        frame.setContentPane(new HittaOmradesChef(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnHittaOmradesChefActionPerformed
 
     private void btnToppListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToppListaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new ToppTreKontaktAgentForm(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Topplista: Kontaktagenter");
-                frame.repaint();
+        frame.setContentPane(new ToppTreKontaktAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Topplista: Kontaktagenter");
+        frame.repaint();
     }//GEN-LAST:event_btnToppListaActionPerformed
 
 
