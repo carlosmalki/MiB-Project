@@ -91,7 +91,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         });
 
         btnSokFunktioner.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnSokFunktioner.setText("Sökfunktioner");
+        btnSokFunktioner.setText("Sök funktioner");
         btnSokFunktioner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokFunktionerActionPerformed(evt);
@@ -107,7 +107,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         });
 
         btnAndraAlienInfo.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnAndraAlienInfo.setText("Ändra alieninfo");
+        btnAndraAlienInfo.setText("Ändra alien info");
         btnAndraAlienInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraAlienInfoActionPerformed(evt);
@@ -207,7 +207,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                     .addComponent(btnRegisteraAlien)
                     .addComponent(btnSokFunktioner))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAndraAlienInfo)
                     .addComponent(btnUtrustning))
                 .addGap(18, 18, 18)

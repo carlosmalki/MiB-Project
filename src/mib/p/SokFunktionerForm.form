@@ -37,11 +37,11 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnSokPlats" alignment="0" pref="80" max="32767" attributes="0"/>
+                  <Component id="btnSokPlats" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnSokRas" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSokMetod" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnValjDatumSok" max="32767" attributes="0"/>
                   <Component id="btnIdSok" max="32767" attributes="0"/>
@@ -49,14 +49,17 @@
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="241" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnMinSida" max="32767" attributes="0"/>
-                  <Component id="lblDatumSok" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblFran" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTill" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDatumSok" alignment="1" max="32767" attributes="0"/>
-                  <Component id="txtFranDatum" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtTillDatum" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnMinSida" max="32767" attributes="0"/>
+                      <Component id="lblDatumSok" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFran" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTill" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDatumSok" alignment="1" max="32767" attributes="0"/>
+                      <Component id="txtFranDatum" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtTillDatum" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="lblFormat" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
@@ -66,7 +69,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <Component id="lblSokMetod" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnSokPlats" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -89,17 +92,19 @@
                   <Component id="jScrollPane1" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="lblDatumSok" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="lblFormat" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblFran" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtFranDatum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblTill" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtTillDatum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="btnDatumSok" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnMinSida" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -220,7 +225,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnValjDatumSokActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblSokMetod">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Gothic" size="14" style="1"/>
@@ -271,6 +276,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIdSokActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFormat">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(YYYY-MM-DD)"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

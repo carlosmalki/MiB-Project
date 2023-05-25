@@ -63,7 +63,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
         btnSokPlats = new javax.swing.JButton();
         btnSokRas = new javax.swing.JButton();
         btnValjDatumSok = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblSokMetod = new javax.swing.JLabel();
         txtFranDatum = new javax.swing.JTextField();
         lblDatumSok = new javax.swing.JLabel();
         lblFran = new javax.swing.JLabel();
@@ -71,6 +71,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
         btnDatumSok = new javax.swing.JButton();
         txtTillDatum = new javax.swing.JTextField();
         btnIdSok = new javax.swing.JButton();
+        lblFormat = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -131,8 +132,8 @@ public class SokFunktionerForm extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel2.setText("Sökmetod:");
+        lblSokMetod.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblSokMetod.setText("Sökmetod:");
 
         lblDatumSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblDatumSok.setText("Datumsök:");
@@ -157,6 +158,8 @@ public class SokFunktionerForm extends javax.swing.JPanel {
             }
         });
 
+        lblFormat.setText("(YYYY-MM-DD)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,31 +175,33 @@ public class SokFunktionerForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSokPlats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(btnSokPlats, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSokRas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
+                        .addComponent(lblSokMetod))
                     .addComponent(btnValjDatumSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIdSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMinSida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblDatumSok)
-                    .addComponent(lblFran)
-                    .addComponent(lblTill)
-                    .addComponent(btnDatumSok, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFranDatum)
-                    .addComponent(txtTillDatum))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnMinSida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDatumSok)
+                        .addComponent(lblFran)
+                        .addComponent(lblTill)
+                        .addComponent(btnDatumSok, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFranDatum)
+                        .addComponent(txtTillDatum))
+                    .addComponent(lblFormat))
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(104, 104, 104)
-                .addComponent(jLabel2)
+                .addComponent(lblSokMetod)
                 .addGap(18, 18, 18)
                 .addComponent(btnSokPlats)
                 .addGap(18, 18, 18)
@@ -217,17 +222,19 @@ public class SokFunktionerForm extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDatumSok)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(13, 13, 13)
+                        .addComponent(lblFormat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblFran)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFranDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTill)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTillDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(29, 29, 29)
                         .addComponent(btnDatumSok)
-                        .addGap(40, 40, 40)
+                        .addGap(18, 18, 18)
                         .addComponent(btnMinSida)))
                 .addGap(16, 16, 16))
         );
@@ -459,7 +466,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
         lblDatumSok.setVisible(false);
         txtTillDatum.setVisible(false);
         txtFranDatum.setVisible(false);
-
+        lblFormat.setVisible(false);
     }
 
     /**
@@ -473,6 +480,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
         lblDatumSok.setVisible(true);
         txtTillDatum.setVisible(true);
         txtFranDatum.setVisible(true);
+        lblFormat.setVisible(true);
 
     }
 
@@ -536,11 +544,12 @@ public class SokFunktionerForm extends javax.swing.JPanel {
     private javax.swing.JButton btnValjDatumSok;
     private javax.swing.JComboBox<String> cbValj;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDatumSok;
+    private javax.swing.JLabel lblFormat;
     private javax.swing.JLabel lblFran;
+    private javax.swing.JLabel lblSokMetod;
     private javax.swing.JLabel lblTill;
     private javax.swing.JTextField txtFranDatum;
     private javax.swing.JTextField txtTillDatum;

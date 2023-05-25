@@ -45,6 +45,7 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
         jPasswordFieldUpprepa = new javax.swing.JPasswordField();
         jPasswordFieldNytt = new javax.swing.JPasswordField();
         jPasswordFieldNuvarandeLosenord = new javax.swing.JPasswordField();
+        btnRensa = new javax.swing.JButton();
 
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
@@ -74,6 +75,14 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
         lblUpprepaLosenord.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblUpprepaLosenord.setText("Upprepa Lösenord:");
 
+        btnRensa.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRensa.setText("Rensa");
+        btnRensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRensaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,9 +106,11 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
                             .addComponent(jPasswordFieldUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(136, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(231, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAndra)
-                .addGap(112, 112, 112)
+                .addGap(18, 18, 18)
+                .addComponent(btnRensa)
+                .addGap(76, 76, 76)
                 .addComponent(btnMinSida)
                 .addGap(32, 32, 32))
         );
@@ -120,11 +131,17 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUpprepaLosenord)
                     .addComponent(jPasswordFieldUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMinSida)
-                    .addComponent(btnAndra))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(btnMinSida)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAndra)
+                            .addComponent(btnRensa))
+                        .addGap(34, 34, 34))))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Denna knapp skickar en till MinSidaAgentForm.
@@ -157,11 +174,19 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen.");
     }
     }//GEN-LAST:event_btnAndraActionPerformed
+    // Denna knapp rensar det som står i lösenordfälten och fokuset sätts på nuvarande lösenord fältet.
+    private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
+        jPasswordFieldNuvarandeLosenord.setText("");
+        jPasswordFieldNytt.setText(""); 
+        jPasswordFieldUpprepa.setText(""); 
+        jPasswordFieldNuvarandeLosenord.requestFocus();
+    }//GEN-LAST:event_btnRensaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndra;
     private javax.swing.JButton btnMinSida;
+    private javax.swing.JButton btnRensa;
     private javax.swing.JPasswordField jPasswordFieldNuvarandeLosenord;
     private javax.swing.JPasswordField jPasswordFieldNytt;
     private javax.swing.JPasswordField jPasswordFieldUpprepa;

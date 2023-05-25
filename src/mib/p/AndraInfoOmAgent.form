@@ -133,12 +133,16 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblNyInfo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtAndraNamn" alignment="0" max="32767" attributes="0"/>
                               <Component id="jComboValjAdministrator" alignment="0" pref="144" max="32767" attributes="0"/>
                               <Component id="jComboValjOmrade" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtAndraAnstallningsdatum" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jComboBoxAgentBokstav" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -156,7 +160,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtNamn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblNamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtAndraNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxAgentBokstav" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -260,8 +265,6 @@
             <Property name="text" type="java.lang.String" value="Nuvarande info"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtAndraNamn">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtAndraTelefon">
         </Component>
         <Component class="javax.swing.JTextField" name="txtAdministrator">
@@ -281,8 +284,8 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="V&#xe4;lj Administrat&#xf6;r"/>
-                <StringItem index="1" value="J"/>
-                <StringItem index="2" value="N"/>
+                <StringItem index="1" value="Ja"/>
+                <StringItem index="2" value="Nej"/>
               </StringArray>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -307,6 +310,52 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAndraAnstallningsdatum">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Agent"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxAgentBokstav">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="30">
+                <StringItem index="0" value="V&#xe4;lj Bokstav"/>
+                <StringItem index="1" value="A"/>
+                <StringItem index="2" value="B"/>
+                <StringItem index="3" value="C"/>
+                <StringItem index="4" value="D"/>
+                <StringItem index="5" value="E"/>
+                <StringItem index="6" value="F"/>
+                <StringItem index="7" value="G"/>
+                <StringItem index="8" value="H"/>
+                <StringItem index="9" value="I"/>
+                <StringItem index="10" value="J"/>
+                <StringItem index="11" value="K"/>
+                <StringItem index="12" value="L"/>
+                <StringItem index="13" value="M"/>
+                <StringItem index="14" value="N"/>
+                <StringItem index="15" value="O"/>
+                <StringItem index="16" value="P"/>
+                <StringItem index="17" value="Q"/>
+                <StringItem index="18" value="R"/>
+                <StringItem index="19" value="S"/>
+                <StringItem index="20" value="T"/>
+                <StringItem index="21" value="U"/>
+                <StringItem index="22" value="V"/>
+                <StringItem index="23" value="W"/>
+                <StringItem index="24" value="X"/>
+                <StringItem index="25" value="Y"/>
+                <StringItem index="26" value="Z"/>
+                <StringItem index="27" value="&#xc5;"/>
+                <StringItem index="28" value="&#xc4;"/>
+                <StringItem index="29" value="&#xd6;"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

@@ -51,7 +51,7 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
         btnMinSida = new javax.swing.JButton();
         lblUpprepaLosenord = new javax.swing.JLabel();
         btnAndra = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRensa = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -84,7 +84,13 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("jButton1");
+        btnRensa.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnRensa.setText("Rensa");
+        btnRensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRensaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,21 +111,20 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jPasswordFieldUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblNyttLosenord)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnAndra)
+                                        .addComponent(lblNyttLosenord))
                                     .addGap(18, 18, 18)
-                                    .addComponent(jPasswordFieldNytt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(btnAndra))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jPasswordFieldNytt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnRensa))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(194, 194, 194)
                         .addComponent(lblAndraLosenord)))
                 .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(btnMinSida))
+                .addComponent(btnMinSida)
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
@@ -127,9 +132,7 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblAndraLosenord)
-                .addGap(16, 16, 16)
-                .addComponent(jButton1)
-                .addGap(33, 33, 33)
+                .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNuvarandeLosenord)
                     .addComponent(jPasswordNuvarandeLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,7 +145,9 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
                     .addComponent(jPasswordFieldUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUpprepaLosenord))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(btnAndra)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndra)
+                    .addComponent(btnRensa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMinSida)
                 .addGap(11, 11, 11))
@@ -179,12 +184,19 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen.");
     }
     }//GEN-LAST:event_btnAndraActionPerformed
+    // Denna knapp rensar det som står i lösenordfälten och fokuset sätts på nuvarande lösenord fältet.
+    private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
+        jPasswordNuvarandeLosenord.setText("");
+        jPasswordFieldNytt.setText(""); 
+        jPasswordFieldUpprepa.setText(""); 
+        jPasswordNuvarandeLosenord.requestFocus();
+    }//GEN-LAST:event_btnRensaActionPerformed
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndra;
     private javax.swing.JButton btnMinSida;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRensa;
     private javax.swing.JPasswordField jPasswordFieldNytt;
     private javax.swing.JPasswordField jPasswordFieldUpprepa;
     private javax.swing.JPasswordField jPasswordNuvarandeLosenord;
