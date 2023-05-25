@@ -50,11 +50,12 @@ public class TaBortUtrustning extends javax.swing.JPanel {
         lblRubrik = new javax.swing.JLabel();
         cbValjUtrustning = new javax.swing.JComboBox<>();
         btnTaBort = new javax.swing.JButton();
-        btnTillbaka = new javax.swing.JButton();
+        btnMinSida = new javax.swing.JButton();
 
         lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblRubrik.setText("Ta bort utrustning:");
 
+        btnTaBort.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnTaBort.setText("Ta bort");
         btnTaBort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,10 +63,11 @@ public class TaBortUtrustning extends javax.swing.JPanel {
             }
         });
 
-        btnTillbaka.setText("Tillbaka");
-        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnMinSida.setText("Min sida");
+        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTillbakaActionPerformed(evt);
+                btnMinSidaActionPerformed(evt);
             }
         });
 
@@ -74,31 +76,32 @@ public class TaBortUtrustning extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(186, 186, 186)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblRubrik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbValjUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblRubrik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbValjUtrustning, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnTaBort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTillbaka))))
-                .addContainerGap(138, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnTaBort)))
+                .addContainerGap(231, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMinSida)
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(80, 80, 80)
                 .addComponent(lblRubrik)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbValjUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnTaBort)
-                .addGap(18, 18, 18)
-                .addComponent(btnTillbaka)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(btnMinSida)
+                .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,13 +124,13 @@ public class TaBortUtrustning extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTaBortActionPerformed
 
-    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortUtrustning.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Startsida: Agent");
         frame.repaint();
-    }//GEN-LAST:event_btnTillbakaActionPerformed
+    }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void fyllComboBox() {
         cbValjUtrustning.removeAllItems();
@@ -152,8 +155,8 @@ public class TaBortUtrustning extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnTaBort;
-    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbValjUtrustning;
     private javax.swing.JLabel lblRubrik;
     // End of variables declaration//GEN-END:variables
