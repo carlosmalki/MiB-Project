@@ -55,7 +55,7 @@ public class AgentSokForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtAngeAgentId = new javax.swing.JLabel();
+        lblAngeAgentId = new javax.swing.JLabel();
         txtAgentIdSok = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -78,13 +78,14 @@ public class AgentSokForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnMinSida = new javax.swing.JButton();
         btnAdminSida = new javax.swing.JButton();
+        btnRensa = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
         setName(""); // NOI18N
 
-        txtAngeAgentId.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        txtAngeAgentId.setText("Ange Agent-ID:");
+        lblAngeAgentId.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        lblAngeAgentId.setText("Ange Agent-ID:");
 
         btnSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSok.setText("Sök");
@@ -217,6 +218,14 @@ public class AgentSokForm extends javax.swing.JPanel {
             }
         });
 
+        btnRensa.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnRensa.setText("Rensa");
+        btnRensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRensaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,16 +235,21 @@ public class AgentSokForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblAngeAgentId)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addComponent(btnAdminSida)))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAngeAgentId)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnAdminSida)
-                                    .addComponent(btnSok))))
-                        .addGap(18, 18, 18)
+                                    .addComponent(btnSok)
+                                    .addComponent(btnRensa))
+                                .addGap(39, 39, 39)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 45, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -249,11 +263,13 @@ public class AgentSokForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(txtAngeAgentId)
+                        .addComponent(lblAngeAgentId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtAgentIdSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSok)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnRensa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -274,6 +290,7 @@ public class AgentSokForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        rensaTextFalt();
         String agentIDString = txtAgentIdSok.getText();
 
     try {
@@ -326,6 +343,14 @@ public class AgentSokForm extends javax.swing.JPanel {
         frame.setTitle("Administratörsfunktioner");
         frame.repaint();
     }//GEN-LAST:event_btnAdminSidaActionPerformed
+    /**
+     * Metod kopplad till btnRensa, som kör metoden rensaTextFalt() för att
+     * återställa formuläret.
+     * @param evt 
+     */
+    private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
+        rensaTextFalt();
+    }//GEN-LAST:event_btnRensaActionPerformed
     /**
      * Metod som körs inifrån agentSok()metoden och sätter text på valda
      * textfält utifrån värden i HashMapen agentInfo.
@@ -497,9 +522,27 @@ public class AgentSokForm extends javax.swing.JPanel {
         }
         return omrade;
     }
+    /**
+     * Metod som återställer textfälten inför ny sökning, eller när rensa-knappen 
+     * trycks.
+     */
+    public void rensaTextFalt()
+    {
+    txtAdmin.setText("");
+    txtChefEllerInte.setText("");
+    txtOmrade.setText("");
+    txtRegDatum.setText("");
+    txtTelefon.setText("");
+    txtNamn.setText("");
+    txtLosenOrd.setText("");
+    txtEpost.setText("");
+    
+    
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminSida;
     private javax.swing.JButton btnMinSida;
+    private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnSok;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -510,10 +553,10 @@ public class AgentSokForm extends javax.swing.JPanel {
     private javax.swing.JLabel labRegDatum;
     private javax.swing.JLabel labTelefon;
     private javax.swing.JLabel lblAgentInfo;
+    private javax.swing.JLabel lblAngeAgentId;
     private javax.swing.JLabel lblOmrade;
     private javax.swing.JTextField txtAdmin;
     private javax.swing.JTextField txtAgentIdSok;
-    private javax.swing.JLabel txtAngeAgentId;
     private javax.swing.JTextField txtChefEllerInte;
     private javax.swing.JTextField txtEpost;
     private javax.swing.JTextField txtLosenOrd;
