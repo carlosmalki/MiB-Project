@@ -14,6 +14,7 @@ import oru.inf.InfException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 
 
 /**
@@ -55,7 +56,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
         btnMinSida = new javax.swing.JButton();
         btnHanteraUtrustning = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        lblValjTyp = new javax.swing.JLabel();
+        lblUtrustningstyp = new javax.swing.JLabel();
         cbUtrustningsTyp = new javax.swing.JComboBox<>();
         lblValjTyp1 = new javax.swing.JLabel();
         tfAngivetNamn = new javax.swing.JTextField();
@@ -82,8 +83,10 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), null, null));
 
-        lblValjTyp.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
-        lblValjTyp.setText("Välj typ:");
+        lblUtrustningstyp.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblUtrustningstyp.setText("Utrustningstyp:");
+
+        cbUtrustningsTyp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj typ" }));
 
         lblValjTyp1.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblValjTyp1.setText("Namnge:");
@@ -101,26 +104,28 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(btnLaggTill))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(btnLaggTill))
+                            .addComponent(cbUtrustningsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAngivetNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(lblValjTyp1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblValjTyp))
-                    .addComponent(cbUtrustningsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfAngivetNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(lblValjTyp1)))
+                        .addGap(64, 64, 64)
+                        .addComponent(lblUtrustningstyp)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(lblValjTyp)
+                .addComponent(lblUtrustningstyp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbUtrustningsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -177,10 +182,10 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
-        
+        JComboBox box = cbUtrustningsTyp;
         String utrustningsTyp = cbUtrustningsTyp.getSelectedItem().toString();
         String benamning = tfAngivetNamn.getText();
-        if (ValideringsKlass.giltigtNamn(benamning)) {
+        if (ValideringsKlass.giltigtNamn(benamning) && ValideringsKlass.valideraComboBoxAktivtVal(box)) {
             try {
                 ArrayList<String> existerandeUtrustningsBenamningar = idb.fetchColumn("select benamning from utrustning");
                 if (!ValideringsKlass.vardeFinns(benamning, existerandeUtrustningsBenamningar)) {
@@ -242,7 +247,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbUtrustningsTyp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblRubrik;
-    private javax.swing.JLabel lblValjTyp;
+    private javax.swing.JLabel lblUtrustningstyp;
     private javax.swing.JLabel lblValjTyp1;
     private javax.swing.JTextField tfAngivetNamn;
     // End of variables declaration//GEN-END:variables
