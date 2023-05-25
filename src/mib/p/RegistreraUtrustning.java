@@ -67,6 +67,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
         lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 24)); // NOI18N
         lblRubrik.setText("Registrera utrustning");
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +76,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
             }
         });
 
+        btnHanteraUtrustning.setBackground(new java.awt.Color(242, 242, 242));
         btnHanteraUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnHanteraUtrustning.setText("Utrustning");
         btnHanteraUtrustning.addActionListener(new java.awt.event.ActionListener() {

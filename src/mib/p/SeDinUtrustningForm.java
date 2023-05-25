@@ -103,6 +103,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +247,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jButton1.setBackground(new java.awt.Color(242, 242, 242));
         jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jButton1.setText("Utrustning");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

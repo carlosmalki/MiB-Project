@@ -38,19 +38,24 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBefordaAgent = new javax.swing.JButton();
-        btnHanteraChef = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnAndraInfoOmAgent = new javax.swing.JButton();
-        btnSokAgent = new javax.swing.JButton();
-        btnRegistreraAgent = new javax.swing.JButton();
+        btnHanteraChef = new javax.swing.JButton();
+        btnBefordaAgent = new javax.swing.JButton();
         btnTaBortAgent = new javax.swing.JButton();
+        btnRegistreraAgent = new javax.swing.JButton();
+        btnSokAgent = new javax.swing.JButton();
         btnAvRegAlien = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        btnBefordaAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnBefordaAgent.setText("Befordra Agent");
-        btnBefordaAgent.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+
+        btnAndraInfoOmAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAndraInfoOmAgent.setText("Ändra agentinfo");
+        btnAndraInfoOmAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBefordaAgentActionPerformed(evt);
+                btnAndraInfoOmAgentActionPerformed(evt);
             }
         });
 
@@ -62,19 +67,19 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
             }
         });
 
-        btnAndraInfoOmAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnAndraInfoOmAgent.setText("Ändra info om Agent");
-        btnAndraInfoOmAgent.addActionListener(new java.awt.event.ActionListener() {
+        btnBefordaAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnBefordaAgent.setText("Befordra Agent");
+        btnBefordaAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAndraInfoOmAgentActionPerformed(evt);
+                btnBefordaAgentActionPerformed(evt);
             }
         });
 
-        btnSokAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnSokAgent.setText("Sök agent");
-        btnSokAgent.addActionListener(new java.awt.event.ActionListener() {
+        btnTaBortAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnTaBortAgent.setText("Avregistrera Agent");
+        btnTaBortAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSokAgentActionPerformed(evt);
+                btnTaBortAgentActionPerformed(evt);
             }
         });
 
@@ -86,11 +91,11 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
             }
         });
 
-        btnTaBortAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnTaBortAgent.setText("Ta bort agent");
-        btnTaBortAgent.addActionListener(new java.awt.event.ActionListener() {
+        btnSokAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnSokAgent.setText("Sök agent");
+        btnSokAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBortAgentActionPerformed(evt);
+                btnSokAgentActionPerformed(evt);
             }
         });
 
@@ -102,42 +107,86 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAvRegAlien)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSokAgent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(btnAndraInfoOmAgent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHanteraChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnBefordaAgent, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                .addComponent(btnRegistreraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                            .addComponent(btnTaBortAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHanteraChef)
+                    .addComponent(btnRegistreraAgent))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndraInfoOmAgent)
+                    .addComponent(btnBefordaAgent))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSokAgent)
+                    .addComponent(btnTaBortAgent))
+                .addGap(26, 26, 26)
+                .addComponent(btnAvRegAlien)
+                .addGap(28, 28, 28))
+        );
+
+        jButton1.setBackground(new java.awt.Color(242, 242, 242));
+        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jButton1.setText("Min sida");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
+        jLabel1.setText("Admin-funktioner");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnHanteraChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBefordaAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAndraInfoOmAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSokAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegistreraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAvRegAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTaBortAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel1)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBefordaAgent)
-                    .addComponent(btnTaBortAgent))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHanteraChef)
-                    .addComponent(btnAvRegAlien))
-                .addGap(30, 30, 30)
-                .addComponent(btnAndraInfoOmAgent)
-                .addGap(29, 29, 29)
-                .addComponent(btnSokAgent)
-                .addGap(31, 31, 31)
-                .addComponent(btnRegistreraAgent)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,6 +246,14 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnAvRegAlienActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfoOmAgent;
@@ -206,5 +263,8 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
     private javax.swing.JButton btnRegistreraAgent;
     private javax.swing.JButton btnSokAgent;
     private javax.swing.JButton btnTaBortAgent;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

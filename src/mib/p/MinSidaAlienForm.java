@@ -21,6 +21,7 @@ import java.util.HashMap;
 public class MinSidaAlienForm extends javax.swing.JPanel {
     String epost;
     String omradet;
+    private boolean tryckNrTva;
     
     private static InfDB idb;
     
@@ -32,6 +33,7 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
     public MinSidaAlienForm(String epost) {
         initComponents();
         this.epost = epost;
+        tryckNrTva = false;
        
         
         try {
@@ -66,6 +68,7 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
         lblOmrade = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblAnsAgent = new javax.swing.JLabel();
+        btnLoggaUt = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -73,6 +76,7 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
         lblMinSida.setFont(new java.awt.Font("MS Gothic", 1, 48)); // NOI18N
         lblMinSida.setText("Min sida");
 
+        btnAndraLosenord.setBackground(new java.awt.Color(242, 242, 242));
         btnAndraLosenord.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         btnAndraLosenord.setText("Ändra lösenord");
         btnAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -162,47 +166,61 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
+        btnLoggaUt.setBackground(new java.awt.Color(242, 242, 242));
+        btnLoggaUt.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnLoggaUt.setText("Logga ut");
+        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoggaUtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAndraLosenord))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(176, 176, 176)
-                                .addComponent(lblMinSida))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(103, 103, 103)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblValkommenNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addGap(0, 84, Short.MAX_VALUE)))
+                        .addGap(103, 103, 103)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 93, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btnLoggaUt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAndraLosenord)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(lblMinSida)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblValkommenNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(lblMinSida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblValkommenNamn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAndraLosenord)
-                .addGap(6, 6, 6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndraLosenord)
+                    .addComponent(btnLoggaUt))
+                .addGap(5, 5, 5))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,6 +250,25 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
     
 }
     }//GEN-LAST:event_btnChefKontaktActionPerformed
+
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+       if(tryckNrTva)
+       {
+           JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
+       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
+        frame.setContentPane(new InloggSidanForm("Alien"));
+        frame.revalidate();
+        frame.setTitle("Välkommen till MiB");
+        frame.repaint();
+       
+       }
+       else
+       {
+       JOptionPane.showMessageDialog(null, "Är du säker på att du vill logga ut? Klicka i såfall 'Logga ut' igen.");
+       tryckNrTva = true;
+       }
+        
+    }//GEN-LAST:event_btnLoggaUtActionPerformed
    private void setValkommen()
    {
        try {
@@ -280,6 +317,7 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraLosenord;
     private javax.swing.JButton btnChefKontakt;
+    private javax.swing.JButton btnLoggaUt;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

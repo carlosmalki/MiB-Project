@@ -22,7 +22,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
     private static InfDB idb;
     private final String epost;
     private final String isAdmin;
-
+    public boolean tryckNrTva;
     /**
      * Creates new form MinSidaAgentForm
      *
@@ -40,6 +40,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         }
         this.epost = epost;
         this.isAdmin = isAdmin;
+        tryckNrTva = false;
 
         btnAdminFunktioner.setVisible(false);
         btnAdminFunktioner.setEnabled(false);
@@ -71,12 +72,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         lblAgentNamn = new javax.swing.JLabel();
         lblValkommen = new javax.swing.JLabel();
         btnToppLista = new javax.swing.JButton();
+        btnLoggaUt = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
 
+        btnAdminFunktioner.setBackground(new java.awt.Color(242, 242, 242));
         btnAdminFunktioner.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnAdminFunktioner.setText("Admin-funktioner");
+        btnAdminFunktioner.setText("Admin-sida");
         btnAdminFunktioner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminFunktionerActionPerformed(evt);
@@ -84,7 +87,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         });
 
         btnRegisteraAlien.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnRegisteraAlien.setText("Registrera Alien");
+        btnRegisteraAlien.setText("Registrera alien");
         btnRegisteraAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisteraAlienActionPerformed(evt);
@@ -92,13 +95,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         });
 
         btnSokFunktioner.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnSokFunktioner.setText("Sök funktioner");
+        btnSokFunktioner.setText("Sökfunktioner");
         btnSokFunktioner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokFunktionerActionPerformed(evt);
             }
         });
 
+        btnAndraLosenord.setBackground(new java.awt.Color(242, 242, 242));
         btnAndraLosenord.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAndraLosenord.setText("Ändra Lösenord");
         btnAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +112,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         });
 
         btnAndraAlienInfo.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnAndraAlienInfo.setText("Ändra alien info");
+        btnAndraAlienInfo.setText("Ändra alieninfo");
         btnAndraAlienInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraAlienInfoActionPerformed(evt);
@@ -141,16 +145,16 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(77, 77, 77)
                 .addComponent(lblAgentNamn)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(15, 15, 15)
                 .addComponent(lblAgentNamn)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         lblValkommen.setFont(new java.awt.Font("MS Gothic", 1, 24)); // NOI18N
@@ -164,37 +168,48 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
             }
         });
 
+        btnLoggaUt.setBackground(new java.awt.Color(242, 242, 242));
+        btnLoggaUt.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnLoggaUt.setText("Logga ut");
+        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoggaUtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(btnAndraLosenord)
+                .addGap(26, 26, 26)
+                .addComponent(btnLoggaUt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAndraLosenord)
+                .addGap(98, 98, 98)
                 .addComponent(btnAdminFunktioner)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(lblValkommen)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnToppLista, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAndraAlienInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSokFunktioner, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, Short.MAX_VALUE)
+                .addGap(34, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegisteraAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUtrustning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHittaOmradesChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(lblValkommen))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +218,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addComponent(lblValkommen)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegisteraAlien)
                     .addComponent(btnSokFunktioner))
@@ -215,11 +230,12 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHittaOmradesChef)
                     .addComponent(btnToppLista))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdminFunktioner)
-                    .addComponent(btnAndraLosenord))
-                .addGap(17, 17, 17))
+                    .addComponent(btnAndraLosenord)
+                    .addComponent(btnLoggaUt))
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
  private void setValkommen() {
@@ -293,12 +309,31 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnToppListaActionPerformed
 
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+         if(tryckNrTva)
+       {
+           JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
+       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+        frame.setContentPane(new InloggSidanForm("Agent"));
+        frame.revalidate();
+        frame.setTitle("Välkommen till MiB");
+        frame.repaint();
+       
+       }
+       else
+       {
+       JOptionPane.showMessageDialog(null, "Är du säker på att du vill logga ut? Klicka i såfall 'Logga ut' igen.");
+       tryckNrTva = true;
+       }
+    }//GEN-LAST:event_btnLoggaUtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminFunktioner;
     private javax.swing.JButton btnAndraAlienInfo;
     private javax.swing.JButton btnAndraLosenord;
     private javax.swing.JButton btnHittaOmradesChef;
+    private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnRegisteraAlien;
     private javax.swing.JButton btnSokFunktioner;
     private javax.swing.JButton btnToppLista;
