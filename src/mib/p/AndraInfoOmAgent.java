@@ -9,8 +9,8 @@ import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-
 public class AndraInfoOmAgent extends javax.swing.JPanel {
+
     private static InfDB idb;
     private String epost;
     private String isAdmin;
@@ -29,7 +29,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        
+
     }
 
     /**
@@ -279,60 +279,56 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    // Sök knappen
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+
+        // Tar agentID från textfältet.
+        String agentIDString = txtAgentID.getText();
+
+        // Om agentID fältet är tom.
+        if (agentIDString.equals("")) {
+            JOptionPane.showMessageDialog(null, "Vänligen ange agent ID!");
+            return;
+        }
+
+        // Omvandlar inmatningen av agent id till int version från String.
+        int agentIDInt = Integer.parseInt(agentIDString);
         
         try {
-            // Tar agentID från textfältet.
-            String agentIDString = txtAgentID.getText();
-            
-            // Om agentID fältet är tom.
-            if(agentIDString.equals("")) {
-                JOptionPane.showMessageDialog(null, "Vänligen ange agent ID!");
-                return;
-            }
-            
-            // Omvandlar inmatningen av agent id till int version från String.
-            int agentIDInt = Integer.parseInt(agentIDString);
-            
-          
+
             // Nuvarande namn
-            String namn = idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
+            String namn = idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Agent_ID = " + agentIDInt + ";");
             txtNamn.setText(namn);
-            
+
             // Nuvarande anställningsdatum
-            String anstallningsdatum = idb.fetchSingle("SELECT Anstallningsdatum FROM mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
+            String anstallningsdatum = idb.fetchSingle("SELECT Anstallningsdatum FROM mibdb.agent WHERE Agent_ID = " + agentIDInt + ";");
             txtAnstallningsdatum.setText(anstallningsdatum);
-            
+
             // Nuvarande telefon 
-            String telefon = idb.fetchSingle("SELECT Telefon FROM mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
+            String telefon = idb.fetchSingle("SELECT Telefon FROM mibdb.agent WHERE Agent_ID = " + agentIDInt + ";");
             txtTelefon.setText(telefon);
-            
+
             // Nuvarande administratör 
-            String administrator = idb.fetchSingle("SELECT Administrator FROM mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
+            String administrator = idb.fetchSingle("SELECT Administrator FROM mibdb.agent WHERE Agent_ID = " + agentIDInt + ";");
             txtAdministrator.setText(administrator);
-            
+
             // Nuvarande Område 
-            String omradeString = idb.fetchSingle("SELECT Omrade FROM mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
+            String omradeString = idb.fetchSingle("SELECT Omrade FROM mibdb.agent WHERE Agent_ID = " + agentIDInt + ";");
             // Omvandlade område id till int från String.
             int omradeInt = Integer.parseInt(omradeString);
-            txtOmrade.setText(idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID ="+omradeInt+";"));
-            
+            txtOmrade.setText(idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID =" + omradeInt + ";"));
+
             // Nuvarande lösenord
-            String losenord = idb.fetchSingle("SELECT Losenord from mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
+            String losenord = idb.fetchSingle("SELECT Losenord from mibdb.agent WHERE Agent_ID = " + agentIDInt + ";");
             txtLosenOrd.setText(losenord);
-        
-        
-          // Fånga fel med catch clause.
+
+            // Fånga fel med catch clause.
         } catch (InfException ex) {
             Logger.getLogger(AndraInfoOmAgent.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
         }
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnSokActionPerformed
     // Denna knapp rensar allt som finns i textfälten 
     private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
@@ -351,106 +347,106 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         jComboBoxAgentBokstav.setSelectedIndex(0);
         jComboValjAdministrator.setSelectedIndex(0);
         jComboValjOmrade.setSelectedIndex(0);
-        
-        
+
+
     }//GEN-LAST:event_btnRensaActionPerformed
     // Denna knapp uppdaterar infon för agenten.
     private void btnUppdaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdaterActionPerformed
-        
-        // Omvandlar String versionen av agent id till int typ.
+
         String agentidString = txtAgentID.getText();
+        
+        // Om agentID fältet är tom.
+        if (agentidString.equals("")) {
+            JOptionPane.showMessageDialog(null, "Vänligen ange agent ID!");
+            return;
+        }
+        // Omvandlar String versionen av agent id till int typ
         int agentidInt = Integer.parseInt(agentidString);
-        
+
         // Nya info:
-        
         String agentbokstav = (String) jComboBoxAgentBokstav.getSelectedItem();
         // Om användaren inte väljer agent bokstav.
-        if(agentbokstav.equals("Välj Bokstav")) {
+        if (agentbokstav.equals("Välj Bokstav")) {
             JOptionPane.showMessageDialog(null, "Vänligen välj agent bokstav!");
             return;
         }
 
         String nyanstallningsdatum = txtAndraAnstallningsdatum.getText();
         // Om datum fältet är tom.
-        if(nyanstallningsdatum.equals("")) {
+        if (nyanstallningsdatum.equals("")) {
             JOptionPane.showMessageDialog(null, "Ange datum med rätt format (YYYY-MM-DD)!");
-                return;
+            return;
         }
- 
+
         String nytelefon = txtAndraTelefon.getText();
         // Om telefonnummer fältet är tom
-        if(nytelefon.equals("")) {
+        if (nytelefon.equals("")) {
             JOptionPane.showMessageDialog(null, "Ange ett telefonnummer!");
-                return;
+            return;
         }
         // Om telefonnummret är giltig. Den får inte innehålla bokstäver.
         for (int i = 0; i < nytelefon.length(); i++) {
             if (Character.isLetter(nytelefon.charAt(i))) {
                 JOptionPane.showMessageDialog(null, "Ange ett giltigt telefonnummer!");
                 return;
-            }   
+            }
         }
-        
+
         // Telefon nummret får inte börja och sluta med bindestreck.
-        if(nytelefon.charAt(0) == ('-') || nytelefon.charAt(nytelefon.length() -1) == ('-')) {
+        if (nytelefon.charAt(0) == ('-') || nytelefon.charAt(nytelefon.length() - 1) == ('-')) {
             JOptionPane.showMessageDialog(null, "Ange ett giltigt telefonnummer!");
-            return;   
-        }
-        else if(nytelefon.charAt(0) == ('-') && nytelefon.charAt(-1) == ('-')) {
+            return;
+        } else if (nytelefon.charAt(0) == ('-') && nytelefon.charAt(-1) == ('-')) {
             JOptionPane.showMessageDialog(null, "Ange ett giltigt telefonnummer!");
-            return; 
-        }
-        
-        String administrator = (String) jComboValjAdministrator.getSelectedItem();
-        // Omvandlar det som väljs från jComboValjAdministrator till J eller N bokstaver, för att kunna supporta databasen.
-        if(administrator.equals("Ja")) {
-            administrator = "J";
-        }
-        else if(administrator.equals("Nej")) {
-            administrator = "N";
-        }
-        // Om användaren inte väljer administratör.
-        else if(administrator.equals("Välj Administratör")) {
-            JOptionPane.showMessageDialog(null, "Vänligen välj administratör!");
             return;
         }
-            
-        else {
+
+        String administrator = (String) jComboValjAdministrator.getSelectedItem();
+        // Omvandlar det som väljs från jComboValjAdministrator till J eller N bokstaver, för att kunna supporta databasen.
+        if (administrator.equals("Ja")) {
+            administrator = "J";
+        } else if (administrator.equals("Nej")) {
+            administrator = "N";
+        } // Om användaren inte väljer administratör.
+        else if (administrator.equals("Välj Administratör")) {
+            JOptionPane.showMessageDialog(null, "Vänligen välj administratör!");
+            return;
+        } else {
             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
         }
-        
+
         String nyomrade = (String) jComboValjOmrade.getSelectedItem();
         // Om användaren inte väljer område.
-        if(nyomrade.equals("Välj Område")) {
+        if (nyomrade.equals("Välj Område")) {
             JOptionPane.showMessageDialog(null, "Vänligen välj område!");
             return;
         }
-        
+
         // Om lösenord fältet är tom.
         String nylosenord = txtAndraLosenOrd.getText();
-        if(nylosenord.equals("")) {
+        if (nylosenord.equals("")) {
             JOptionPane.showMessageDialog(null, "Vänligen ange ett lösenord!");
             return;
         }
         try {
             // Här tas och omvandlas område id till int typ beroende på det som väljs i combobox.
-            String omradeidString = idb.fetchSingle("SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning ='"+nyomrade+"';");
+            String omradeidString = idb.fetchSingle("SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning ='" + nyomrade + "';");
             int omradeidInt = Integer.parseInt(omradeidString);
-            
+
             // Uppdatera infon för agenten.
-            idb.update("UPDATE mibdb.agent SET Namn ='Agent "+agentbokstav+"', Telefon='"+nytelefon+"', Anstallningsdatum ='"+nyanstallningsdatum+"', Administrator ='"+administrator+"', Losenord='"+nylosenord+"', Omrade="+omradeidInt+" WHERE Agent_ID = "+agentidInt+";");
+            idb.update("UPDATE mibdb.agent SET Namn ='Agent " + agentbokstav + "', Telefon='" + nytelefon + "', Anstallningsdatum ='" + nyanstallningsdatum + "', Administrator ='" + administrator + "', Losenord='" + nylosenord + "', Omrade=" + omradeidInt + " WHERE Agent_ID = " + agentidInt + ";");
             JOptionPane.showMessageDialog(null, "Informationen ändrades!");
-            
-          // Fånga fel med catch clause. 
+
+            // Fånga fel med catch clause. 
         } catch (InfException ex) {
             Logger.getLogger(AndraInfoOmAgent.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Ange rätt datum format (YYYY-MM-DD)!");
         }
-               
+
     }//GEN-LAST:event_btnUppdaterActionPerformed
     // Denna knapp skickar en till AdminSidan. "AdminFunktionerForm".
     private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
-    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraInfoOmAgent.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraInfoOmAgent.this);
         frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Administratörsfunktioner");
