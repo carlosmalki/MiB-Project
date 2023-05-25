@@ -304,7 +304,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             txtLosenOrd.setText(losenord);
         
         
-        
+          // Fånga felet med catch clause.
         } catch (InfException ex) {
             Logger.getLogger(AndraInfoOmAgent.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
@@ -340,7 +340,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         String nyomrade = (String) jComboValjOmrade.getSelectedItem();
         String nylosenord = txtAndraLosenOrd.getText();
         try {
-            // Här tas och omvandlas omrade id till int typ beroende av det som väljs i combobox.
+            // Här tas och omvandlas område id till int typ beroende på det som väljs i combobox.
             String omradeidString = idb.fetchSingle("SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning ='"+nyomrade+"';");
             int omradeidInt = Integer.parseInt(omradeidString);
             
@@ -348,6 +348,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             idb.update("UPDATE mibdb.agent SET Namn ='"+nynamn+"', Telefon='"+nytelefon+"', Anstallningsdatum ='"+nyanstallningsdatum+"', Administrator ='"+nyadministrator+"', Losenord='"+nylosenord+"', Omrade="+omradeidInt+" WHERE Agent_ID = "+agentidInt+";");
             JOptionPane.showMessageDialog(null, "Informationen ändrades!");
             
+          // Fånga felet med catch clause. 
         } catch (InfException ex) {
             Logger.getLogger(AndraInfoOmAgent.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");

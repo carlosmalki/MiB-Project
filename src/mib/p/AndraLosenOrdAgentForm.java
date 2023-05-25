@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package mib.p;
 
 import javax.swing.JFrame;
@@ -10,10 +6,6 @@ import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-/**
- *
- * @author carlo
- */
 public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
     String epost;
     String isAdmin;
@@ -135,7 +127,7 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    // Denna knapp skickar en till MInSidaAgentForm.
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraLosenOrdAgentForm.this);
                 frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
