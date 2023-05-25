@@ -147,18 +147,17 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtAndraTelefon)
                     .addComponent(txtAndraLosenOrd)
-                    .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
-                            .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblNyInfo)
-                                .addComponent(jComboValjAdministrator, 0, 144, Short.MAX_VALUE)
-                                .addComponent(jComboValjOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtAndraAnstallningsdatum))
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jComboBoxAgentBokstav, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
+                        .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNyInfo)
+                            .addComponent(jComboValjAdministrator, 0, 144, Short.MAX_VALUE)
+                            .addComponent(jComboValjOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtAndraAnstallningsdatum))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxAgentBokstav, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPaneInfoAgentLayout.setVerticalGroup(
@@ -208,7 +207,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             }
         });
 
-        lblAngeAgentID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAngeAgentID.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblAngeAgentID.setText("Ange Agent ID:");
 
         btnSok.setText("Sök");
@@ -254,7 +253,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addComponent(btnAdminSida)
                 .addGap(59, 59, 59)
                 .addComponent(btnUppdater)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(btnRensa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMinSida)
