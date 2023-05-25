@@ -5,13 +5,11 @@
 package mib.p;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -522,6 +520,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
             // Datum formatet som måste följas yyyy-MM-dd.
             String datePattern = "\\d{4}-\\d{2}-\\d{2}";
             
+            // Om inmatning av datumnet machar formatet körs if statsen.
             if (Datum1.matches(datePattern)&& Datum2.matches(datePattern)) {
 
                 // En ny table skapas.

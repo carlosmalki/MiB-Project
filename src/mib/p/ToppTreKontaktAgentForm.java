@@ -15,7 +15,10 @@ import java.util.Map;
 import java.util.List;
 import java.util.Comparator;
 
-/**
+/**ToppTreKonTaktAgentForm är en JPanel-klass där man
+ * kan söka fram info om vilka tre agenter som har flest kontakt-aliens i databasen,
+ * Område väljs genom ComboBox och de agenter med flest kontaktaliens i valt
+ * område visas i textfält.
  *
  * @author samsung
  */
@@ -48,7 +51,12 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         jLabel1.setVisible(false);
 
     }
-
+   /**
+    * Metod för att fylla upp ComboBoxen med områdesnamnet, genom att
+    * först, via InfDB-metoden fetchColumn skaa en arraylist över områdes-
+    * namn och sedan loopa genom denna och lägga till varje objekt
+    * i comboboxen.
+    */
     private void fyllComboBox() {
         ArrayList<String> omraden;
         try {
@@ -215,7 +223,12 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnTillbakaActionPerformed
-
+  /**
+   * Metod kopplad till btnVisaTopp3,som först tömmer textfälten
+   * och sedan utifrån valt område kör skapaToppListaOmrade()-metoden
+   * med områdersnamnet som ingående parameter.
+   * @param evt 
+   */
     private void btnVisaTopp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaTopp3ActionPerformed
         tomTextFalt();
         if (cbValjOmrade.getSelectedItem().toString().equals("Svealand")) {
@@ -233,31 +246,49 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnVisaTopp3ActionPerformed
-
+    /**
+     * Metod för att räkna ut vilka tre agenter som har flest kontaktaliens i
+     * valt område.
+     * Kommentar: denna metodsammanfattning blev väldigt lång, så vi
+     * tog det som ett tecken på att detta var en del av koden
+     * där kommentarer i kodblocket behövdes.
+     * @param omrade
+     */
     public void skapaToppListaOmrade(String omrade) {
-       jLabel1.setText("Agenter med flest kontaktaliens i "+omrade);
-       jLabel1.setVisible(true);
+        jLabel1.setText("Agenter med flest kontaktaliens i " + omrade);
+        jLabel1.setVisible(true);
         try {
+
             String query = "SELECT Ansvarig_Agent FROM mibdb.alien WHERE Plats IN "
                     + "(SELECT mibdb.plats.Plats_ID FROM mibdb.plats WHERE Finns_I IN "
                     + "(SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "'));";
             agentIDs = idb.fetchColumn(query);
 
-            Map<String, Integer> frekvenser = new HashMap<>();
+            // Skapar en hashmap för att hålla koll på frekvensen av varje Agent_ID i agentIDs-ArrayListan
+            HashMap<String, Integer> frekvenser = new HashMap<>();
             for (String id : agentIDs) {
+                // Ökar värdet för det akutella ID:t eller lägger till det med antal 1 om detinte finns än i HashMapen
                 frekvenser.put(id, frekvenser.getOrDefault(id, 0) + 1);
             }
 
             List<Map.Entry<String, Integer>> sorteradLista = new ArrayList<>(frekvenser.entrySet());
             sorteradLista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+            //Skapar en lista i fallande ordning (reverseOrder) för att få det högsta värdet först, baserat
+            // på värdet (antalet förekomster) till varje nyckel(Agent_ID) i HashMapen
 
             if (sorteradLista.size() < 3) {
-
+                // Finns det inte tillräckligt med olika Agent_IDs i listan för en topp tre så meddelas detta
+                //och skapaToppTvaListaOmrade() körs istället för att skapa en topp två-lista.
                 JOptionPane.showMessageDialog(null, "Det finns inte tillräckligt med ansvariga agenter i " + omrade + " för att skapa en topp 3. Dessa agenter är topp 2.");
-                skapaToppTvaListaOmrade(agentIDs,omrade);
+                skapaToppTvaListaOmrade(agentIDs, omrade);
                 return;
             }
 
+            // Här Skapas en lista med de tre nycklar (Agent_IDs) som
+            // har högst värde (antal förekomster) i HashMapen
+            // För varje värde läggs dess nyckel till i listan
+            // (entry.getKey()) och när positioner har fyllts
+            // på i listan slutar loopen.
             List<String> toppTreVärden = new ArrayList<>();
             int räknare = 0;
             for (Map.Entry<String, Integer> entry : sorteradLista) {
@@ -268,15 +299,25 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
                 }
             }
 
+            
             topp1 = toppTreVärden.get(0);
             topp2 = toppTreVärden.get(1);
             topp3 = toppTreVärden.get(2);
+
+            
             setToppListeFalt(topp1, topp2, topp3);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Medtod som utifrån en agents ID hämtar hem dess namn med hjälp av
+     * InfDB-metoden fetchSingle och ger namnet som return.
+     *
+     * @param agentIDString
+     * @return
+     */
     public String getAgentNamn(String agentIDString) {
         String agentNamn = "";
         try {
@@ -289,6 +330,15 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         return agentNamn;
     }
 
+    /**
+     * Metod som sätter texten i topplistans textfält, med de agenter som i
+     * metoderna skapaToppListaOmrade() eller skapaToppTvaListaOmrade() räknats
+     * fram till att ha mest kontaktaliens.
+     *
+     * @param topp1
+     * @param topp2
+     * @param topp3
+     */
     public void setToppListeFalt(String topp1, String topp2, String topp3) {
         txtTopp1.setText(getAgentNamn(topp1));
         txtTopp2.setText(getAgentNamn(topp2));
@@ -296,6 +346,15 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som om, det inte finns tillräckligt med agenter för en topp3, körs
+     * för att skapa en topp två, den fungerar på samma sätt som
+     * skapaToppListaOmrade och tar in den skapade Agent_ID-listan som parameter
+     * tillsammans med området.
+     *
+     * @param agentIDs
+     * @param omrade
+     */
     public void skapaToppTvaListaOmrade(List<String> agentIDs, String omrade) {
 
         Map<String, Integer> frekvenser = new HashMap<>();
@@ -328,10 +387,11 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         topp3 = "";
         setToppListeFalt(topp1, topp2, topp3);
 
-        
-
     }
 
+    /**
+     * Metod som som sätter textfälten i topp3-listan till "" (tomt).
+     */
     public void tomTextFalt() {
         txtTopp1.setText("");
         txtTopp2.setText("");
