@@ -346,7 +346,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
     // Denna knapp skickar användaren till RegistreraUtrustning sidan.
     private void btnRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraUtrustningActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SeDinUtrustningForm.this);
-        frame.setContentPane(new RegistreraUtrustning2(epost, isAdmin));
+        frame.setContentPane(new RegistreraUtrustning(epost, isAdmin));
         frame.revalidate();
         frame.setTitle(" Registrera Utrustning");
         frame.repaint();

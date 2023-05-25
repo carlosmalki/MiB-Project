@@ -25,6 +25,12 @@ public class RegistreraVapen extends javax.swing.JPanel {
      */
     public RegistreraVapen(String id, String epost, String isAdmin) {
         initComponents();
+        try {
+            idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+        }
         this.id = id;
         this.epost = epost;
         this.isAdmin = isAdmin;
