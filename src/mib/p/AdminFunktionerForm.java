@@ -43,6 +43,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
         btnSokAgent = new javax.swing.JButton();
         btnRegistreraAgent = new javax.swing.JButton();
         btnTaBortAgent = new javax.swing.JButton();
+        btnAvRegAlien = new javax.swing.JButton();
 
         btnBefordaAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnBefordaAgent.setText("Befordra Agent");
@@ -92,6 +93,14 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
             }
         });
 
+        btnAvRegAlien.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAvRegAlien.setText("Avregistrera Alien");
+        btnAvRegAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvRegAlienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,8 +114,10 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                     .addComponent(btnSokAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRegistreraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(48, 48, 48)
-                .addComponent(btnTaBortAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAvRegAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTaBortAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,15 +126,17 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBefordaAgent)
                     .addComponent(btnTaBortAgent))
-                .addGap(37, 37, 37)
-                .addComponent(btnHanteraChef)
-                .addGap(31, 31, 31)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHanteraChef)
+                    .addComponent(btnAvRegAlien))
+                .addGap(30, 30, 30)
                 .addComponent(btnAndraInfoOmAgent)
                 .addGap(29, 29, 29)
                 .addComponent(btnSokAgent)
                 .addGap(31, 31, 31)
                 .addComponent(btnRegistreraAgent)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,13 +184,22 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
          JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
                 frame.setContentPane(new TaBortAgentForm(epost,isAdmin));
                 frame.revalidate();
-                frame.setTitle("Ta bort agent");
+                frame.setTitle("Avregistrera Agent");
                 frame.repaint();
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
+
+    private void btnAvRegAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvRegAlienActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
+                frame.setContentPane(new TaBortAlienForm(epost,isAdmin));
+                frame.revalidate();
+                frame.setTitle("Avregistrera Alien");
+                frame.repaint();
+    }//GEN-LAST:event_btnAvRegAlienActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraInfoOmAgent;
+    private javax.swing.JButton btnAvRegAlien;
     private javax.swing.JButton btnBefordaAgent;
     private javax.swing.JButton btnHanteraChef;
     private javax.swing.JButton btnRegistreraAgent;
