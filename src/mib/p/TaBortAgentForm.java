@@ -86,7 +86,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
 
         cbAgentNamn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agenter" }));
 
-        btnTaBortAgent.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnTaBortAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnTaBortAgent.setText("Ta bort agent");
         btnTaBortAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(cbAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,6 +118,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +127,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             }
         });
 
+        btnAdminSida.setBackground(new java.awt.Color(242, 242, 242));
         btnAdminSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAdminSida.setText("Adminsida");
         btnAdminSida.addActionListener(new java.awt.event.ActionListener() {

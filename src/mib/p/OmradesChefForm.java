@@ -71,6 +71,7 @@ public class OmradesChefForm extends javax.swing.JPanel {
         lblChefRubrik.setFont(new java.awt.Font("MS Gothic", 1, 36)); // NOI18N
         lblChefRubrik.setText("Områdeschef: Norrland");
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {

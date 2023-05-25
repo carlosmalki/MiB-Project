@@ -13,13 +13,12 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *HittaOmradesChef är en JPanel-klass där användaren utifrån valt område (valt i
- * en combobox)  kan söka upp Områderschefen och se hens namn,
- * vidare kan man trycka på en Jbutton, som tar användaren vidare 
- * till en panel med lite mer information om chefen,
- * klassen tar in String epost, och String isAdmin som håller
- * reda på vilken agent som är inloggad, och om denne är admin.
- * 
+ * HittaOmradesChef är en JPanel-klass där användaren utifrån valt område (valt
+ * i en combobox) kan söka upp Områderschefen och se hens namn, vidare kan man
+ * trycka på en Jbutton, som tar användaren vidare till en panel med lite mer
+ * information om chefen, klassen tar in String epost, och String isAdmin som
+ * håller reda på vilken agent som är inloggad, och om denne är admin.
+ *
  * @author samsung
  */
 public class HittaOmradesChef extends javax.swing.JPanel {
@@ -43,6 +42,7 @@ public class HittaOmradesChef extends javax.swing.JPanel {
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
         fyllComboBoxKontor();
+        txtHittadChef.setEditable(false);
     }
 
     /**
@@ -173,19 +173,23 @@ public class HittaOmradesChef extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void btnChefInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChefInfoActionPerformed
-        try {
-            String omradet = cbOmrade.getSelectedItem().toString();
-            HashMap<String, String> chefInfo = idb.fetchRow("SELECT * FROM MIBDB.AGENT WHERE MIBDB.AGENT.AGENT_ID IN (SELECT MIBDB.OMRADESCHEF.AGENT_ID FROM MIBDB.OMRADESCHEF WHERE OMRADE IN (SELECT OMRADES_ID FROM MIBDB.OMRADE WHERE BENAMNING = '" + omradet + "'))");
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HittaOmradesChef.this);
-            frame.setContentPane(new OmradesChefInfoForm(chefInfo, omradet, epost, isAdmin));
-            frame.revalidate();
-            frame.setTitle("Områdeschef: Information");
-            frame.repaint();
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtHittadChef.getText())) {
+            try {
+                String omradet = cbOmrade.getSelectedItem().toString();
+                HashMap<String, String> chefInfo = idb.fetchRow("SELECT * FROM MIBDB.AGENT WHERE MIBDB.AGENT.AGENT_ID IN (SELECT MIBDB.OMRADESCHEF.AGENT_ID FROM MIBDB.OMRADESCHEF WHERE OMRADE IN (SELECT OMRADES_ID FROM MIBDB.OMRADE WHERE BENAMNING = '" + omradet + "'))");
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HittaOmradesChef.this);
+                frame.setContentPane(new OmradesChefInfoForm(chefInfo, omradet, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Områdeschef: Information");
+                frame.repaint();
 
-        } catch (InfException e) {
+            } catch (InfException e) {
 
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ett fel uppstod: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Vad god sök chef först.");
         }
     }//GEN-LAST:event_btnChefInfoActionPerformed
 
@@ -195,7 +199,7 @@ public class HittaOmradesChef extends javax.swing.JPanel {
         cbOmrade.removeAllItems();
         try {
             kontor = idb.fetchColumn("select benamning from omrade");
-        
+
             for (String ettKontor : kontor) {
                 cbOmrade.addItem(ettKontor);
             }

@@ -70,7 +70,7 @@
               <Component id="lblValkommen" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnRegisteraAlien" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSokFunktioner" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -85,7 +85,7 @@
                   <Component id="btnHittaOmradesChef" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnToppLista" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAdminFunktioner" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAndraLosenord" alignment="3" min="-2" max="-2" attributes="0"/>

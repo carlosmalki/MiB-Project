@@ -92,6 +92,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(550, 343));
         setPreferredSize(new java.awt.Dimension(550, 343));
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -258,6 +259,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        btnAdminSida.setBackground(new java.awt.Color(242, 242, 242));
         btnAdminSida.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         btnAdminSida.setText("Adminsida");
         btnAdminSida.addActionListener(new java.awt.event.ActionListener() {
