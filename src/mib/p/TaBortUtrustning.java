@@ -10,22 +10,27 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JComboBox;
 
 /**
  *
  * @author samsung
  */
 public class TaBortUtrustning extends javax.swing.JPanel {
+
     private static InfDB idb;
     private String epost;
     private String isAdmin;
+    private boolean vapenTryckt;
+    private boolean kommTryckt;
+    private boolean teknikTryckt;
+    
 
     /**
      * Creates new form TaBortUtrustning
      */
     public TaBortUtrustning(String epost, String isAdmin) {
         initComponents();
-        
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -35,7 +40,13 @@ public class TaBortUtrustning extends javax.swing.JPanel {
         }
         this.epost = epost;
         this.isAdmin = isAdmin;
-        fyllComboBox();
+        fyllComboBoxVapen();
+        fyllComboBoxKommunikation();
+        fyllComboBoxTeknik();
+        vapenTryckt = false;
+        teknikTryckt = false;
+        kommTryckt = false;
+        
     }
 
     /**
@@ -48,12 +59,22 @@ public class TaBortUtrustning extends javax.swing.JPanel {
     private void initComponents() {
 
         lblRubrik = new javax.swing.JLabel();
-        cbValjUtrustning = new javax.swing.JComboBox<>();
+        cbVapen = new javax.swing.JComboBox<>();
         btnTaBort = new javax.swing.JButton();
         btnMinSida = new javax.swing.JButton();
+        cbTeknik = new javax.swing.JComboBox<>();
+        cbKomm = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnTaBort1 = new javax.swing.JButton();
+        btnTaBort2 = new javax.swing.JButton();
+        btnUtrustning = new javax.swing.JButton();
 
-        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
         lblRubrik.setText("Ta bort utrustning:");
+
+        cbVapen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj vapen" }));
 
         btnTaBort.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnTaBort.setText("Ta bort");
@@ -71,57 +92,114 @@ public class TaBortUtrustning extends javax.swing.JPanel {
             }
         });
 
+        cbTeknik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj teknik" }));
+
+        cbKomm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj kommunikation" }));
+
+        jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel1.setText("Vapen:");
+
+        jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel2.setText("Teknik:");
+
+        jLabel3.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel3.setText("Kommunikation:");
+
+        btnTaBort1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnTaBort1.setText("Ta bort");
+        btnTaBort1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBort1ActionPerformed(evt);
+            }
+        });
+
+        btnTaBort2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnTaBort2.setText("Ta bort");
+        btnTaBort2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBort2ActionPerformed(evt);
+            }
+        });
+
+        btnUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnUtrustning.setText("Utrustning");
+        btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUtrustningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblRubrik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbValjUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnTaBort)))
-                .addContainerGap(231, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
-                .addGap(38, 38, 38))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnMinSida)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblRubrik)
+                        .addGap(169, 169, 169))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbVapen, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(cbTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(cbKomm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUtrustning)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnTaBort)
+                                .addGap(83, 83, 83)
+                                .addComponent(btnTaBort1)
+                                .addGap(67, 67, 67)
+                                .addComponent(btnTaBort2)))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(30, 30, 30)
                 .addComponent(lblRubrik)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbValjUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnTaBort)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTeknik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVapen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbKomm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTaBort1)
+                    .addComponent(btnTaBort2)
+                    .addComponent(btnTaBort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addComponent(btnMinSida)
-                .addGap(27, 27, 27))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMinSida)
+                    .addComponent(btnUtrustning))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        String valdUtrustning = cbValjUtrustning.getSelectedItem().toString();
-        try {
-            String valtUtrustningsID = idb.fetchSingle("select utrustnings_id from utrustning where benamning = '" + valdUtrustning + "'");
-            idb.delete("delete from utrustning where utrustnings_id = " + valtUtrustningsID);
-            idb.delete("delete from innehar_utrustning where utrustnings_id = " + valtUtrustningsID);
-            taBortFranUtrustningsTyp(valtUtrustningsID);
-            JOptionPane.showMessageDialog(null, "Utrustningen har tagits bort!");
-            
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortUtrustning.this);
-            frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
-            frame.revalidate();
-            frame.setTitle("Startsida: Agent");
-            frame.repaint();
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-        }
+        vapenTryckt = true;
+        taBort(cbVapen);
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
@@ -132,32 +210,128 @@ public class TaBortUtrustning extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
-    private void fyllComboBox() {
-        cbValjUtrustning.removeAllItems();
+    private void btnTaBort1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBort1ActionPerformed
+        teknikTryckt = true;
+        taBort(cbTeknik);
+    }//GEN-LAST:event_btnTaBort1ActionPerformed
+
+    private void btnTaBort2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBort2ActionPerformed
+        kommTryckt = true;
+        taBort(cbKomm);
+    }//GEN-LAST:event_btnTaBort2ActionPerformed
+
+    private void btnUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtrustningActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(TaBortUtrustning.this);
+        frame.setContentPane(new HanteraUtrustningForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Hantera utrustning");
+        frame.repaint();
+    }//GEN-LAST:event_btnUtrustningActionPerformed
+
+    private void fyllComboBoxVapen() {
+        cbVapen.removeAllItems();
+        cbVapen.addItem("Välj utrustning");
         try {
-            ArrayList<String> utrustningsBenamningar = idb.fetchColumn("select benamning from utrustning");
+           ArrayList<String> utrustningsBenamningar = idb.fetchColumn("SELECT benamning FROM utrustning WHERE Utrustnings_ID IN (SELECT Utrustnings_ID FROM vapen)");
             for (String enBenamning : utrustningsBenamningar) {
-                cbValjUtrustning.addItem(enBenamning);
+                cbVapen.addItem(enBenamning);
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
+
         }
     }
-    
-    private void taBortFranUtrustningsTyp(String valtUtrustningsID) {
+    private void fyllComboBoxTeknik() {
+        cbTeknik.removeAllItems();
+        cbTeknik.addItem("Välj utrustning");
         try {
-            idb.delete("delete from vapen where utrustnings_id = " + valtUtrustningsID);
-            idb.delete("delete from kommunikation where utrustnings_id = " + valtUtrustningsID);
-            idb.delete("delete from teknik where utrustnings_id = " + valtUtrustningsID);
+           ArrayList<String> utrustningsBenamningar = idb.fetchColumn("SELECT benamning FROM utrustning WHERE Utrustnings_ID IN (SELECT Utrustnings_ID FROM teknik)");
+            for (String enBenamning : utrustningsBenamningar) {
+                cbTeknik.addItem(enBenamning);
+            }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
+
+        }
+    }
+    private void fyllComboBoxKommunikation() {
+        cbKomm.removeAllItems();
+        cbKomm.addItem("Välj utrustning");
+        try {
+           ArrayList<String> utrustningsBenamningar = idb.fetchColumn("SELECT benamning FROM utrustning WHERE Utrustnings_ID IN (SELECT Utrustnings_ID FROM kommunikation)");
+            for (String enBenamning : utrustningsBenamningar) {
+                cbKomm.addItem(enBenamning);
+            }
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+
         }
     }
 
+ private void taBortFranUtrustningsTyp(String valtUtrustningsID) {
+    if (kommTryckt) {
+        try {
+            idb.delete("delete from kommunikation where utrustnings_id = " + valtUtrustningsID);
+            kommTryckt = false;
+            fyllComboBoxKommunikation();
+        } catch (InfException ex) {
+            
+        }
+    }
+        
+    try {
+        if (vapenTryckt) {
+            idb.delete("delete from vapen where utrustnings_id = " + valtUtrustningsID);
+            vapenTryckt = false;
+            fyllComboBoxVapen();
+        }
+    } catch (InfException ex2) {
+        
+    }
+            
+    try {
+        if (teknikTryckt) {
+            idb.delete("delete from teknik where utrustnings_id = " + valtUtrustningsID);
+            teknikTryckt = false;
+            fyllComboBoxTeknik();
+        }
+    } catch (InfException ex3) {
+        
+    }
+}
+  private void taBort(JComboBox box)
+  {
+  String valdUtrustning = box.getSelectedItem().toString();
+        try {
+            String valtUtrustningsID = idb.fetchSingle("select utrustnings_id from utrustning where benamning = '" + valdUtrustning + "'");
+            taBortFranUtrustningsTyp(valtUtrustningsID);
+
+            idb.delete("delete from innehar_utrustning where utrustnings_id = " + valtUtrustningsID);
+            idb.delete("delete from utrustning where utrustnings_id = " + valtUtrustningsID);
+
+            JOptionPane.showMessageDialog(null, "Utrustningen har tagits bort!");
+            fyllComboBoxVapen();
+
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+
+        }
+  
+  }
+  
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnTaBort;
-    private javax.swing.JComboBox<String> cbValjUtrustning;
+    private javax.swing.JButton btnTaBort1;
+    private javax.swing.JButton btnTaBort2;
+    private javax.swing.JButton btnUtrustning;
+    private javax.swing.JComboBox<String> cbKomm;
+    private javax.swing.JComboBox<String> cbTeknik;
+    private javax.swing.JComboBox<String> cbVapen;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblRubrik;
     // End of variables declaration//GEN-END:variables
 }
