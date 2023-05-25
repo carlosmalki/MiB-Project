@@ -21,12 +21,13 @@ public class AlienSokForm extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
+    private ValideringsKlass validering;
 
     /**
      * Creates new form AlienSokForm
      */
     public AlienSokForm(String epost, String isAdmin) {
-        
+
         this.isAdmin = isAdmin;
         initComponents();
         try {
@@ -35,8 +36,9 @@ public class AlienSokForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        this.epost=epost;
-        
+        this.epost = epost;
+        validering = new ValideringsKlass();
+
     }
 
     /**
@@ -239,20 +241,28 @@ public class AlienSokForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
  /**
-  * Metod kopplad till btnAlienSok som när den trycks kör metoden alienSok() för att
-  * hämta hem uppgifter om vald alien.
-  * @param evt 
-  */
+     * Metod kopplad till btnAlienSok som när den trycks kör metoden alienSok()
+     * för att hämta hem uppgifter om vald alien, efter att först ha validerat
+     * så användarinmatningen är giltig och existerar i databasen, detta genom
+     * metoder från ValideringsKlass.
+     *
+     * @param evt
+     */
     private void btnAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlienSokActionPerformed
         String alienIDString = txtAlienIdSok.getText();
-        if(!ValideringsKlass.existerarAlienID(alienIDString)&&ValideringsKlass.valideraInt(alienIDString))
-        {
-        JOptionPane.showMessageDialog(null, "Valt Alien-ID existerar inte i databasen. Försök igen.");
+        if (!ValideringsKlass.validateTextFieldNotEmpty(alienIDString)) {
+            JOptionPane.showMessageDialog(null, "Du måste skriva in ett Alien ID för sökning.");
+        } else if (!ValideringsKlass.existerarAlienID(alienIDString) && ValideringsKlass.valideraInt(alienIDString)) {
+            JOptionPane.showMessageDialog(null, "Valt Alien-ID existerar inte i databasen. Försök igen.");
+
+        } else if (!ValideringsKlass.valideraInt(alienIDString)) {
+            JOptionPane.showMessageDialog(null, "Felaktig inmatning, ange heltalssiffra för sökning.");
+        } else {
+            alienSok();
         }
-        alienSok();
 
     }//GEN-LAST:event_btnAlienSokActionPerformed
-   /**
+    /**
      * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
      * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
      * sida, epost och isAdmin skickas med som parametrar för att initialiera en
@@ -262,16 +272,17 @@ public class AlienSokForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AlienSokForm.this);
-                frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AlienSokForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
     /**
      * Metod som hämtar ut värdena för de valda nycklarna i alienInfo HashMapen,
      * och sedan sätter respektive textfält med rätt värde.
-     * @param alienInfo 
+     *
+     * @param alienInfo
      */
     private void setTextFalt(HashMap<String, String> alienInfo) {
         txtNamn.setText(alienInfo.get("Namn"));
@@ -281,13 +292,14 @@ public class AlienSokForm extends javax.swing.JPanel {
         txtTelefon.setText(alienInfo.get("Telefon"));
 
     }
-   /**
-    * Metod som genom InfDB-metoden fetchSingle() hämtar namnet på den
-    * agent som vald alien har som ansvarig agent, utifrån dennes Alien_ID, och txtAnsvAgent
-    * sätts sedan med aktuell Agent..
-    * 
-    * @param alienID 
-    */
+
+    /**
+     * Metod som genom InfDB-metoden fetchSingle() hämtar namnet på den agent
+     * som vald alien har som ansvarig agent, utifrån dennes Alien_ID, och
+     * txtAnsvAgent sätts sedan med aktuell Agent..
+     *
+     * @param alienID
+     */
     private void setAgent(int alienID) {
         try {
             String agentNamn = idb.fetchSingle("SELECT namn FROM mibdb.agent WHERE Agent_ID IN (SELECT Ansvarig_Agent FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
@@ -296,13 +308,14 @@ public class AlienSokForm extends javax.swing.JPanel {
 
         }
     }
-   /**
-    * Metod som genom InfDB-metoden fetchSingle() hämtar benämningen på den
-    * plats där vald alien är registrerad, utifrån dennes Alien_ID, och txtPlats
-    * sätts sedan med aktuell plats.
-    * 
-    * @param alienID 
-    */
+
+    /**
+     * Metod som genom InfDB-metoden fetchSingle() hämtar benämningen på den
+     * plats där vald alien är registrerad, utifrån dennes Alien_ID, och
+     * txtPlats sätts sedan med aktuell plats.
+     *
+     * @param alienID
+     */
     private void setPlats(int alienID) {
         try {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.plats WHERE Plats_ID IN (SELECT Plats FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
@@ -312,13 +325,15 @@ public class AlienSokForm extends javax.swing.JPanel {
         }
 
     }
-/**
- * Metod som genom InfDB-metoden fetchColumn skapar ArrayListor av Alien_ID 
- * för de olika raserna, och sedan letas dessa listor igenom efter valt Alien_ID
- * och rasen sätts utifrån vilken lista det hittades i, och txtRas sätts sedan
- * med aktuell ras.
- * @param alienID 
- */
+
+    /**
+     * Metod som genom InfDB-metoden fetchColumn skapar ArrayListor av Alien_ID
+     * för de olika raserna, och sedan letas dessa listor igenom efter valt
+     * Alien_ID och rasen sätts utifrån vilken lista det hittades i, och txtRas
+     * sätts sedan med aktuell ras.
+     *
+     * @param alienID
+     */
     private void setRas(int alienID) {
 
         String alienIdString = Integer.toString(alienID);
@@ -349,20 +364,17 @@ public class AlienSokForm extends javax.swing.JPanel {
         }
 
     }
+
     /**
-     * Metod som genom InfDB-metoden fetchRow skapar en HashMap av raden för valt
-     * Alien_ID i tabellen alien, sedan körs setTextFalt-metoden för att skriva
-     * värdena från HashMapen på tilldelade textfält, och även setAgent(), setRas() och
-     * SetPlats() för att skriva också dessa värden på respektive textfält.
+     * Metod som genom InfDB-metoden fetchRow skapar en HashMap av raden för
+     * valt Alien_ID i tabellen alien, sedan körs setTextFalt-metoden för att
+     * skriva värdena från HashMapen på tilldelade textfält, och även
+     * setAgent(), setRas() och SetPlats() för att skriva också dessa värden på
+     * respektive textfält.
      */
     private void alienSok() {
-        int alienID;
-        if (ValideringsKlass.valideraInt(txtAlienIdSok.getText())) {
-            alienID = Integer.parseInt(txtAlienIdSok.getText());
-        } else {
-            JOptionPane.showMessageDialog(null, "Felaktig inmatning. Ange ett giltigt Alien-ID.");
-            return;
-        }
+        int alienID = Integer.parseInt(txtAlienIdSok.getText());
+        
 
         try {
             HashMap<String, String> alienInfo = idb.fetchRow("SELECT * FROM mibdb.alien WHERE Alien_ID = " + alienID + ";");

@@ -200,7 +200,7 @@ public class ValideringsKlass {
      public static boolean existerarAlienID(String alienID) {
     boolean idExisterar = false;
     String query = "SELECT Alien_ID FROM mibdb.alien;";
-    ArrayList<String> allaIDs = new ArrayList<>();
+    ArrayList<String> allaIDs ;
 
     try {
         allaIDs = idb.fetchColumn(query);
@@ -221,7 +221,7 @@ public class ValideringsKlass {
      public static boolean existerarAgentID(String alienID) {
     boolean idExisterar = false;
     String query = "SELECT Agent_ID FROM mibdb.agent;";
-    ArrayList<String> allaAgentIDs = new ArrayList<>();
+    ArrayList<String> allaAgentIDs;
 
     try {
         allaAgentIDs = idb.fetchColumn(query);

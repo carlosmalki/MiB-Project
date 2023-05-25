@@ -25,7 +25,6 @@ public class AgentSokForm extends javax.swing.JPanel {
     private ArrayList<String> kontorsChef;
     private boolean idExists;
     private ValideringsKlass validering;
-
     /**
      * Creates new form AlienSokForm
      */
@@ -42,6 +41,7 @@ public class AgentSokForm extends javax.swing.JPanel {
         this.epost = epost;
         idExists = true;
         validering = new ValideringsKlass();
+
         fyllArrayLists();
 
     }
@@ -267,20 +267,31 @@ public class AgentSokForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
    /**
      * Metod som först återställer texten på fältet txtAdmin till "", för att
-     * sedan köra agentSok()-metoden och genom det få info om vald agent.
+     * sedan köra agentSok()-metoden och genom det få info om vald agent, efter
+     * att först ha kontrollerat att inmatningen är giltig, och att valt Agent ID existerar
+     * i databasen, detta genom metoder från ValideringsKlassen.
      *
      * @param evt
      */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         String agentIDString = txtAgentIdSok.getText();
-        if(!ValideringsKlass.existerarAgentID(agentIDString)&&ValideringsKlass.valideraInt(agentIDString))
-        {
-        JOptionPane.showMessageDialog(null, "Valt Agent-ID existerar inte i databasen. Försök igen.");
-        }
-        txtAdmin.setText("");
-        agentSok();
-        chefEllerInte();
 
+    try {
+        if (!ValideringsKlass.validateTextFieldNotEmpty(agentIDString)) {
+            JOptionPane.showMessageDialog(null, "Du måste skriva in ett Agent ID för sökning.");
+        } else if (!ValideringsKlass.valideraInt(agentIDString)) {
+            JOptionPane.showMessageDialog(null, "Ogiltig Agent ID. Ange heltalssiffra.");
+        } else if (!ValideringsKlass.existerarAgentID(agentIDString)) {
+            JOptionPane.showMessageDialog(null, "Valt Agent-ID existerar inte i databasen. Försök igen.");
+        } else {
+            txtAdmin.setText("");
+            agentSok();
+            chefEllerInte();
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade: " + e.getMessage());
+    }
+    
     }//GEN-LAST:event_btnSokActionPerformed
     /**
      * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
@@ -371,6 +382,8 @@ public class AgentSokForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid sökningen av alien.");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Vänligen ange heltalssiffra för ID-sökning.");
         }
     }
 
@@ -401,7 +414,7 @@ public class AgentSokForm extends javax.swing.JPanel {
 
                 txtChefEllerInte.setText("");
             } catch (NullPointerException e) {
-                
+
                 idExists = false;
                 txtChefEllerInte.setText("");
 
@@ -409,10 +422,12 @@ public class AgentSokForm extends javax.swing.JPanel {
             }
         }
     }
-/**
- * Metod som via InfDB-metoden fetchColumn skapar arraylistor av områderschefer
- * och kontorschefer för att använda för att kontrollera om vald agent är chef eller inte.
- */
+
+    /**
+     * Metod som via InfDB-metoden fetchColumn skapar arraylistor av
+     * områderschefer och kontorschefer för att använda för att kontrollera om
+     * vald agent är chef eller inte.
+     */
     private void fyllArrayLists() {
         try {
             String query = "SELECT Agent_ID FROM mibdb.omradeschef";
@@ -427,13 +442,15 @@ public class AgentSokForm extends javax.swing.JPanel {
         }
 
     }
-   /**
-    * Metod som kollar upp om vald agent är chef eller inte, genom att söka genom
-    * arraylistorna omradesChef och kontorsChef, om sökningen gjorts på ett Agent_ID
-    * som inte existerar i datbasen kommer idExists vara false när metoden körs och då
-    * görs inget annat än att idExists sätts till true inför fortsatta sökningar, annars
-    * sätts texten i txtChefEller inte med relevant information.
-    */
+
+    /**
+     * Metod som kollar upp om vald agent är chef eller inte, genom att söka
+     * genom arraylistorna omradesChef och kontorsChef, om sökningen gjorts på
+     * ett Agent_ID som inte existerar i datbasen kommer idExists vara false när
+     * metoden körs och då görs inget annat än att idExists sätts till true
+     * inför fortsatta sökningar, annars sätts texten i txtChefEller inte med
+     * relevant information.
+     */
     private void chefEllerInte() {
         int agentID;
         String omrade = "";
@@ -458,12 +475,15 @@ public class AgentSokForm extends javax.swing.JPanel {
         }
         idExists = true;
     }
-   /**
-    * Metod som hämtar benämningen på det område en agent är chef för, med hjälp av dennes Agent_ID
-    * via InfDB-metoden fetchSingle, metoden returnerar områdesnamnet som String.
-    * @param agentID
-    * @return 
-    */
+
+    /**
+     * Metod som hämtar benämningen på det område en agent är chef för, med
+     * hjälp av dennes Agent_ID via InfDB-metoden fetchSingle, metoden
+     * returnerar områdesnamnet som String.
+     *
+     * @param agentID
+     * @return
+     */
     private String getOmrade(int agentID) {
         String omrade = "";
         String query = "SELECT Benamning "
