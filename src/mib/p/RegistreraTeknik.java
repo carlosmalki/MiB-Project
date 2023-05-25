@@ -46,12 +46,16 @@ public class RegistreraTeknik extends javax.swing.JPanel {
     private void initComponents() {
 
         lblRubrik = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         tfAngivenKraftkalla = new javax.swing.JTextField();
         btnLaggTill = new javax.swing.JButton();
 
-        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
         lblRubrik.setText("Ange kraftkälla:");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153), null, null));
+
+        btnLaggTill.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnLaggTill.setText("Lägg till");
         btnLaggTill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,31 +63,49 @@ public class RegistreraTeknik extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(85, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLaggTill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfAngivenKraftkalla, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(tfAngivenKraftkalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLaggTill)
+                .addGap(19, 19, 19))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLaggTill, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                    .addComponent(tfAngivenKraftkalla))
-                .addContainerGap(131, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRubrik)
-                .addGap(151, 151, 151))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(lblRubrik))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(lblRubrik)
-                .addGap(18, 18, 18)
-                .addComponent(tfAngivenKraftkalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(btnLaggTill)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -92,11 +114,11 @@ public class RegistreraTeknik extends javax.swing.JPanel {
         if (ValideringsKlass.validateTextFieldNotEmpty(kraftKalla)) {
             try {
                 idb.insert("insert into teknik values (" + id + ", '" + kraftKalla + "')");
-                JOptionPane.showMessageDialog(null, "Teknik har lagts till!");
+                JOptionPane.showMessageDialog(null, "Ny teknikutrustning registrerad i databasen!");
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraTeknik.this);
-                frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+                frame.setContentPane(new RegistreraUtrustning(epost, isAdmin));
                 frame.revalidate();
-                frame.setTitle("Startsida: Agent");
+                frame.setTitle("Registrera ny utrustning");
                 frame.repaint();
             } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Kommunikationsfel!");
@@ -107,6 +129,7 @@ public class RegistreraTeknik extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTill;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JTextField tfAngivenKraftkalla;
     // End of variables declaration//GEN-END:variables
