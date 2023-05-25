@@ -22,6 +22,11 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
+        if(isAdmin.equals("N"))
+        {
+        btnTaBortUtrustning.setVisible(false);
+        btnTaBortUtrustning.setEnabled(false);
+        }
     }
 
     /**
@@ -33,9 +38,22 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnTaBortUtrustning = new javax.swing.JButton();
         btnRegistreraUtrustning = new javax.swing.JButton();
         btnSeUtrustning = new javax.swing.JButton();
-        btnTaBortUtrustning = new javax.swing.JButton();
+        lblRubrik = new javax.swing.JLabel();
+        btnMinSida = new javax.swing.JButton();
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153), null, null));
+
+        btnTaBortUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnTaBortUtrustning.setText("Ta bort utrustning");
+        btnTaBortUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortUtrustningActionPerformed(evt);
+            }
+        });
 
         btnRegistreraUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnRegistreraUtrustning.setText("Registrera utrustning");
@@ -53,11 +71,38 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
             }
         });
 
-        btnTaBortUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnTaBortUtrustning.setText("Ta bort utrustning");
-        btnTaBortUtrustning.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRegistreraUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSeUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(btnSeUtrustning)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistreraUtrustning)
+                .addGap(18, 18, 18)
+                .addComponent(btnTaBortUtrustning)
+                .addGap(19, 19, 19))
+        );
+
+        lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 48)); // NOI18N
+        lblRubrik.setText("Hantera utrustning:");
+
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnMinSida.setText("Min sida");
+        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBortUtrustningActionPerformed(evt);
+                btnMinSidaActionPerformed(evt);
             }
         });
 
@@ -66,23 +111,28 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRegistreraUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSeUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(149, 149, 149))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnMinSida, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(226, 226, 226))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(lblRubrik)
+                .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
-                .addComponent(btnRegistreraUtrustning)
-                .addGap(28, 28, 28)
-                .addComponent(btnSeUtrustning)
-                .addGap(31, 31, 31)
-                .addComponent(btnTaBortUtrustning)
-                .addGap(111, 111, 111))
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addComponent(lblRubrik)
+                .addGap(32, 32, 32)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(btnMinSida)
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -110,10 +160,21 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnTaBortUtrustningActionPerformed
 
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraUtrustningForm.this);
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
+    }//GEN-LAST:event_btnMinSidaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistreraUtrustning;
     private javax.swing.JButton btnSeUtrustning;
     private javax.swing.JButton btnTaBortUtrustning;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblRubrik;
     // End of variables declaration//GEN-END:variables
 }
