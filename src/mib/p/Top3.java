@@ -77,8 +77,6 @@ public class Top3 extends javax.swing.JPanel {
 
         lblRubrik.setText("Välj område:");
 
-        cbValjOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnVisaTopp3.setText("Visa topp 3");
         btnVisaTopp3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

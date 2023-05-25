@@ -54,8 +54,6 @@ public class TaBortUtrustning extends javax.swing.JPanel {
         lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblRubrik.setText("Ta bort utrustning:");
 
-        cbValjUtrustning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnTaBort.setText("Ta bort");
         btnTaBort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
