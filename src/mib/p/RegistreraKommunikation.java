@@ -11,7 +11,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * Registrera kommunikation fungerar som en förlängning av registrera utrustning.
+ * Här anger användaren överföringsteknik som kommer att lagras i kommunikationtabellen.
  * @author samsung
  */
 public class RegistreraKommunikation extends javax.swing.JPanel {

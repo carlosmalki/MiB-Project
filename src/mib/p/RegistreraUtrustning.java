@@ -18,7 +18,9 @@ import javax.swing.JComboBox;
 
 
 /**
- *
+ * Registrera utrustning låter agenten skapa nya instanser av utrustning. 
+ * De behöver välja utrustningstyp, vilket leder till separata fönster där data 
+ * lagras i respektive tabell eftersom det inte bara är en utrustningstabell.
  * @author samsung
  */
 public class RegistreraUtrustning extends javax.swing.JPanel {
@@ -208,7 +210,9 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
                 frame.setTitle("Hantera utrustning");
                 frame.repaint();
     }//GEN-LAST:event_btnHanteraUtrustningActionPerformed
-
+    
+    //Denna metod gör det möjligt att välja typ i en "drop down meny" istället
+    //för att användaren ska behöva skriva in det manuellt
     private void fyllTypLista() {
         cbUtrustningsTyp.removeAllItems();
         cbUtrustningsTyp.addItem("Vapen");
@@ -216,6 +220,9 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
         cbUtrustningsTyp.addItem("Teknik");
     }
     
+    //Denna metod används i LaggTillknappens actionperformed. 
+    //Kontrollerar vilken sorts utrustningstyp man vill registrera och
+    //öppnar sedan rätt fortsättningsfönster för vidare datainput.
     private void kollaTyp(String utrustningsTyp, String id) {
         if (utrustningsTyp.equals("Vapen")) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
@@ -236,8 +243,6 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
                 frame.setTitle("Registrera teknik");
                 frame.repaint();
         }
-        //dispose(); funkar inte ?? kanske inte behövs
-        // - kolla vad som händer när sidan tar dig vidare till nästa steg, stängs detta?
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

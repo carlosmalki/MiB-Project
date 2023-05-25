@@ -13,7 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
- *
+ * TaBortAlienForm rensar aliens från databasen genom att först kontrollera
+ * vilken sorts alien det är. Efter att en alien tas bort från sin specifika
+ * rastabell så tas den bort från huvudtabellen för alla aliens. 
  * @author samsung
  */
 public class TaBortAlienForm extends javax.swing.JPanel {

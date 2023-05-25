@@ -11,7 +11,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * Registrera vapen fungerar som en förlängning av registrera utrustning.
+ * Här anger användaren kaliber som kommer att lagras i vapentabellen.
  * @author samsung
  */
 public class RegistreraVapen extends javax.swing.JPanel {

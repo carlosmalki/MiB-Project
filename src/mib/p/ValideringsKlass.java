@@ -6,6 +6,14 @@ import oru.inf.InfException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 
+/**
+ * Denna klass är till för att validera all sorts användarinmatning. 
+ * I projektets olika sidor finns det metoder som använder sig utav och
+ * refererar till dessa valideringsmetoder. Detta är för att undvika
+ * upprepning av kod och för att organisera funktionaliteter.
+ * 
+ * I denna klass finns även kommentarer för de specifika valideringsmetoderna.
+ */
 public class ValideringsKlass {
 
     private static InfDB idb;
@@ -20,6 +28,8 @@ public class ValideringsKlass {
 
     }
 
+    //Denna metod kontrollerar om angiven alien epost stämmer överens med 
+    //registrerad epost.
     public static boolean checkIfAlienEpostExist(String epost) {
         try {
             return idb.fetchSingle("SELECT 1 FROM mibdb.alien WHERE Epost = \"" + epost + "\"") != null;
@@ -30,6 +40,7 @@ public class ValideringsKlass {
         }
     }
 
+    //Denna metod kontrollerar så att input består av heltal där det efterfrågas. 
     public static boolean valideraInt(String input) {
         try {
             int value = Integer.parseInt(input);
@@ -40,6 +51,8 @@ public class ValideringsKlass {
         }
     }
 
+    //Denna metod kontrollerar så att både aliens och agenters epostadresser
+    //stämmer överens med de registrerade epostadresserna. 
     public static boolean checkEpost(String epost) {
         ArrayList<String> alienEpostList = new ArrayList<>();
         ArrayList<String> agentEpostList = new ArrayList<>();
@@ -59,10 +72,14 @@ public class ValideringsKlass {
         return alienEpostList.contains(epost) || agentEpostList.contains(epost);
     }
 
+    //Kontrollerar så att användaren har matat in värden där det krävs.
     public static boolean validateTextFieldNotEmpty(String input) {
         return input != null && !input.isEmpty();
     }
 
+    //Denna metod ser till så att användaren har använt rätt format 
+    //vid input av datum. Det finns många olika sätt att skriva datum
+    //och det kan vara svårt att hantera utan en date picker. 
     public static boolean valideraDatum(String input) {
         boolean korrektDatumInput = false;
         if (input.length() == 10) { // Kontrollera att inmatningssträngen har rätt längd (yyyy-MM-dd)
@@ -77,7 +94,9 @@ public class ValideringsKlass {
         return korrektDatumInput;
     }
 
-    //Kontrollera att ett värde finns i databasen - används t.ex. i registrera utrustning
+    //Kontrollerar om ett värde finns i databasen.
+    //Detta för att bl.a. undvika att försöka lägga in data i databasen
+    //som redan existerar. 
     public static boolean vardeFinns(String varde, ArrayList<String> column) {
         boolean finns = false;
         for (String ettVarde : column) {
@@ -89,6 +108,8 @@ public class ValideringsKlass {
     }
 
     //Kontrollerar att angivet namn i registrerautrustning är okej
+    //Använder sig utav 2 inbakade metoder. Dessa 2 metoder hittar man också i 
+    //denna valideringsklass. (Den ena precis under)
     public static boolean giltigtNamn(String ettNamn) {
         boolean giltigt = false;
         if (!isLongBenamning(ettNamn) && validateTextFieldNotEmpty(ettNamn)) {
@@ -98,7 +119,7 @@ public class ValideringsKlass {
         return giltigt;
     }
 
-    //Används i metoden ovan
+    //Används i metoden ovan. Ser till så att benämningar inte är för långa.
     private static boolean isLongBenamning(String enBenamning) {
         boolean isLong = false;
         if (enBenamning.length() > 20) {
@@ -107,12 +128,9 @@ public class ValideringsKlass {
 
         }
         return isLong;
-        /**
-         * Valideringsmetod som kontrollerar om en cobobox är tom eller inte, är
-         * den tom returneras true, annars false.
-         */
     }
 
+    //Kontrollera att comboboxar inte är tomma utan har fyllts upp med alternativ
     public static boolean valideraComboBox(JComboBox box) {
         boolean boxEmpty = false;
         if (box.getItemCount() == 0) {
@@ -138,6 +156,7 @@ public class ValideringsKlass {
         return aktivtVal;
     }
 
+    //Kontrollerar om arraylistan har värden eller inte
     public static boolean arArrayListTom(ArrayList lista) {
         boolean isEmpty = false;
         if (lista.isEmpty()) {
@@ -220,6 +239,7 @@ public class ValideringsKlass {
 
         return idExisterar;
     }
+    
    /**
    * Metod avsedd för att kontrollera om ett Alien ID existerar i databasen,
    * genom att skapa en ArrayList av allaIDs geno InfDB-metodn fetchColumn,

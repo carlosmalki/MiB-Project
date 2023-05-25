@@ -11,7 +11,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * Registrera teknkik fungerar som en förlängning av registrera utrustning.
+ * Här anger användaren kraftkälla som kommer att lagras i tekniktabellen.
  * @author samsung
  */
 public class RegistreraTeknik extends javax.swing.JPanel {

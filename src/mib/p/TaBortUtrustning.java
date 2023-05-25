@@ -13,7 +13,9 @@ import oru.inf.InfException;
 import javax.swing.JComboBox;
 
 /**
- *
+ * Denna sida tar bort utrustning från databasen. Först utförs en kontroll för 
+ * att se vilken sorts utrustning det är, och sedan tas den bort både från sin 
+ * specifika tabell och huvudtabellen med alla utrustningsID:n.
  * @author samsung
  */
 public class TaBortUtrustning extends javax.swing.JPanel {
