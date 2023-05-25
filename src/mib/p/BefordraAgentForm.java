@@ -130,16 +130,22 @@ public class BefordraAgentForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 /**
  * Metod kopplad till btnBefordra som med hjälp av InfDB-metoden update()
- * uppdaterar Administrator-kolumnen i agent-tabellen för vald agent, från "N" till "J",
+ * uppdaterar Administrator-kolumnen i agent-tabellen för vald agent, från "N" till "J", efter
+ * att först ha validerat så ett val gjorts, genom metod från valideringsklassen,
  * seda körs metoderna resetEjAdminComboBox() och fyllEjAdminComboBox
  * för att återställa cbEjAdmin.
  * @param evt 
  */
     private void btnBefordraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraActionPerformed
         String namn = null;
-        if (!cbEjAdmin.getSelectedItem().toString().equals("Agenter")) {
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbEjAdmin)) {
             namn = cbEjAdmin.getSelectedItem().toString();
+            
+           
         }
+        else{
+        JOptionPane.showMessageDialog(null, "Var god välj att agent att befordra");
+           }
         String query = "UPDATE mibdb.agent SET Administrator = 'J' WHERE Namn = '" + namn + "'";
         
         try {

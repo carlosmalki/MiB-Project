@@ -83,6 +83,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
         lblRegDatum = new javax.swing.JLabel();
         btnRegistrera = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnAdminSida = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -254,6 +255,14 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        btnAdminSida.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
+        btnAdminSida.setText("Adminsida");
+        btnAdminSida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminSidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,8 +273,11 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMinSida)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdminSida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMinSida))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
@@ -277,8 +289,10 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMinSida)
-                .addGap(24, 24, 24))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMinSida)
+                    .addComponent(btnAdminSida))
+                .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
   /**
@@ -445,6 +459,14 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
     private void btnSkapaNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNamnActionPerformed
         skapaNamn();
     }//GEN-LAST:event_btnSkapaNamnActionPerformed
+
+    private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
+         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegisteraAgentForm.this);
+        frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Administratörsfunktioner");
+        frame.repaint();
+    }//GEN-LAST:event_btnAdminSidaActionPerformed
     /**
      * Metod som använder sig av InfDB-metoden getAutoIncrement() för att välja
      * ut nästkommande värde ur kolumnen Agent_ID i tabellen agent, och detta
@@ -563,6 +585,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminSida;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistrera;
     private javax.swing.JButton btnSkapaEpost;
