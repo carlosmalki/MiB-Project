@@ -281,12 +281,21 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
-        // Omvandlar inmatningen av agent id till int version från String.
-        String agentIDString = txtAgentID.getText();
-        int agentIDInt = Integer.parseInt(agentIDString);
         
         try {
+            // Tar agentID från textfältet.
+            String agentIDString = txtAgentID.getText();
             
+            // Om agentID fältet är tom.
+            if(agentIDString.equals("")) {
+                JOptionPane.showMessageDialog(null, "Vänligen ange agent ID!");
+                return;
+            }
+            
+            // Omvandlar inmatningen av agent id till int version från String.
+            int agentIDInt = Integer.parseInt(agentIDString);
+            
+          
             // Nuvarande namn
             String namn = idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Agent_ID = "+agentIDInt+";");
             txtNamn.setText(namn);
@@ -319,6 +328,9 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             Logger.getLogger(AndraInfoOmAgent.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
         }
+        
+        
+        
         
         
     }//GEN-LAST:event_btnSokActionPerformed
