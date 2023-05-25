@@ -13,12 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
- * TaBortAgentForm ser ut som en simpel sida men om man kikar i koden så är det
- * en av de bökigaste funktionaliteterna att få till. Genom flera olika
- * kontroller ser denna sida till att rensa agenter och tillhörande värden
- * från databasen på ett smidigt sätt. 
+ * TaBortAgentForm är en JPanel-klass där administratörer i systemet kan ta bort
+ * vilken annan agent som helst (utom sig själv), en rensning av alla referenser
+ * till Agentens ID tas bort ur databasen och agenten avregistreras.
  * @author ASUS
  */
+
 public class TaBortAgentForm extends javax.swing.JPanel {
 
     private static InfDB idb;
