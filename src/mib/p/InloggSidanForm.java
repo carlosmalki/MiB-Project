@@ -161,22 +161,23 @@ public class InloggSidanForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
+        
         // Texten som finns i fälten Epost och Lösenord tilldelas till dessa två variabler epostadress och losenord.
-        // Alien
         String epostadress = txtAnvandarnamn.getText();
         String losenord = jPasswordFieldLoseonrd.getText();
+       
+       // Alien inloggning.
        if(AlienOrAgent.equals("Alien"))
        {
         try {
             
-            // Variablerna tilldelas värde från mibdb-databasen
-            // Alien-AN varibler som representerar epostadressen för en agent från databasen samt lösenord.
+            // Variablerna tilldelas värde från mibdb-databasen.
+            // Alien-AN varibler som representerar epostadressen för en alien från databasen samt lösenord.
             String ANepostadressDb = idb.fetchSingle("SELECT Epost FROM mibdb.alien WHERE Epost = '"+epostadress+"'");
             String ANlosenordDb = idb.fetchSingle("SELECT Losenord FROM mibdb.alien WHERE Epost = '"+epostadress+"'");
             
             
-            // if-sats, om epostadressen samt lösenordet som skrivs i text fälteten är lika med infon från databasen, skapas en JFrame.
-            // Agent
+            // if-sats, om epostadressen samt lösenordet som skrivs i text fälteten är lika med infon från databasen, skickas användaren till MinSidaAlienForm.
             if(epostadress.equals(ANepostadressDb) && losenord.equals(ANlosenordDb)) {
                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(InloggSidanForm.this);
                 frame.setContentPane(new MinSidaAlienForm(txtAnvandarnamn.getText()));
@@ -199,23 +200,24 @@ public class InloggSidanForm extends javax.swing.JPanel {
             
         }
        }
+       // Agent inloggning.
        if(AlienOrAgent.equals("Agent"))
        {try {
             
-            // Variablerna tilldelas värde från mibdb-databasen
-            // Alien-AN varibler som representerar epostadressen för en agent från databasen samt lösenord.
-            String isAdmin = idb.fetchSingle("select Administrator from mibdb.agent where Epost = '" + epostadress + "';");
-            String ANepostadressDb = idb.fetchSingle("SELECT Epost FROM mibdb.agent WHERE Epost = '"+epostadress+"'");
-            String ANlosenordDb = idb.fetchSingle("SELECT Losenord FROM mibdb.agent WHERE Epost = '"+epostadress+"'");
+            
+            // Variablerna tilldelas värde från mibdb-databasen.
+            // Agent-AT varibler som representerar epostadressen för en agent från databasen samt lösenordet.
+            String isAdmin = idb.fetchSingle("select Administrator from mibdb.agent WHERE Epost = '" + epostadress + "';");
+            String ATepostadressDb = idb.fetchSingle("SELECT Epost FROM mibdb.agent WHERE Epost = '"+epostadress+"'");
+            String ATlosenordDb = idb.fetchSingle("SELECT Losenord FROM mibdb.agent WHERE Epost = '"+epostadress+"'");
             
             
-            // if-sats, om epostadressen samt lösenordet som skrivs i text fälteten är lika med infon från databasen, skapas en JFrame.
-            // Agent
-            if(epostadress.equals(ANepostadressDb) && losenord.equals(ANlosenordDb)) {
+            // if-sats, om epostadressen samt lösenordet som skrivs i text fälteten är lika med infon från databasen, skickas användaren till MinSidaAgentForm.
+            if(epostadress.equals(ATepostadressDb) && losenord.equals(ATlosenordDb)) {
                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(InloggSidanForm.this);
                 frame.setContentPane(new MinSidaAgentForm(epostadress,isAdmin));
                 frame.revalidate();
-                frame.setTitle("Startsida: Agent");
+                frame.setTitle("Startsida: Agent"); 
                 frame.repaint();
 
 
