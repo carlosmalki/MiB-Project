@@ -13,8 +13,13 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
- *
+ * AgentSokForm är en JPanel-klass som visar en panel över ett formulär 
+ * för att utifrån Agent ID söka upp information om agenter registrerade i 
+ * databasen, klassen tar in String epost, och String isAdmin som håller
+ * reda på vilken agent som är inloggad, och om denne är admin.
  * @author ASUS
+ * 
+ * 
  */
 public class AgentSokForm extends javax.swing.JPanel {
 
@@ -26,7 +31,8 @@ public class AgentSokForm extends javax.swing.JPanel {
     private boolean idExists;
     private ValideringsKlass validering;
     /**
-     * Creates new form AlienSokForm
+     * @param epost
+     * @param isAdmin
      */
     public AgentSokForm(String epost, String isAdmin) {
 

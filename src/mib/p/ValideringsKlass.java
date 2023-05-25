@@ -137,7 +137,7 @@ public class ValideringsKlass {
         }
         return aktivtVal;
     }
-  
+
     public static boolean arArrayListTom(ArrayList lista) {
         boolean isEmpty = false;
         if (lista.isEmpty()) {
@@ -145,96 +145,105 @@ public class ValideringsKlass {
         }
         return isEmpty;
     }
-/**
-   * Metod för att validera om ett telefonnummer är giltigt, här har kriterierna sats till:
-   * numret får enbart innehålla siffor och max ett bindestreck, som ej får vara på första
-   * eller sista plats i strängen,uppfylls alla de kraven returneras true, annars false.
-   * @param telefon
+
+    /**
+     * Metod för att validera om ett telefonnummer är giltigt, här har
+     * kriterierna sats till: numret får enbart innehålla siffor och max ett
+     * bindestreck, som ej får vara på första eller sista plats i
+     * strängen,uppfylls alla de kraven returneras true, annars false.
+     *
+     * @param telefon
+     * @return
+     */
+    public static boolean valideraTelefonNummer(String telefon) {
+        boolean giltigtNr = true;
+        int antalBindestreck = 0;
+        int bindestreckIndex = -1;
+
+        for (int i = 0; i < telefon.length(); i++) {
+            if (telefon.charAt(i) == '-') {
+                antalBindestreck++;
+                bindestreckIndex = i;
+            }
+        }
+
+        if (antalBindestreck > 1) {
+            giltigtNr = false;
+        } else if (bindestreckIndex == 0 || bindestreckIndex == telefon.length() - 1) {
+            giltigtNr = false;
+        } else if (antalBindestreck == 1) {
+            String forstaDel = telefon.substring(0, bindestreckIndex);
+            String andraDel = telefon.substring(bindestreckIndex + 1);
+
+            try {
+                int forstaDelNummer = Integer.parseInt(forstaDel);
+                int andraDelNummer = Integer.parseInt(andraDel);
+
+            } catch (NumberFormatException e) {
+                giltigtNr = false;
+            }
+        } else {
+
+            try {
+                int telefonNummer = Integer.parseInt(telefon);
+
+            } catch (NumberFormatException e) {
+                giltigtNr = false;
+            }
+        }
+
+        return giltigtNr;
+    }
+  /**
+   * Metod avsedd för att kontrollera om ett Alien ID existerar i databasen,
+   * genom att skapa en ArrayList av allaIDs geno InfDB-metodn fetchColumn,
+   * och sedan loopa genom den för att se om listan innehåller valt ID,
+   * hittas ID returneras true, annars false.
+   * @param alienID
    * @return 
    */
-    public static boolean valideraTelefonNummer(String telefon) {
-    boolean giltigtNr = true;
-    int antalBindestreck = 0;
-    int bindestreckIndex = -1;
+    public static boolean existerarAlienID(String alienID) {
+        boolean idExisterar = false;
+        String query = "SELECT Alien_ID FROM mibdb.alien;";
+        ArrayList<String> allaIDs;
 
-    for (int i = 0; i < telefon.length(); i++) {
-        if (telefon.charAt(i) == '-') {
-            antalBindestreck++;
-            bindestreckIndex = i;
-        }
-    }
-
-    if (antalBindestreck > 1) {
-        giltigtNr = false; 
-    } else if (bindestreckIndex == 0 || bindestreckIndex == telefon.length() - 1) {
-        giltigtNr = false; 
-    } else if (antalBindestreck == 1) {
-        String forstaDel = telefon.substring(0, bindestreckIndex);
-        String andraDel = telefon.substring(bindestreckIndex + 1);
-
-        
         try {
-            int forstaDelNummer = Integer.parseInt(forstaDel);
-            int andraDelNummer = Integer.parseInt(andraDel);
-            
-          
+            allaIDs = idb.fetchColumn(query);
 
-        } catch (NumberFormatException e) {
-            giltigtNr = false; 
+            if (allaIDs.contains(alienID)) {
+
+                idExisterar = true;
+            }
+        } catch (InfException e) {
+
         }
-    } else {
-       
+
+        return idExisterar;
+    }
+   /**
+   * Metod avsedd för att kontrollera om ett Alien ID existerar i databasen,
+   * genom att skapa en ArrayList av allaIDs geno InfDB-metodn fetchColumn,
+   * och sedan loopa genom den för att se om listan innehåller valt ID,
+   * hittas ID returneras true, annars false.
+   * @param agentID
+   * @return 
+   */
+    public static boolean existerarAgentID(String agentID) {
+        boolean idExisterar = false;
+        String query = "SELECT Agent_ID FROM mibdb.agent;";
+        ArrayList<String> allaAgentIDs;
+
         try {
-            int telefonNummer = Integer.parseInt(telefon);
-            
-            
+            allaAgentIDs = idb.fetchColumn(query);
 
-        } catch (NumberFormatException e) {
-            giltigtNr = false; 
+            if (allaAgentIDs.contains(agentID)) {
+
+                idExisterar = true;
+            }
+        } catch (InfException e) {
+
         }
+
+        return idExisterar;
     }
-
-    return giltigtNr;
-}
-    
-     public static boolean existerarAlienID(String alienID) {
-    boolean idExisterar = false;
-    String query = "SELECT Alien_ID FROM mibdb.alien;";
-    ArrayList<String> allaIDs ;
-
-    try {
-        allaIDs = idb.fetchColumn(query);
-       
-        
-        if(allaIDs.contains(alienID))
-        {
-            
-          idExisterar = true;
-        }
-    } catch (InfException e) {
-        
-    }
-
-    return idExisterar;
-}
-     
-     public static boolean existerarAgentID(String alienID) {
-    boolean idExisterar = false;
-    String query = "SELECT Agent_ID FROM mibdb.agent;";
-    ArrayList<String> allaAgentIDs;
-
-    try {
-        allaAgentIDs = idb.fetchColumn(query);
-       
-        if(allaAgentIDs.contains(alienID))
-        {
-            
-          idExisterar = true;
-        }
-    } catch (InfException e) {
-        
-    }
-
-    return idExisterar;
-}
 }
