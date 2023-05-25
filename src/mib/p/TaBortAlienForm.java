@@ -155,13 +155,15 @@ public class TaBortAlienForm extends javax.swing.JPanel {
         String aliensNamn = cbValjAlien.getSelectedItem().toString();
     if (boglodites.contains(aliensNamn)) {
         taBortBoglodite(aliensNamn);
-    } else if (worms.contains(aliensNamn)) {
-        taBortWorm(aliensNamn);
-    } else if (squids.contains(aliensNamn)) {
-        taBortSquid(aliensNamn);
-    } else {
-         taBortAlien(aliensNamn);
     }
+    if (worms.contains(aliensNamn)) {
+        taBortWorm(aliensNamn);
+    }
+    if (squids.contains(aliensNamn)) {
+        taBortSquid(aliensNamn);
+    } 
+    taBortAlien(aliensNamn);
+    
     }//GEN-LAST:event_btnTaBortAlienActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
