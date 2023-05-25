@@ -83,11 +83,12 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         cbNyKontorsChef = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        btnAdminsida = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -256,8 +257,14 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Sök och byt chef:");
 
-        btnAdminsida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnAdminsida.setText("Adminsida");
+        jButton1.setBackground(new java.awt.Color(242, 242, 242));
+        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jButton1.setText("Adminsida");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -269,8 +276,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdminsida)
-                .addGap(95, 95, 95)
+                .addComponent(jButton1)
+                .addGap(87, 87, 87)
                 .addComponent(btnMinSida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
             .addGroup(layout.createSequentialGroup()
@@ -283,7 +290,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,9 +298,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdminsida)
-                    .addComponent(btnMinSida))
-                .addGap(8, 8, 8))
+                    .addComponent(btnMinSida)
+                    .addComponent(jButton1))
+                .addGap(7, 7, 7))
         );
     }// </editor-fold>//GEN-END:initComponents
 /**
@@ -382,6 +389,14 @@ public class HanteraCheferForm extends javax.swing.JPanel {
          JOptionPane.showMessageDialog(null, "Var god välj agent att befordra.");
         }
     }//GEN-LAST:event_btnBytKontorsChefActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraCheferForm.this);
+        frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Administratörsfunktioner");
+        frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * Metod för att få Agent_ID på den agent man vill välja som ny områdes-
      * eller kontorschef; boolean-variablen omradePueshed håller reda på om det
@@ -670,7 +685,6 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdminsida;
     private javax.swing.JButton btnBytKontorsChef;
     private javax.swing.JButton btnBytOmradesChef;
     private javax.swing.JButton btnHittaChefKontor;
@@ -680,6 +694,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbNyKontorsChef;
     private javax.swing.JComboBox<String> cbNyOmradesChef;
     private javax.swing.JComboBox<String> cbOmradesChef;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

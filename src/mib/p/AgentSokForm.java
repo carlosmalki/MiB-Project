@@ -208,6 +208,7 @@ public class AgentSokForm extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +217,7 @@ public class AgentSokForm extends javax.swing.JPanel {
             }
         });
 
+        btnAdminSida.setBackground(new java.awt.Color(242, 242, 242));
         btnAdminSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAdminSida.setText("Adminsida");
         btnAdminSida.addActionListener(new java.awt.event.ActionListener() {

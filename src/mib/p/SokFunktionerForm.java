@@ -17,6 +17,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * SokFunktionerForm är en JPanel-klass där användare får olika alterativ till
+ * att söka efter aliens i databasen, utifrån ras, plats, och reg-datum, och
+ * resultaten visas upp i en JTable, användaren kan också välja ID-sök och
+ * skicas då vidare till en panel för det ändamålet.
  *
  * @author ASUS
  */
@@ -244,9 +248,9 @@ public class SokFunktionerForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
   /**
      * Metod som utifrån texten på fältet sokMetod, kör anting sokRas()-metoden
-     * eller sokPlats()-metoden för att ge relevanta resultat, efter att 
-     * först ha testat cbValj boxen så att ett aktivt val har gjorts, genom metod
-     * från ValiderinsKlass.
+     * eller sokPlats()-metoden för att ge relevanta resultat, efter att först
+     * ha testat cbValj boxen så att ett aktivt val har gjorts, genom metod från
+     * ValiderinsKlass.
      *
      * @param evt
      */
@@ -327,8 +331,8 @@ public class SokFunktionerForm extends javax.swing.JPanel {
         } catch (ParseException ex) {
             Logger.getLogger(SokFunktionerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-        
+
+
     }//GEN-LAST:event_btnDatumSokActionPerformed
 
     private void btnIdSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdSokActionPerformed
@@ -495,33 +499,32 @@ public class SokFunktionerForm extends javax.swing.JPanel {
 
     public void datumSok() throws ParseException {
         try {
-            
-            
+
             // Datum 1 och 2 från txtfälten.
             String Datum1 = txtFranDatum.getText();
             String Datum2 = txtTillDatum.getText();
             // Omvandlar dom till date.
-          
+
             // Om båda datum fälten är tomma.
-            if(Datum1.equals("") && Datum2.equals("")) {
+            if (Datum1.equals("") && Datum2.equals("")) {
                 JOptionPane.showMessageDialog(null, "Vänligen ange dina önskade datum!");
                 return;
             }
             // Om datum1 "från" är tom.
-            if(Datum1.equals("")) {
+            if (Datum1.equals("")) {
                 JOptionPane.showMessageDialog(null, "Vänligen ange din önskade från: datum!");
                 return;
             }
             // Om datum2 "till" är tom.
-            if(Datum2.equals("")) {
+            if (Datum2.equals("")) {
                 JOptionPane.showMessageDialog(null, "Vänligen ange din önskade till: datum!");
                 return;
             }
             // Datum formatet som måste följas yyyy-MM-dd.
             String datePattern = "\\d{4}-\\d{2}-\\d{2}";
-            
+
             // Om inmatning av datumnet machar formatet körs if statsen.
-            if (Datum1.matches(datePattern)&& Datum2.matches(datePattern)) {
+            if (Datum1.matches(datePattern) && Datum2.matches(datePattern)) {
 
                 // En ny table skapas.
                 DefaultTableModel model = new DefaultTableModel();
@@ -531,10 +534,10 @@ public class SokFunktionerForm extends javax.swing.JPanel {
 
                 ArrayList<HashMap<String, String>> rows;
                 String query;
-                
+
                 query = ("SELECT mibdb.alien.Alien_ID, mibdb.alien.Namn, mibdb.alien.Registreringsdatum FROM mibdb.alien WHERE "
                         + "Registreringsdatum BETWEEN '" + Datum1 + "' AND '" + Datum2 + "' ORDER BY Registreringsdatum ");
-                
+
                 // skapar raderna beronde av sql frågan.
                 rows = idb.fetchRows(query);
 
@@ -550,7 +553,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
                 // Om fel format anges på datum.
                 JOptionPane.showMessageDialog(null, "Vara god ange datum enligt format: YYYY-MM-DD");
             }
-            
+
             jTable1.setVisible(true);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Vara god ange datum enligt format: YYYY-MM-DD");

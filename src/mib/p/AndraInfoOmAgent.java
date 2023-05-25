@@ -71,7 +71,8 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         btnMinSida = new javax.swing.JButton();
         btnAdminSida = new javax.swing.JButton();
 
-        btnUppdater.setText("Uppdatera ");
+        btnUppdater.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnUppdater.setText("Ändra");
         btnUppdater.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUppdaterActionPerformed(evt);
@@ -118,22 +119,16 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         jPaneInfoAgentLayout.setHorizontalGroup(
             jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblTelefon)
-                .addGap(388, 388, 388))
-            .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAdminstrator)
-                            .addComponent(lblNamn)
-                            .addComponent(lblOmrade)
-                            .addComponent(lblLosenOrd)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPaneInfoAgentLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblAnstallningsDatum)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblAnstallningsDatum, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblNamn, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblAdminstrator, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblOmrade, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblLosenOrd, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtNamn)
@@ -147,17 +142,15 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtAndraTelefon)
                     .addComponent(txtAndraLosenOrd)
-                    .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
-                        .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblNyInfo)
-                            .addComponent(jComboValjAdministrator, 0, 144, Short.MAX_VALUE)
-                            .addComponent(jComboValjOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtAndraAnstallningsdatum))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblNyInfo)
+                        .addComponent(jComboValjAdministrator, 0, 161, Short.MAX_VALUE)
+                        .addComponent(jComboValjOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtAndraAnstallningsdatum))
                     .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxAgentBokstav, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jComboBoxAgentBokstav, 0, 117, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPaneInfoAgentLayout.setVerticalGroup(
@@ -200,6 +193,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnRensa.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnRensa.setText("Rensa");
         btnRensa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +204,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         lblAngeAgentID.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblAngeAgentID.setText("Ange Agent ID:");
 
+        btnSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSok.setText("Sök");
         btnSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +212,8 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             }
         });
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,6 +221,8 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             }
         });
 
+        btnAdminSida.setBackground(new java.awt.Color(242, 242, 242));
+        btnAdminSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAdminSida.setText("Adminsida");
         btnAdminSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,9 +248,9 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                         .addComponent(jPaneInfoAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addComponent(btnAdminSida)
-                .addGap(59, 59, 59)
+                .addGap(35, 35, 35)
                 .addComponent(btnUppdater)
                 .addGap(18, 18, 18)
                 .addComponent(btnRensa)

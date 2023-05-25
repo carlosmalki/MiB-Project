@@ -102,6 +102,7 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 48)); // NOI18N
         lblRubrik.setText("Hantera utrustning:");
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {

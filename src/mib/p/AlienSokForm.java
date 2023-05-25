@@ -199,6 +199,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
         btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnMinSida.setText("Min sida");
         btnMinSida.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +208,7 @@ public class AlienSokForm extends javax.swing.JPanel {
             }
         });
 
+        btnSokFunktioner.setBackground(new java.awt.Color(242, 242, 242));
         btnSokFunktioner.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSokFunktioner.setText("Sökfunktioner");
         btnSokFunktioner.addActionListener(new java.awt.event.ActionListener() {
