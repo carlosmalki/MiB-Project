@@ -4,11 +4,16 @@
  */
 package mib.p;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -319,7 +324,13 @@ public class SokFunktionerForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
-        datumSok();
+        try {
+            datumSok();
+        } catch (ParseException ex) {
+            Logger.getLogger(SokFunktionerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        
     }//GEN-LAST:event_btnDatumSokActionPerformed
 
     private void btnIdSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdSokActionPerformed
@@ -484,13 +495,15 @@ public class SokFunktionerForm extends javax.swing.JPanel {
 
     }
 
-    public void datumSok() {
+    public void datumSok() throws ParseException {
         try {
-
+            
+            
             // Datum 1 och 2 från txtfälten.
             String Datum1 = txtFranDatum.getText();
             String Datum2 = txtTillDatum.getText();
-            
+            // Omvandlar dom till date.
+          
             // Om båda datum fälten är tomma.
             if(Datum1.equals("") && Datum2.equals("")) {
                 JOptionPane.showMessageDialog(null, "Vänligen ange dina önskade datum!");
@@ -506,8 +519,10 @@ public class SokFunktionerForm extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Vänligen ange din önskade till: datum!");
                 return;
             }
-           
-            if (Datum1.contains("-") && Datum2.contains("-")) {
+            // Datum formatet som måste följas yyyy-MM-dd.
+            String datePattern = "\\d{4}-\\d{2}-\\d{2}";
+            
+            if (Datum1.matches(datePattern)&& Datum2.matches(datePattern)) {
 
                 // En ny table skapas.
                 DefaultTableModel model = new DefaultTableModel();
