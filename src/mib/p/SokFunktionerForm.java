@@ -490,32 +490,53 @@ public class SokFunktionerForm extends javax.swing.JPanel {
             // Datum 1 och 2 från txtfälten.
             String Datum1 = txtFranDatum.getText();
             String Datum2 = txtTillDatum.getText();
-
+            
+            // Om båda datum fälten är tomma.
+            if(Datum1.equals("") && Datum2.equals("")) {
+                JOptionPane.showMessageDialog(null, "Vänligen ange dina önskade datum!");
+                return;
+            }
+            // Om datum1 "från" är tom.
+            if(Datum1.equals("")) {
+                JOptionPane.showMessageDialog(null, "Vänligen ange din önskade från: datum!");
+                return;
+            }
+            // Om datum2 "till" är tom.
+            if(Datum2.equals("")) {
+                JOptionPane.showMessageDialog(null, "Vänligen ange din önskade till: datum!");
+                return;
+            }
+           
             if (Datum1.contains("-") && Datum2.contains("-")) {
 
+                // En ny table skapas.
                 DefaultTableModel model = new DefaultTableModel();
+                // Den får tre kolumner, alienid, namn, registreringsdatum
                 model.setColumnIdentifiers(new Object[]{"Alien ID", "Namn", "Registreringsdatum"});
                 jTable1.setModel(model);
 
                 ArrayList<HashMap<String, String>> rows;
                 String query;
-
+                
                 query = ("SELECT mibdb.alien.Alien_ID, mibdb.alien.Namn, mibdb.alien.Registreringsdatum FROM mibdb.alien WHERE "
                         + "Registreringsdatum BETWEEN '" + Datum1 + "' AND '" + Datum2 + "' ORDER BY Registreringsdatum ");
-
+                
+                // skapar raderna beronde av sql frågan.
                 rows = idb.fetchRows(query);
 
                 for (HashMap<String, String> item : rows) {
                     String alienId = item.get("Alien_ID");
                     String namn = item.get("Namn");
                     String registreringsdatum = item.get("Registreringsdatum");
+                    // Lägger till raderna.
                     model.addRow(new Object[]{alienId, namn, registreringsdatum});
                 }
 
             } else {
+                // Om fel format anges på datum.
                 JOptionPane.showMessageDialog(null, "Vara god ange datum enligt format: YYYY-MM-DD");
             }
-
+            
             jTable1.setVisible(true);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Vara god ange datum enligt format: YYYY-MM-DD");
