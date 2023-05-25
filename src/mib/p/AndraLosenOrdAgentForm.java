@@ -127,7 +127,7 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    // Denna knapp skickar en till MInSidaAgentForm.
+    // Denna knapp skickar en till MinSidaAgentForm.
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraLosenOrdAgentForm.this);
                 frame.setContentPane(new MinSidaAgentForm(epost,isAdmin));
