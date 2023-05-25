@@ -362,7 +362,7 @@ JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-                frame.setContentPane(new RegistreraUtrustning2(epost, isAdmin));
+                frame.setContentPane(new RegistreraUtrustning(epost, isAdmin));
                 frame.revalidate();
                 frame.setTitle("Startsida: Agent");
                 frame.repaint();

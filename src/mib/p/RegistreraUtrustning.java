@@ -20,15 +20,15 @@ import java.util.logging.Logger;
  *
  * @author samsung
  */
-public class RegistreraUtrustning2 extends javax.swing.JPanel {
+public class RegistreraUtrustning extends javax.swing.JPanel {
     private String epost;
     private String isAdmin;
     private static InfDB idb;
 
     /**
-     * Creates new form RegistreraUtrustning2
+     * Creates new form RegistreraUtrustning
      */
-    public RegistreraUtrustning2(String epost, String isAdmin) {
+    public RegistreraUtrustning(String epost, String isAdmin) {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
@@ -129,7 +129,7 @@ public class RegistreraUtrustning2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning2.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
                 frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
                 frame.revalidate();
                 frame.setTitle("Startsida: Agent");
@@ -165,11 +165,23 @@ public class RegistreraUtrustning2 extends javax.swing.JPanel {
     
     private void kollaTyp(String utrustningsTyp, String id) {
         if (utrustningsTyp.equals("Vapen")) {
-            new RegistreraVapen(id, epost, isAdmin).setVisible(true);
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+                frame.setContentPane(new RegistreraVapen(id, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera vapen");
+                frame.repaint();
         } else if (utrustningsTyp.equals("Kommunikation")) {
-            new RegistreraKommunikation(id, epost, isAdmin).setVisible(true);
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+                frame.setContentPane(new RegistreraKommunikation(id, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera kommunikation");
+                frame.repaint();
         } else if (utrustningsTyp.equals("Teknik")) {
-            new RegistreraTeknik(id, epost, isAdmin).setVisible(true);
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+                frame.setContentPane(new RegistreraTeknik(id, epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Registrera teknik");
+                frame.repaint();
         }
         //dispose(); funkar inte ?? kanske inte behövs
         // - kolla vad som händer när sidan tar dig vidare till nästa steg, stängs detta?
