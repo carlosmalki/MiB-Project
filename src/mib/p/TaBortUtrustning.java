@@ -25,9 +25,7 @@ public class TaBortUtrustning extends javax.swing.JPanel {
      */
     public TaBortUtrustning(String epost, String isAdmin) {
         initComponents();
-        this.epost = epost;
-        this.isAdmin = isAdmin;
-        fyllComboBox();
+        
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -35,6 +33,9 @@ public class TaBortUtrustning extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
+        this.epost = epost;
+        this.isAdmin = isAdmin;
+        fyllComboBox();
     }
 
     /**

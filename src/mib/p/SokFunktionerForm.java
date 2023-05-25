@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ASUS
  */
-public class ListaAlienForm extends javax.swing.JPanel {
+public class SokFunktionerForm extends javax.swing.JPanel {
 
     private static InfDB idb;
     private String epost;
@@ -28,7 +28,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
     /**
      * Creates new form testFormTabell
      */
-    public ListaAlienForm(String epost, String isAdmin) {
+    public SokFunktionerForm(String epost, String isAdmin) {
         initComponents();
 
         try {
@@ -70,6 +70,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
         lblTill = new javax.swing.JLabel();
         btnDatumSok = new javax.swing.JButton();
         txtTillDatum = new javax.swing.JTextField();
+        btnIdSok = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -148,6 +149,14 @@ public class ListaAlienForm extends javax.swing.JPanel {
             }
         });
 
+        btnIdSok.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnIdSok.setText("Id-sök");
+        btnIdSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIdSokActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +177,8 @@ public class ListaAlienForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2))
-                    .addComponent(btnValjDatumSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValjDatumSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIdSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -193,14 +203,16 @@ public class ListaAlienForm extends javax.swing.JPanel {
                 .addComponent(btnSokRas)
                 .addGap(18, 18, 18)
                 .addComponent(btnValjDatumSok)
-                .addGap(8, 108, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnIdSok)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbValj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnSokKnapp))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -245,10 +257,10 @@ public class ListaAlienForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSokKnappActionPerformed
 
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ListaAlienForm.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SokFunktionerForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
         frame.revalidate();
-        frame.setTitle("Sök ras");
+        frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
     /**
@@ -302,6 +314,14 @@ public class ListaAlienForm extends javax.swing.JPanel {
     private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
         datumSok();
     }//GEN-LAST:event_btnDatumSokActionPerformed
+
+    private void btnIdSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdSokActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SokFunktionerForm.this);
+        frame.setContentPane(new AlienSokForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Id-Sök");
+        frame.repaint();
+    }//GEN-LAST:event_btnIdSokActionPerformed
     /**
      * Metod som först anpassar SQL-query efter vald ras, och sedan anpassar
      * jTable1-tabellen med hjälp av DefaultTableModel, så att den kan fyllas på
@@ -508,6 +528,7 @@ public class ListaAlienForm extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatumSok;
+    private javax.swing.JButton btnIdSok;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnSokKnapp;
     private javax.swing.JButton btnSokPlats;
