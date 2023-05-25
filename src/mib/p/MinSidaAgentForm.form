@@ -25,29 +25,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="49" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnAndraAlienInfo" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
-                  <Component id="btnSokFunktioner" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnRegisteraAlien" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
-                  <Component id="btnUtrustning" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="btnAndraLosenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btnAdminFunktioner" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-              <Component id="btnHittaOmradesChef" min="-2" pref="194" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
@@ -61,6 +43,21 @@
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnToppLista" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Component id="btnAndraAlienInfo" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Component id="btnSokFunktioner" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="41" pref="24" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnRegisteraAlien" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Component id="btnUtrustning" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Component id="btnHittaOmradesChef" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,7 +79,10 @@
                   <Component id="btnUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnHittaOmradesChef" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnHittaOmradesChef" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnToppLista" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="53" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAdminFunktioner" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -221,6 +221,17 @@
         </Property>
         <Property name="text" type="java.lang.String" value="V&#xe4;lkommen:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnToppLista">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="MS Gothic" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Topplista"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnToppListaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -69,6 +69,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblAgentNamn = new javax.swing.JLabel();
         lblValkommen = new javax.swing.JLabel();
+        btnToppLista = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -154,30 +155,24 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         lblValkommen.setFont(new java.awt.Font("MS Gothic", 1, 24)); // NOI18N
         lblValkommen.setText("Välkommen:");
 
+        btnToppLista.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnToppLista.setText("Topplista");
+        btnToppLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToppListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAndraAlienInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSokFunktioner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegisteraAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUtrustning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(btnAndraLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAdminFunktioner)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(btnHittaOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -187,6 +182,18 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                         .addGap(193, 193, 193)
                         .addComponent(lblValkommen)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnToppLista, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAndraAlienInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSokFunktioner, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegisteraAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUtrustning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHittaOmradesChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +211,9 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                     .addComponent(btnAndraAlienInfo)
                     .addComponent(btnUtrustning))
                 .addGap(18, 18, 18)
-                .addComponent(btnHittaOmradesChef)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHittaOmradesChef)
+                    .addComponent(btnToppLista))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdminFunktioner)
@@ -276,6 +285,14 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 frame.repaint();
     }//GEN-LAST:event_btnHittaOmradesChefActionPerformed
 
+    private void btnToppListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToppListaActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+                frame.setContentPane(new ToppTreKontaktAgentForm(epost, isAdmin));
+                frame.revalidate();
+                frame.setTitle("Topplista: Kontaktagenter");
+                frame.repaint();
+    }//GEN-LAST:event_btnToppListaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminFunktioner;
@@ -284,6 +301,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
     private javax.swing.JButton btnHittaOmradesChef;
     private javax.swing.JButton btnRegisteraAlien;
     private javax.swing.JButton btnSokFunktioner;
+    private javax.swing.JButton btnToppLista;
     private javax.swing.JButton btnUtrustning;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAgentNamn;
