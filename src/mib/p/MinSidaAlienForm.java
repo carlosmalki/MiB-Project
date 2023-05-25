@@ -223,7 +223,7 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
 
     
 } catch (InfException e) {
-    // Hantera eventuellt undantag här
+   
     JOptionPane.showMessageDialog(null, "Ett fel uppstod: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
     
 }
