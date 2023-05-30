@@ -39,9 +39,9 @@ public class HittaOmradesChef extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+            
         }
-        fyllComboBoxKontor();
+        fyllComboBoxOmrade();
         txtHittadChef.setEditable(false);
     }
 
@@ -153,7 +153,11 @@ public class HittaOmradesChef extends javax.swing.JPanel {
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metod kopplad till btnVisaOmradesChef som genom InfDB-metoden fetchSingle() hämtar namnet
+ * på den agent som för tillfället är chef för valt område, och sätter ett textfält med namnet.
+ * @param evt 
+ */
     private void btnVisaOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaOmradesChefActionPerformed
         String valtKontor = cbOmrade.getSelectedItem().toString();
         try {
@@ -171,7 +175,12 @@ public class HittaOmradesChef extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+/**
+ * Metod kopplad till btnChefInfo,som om textfältet för chefsnamn inte är tomt hämtar all info om vald chef,
+ * genom InfDB-metoden fetchRow och lagrar det i en HashMap, som sedan skickas med
+ * som parameter när en ny instans av HittaOmradesChef initieras.
+ * @param evt 
+ */
     private void btnChefInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChefInfoActionPerformed
         if (ValideringsKlass.validateTextFieldNotEmpty(txtHittadChef.getText())) {
             try {
@@ -192,15 +201,18 @@ public class HittaOmradesChef extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vad god sök chef först.");
         }
     }//GEN-LAST:event_btnChefInfoActionPerformed
+/**
+ * Metod som fyller upp cbOmrade med namn på de områden som finns i databasen genom
+ * InfDB-metode fetchColumn().
+ */
+    private void fyllComboBoxOmrade() {
 
-    private void fyllComboBoxKontor() {
-
-        ArrayList<String> kontor;
+        ArrayList<String> omrade;
         cbOmrade.removeAllItems();
         try {
-            kontor = idb.fetchColumn("select benamning from omrade");
+            omrade = idb.fetchColumn("select benamning from omrade");
 
-            for (String ettKontor : kontor) {
+            for (String ettKontor : omrade) {
                 cbOmrade.addItem(ettKontor);
             }
         } catch (InfException ex) {

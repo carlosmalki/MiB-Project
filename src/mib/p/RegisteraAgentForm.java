@@ -432,7 +432,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Områdes-ID.");
         }
 
         return omradesID;
@@ -505,7 +505,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             }
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av data.");
         }
 
     }
@@ -569,7 +569,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             }
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av data.");
         }
 
     }
@@ -584,7 +584,7 @@ public class RegisteraAgentForm extends javax.swing.JPanel {
             idb.insert(query);
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av data.");
         }
     }
 

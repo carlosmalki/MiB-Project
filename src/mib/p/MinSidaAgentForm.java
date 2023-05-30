@@ -238,7 +238,11 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
- private void setValkommen() {
+ /**
+  * Metod som genon InfDB-metoden fetchSingle hämtar namnet på den agent som precis loggat in
+  * för att fylla lblAgentNamn med detta som välkomnsthälsning.
+  */
+    private void setValkommen() {
         try {
             lblAgentNamn.setText(idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Epost = '" + epost + "'"));
         } catch (InfException e) {
@@ -308,7 +312,12 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         frame.setTitle("Topplista: Kontaktagenter");
         frame.repaint();
     }//GEN-LAST:event_btnToppListaActionPerformed
-
+/**
+ * Metod kopplad till btnLoggaUt, som vid första trycket ställer en kontrollfråga om man verkligen vill
+ * logga ut, och vid andra trycket (vilket hålls reda på via boolean-variabel tryckNrTva) låter
+ * användaren logga ut.
+ * @param evt 
+ */
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
          if(tryckNrTva)
        {

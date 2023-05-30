@@ -420,10 +420,10 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             agentID = Integer.parseInt(idb.fetchSingle(query));
         } catch (NumberFormatException e) {
 
-            System.out.println("Fel vid konvertering av Agent_ID till heltal: " + e.getMessage());
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid konverting till heltal");
         } catch (InfException e) {
 
-            System.out.println("Fel vid databasåtkomst: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av Agent ID.");
         }
 
         return agentID;
@@ -453,8 +453,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
         try {
             chefsNamn = idb.fetchSingle(query);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämntning av chefnamn.");
+            
             return null;
         }
         return chefsNamn;
@@ -480,8 +480,8 @@ public class HanteraCheferForm extends javax.swing.JPanel {
                     + ")";
             kontorsChef = idb.fetchSingle(query);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämnting av chefsnamn.");
+           
         }
         return kontorsChef;
     }
@@ -502,7 +502,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
 
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
+          
             omrade = new ArrayList<>();
         }
 
@@ -639,7 +639,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             txtNuvarandeChefKontor.setText("");
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Något gick fel med uppdatering av kontorschef.");
 
         }
     }
@@ -661,9 +661,9 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             idb.insert(query2);
         } catch (InfException e) {
 
-            e.printStackTrace();
+           
 
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hantering av kontorschef till fältagent: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hantering av kontorschef till fältagent: ");
         }
     }
 
@@ -681,7 +681,7 @@ public class HanteraCheferForm extends javax.swing.JPanel {
             idb.delete(query);
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av fältagent.");
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

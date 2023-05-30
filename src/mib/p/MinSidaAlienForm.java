@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package mib.p;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -11,31 +12,31 @@ import oru.inf.InfException;
 import java.util.HashMap;
 
 /**
- *MinSidaAlienForm är en JPanel-klass som visar hemsidan för en alien
- * när denne loggar in i systemet, den får info om kontakt-agent,
- * aktuellt område denne alien tillhör, och namn på områdeschefen,
- * Alien kan välja att se mer information om chefen, eller ändra sitt lösenord.
- * 
+ * MinSidaAlienForm är en JPanel-klass som visar hemsidan för en alien när denne
+ * loggar in i systemet, den får info om kontakt-agent, aktuellt område denne
+ * alien tillhör, och namn på områdeschefen, Alien kan välja att se mer
+ * information om chefen, eller ändra sitt lösenord.
+ *
  * @author ASUS
  */
 public class MinSidaAlienForm extends javax.swing.JPanel {
+
     String epost;
     String omradet;
     private boolean tryckNrTva;
-    
+
     private static InfDB idb;
-    
 
     /**
      * Creates new form MinSidaForm
+     *
      * @param epost
      */
     public MinSidaAlienForm(String epost) {
         initComponents();
         this.epost = epost;
         tryckNrTva = false;
-       
-        
+
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
@@ -46,7 +47,7 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
         setAnsvarigAgent();
         setOmrade();
         setOmradesChef();
-       
+
     }
 
     /**
@@ -217,102 +218,127 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAndraLosenord)
-                    .addComponent(btnLoggaUt))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLoggaUt)
+                    .addComponent(btnAndraLosenord))
                 .addGap(5, 5, 5))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosenordActionPerformed
-     JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
-                frame.setContentPane(new AndraLosenOrdAlienForm(epost));
-                frame.revalidate();
-                frame.setTitle("Ändra lösenord");
-                frame.repaint();
-                
-    }//GEN-LAST:event_btnAndraLosenordActionPerformed
-
-    private void btnChefKontaktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChefKontaktActionPerformed
-      
-        try {
-    HashMap<String, String> agent = idb.fetchRow("SELECT * FROM MIBDB.AGENT WHERE MIBDB.AGENT.AGENT_ID IN (SELECT MIBDB.OMRADESCHEF.AGENT_ID FROM MIBDB.OMRADESCHEF WHERE OMRADE IN (SELECT OMRADES_ID FROM MIBDB.OMRADE WHERE BENAMNING = '" + omradet + "'))");
-    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
-                frame.setContentPane(new OmradesChefForm(agent,omradet,epost));
-                frame.revalidate();
-                frame.setTitle("Områdeschef: Information");
-                frame.repaint();
-
-    
-} catch (InfException e) {
-   
-    JOptionPane.showMessageDialog(null, "Ett fel uppstod: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
-    
-}
-    }//GEN-LAST:event_btnChefKontaktActionPerformed
-
-    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-       if(tryckNrTva)
-       {
-           JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
-        frame.setContentPane(new InloggSidanForm("Alien"));
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
+        frame.setContentPane(new AndraLosenOrdAlienForm(epost));
         frame.revalidate();
-        frame.setTitle("Välkommen till MiB");
+        frame.setTitle("Ändra lösenord");
         frame.repaint();
-       
-       }
-       else
-       {
-       JOptionPane.showMessageDialog(null, "Är du säker på att du vill logga ut? Klicka i såfall 'Logga ut' igen.");
-       tryckNrTva = true;
-       }
-        
+
+    }//GEN-LAST:event_btnAndraLosenordActionPerformed
+    /**
+     * Metod kopplad till btnChefKontakt,som utifrån texten för chefsnamn hämtar
+     * all info om vald chef, genom InfDB-metoden fetchRow och lagrar det i en
+     * HashMap, som sedan skickas med som parameter när en ny instans av
+     * OmradesChefForm initieras.
+     *
+     * @param evt
+     */
+    private void btnChefKontaktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChefKontaktActionPerformed
+
+        try {
+            HashMap<String, String> agent = idb.fetchRow("SELECT * FROM MIBDB.AGENT WHERE MIBDB.AGENT.AGENT_ID IN (SELECT MIBDB.OMRADESCHEF.AGENT_ID FROM MIBDB.OMRADESCHEF WHERE OMRADE IN (SELECT OMRADES_ID FROM MIBDB.OMRADE WHERE BENAMNING = '" + omradet + "'))");
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
+            frame.setContentPane(new OmradesChefForm(agent, omradet, epost));
+            frame.revalidate();
+            frame.setTitle("Områdeschef: Information");
+            frame.repaint();
+
+        } catch (InfException e) {
+
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnChefKontaktActionPerformed
+    /**
+     * Metod kopplad till btnLoggaUt, som vid första trycket ställer en
+     * kontrollfråga om man verkligen vill logga ut, och vid andra trycket
+     * (vilket hålls reda på via boolean-variabel tryckNrTva) låter användaren
+     * logga ut.
+     *
+     * @param evt
+     */
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+        if (tryckNrTva) {
+            JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
+            frame.setContentPane(new InloggSidanForm("Alien"));
+            frame.revalidate();
+            frame.setTitle("Välkommen till MiB");
+            frame.repaint();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Är du säker på att du vill logga ut? Klicka i såfall 'Logga ut' igen.");
+            tryckNrTva = true;
+        }
+
     }//GEN-LAST:event_btnLoggaUtActionPerformed
-   private void setValkommen()
-   {
-       try {
-   
-   lblValkommenNamn.setText("Välkommen "+idb.fetchSingle("SELECT Namn FROM mibdb.alien WHERE Epost = '"+epost+"'"));
-   }
-       catch(InfException e) {
+    /**
+     * Metod som genom InfDB-metoden fetchSingle hämtar namnet på inloggad alien
+     * och sedan sätter lblValkommenNamn med namnet som en välkomsthälsning.
+     */
+    private void setValkommen() {
+        try {
+
+            lblValkommenNamn.setText("Välkommen " + idb.fetchSingle("SELECT Namn FROM mibdb.alien WHERE Epost = '" + epost + "'"));
+        } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
-       }}
-   private void setAnsvarigAgent()
-   {
+        }
+    }
+
+    /**
+     * Metod som genom InfDB-metoden fetchSingle hämtar namnet på den agent som
+     * är kontaktagent åt inloggad alien, och sedan sätter lblAnsAgent med
+     * namnet.
+     */
+    private void setAnsvarigAgent() {
         try {
             String ansAgent = idb.fetchSingle("SELECT namn FROM mibdb.agent WHERE Agent_ID IN (SELECT Ansvarig_Agent FROM mibdb.alien WHERE Epost = \"" + epost + "\")");
-       lblAnsAgent.setText("Ansvarig agent:  "+ansAgent);
-       lblAnsAgent.setVisible(true);
-      }
-        catch(InfException e) {
+            lblAnsAgent.setText("Ansvarig agent:  " + ansAgent);
+            lblAnsAgent.setVisible(true);
+        } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
-       }}
-  private void setOmrade() {
-    try {
-        String omrade = idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID IN (SELECT Finns_I FROM mibdb.plats WHERE Plats_ID IN (SELECT Plats FROM mibdb.alien WHERE Epost = '" + epost + "'))");
-        lblOmrade.setText("Område:          " + omrade);
-        lblOmrade.setVisible(true);
-        omradet = omrade;
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
+        }
     }
-} 
- 
-  private void setOmradesChef() {
-    try {
-         
-        String omradesChef = idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE mibdb.agent.Agent_ID IN (SELECT mibdb.omradeschef.Agent_ID FROM mibdb.omradeschef WHERE Omrade IN (SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omradet + "'));");
-        lblOmradesChef.setText("Områdeschef:     " + omradesChef);
-        lblOmradesChef.setVisible(true);
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
+
+    /**
+     * Metod som genom InfDB-metoden fetchSingle hämtar namnet på det område där
+     * inloggad alien vistas, och sedan sätter lblOmrade med namnet.
+     */
+    private void setOmrade() {
+        try {
+            String omrade = idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID IN (SELECT Finns_I FROM mibdb.plats WHERE Plats_ID IN (SELECT Plats FROM mibdb.alien WHERE Epost = '" + epost + "'))");
+            lblOmrade.setText("Område:          " + omrade);
+            lblOmrade.setVisible(true);
+            omradet = omrade;
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
+        }
     }
-}
-           
-   
-   
-   
+
+    /**
+     * Metod som genom InfDB-metoden fetchSingle hämtar namnet på den chef som
+     * är områdeschef över det område där inloggad alien vistas, och sedan
+     * sätter lblOmradesChef med namnet.
+     */
+    private void setOmradesChef() {
+        try {
+
+            String omradesChef = idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE mibdb.agent.Agent_ID IN (SELECT mibdb.omradeschef.Agent_ID FROM mibdb.omradeschef WHERE Omrade IN (SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omradet + "'));");
+            lblOmradesChef.setText("Områdeschef:     " + omradesChef);
+            lblOmradesChef.setVisible(true);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraLosenord;

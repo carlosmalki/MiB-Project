@@ -42,7 +42,7 @@ public class AgentSokForm extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+            
         }
         this.epost = epost;
         idExists = true;
@@ -314,7 +314,7 @@ public class AgentSokForm extends javax.swing.JPanel {
             chefEllerInte();
         }
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Ett fel inträffade: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Ett fel inträffade");
     }
     
     }//GEN-LAST:event_btnSokActionPerformed
@@ -386,6 +386,7 @@ public class AgentSokForm extends javax.swing.JPanel {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.omrade WHERE Omrades_ID IN (SELECT Omrade FROM mibdb.agent WHERE Agent_ID = " + agentID + ")");
             txtOmrade.setText(platsNamn);
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
 
@@ -443,7 +444,7 @@ public class AgentSokForm extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Vänligen ange heltalssiffra för ID-sökning.");
             } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "Agent ID " + txtAgentIdSok.getText() + " finns inte i databasen.");
-                e.printStackTrace();
+                
 
                 txtChefEllerInte.setText("");
             } catch (NullPointerException e) {
@@ -451,7 +452,7 @@ public class AgentSokForm extends javax.swing.JPanel {
                 idExists = false;
                 txtChefEllerInte.setText("");
 
-                e.printStackTrace();
+                
             }
         }
     }
@@ -470,7 +471,7 @@ public class AgentSokForm extends javax.swing.JPanel {
 
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
+           
 
         }
 
@@ -526,7 +527,7 @@ public class AgentSokForm extends javax.swing.JPanel {
             omrade = idb.fetchSingle(query);
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
         }
         return omrade;
     }

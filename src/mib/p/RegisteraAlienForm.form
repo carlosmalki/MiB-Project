@@ -287,9 +287,9 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
                 <StringItem index="0" value="V&#xe4;lj ras"/>
-                <StringItem index="1" value="Boglodite&#x9;"/>
-                <StringItem index="2" value="Squid"/>
-                <StringItem index="3" value="Worm"/>
+                <StringItem index="1" value="Boglodite"/>
+                <StringItem index="2" value="Worm"/>
+                <StringItem index="3" value="Squid"/>
               </StringArray>
             </Property>
           </Properties>

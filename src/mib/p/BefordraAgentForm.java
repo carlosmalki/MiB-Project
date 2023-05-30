@@ -2,8 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-
- /**
+/**
  * Detta är en JPanel-klass som visar användaren en formulärsida för att befordra en agent till administratör,
  * Agenter som för närvarande inte har admin-status visas i en jComboBox,
  * När användaren trycker på knappen "Befordra" sätts den valda agenten till Administratör i databasen,
@@ -168,47 +167,47 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 /**
- * Metod kopplad till btnBefordra som med hjälp av InfDB-metoden update()
- * uppdaterar Administrator-kolumnen i agent-tabellen för vald agent, från "N" till "J", efter
- * att först ha validerat så ett val gjorts, genom metod från valideringsklassen,
- * seda körs metoderna resetEjAdminComboBox() och fyllEjAdminComboBox
- * för att återställa cbEjAdmin.
- * @param evt 
- */
+     * Metod kopplad till btnBefordra som med hjälp av InfDB-metoden update()
+     * uppdaterar Administrator-kolumnen i agent-tabellen för vald agent, från
+     * "N" till "J", efter att först ha validerat så ett val gjorts, genom metod
+     * från valideringsklassen, seda körs metoderna resetEjAdminComboBox() och
+     * fyllEjAdminComboBox för att återställa cbEjAdmin.
+     *
+     * @param evt
+     */
     private void btnBefordraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraActionPerformed
         String namn = null;
         if (ValideringsKlass.valideraComboBoxAktivtVal(cbEjAdmin)) {
             namn = cbEjAdmin.getSelectedItem().toString();
-            
-           
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Var god välj att agent att befordra");
         }
-        else{
-        JOptionPane.showMessageDialog(null, "Var god välj att agent att befordra");
-           }
         String query = "UPDATE mibdb.agent SET Administrator = 'J' WHERE Namn = '" + namn + "'";
-        
+
         try {
             idb.update(query);
             resetEjAdminComboBox();
             fyllEjAdminComboBox();
-            if(namn!=null)
-            {
-            JOptionPane.showMessageDialog(null, namn + " har nu fått administratörstatus");
+            if (namn != null) {
+                JOptionPane.showMessageDialog(null, namn + " har nu fått administratörstatus");
             }
 
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid uppdatering av admin-status.");
 
         }
     }//GEN-LAST:event_btnBefordraActionPerformed
     /**
-     * Metod som återställer cbEjAdmin genom att ta bort allt innehåll och 
-     * sedan lägga in "Agenter" på index 0.
+     * Metod som återställer cbEjAdmin genom att ta bort allt innehåll och sedan
+     * lägga in "Agenter" på index 0.
      */
     public void resetEjAdminComboBox() {
         cbEjAdmin.removeAllItems();
         cbEjAdmin.addItem("Agenter");
         cbEjAdmin.setSelectedIndex(0);
     }
+
     /**
      * Metod kopplad till btnMinSida som fyller upp JFrame med en ny instans av
      * MinSidaAgentForm för att användaren ska kunna ta sig tillbaka till sin
@@ -233,25 +232,24 @@ public class BefordraAgentForm extends javax.swing.JPanel {
         frame.setTitle("Administratörsfunktioner");
         frame.repaint();
     }//GEN-LAST:event_btnAdminTjansterActionPerformed
-     /**
-      * Fyller upp cbEjAdmin med namn på agenter som för tillfället inte har
-      * admin-status, genom InfDB-metoden fetchColumn() som skapar en arraylist
-      * med agent-namn som har "N" i Administrator-kolumnen, och denna arraylist
-      * loopas sedan genom och agentnamnen läggs till im comboboxen.
-      */
+    /**
+     * Fyller upp cbEjAdmin med namn på agenter som för tillfället inte har
+     * admin-status, genom InfDB-metoden fetchColumn() som skapar en arraylist
+     * med agent-namn som har "N" i Administrator-kolumnen, och denna arraylist
+     * loopas sedan genom och agentnamnen läggs till im comboboxen.
+     */
     private void fyllEjAdminComboBox() {
         String query = "SELECT namn FROM mibdb.agent WHERE Administrator = 'N'";
-        ArrayList<String> ejAdminAgenter = null;
+        ArrayList<String> ejAdminAgenter;
 
         try {
             ejAdminAgenter = idb.fetchColumn(query);
+            for (String agent : ejAdminAgenter) {
+                cbEjAdmin.addItem(agent);
+            }
         } catch (InfException e) {
 
-            System.out.println("Fel vid hämtning av ej-administratörer: " + e.getMessage());
-        }
-        for (String agent : ejAdminAgenter) {
-            cbEjAdmin.addItem(agent);
-
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
         }
 
     }

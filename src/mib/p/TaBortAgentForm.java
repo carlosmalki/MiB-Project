@@ -16,9 +16,9 @@ import javax.swing.SwingUtilities;
  * TaBortAgentForm är en JPanel-klass där administratörer i systemet kan ta bort
  * vilken annan agent som helst (utom sig själv), en rensning av alla referenser
  * till Agentens ID tas bort ur databasen och agenten avregistreras.
+ *
  * @author ASUS
  */
-
 public class TaBortAgentForm extends javax.swing.JPanel {
 
     private static InfDB idb;
@@ -49,7 +49,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
         ejChefer = new ArrayList();
         rand = new Random();
         mittNamn = getMittEgetNamn();
-      tomLista = false;
+        tomLista = false;
         fyllAgentArrayList();
         fyllOmradesChefArrayList();
 
@@ -180,8 +180,9 @@ public class TaBortAgentForm extends javax.swing.JPanel {
     private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
         String agentensNamn = cbAgentNamn.getSelectedItem().toString();
         testaEjChefArrayList();
-        if(!tomLista)
-        {testaComboBox();}
+        if (!tomLista) {
+            testaComboBox();
+        }
         if (agentensNamn.equals(mittNamn)) {
             JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv ur databasen. Välj annan agent för borttagning.");
         } else if (omradesChefer.contains(agentensNamn)) {
@@ -239,7 +240,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             agentNamn = idb.fetchColumn(query);
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Agent-namn.");
         }
     }
 
@@ -273,7 +274,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av områdeschefer.");
         }
     }
 
@@ -289,7 +290,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av kontorschefer.");
         }
     }
 
@@ -343,7 +344,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             agentID = Integer.parseInt(idb.fetchSingle(query));
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Agent-ID.");
         }
         return agentID;
     }
@@ -364,7 +365,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av fältagent.");
 
         }
     }
@@ -392,7 +393,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             idb.delete(query2);
 
         } catch (InfException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid byte av områdeschef.");
         }
     }
 
@@ -418,7 +419,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             idb.update(query);
 
         } catch (InfException e) {
-
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid byte av kontorschef.");
         }
     }
 
@@ -447,7 +448,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             omrade = idb.fetchSingle(query);
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av områdesnamn.");
         }
 
         return omrade;
@@ -469,7 +470,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av Agent-ID från utrustning.");
 
         }
     }
@@ -496,7 +497,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av agent.");
 
         }
 
@@ -524,7 +525,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             idb.update(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid byte av ansvarig agent.");
         }
 
     }
@@ -571,7 +572,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             mNamn = idb.fetchSingle(query);
         } catch (InfException ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av namn.");
 
         }
         return mNamn;
@@ -589,12 +590,12 @@ public class TaBortAgentForm extends javax.swing.JPanel {
     }
 
     public void testaEjChefArrayList() {
-       
+
         try {
             if (ValideringsKlass.arArrayListTom(ejChefer)) {
-                
+
                 throw new NumberFormatException();
-                
+
             }
 
         } catch (NumberFormatException e) {
@@ -602,7 +603,7 @@ public class TaBortAgentForm extends javax.swing.JPanel {
             String meddelande = "<html>Agenten har chefsstatus och kan inte tas bort utan att platsen tillsätts.<br>För närvarande finns inga agenter utan chefsstatus som kan befordras.<br>Registrera ny agent och försök igen.</html>";
             JOptionPane.showMessageDialog(null, meddelande);
         }
-    
+
     }
 
 

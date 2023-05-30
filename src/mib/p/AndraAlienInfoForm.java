@@ -13,15 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
- * AndraAlienInfoForm är en JPanel-klass som visar en panel över ett formulär 
- * för att utifrån Alien ID söka upp information om aliens registrerade i 
- * databasen, och sedan ändra den informationen som man tycker behöver 
- * uppdateras,
- * klassen tar in String epost, och String isAdmin som håller
- * reda på vilken agent som är inloggad, och om denne är admin.
+ * AndraAlienInfoForm är en JPanel-klass som visar en panel över ett formulär
+ * för att utifrån Alien ID söka upp information om aliens registrerade i
+ * databasen, och sedan ändra den informationen som man tycker behöver
+ * uppdateras, klassen tar in String epost, och String isAdmin som håller reda
+ * på vilken agent som är inloggad, och om denne är admin.
+ *
  * @author ASUS
- * 
- * 
+ *
+ *
  */
 public class AndraAlienInfoForm extends javax.swing.JPanel {
 
@@ -29,6 +29,8 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private String epost;
     private String isAdmin;
     private ValideringsKlass validera = new ValideringsKlass();
+    private int varierande;
+    private String varierandeString;
 
     /**
      * Creates new form AlienSokForm
@@ -41,9 +43,11 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+           
         }
         this.epost = epost;
+        varierande = 0;
+        varierandeString = "";
 
     }
 
@@ -81,7 +85,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         txtAndraLosenOrd = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jComboAgenter = new javax.swing.JComboBox<>();
-        jComboValjRas = new javax.swing.JComboBox<>();
+        cbValjRas = new javax.swing.JComboBox<>();
         jComboValjPlats = new javax.swing.JComboBox<>();
         btnMinSida = new javax.swing.JButton();
         btnAndraInfo = new javax.swing.JButton();
@@ -134,7 +138,12 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         jComboAgenter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj agent" }));
         jComboAgenter.setToolTipText("");
 
-        jComboValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", " " }));
+        cbValjRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras" }));
+        cbValjRas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbValjRasActionPerformed(evt);
+            }
+        });
 
         jComboValjPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj plats" }));
 
@@ -177,7 +186,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                                     .addComponent(jLabel4)
                                     .addComponent(txtAndraNamn)
                                     .addComponent(jComboAgenter, 0, 144, Short.MAX_VALUE)
-                                    .addComponent(jComboValjRas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbValjRas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboValjPlats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
@@ -197,7 +206,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labRas)
-                    .addComponent(jComboValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbValjRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,15 +310,17 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     /**
-     * Metod kopplad till btnSok som först fyller upp alla comboxar genom respektive
-     * box-metod, och sedan kör alienSok() för att få fram info om vald alien.
-     * @param evt 
+     * Metod kopplad till btnSok som först fyller upp alla comboxar genom
+     * respektive box-metod, och sedan kör alienSok() för att få fram info om
+     * vald alien.
+     *
+     * @param evt
      */
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        resetComboBoxes();
         String alienIDString = txtAlienIdSok.getText();
-        if(!ValideringsKlass.existerarAlienID(alienIDString)&&ValideringsKlass.valideraInt(alienIDString))
-        {
-        JOptionPane.showMessageDialog(null, "Valt Alien-ID existerar inte i databasen. Försök igen.");
+        if (!ValideringsKlass.existerarAlienID(alienIDString) && ValideringsKlass.valideraInt(alienIDString)) {
+            JOptionPane.showMessageDialog(null, "Valt Alien-ID existerar inte i databasen. Försök igen.");
         }
         txtRas.setText("");
         fyllAgentComboBox();
@@ -359,16 +370,16 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             andraRegDatum(alienID);
 
         }
-        if (!jComboValjRas.getSelectedItem().toString().equals("Välj ras") && ValideringsKlass.validateTextFieldNotEmpty(txtRas.getText())) {
+        if (!cbValjRas.getSelectedItem().toString().equals("Välj ras") && ValideringsKlass.validateTextFieldNotEmpty(txtRas.getText())) {
             String nuvarandeRas = txtRas.getText();
-            String nyRas = jComboValjRas.getSelectedItem().toString();
+            String nyRas = cbValjRas.getSelectedItem().toString();
             if (nyRas.equals("Worm") || nyRas.equals("Boglodite") || nyRas.equals("Squid")) {
                 andraRas(nuvarandeRas, nyRas, Integer.parseInt(txtAlienIdSok.getText()));
             }
         }
-        if (!jComboValjRas.getSelectedItem().toString().equals("Välj ras") && !ValideringsKlass.validateTextFieldNotEmpty(txtRas.getText())) {
-            String nyRas = jComboValjRas.getSelectedItem().toString();
-            laggTillAlien(nyRas, alienID);
+        if (!cbValjRas.getSelectedItem().toString().equals("Välj ras") && !ValideringsKlass.validateTextFieldNotEmpty(txtRas.getText())) {
+            String nyRas = cbValjRas.getSelectedItem().toString();
+            laggTillAlienRas(nyRas, alienID, varierandeString, varierande);
             JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
 
         }
@@ -385,7 +396,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         }
         jComboAgenter.setSelectedIndex(0);
         jComboValjPlats.setSelectedIndex(0);
-        jComboValjRas.setSelectedIndex(0);
+        cbValjRas.setSelectedIndex(0);
     }//GEN-LAST:event_btnAndraInfoActionPerformed
     /**
      * Metod kopplat till btnRensa, som först återställer comboboxarna med
@@ -395,9 +406,56 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
      * @param evt
      */
     private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
-        resetComboBoxes();
+        cbValjRas.setSelectedIndex(0);
         resetTextFalt();
     }//GEN-LAST:event_btnRensaActionPerformed
+    /**
+     * Metod kopplad till cbCbValjRas, som när ett alternativ på ras väljs i
+     * comboboxen ger användaren information om att ange det värde som är
+     * varierande för varje ras (boogies,längd,armar) för att sedan sätta en
+     * varierande Int-variabel med det värdet, och en varierande String-variabel
+     * med kolumn-namnet för den varierande kolumnen hos varje ras, inför att
+     * sedan kunna använda dessa variablar i metoden laggTillAlienRas().
+     *
+     * @param evt
+     */
+    private void cbValjRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbValjRasActionPerformed
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbValjRas) && !ValideringsKlass.valideraComboBox(cbValjRas)) {
+            String valdRas = cbValjRas.getSelectedItem().toString();
+
+            if (valdRas.equals("Boglodite")) {
+                String input = JOptionPane.showInputDialog(null, "Välj antal boogies.");
+                if (ValideringsKlass.valideraInt(input)) {
+                    varierande = Integer.parseInt(input);
+                    varierandeString = "Antal_boogies";
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ange ett heltalsvärde för antal boogies.");
+                }
+            }
+            if (valdRas.equals("Worm")) {
+                String input = JOptionPane.showInputDialog(null, "Välj antal längd.");
+                if (ValideringsKlass.valideraInt(input)) {
+                    varierande = Integer.parseInt(input);
+                    varierandeString = "Langd";
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ange ett heltalsvärde för antal längd.");
+                }
+            }
+            if (valdRas.equals("Squid")) {
+                String input = JOptionPane.showInputDialog(null, "Välj antal armar.");
+                if (ValideringsKlass.valideraInt(input)) {
+                    varierande = Integer.parseInt(input);
+                    varierandeString = "Antal_armar";
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ange ett heltalsvärde för antal armar.");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_cbValjRasActionPerformed
     /**
      * Metod som tar emot en HashMap och utifrån dess nycklar sätter respektive
      * textfält med värdena från HashMapen.
@@ -425,6 +483,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             String agentNamn = idb.fetchSingle("SELECT namn FROM mibdb.agent WHERE Agent_ID IN (SELECT Ansvarig_Agent FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
             txtAnsvAgent.setText(agentNamn);
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
     }
@@ -464,7 +523,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 txtRas.setText("Worm");
             }
         } catch (InfException e) {
-
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
         }
         try {
             ArrayList<String> squid = idb.fetchColumn("SELECT Alien_ID FROM mibdb.squid");
@@ -472,6 +531,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 txtRas.setText("Squid");
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
         try {
@@ -480,6 +540,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 txtRas.setText("Boglodite");
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
 
@@ -612,7 +673,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
 
     /**
      * Metod som byter ras på vald alien genom att först köra metoden
-     * taBortAlien() och sedan laggTillAlien() och sätta txtRas med den nya
+     * taBortAlien() och sedan laggTillAlienRas() och sätta txtRas med den nya
      * rasen.
      *
      * @param nuvarandeRas
@@ -622,7 +683,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private void andraRas(String nuvarandeRas, String nyRas, int alienID) {
 
         taBortAlien(nuvarandeRas, alienID);
-        laggTillAlien(nyRas, alienID);
+        laggTillAlienRas(nyRas, alienID, varierandeString, varierande);
         JOptionPane.showMessageDialog(null, "Rasen uppdaterades. Ny ras: " + nyRas);
 
         txtRas.setText(nyRas);
@@ -644,7 +705,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
         try {
             idb.update(query);
         } catch (InfException e) {
-
+            JOptionPane.showMessageDialog(null, "Något gick fel vid uppdatering av plats.");
         }
     }
 
@@ -667,7 +728,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             idb.update(query2);
             txtAnsvAgent.setText(agentNamn);
         } catch (InfException e) {
-
+            JOptionPane.showMessageDialog(null, "Något gick fel vid uppdatering av Ansvarig Agent.");
         }
 
     }
@@ -678,24 +739,24 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
      *
      * @param nyRas
      * @param alienID
+     *
      */
-    public void laggTillAlien(String nyRas, int alienID) {
+    public void laggTillAlienRas(String nyRas, int alienID, String varierandeKolumn, int varierandeVarde) {
         try {
-
-            String query = "INSERT INTO mibdb." + nyRas + " (Alien_ID) VALUES (" + alienID + ")";
+            String query = "INSERT INTO mibdb." + nyRas + " (Alien_ID, " + varierandeKolumn + ") VALUES (" + alienID + ", '" + varierandeVarde + "')";
             idb.insert(query);
 
             txtRas.setText(nyRas);
 
         } catch (InfException e) {
-
+            JOptionPane.showMessageDialog(null, "Något gick fel vid uppdatering av ras.");
         }
     }
 
     /**
      * Metod som tar bort en alien från tabellen över nuvarande ras, inför att
      * sedan kunna lägga till Alien_ID i den nyvalda rasen, med metoden
-     * laggTillAlien().
+     * laggTillAlienRas().
      *
      * @param nuvarandeRas
      * @param alienID
@@ -707,7 +768,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             idb.delete(query);
 
         } catch (InfException e) {
-
+         JOptionPane.showMessageDialog(null, "Något gick fel vid borttagning av alien.");
         }
     }
 
@@ -725,7 +786,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
             platsID = Integer.parseInt(idb.fetchSingle(query));
 
         } catch (InfException e) {
-            System.out.println("Fel vid hämtning av plats ID: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av plats-ID.");
         }
         return platsID;
     }
@@ -743,6 +804,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 jComboAgenter.addItem(namn);
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
 
@@ -762,6 +824,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 jComboValjPlats.addItem(plats);
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
     }
@@ -771,9 +834,9 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
      * finns.
      */
     private void fyllValjRasComboBox() {
-        jComboValjRas.addItem("Boglodite");
-        jComboValjRas.addItem("Squid");
-        jComboValjRas.addItem("Worm");
+        cbValjRas.addItem("Boglodite");
+        cbValjRas.addItem("Squid");
+        cbValjRas.addItem("Worm");
     }
 
     /**
@@ -782,8 +845,8 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
      *
      */
     private void resetComboBoxes() {
-        jComboValjRas.removeAllItems();
-        jComboValjRas.addItem("Välj ras");
+        cbValjRas.removeAllItems();
+        cbValjRas.addItem("Välj ras");
         jComboValjPlats.removeAllItems();
         jComboValjPlats.addItem("Välj plats");
         jComboAgenter.removeAllItems();
@@ -816,9 +879,9 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnSok;
+    private javax.swing.JComboBox<String> cbValjRas;
     private javax.swing.JComboBox<String> jComboAgenter;
     private javax.swing.JComboBox<String> jComboValjPlats;
-    private javax.swing.JComboBox<String> jComboValjRas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

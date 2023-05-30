@@ -27,7 +27,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+           
         }
 
     }

@@ -235,7 +235,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             alienNamn = idb.fetchColumn(query);
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av alien-namn.");
         }
     }
 
@@ -249,7 +249,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             boglodites = idb.fetchColumn(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av boglodite-alien:IDs.");
         }
     }
 
@@ -263,7 +263,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             worms = idb.fetchColumn(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+              JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av worm-alien:IDs.");
         }
     }
 
@@ -277,7 +277,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             squids = idb.fetchColumn(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av squid-alien:IDs.");
         }
     }
 
@@ -289,7 +289,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             txtAlienNamn.setText(alienNamnet);
         } catch (InfException e) {
 
-            e.printStackTrace();
+              JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av alien-namn.");
         }
 
     }
@@ -308,7 +308,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             idb.delete(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning från boglodite-tabell.");
         }
     }
 
@@ -326,7 +326,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             idb.delete(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning från worm-tabell.");
         }
     }
 
@@ -344,7 +344,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             idb.delete(query);
 
         } catch (InfException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning från squid-tabell.");
         }
     }
 
@@ -374,7 +374,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av alien.");
 
         }
     }
@@ -410,7 +410,7 @@ public class TaBortAlienForm extends javax.swing.JPanel {
             String query = "SELECT Alien_ID FROM mibdb.alien ORDER BY Alien_ID ASC;";
             alienIds = idb.fetchColumn(query);
         } catch (InfException e) {
-            e.printStackTrace();
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Alien-ID.");
         }
     }
 

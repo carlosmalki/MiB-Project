@@ -39,7 +39,7 @@ public class AlienSokForm extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+           
         }
         this.epost = epost;
         validering = new ValideringsKlass();
@@ -334,7 +334,7 @@ public class AlienSokForm extends javax.swing.JPanel {
             String agentNamn = idb.fetchSingle("SELECT namn FROM mibdb.agent WHERE Agent_ID IN (SELECT Ansvarig_Agent FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
             txtAnsvAgent.setText(agentNamn);
         } catch (InfException e) {
-
+         JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
         }
     }
 
@@ -350,7 +350,7 @@ public class AlienSokForm extends javax.swing.JPanel {
             String platsNamn = idb.fetchSingle("SELECT Benamning FROM mibdb.plats WHERE Plats_ID IN (SELECT Plats FROM mibdb.alien WHERE Alien_ID = " + alienID + ")");
             txtPlats.setText(platsNamn);
         } catch (InfException e) {
-
+          JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
         }
 
     }
@@ -373,6 +373,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                 txtRas.setText("Worm");
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
         try {
@@ -381,6 +382,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                 txtRas.setText("Squid");
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
         try {
@@ -389,6 +391,7 @@ public class AlienSokForm extends javax.swing.JPanel {
                 txtRas.setText("Boglodite");
             }
         } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
 
         }
 

@@ -359,7 +359,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             txtUtKvittDatum.setVisible(true);
             lblUtkvitterad.setText("Utkvitterinsdatum:");
             lblUtkvitterad.setVisible(true);
-            lblVarierande2.setText("Kraftkälla:");
+            lblVarierande2.setText("       Kraftkälla:");
             lblVarierande.setText(teknikNamn);
             visaInfo();
         }
@@ -413,7 +413,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             String agentIDString = idb.fetchSingle(query);
             return Integer.parseInt(agentIDString);
         } catch (InfException ex) {
-
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Agent-ID.");
         }
         return -1;
     }
@@ -433,7 +433,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
         } catch (InfException ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av utrustning.");
         }
 
     }
@@ -449,7 +449,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             vapen = idb.fetchColumn(query);
         } catch (InfException ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Vapen-namn.");
         }
     }
 
@@ -464,7 +464,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             teknik = idb.fetchColumn(query);
         } catch (InfException ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Teknik-namn.");
         }
     }
 
@@ -479,7 +479,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             kommunikation = idb.fetchColumn(query);
         } catch (InfException ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Kommunikationsutrustning.");
         }
     }
 
@@ -544,7 +544,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             txtUtKvittDatum.setText(idb.fetchSingle(query));
         } catch (InfException ex) {
 
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av utkvitteringsdatum.");
         }
     }
 
@@ -571,7 +571,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av kraftkälla.");
         }
 
         return kraftKalla;
@@ -600,7 +600,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av kaliber");
         }
 
         return kaliber;
@@ -631,7 +631,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av överföringsteknik.");
         }
 
         return teknik;

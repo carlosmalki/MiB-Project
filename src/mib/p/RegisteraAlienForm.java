@@ -129,7 +129,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
         lblRas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRas.setText("Ras:");
 
-        cbRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Boglodite\t", "Squid", "Worm" }));
+        cbRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj ras", "Boglodite", "Worm", "Squid" }));
         cbRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbRasActionPerformed(evt);
@@ -407,10 +407,11 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             String insertQuery = "INSERT INTO mibdb." + ras.toLowerCase() + " (Alien_ID, " + varierandeKolumn + ") VALUES (" + alienID + ", " + varierande + ")";
 
             idb.insert(insertQuery);
+            System.out.println("Hejhej");
             return true;
 
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av " + ras + "-raden: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid infogning av " + ras);
             return false;
         }
     }
@@ -461,7 +462,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
                 cbAnsvAgent.addItem(namn);
             }
         } catch (InfException e) {
-
+       JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av agentnamn.");
         }
 
     }
@@ -474,7 +475,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
                 cbPlats.addItem(plats);
             }
         } catch (InfException e) {
-
+      JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av platsbenämningar.");
         }
     }
 
@@ -489,7 +490,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             ansvAgentID = Integer.parseInt(idb.fetchSingle(query));
         } catch (InfException e) {
 
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Agent-ID.");
         }
         return ansvAgentID;
     }
@@ -505,7 +506,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             platsID = Integer.parseInt(idb.fetchSingle(query));
         } catch (InfException e) {
 
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Plats-ID.");
         }
         return platsID;
 

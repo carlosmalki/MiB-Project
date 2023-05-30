@@ -160,7 +160,7 @@
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtAndraNamn" max="32767" attributes="0"/>
                                       <Component id="jComboAgenter" alignment="0" pref="144" max="32767" attributes="0"/>
-                                      <Component id="jComboValjRas" max="32767" attributes="0"/>
+                                      <Component id="cbValjRas" max="32767" attributes="0"/>
                                       <Component id="jComboValjPlats" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -189,7 +189,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtRas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labRas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboValjRas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbValjRas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -334,15 +334,17 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboValjRas">
+        <Component class="javax.swing.JComboBox" name="cbValjRas">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="1">
                 <StringItem index="0" value="V&#xe4;lj ras"/>
-                <StringItem index="1" value=" "/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbValjRasActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

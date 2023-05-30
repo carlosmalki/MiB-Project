@@ -279,6 +279,7 @@ public class TaBortUtrustning extends javax.swing.JPanel {
             kommTryckt = false;
             fyllComboBoxKommunikation();
         } catch (InfException ex) {
+             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning från av kommunikationsutrustning.");
             
         }
     }
@@ -290,6 +291,7 @@ public class TaBortUtrustning extends javax.swing.JPanel {
             fyllComboBoxVapen();
         }
     } catch (InfException ex2) {
+         JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av vapen.");
         
     }
             
@@ -300,6 +302,7 @@ public class TaBortUtrustning extends javax.swing.JPanel {
             fyllComboBoxTeknik();
         }
     } catch (InfException ex3) {
+         JOptionPane.showMessageDialog(null, "Ett fel uppstod vid borttagning av teknik");
         
     }
 }

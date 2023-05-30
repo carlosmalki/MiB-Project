@@ -420,7 +420,7 @@ public class SokFunktionerForm extends javax.swing.JPanel {
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
         } catch (NullPointerException npe) {
-
+            JOptionPane.showMessageDialog(null, "Platsfältet är tomt");
         }
 
     }

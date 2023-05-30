@@ -4,21 +4,20 @@
  */
 package mib.p;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-import java.util.Map;
-import java.util.List;
-import java.util.Comparator;
 
-/**ToppTreKonTaktAgentForm är en JPanel-klass där man
- * kan söka fram info om vilka tre agenter som har flest kontakt-aliens i databasen,
- * Område väljs genom ComboBox och de agenter med flest kontaktaliens i valt
- * område visas i textfält.
+import java.util.HashMap;
+import java.util.ArrayList;
+
+/**
+ * ToppTreKonTaktAgentForm är en JPanel-klass där man kan söka fram info om
+ * vilka tre agenter som har flest kontakt-aliens i databasen, Område väljs
+ * genom ComboBox och de agenter med flest kontaktaliens i valt område visas i
+ * textfält.
  *
  * @author samsung
  */
@@ -27,11 +26,6 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
-
-    private String topp1;
-    private String topp2;
-    private String topp3;
-    private List<String> agentIDs;
 
     /**
      * Creates new form Top3
@@ -45,28 +39,27 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+            
         }
         fyllComboBox();
-        jLabel1.setVisible(false);
 
     }
-   /**
-    * Metod för att fylla upp ComboBoxen med områdesnamnet, genom att
-    * först, via InfDB-metoden fetchColumn skaa en arraylist över områdes-
-    * namn och sedan loopa genom denna och lägga till varje objekt
-    * i comboboxen.
-    */
+
+    /**
+     * Metod för att fylla upp ComboBoxen med områdesnamnet, genom att först,
+     * via InfDB-metoden fetchColumn skaa en arraylist över områdes- namn och
+     * sedan loopa genom denna och lägga till varje objekt i comboboxen.
+     */
     private void fyllComboBox() {
         ArrayList<String> omraden;
         try {
-            omraden = idb.fetchColumn("select benamning from omrade");
+            omraden = idb.fetchColumn("SELECT benamning FROM omrade");
             cbValjOmrade.removeAllItems();
             for (String ettOmrade : omraden) {
                 cbValjOmrade.addItem(ettOmrade);
             }
         } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            JOptionPane.showMessageDialog(null, "Något gick fel med hämtning av data!");
         }
 
     }
@@ -86,13 +79,12 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         btnTillbaka = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtTopp3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtTopp1 = new javax.swing.JTextField();
-        txtTopp2 = new javax.swing.JTextField();
+        txtPlatsEtt = new javax.swing.JTextField();
+        txtPlatsTva = new javax.swing.JTextField();
+        txtPlatsTre = new javax.swing.JTextField();
 
         lblRubrik.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         lblRubrik.setText("Välj område:");
@@ -137,54 +129,50 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jLabel1.setText("Topp tre kontaktagenter i Svealand:");
+        jLabel1.setText("1:");
 
-        jLabel2.setText("1:");
+        jLabel2.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel2.setText("2:");
 
-        jLabel3.setText("2:");
-
-        jLabel4.setText("3:");
+        jLabel3.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        jLabel3.setText("3:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
-                .addGap(29, 29, 29))
+                .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtTopp1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtTopp2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtTopp3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblRubrik)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbValjOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnVisaTopp3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(102, Short.MAX_VALUE))
+                                .addComponent(btnVisaTopp3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPlatsEtt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPlatsTva, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPlatsTre, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,24 +184,21 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
                     .addComponent(cbValjOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVisaTopp3)
                     .addComponent(lblRubrik))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtTopp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTopp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTopp3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4))
-                .addGap(46, 46, 46)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtPlatsEtt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPlatsTva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtPlatsTre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addComponent(btnTillbaka)
-                .addGap(178, 178, 178))
+                .addGap(54, 54, 54))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,180 +209,91 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnTillbakaActionPerformed
-  /**
-   * Metod kopplad till btnVisaTopp3,som först tömmer textfälten
-   * och sedan utifrån valt område kör skapaToppListaOmrade()-metoden
-   * med områdersnamnet som ingående parameter.
-   * @param evt 
-   */
+    /**
+     * Metod kopplad till btnVisaTopp3,som utifrån valt område kör
+     * skapaToppLista()-metoden med områdersnamnet som ingående parameter, efter
+     * att först ha rensat alla textfält genom metoden rensaTextFalt().
+     *
+     * @param evt
+     */
     private void btnVisaTopp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaTopp3ActionPerformed
-        tomTextFalt();
+        rensaTextFalt();
         if (cbValjOmrade.getSelectedItem().toString().equals("Svealand")) {
             String omrade = "Svealand";
-            skapaToppListaOmrade(omrade);
+            skapaToppLista(omrade);
         }
         if (cbValjOmrade.getSelectedItem().toString().equals("Götaland")) {
             String omrade = "Götaland";
-            skapaToppListaOmrade(omrade);
+            skapaToppLista(omrade);
         }
         if (cbValjOmrade.getSelectedItem().toString().equals("Norrland")) {
             String omrade = "Norrland";
-            skapaToppListaOmrade(omrade);
+            skapaToppLista(omrade);
         }
 
 
     }//GEN-LAST:event_btnVisaTopp3ActionPerformed
     /**
-     * Metod för att räkna ut vilka tre agenter som har flest kontaktaliens i
-     * valt område.
-     * Kommentar: denna metodsammanfattning blev väldigt lång, så vi
-     * tog det som ett tecken på att detta var en del av koden
-     * där kommentarer i kodblocket behövdes.
+     * Metod som genom InfDB-metoden fetchRows hämtar hem de agenter med flest
+     * kontaktaliens inom valt område i comboboxen, dessa sparas som HashMaps
+     * med nycklarna "Namn" och "Antal kontaktaliens", dessa HashMaps ligger i
+     * en ArrayList som loopas genom för att för varje nyckel-värde par skapa en
+     * String med agentens namn och antalet aliens, som lagras i en ArrayList
+     * som skickas med in i metoden fyllToppTreLista().
+     *
      * @param omrade
      */
-    public void skapaToppListaOmrade(String omrade) {
-        jLabel1.setText("Agenter med flest kontaktaliens i " + omrade);
-        jLabel1.setVisible(true);
+
+    public void skapaToppLista(String omrade) {
+        ArrayList<String> toppLista = new ArrayList<>();
         try {
+            String query = "SELECT ag.Namn AS Agent, COUNT(*) AS 'Antal kontaktaliens' "
+                    + "FROM alien AS a "
+                    + "JOIN plats AS p ON a.Plats = p.Plats_ID "
+                    + "JOIN omrade AS o ON p.Finns_I = o.Omrades_ID "
+                    + "JOIN agent AS ag ON a.Ansvarig_Agent = ag.Agent_ID "
+                    + "WHERE o.Benamning = '" + omrade + "' "
+                    + "GROUP BY a.Ansvarig_Agent "
+                    + "ORDER BY CAST('Antal kontaktaliens' AS SIGNED) DESC "
+                    + "LIMIT 3;";
+            ArrayList<HashMap<String, String>> agentRader = idb.fetchRows(query);
 
-            String query = "SELECT Ansvarig_Agent FROM mibdb.alien WHERE Plats IN "
-                    + "(SELECT mibdb.plats.Plats_ID FROM mibdb.plats WHERE Finns_I IN "
-                    + "(SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "'));";
-            agentIDs = idb.fetchColumn(query);
+            for (HashMap<String, String> raden : agentRader) {
+                String agent = raden.get("Namn") + ": " + raden.get("Antal kontaktaliens") + " kontaktalien.";
 
-            // Skapar en hashmap för att hålla koll på frekvensen av varje Agent_ID i agentIDs-ArrayListan
-            HashMap<String, Integer> frekvenser = new HashMap<>();
-            for (String id : agentIDs) {
-                // Ökar värdet för det akutella ID:t eller lägger till det med antal 1 om detinte finns än i HashMapen
-                frekvenser.put(id, frekvenser.getOrDefault(id, 0) + 1);
+                toppLista.add(agent);
             }
 
-            List<Map.Entry<String, Integer>> sorteradLista = new ArrayList<>(frekvenser.entrySet());
-            sorteradLista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-            //Skapar en lista i fallande ordning (reverseOrder) för att få det högsta värdet först, baserat
-            // på värdet (antalet förekomster) till varje nyckel(Agent_ID) i HashMapen
-
-            if (sorteradLista.size() < 3) {
-                // Finns det inte tillräckligt med olika Agent_IDs i listan för en topp tre så meddelas detta
-                //och skapaToppTvaListaOmrade() körs istället för att skapa en topp två-lista.
-                JOptionPane.showMessageDialog(null, "Det finns inte tillräckligt med ansvariga agenter i " + omrade + " för att skapa en topp 3. Dessa agenter är topp 2.");
-                skapaToppTvaListaOmrade(agentIDs, omrade);
-                return;
-            }
-
-            // Här Skapas en lista med de tre nycklar (Agent_IDs) som
-            // har högst värde (antal förekomster) i HashMapen
-            // För varje värde läggs dess nyckel till i listan
-            // (entry.getKey()) och när positioner har fyllts
-            // på i listan slutar loopen.
-            List<String> toppTreVärden = new ArrayList<>();
-            int räknare = 0;
-            for (Map.Entry<String, Integer> entry : sorteradLista) {
-                toppTreVärden.add(entry.getKey());
-                räknare++;
-                if (räknare == 3) {
-                    break;
+            if (toppLista.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Det finns ingen agent i området.");
+            } else {
+                if (toppLista.size() == 3) {
+                    txtPlatsEtt.setText(toppLista.get(2));
+                    txtPlatsTva.setText(toppLista.get(1));
+                    txtPlatsTre.setText(toppLista.get(0));
+                } else if (toppLista.size() == 2) {
+                    txtPlatsEtt.setText(toppLista.get(1));
+                    txtPlatsTva.setText(toppLista.get(0));
+                } else if (toppLista.size() == 1) {
+                    txtPlatsEtt.setText(toppLista.get(0));
                 }
             }
 
-            
-            topp1 = toppTreVärden.get(0);
-            topp2 = toppTreVärden.get(1);
-            topp3 = toppTreVärden.get(2);
-
-            
-            setToppListeFalt(topp1, topp2, topp3);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Medtod som utifrån en agents ID hämtar hem dess namn med hjälp av
-     * InfDB-metoden fetchSingle och ger namnet som return.
-     *
-     * @param agentIDString
-     * @return
-     */
-    public String getAgentNamn(String agentIDString) {
-        String agentNamn = "";
-        try {
-            int agentID = Integer.parseInt(agentIDString);
-            String query = "SELECT namn FROM mibdb.agent WHERE Agent_ID =" + agentID;
-            agentNamn = idb.fetchSingle(query);
         } catch (InfException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av data.");
         }
-        return agentNamn;
     }
 
     /**
-     * Metod som sätter texten i topplistans textfält, med de agenter som i
-     * metoderna skapaToppListaOmrade() eller skapaToppTvaListaOmrade() räknats
-     * fram till att ha mest kontaktaliens.
-     *
-     * @param topp1
-     * @param topp2
-     * @param topp3
+     * Metod som återställer topplistans textfält inför varje sökning.
      */
-    public void setToppListeFalt(String topp1, String topp2, String topp3) {
-        txtTopp1.setText(getAgentNamn(topp1));
-        txtTopp2.setText(getAgentNamn(topp2));
-        txtTopp3.setText(getAgentNamn(topp3));
+    public void rensaTextFalt() {
+        txtPlatsEtt.setText((""));
+        txtPlatsTva.setText("");
+        txtPlatsTre.setText("");
 
     }
 
-    /**
-     * Metod som om, det inte finns tillräckligt med agenter för en topp3, körs
-     * för att skapa en topp två, den fungerar på samma sätt som
-     * skapaToppListaOmrade och tar in den skapade Agent_ID-listan som parameter
-     * tillsammans med området.
-     *
-     * @param agentIDs
-     * @param omrade
-     */
-    public void skapaToppTvaListaOmrade(List<String> agentIDs, String omrade) {
-
-        Map<String, Integer> frekvenser = new HashMap<>();
-        for (String id : agentIDs) {
-            frekvenser.put(id, frekvenser.getOrDefault(id, 0) + 1);
-        }
-
-        List<Map.Entry<String, Integer>> sorteradLista = new ArrayList<>(frekvenser.entrySet());
-        sorteradLista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-
-        if (sorteradLista.size() < 2) {
-
-            JOptionPane.showMessageDialog(null, "Det finns inte tillräckligt med ansvariga agenter i " + omrade + " för att skapa en topp 2. Välj annat område.");
-
-            return;
-        }
-
-        List<String> toppTreVärden = new ArrayList<>();
-        int räknare = 0;
-        for (Map.Entry<String, Integer> entry : sorteradLista) {
-            toppTreVärden.add(entry.getKey());
-            räknare++;
-            if (räknare == 2) {
-                break;
-            }
-        }
-
-        topp1 = toppTreVärden.get(0);
-        topp2 = toppTreVärden.get(1);
-        topp3 = "";
-        setToppListeFalt(topp1, topp2, topp3);
-
-    }
-
-    /**
-     * Metod som som sätter textfälten i topp3-listan till "" (tomt).
-     */
-    public void tomTextFalt() {
-        txtTopp1.setText("");
-        txtTopp2.setText("");
-        txtTopp3.setText("");
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
@@ -406,12 +302,11 @@ public class ToppTreKontaktAgentForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblRubrik;
-    private javax.swing.JTextField txtTopp1;
-    private javax.swing.JTextField txtTopp2;
-    private javax.swing.JTextField txtTopp3;
+    private javax.swing.JTextField txtPlatsEtt;
+    private javax.swing.JTextField txtPlatsTre;
+    private javax.swing.JTextField txtPlatsTva;
     // End of variables declaration//GEN-END:variables
 }
