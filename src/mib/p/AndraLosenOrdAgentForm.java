@@ -179,10 +179,13 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
                 idb.update(query);
                 JOptionPane.showMessageDialog(null, "Lösenordet har ändrats.");
             } catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "Lösenord får vara max 6 tecken, försök igen.");
+                JOptionPane.showMessageDialog(null, "Lösenordet får vara max sex tecken, försök igen.");
             }
+
         } else if (jPassNytt.getText().equals(jPassUpprepa.getText()) && !jPassNuvarande.getText().equals(losenord)) {
-            JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen.");
+            JOptionPane.showMessageDialog(null, "Felaktigt lösenord, försök igen.");
+        } else if (!jPassNytt.getText().equals(jPassUpprepa.getText())) {
+            JOptionPane.showMessageDialog(null, "Upprepat lösenord matchar inte önskat nytt lösenord, försök igen.");
         }
     }//GEN-LAST:event_btnAndraActionPerformed
     // Denna knapp rensar det som står i lösenordfälten och fokuset sätts på nuvarande lösenord fältet.

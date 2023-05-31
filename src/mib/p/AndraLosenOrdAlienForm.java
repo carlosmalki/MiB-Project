@@ -15,6 +15,7 @@ import oru.inf.InfException;
  * @author ASUS
  */
 public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
+
     String epost;
     private static InfDB idb;
 
@@ -22,9 +23,9 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
      * Creates new form AndraLosenOrdForm
      */
     public AndraLosenOrdAlienForm(String epost) {
-        
+
         initComponents();
-        this.epost= epost;
+        this.epost = epost;
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
@@ -44,10 +45,10 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
 
         lblAndraLosenord = new javax.swing.JLabel();
         lblNuvarandeLosenord = new javax.swing.JLabel();
-        jPasswordNuvarandeLosenord = new javax.swing.JPasswordField();
+        jPassNuvarande = new javax.swing.JPasswordField();
         lblNyttLosenord = new javax.swing.JLabel();
-        jPasswordFieldNytt = new javax.swing.JPasswordField();
-        jPasswordFieldUpprepa = new javax.swing.JPasswordField();
+        jPassNytt = new javax.swing.JPasswordField();
+        jPassUpprepa = new javax.swing.JPasswordField();
         btnMinSida = new javax.swing.JButton();
         lblUpprepaLosenord = new javax.swing.JLabel();
         btnAndra = new javax.swing.JButton();
@@ -107,19 +108,19 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblNuvarandeLosenord)
                         .addGap(18, 18, 18)
-                        .addComponent(jPasswordNuvarandeLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPassNuvarande, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblUpprepaLosenord)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPasswordFieldUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPassUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnAndra)
                                 .addComponent(lblNyttLosenord))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPasswordFieldNytt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPassNytt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(btnRensa)
                                     .addGap(8, 8, 8))))))
@@ -135,14 +136,14 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNuvarandeLosenord)
-                    .addComponent(jPasswordNuvarandeLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPassNuvarande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordFieldNytt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPassNytt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNyttLosenord))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordFieldUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPassUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUpprepaLosenord))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -159,51 +160,62 @@ public class AndraLosenOrdAlienForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-    
-   JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraLosenOrdAlienForm.this);
-                frame.setContentPane(new MinSidaAlienForm(epost));
-                frame.revalidate();
-                frame.setTitle("Startsida: Alien");
-                frame.repaint();
+
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraLosenOrdAlienForm.this);
+        frame.setContentPane(new MinSidaAlienForm(epost));
+        frame.revalidate();
+        frame.setTitle("Startsida: Alien");
+        frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
-      String losenord = "";
-    try {
-        String losenOrdCheck = idb.fetchSingle("SELECT Losenord FROM mibdb.alien WHERE epost = '" + epost + "'");
-        losenord = losenOrdCheck;
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
-        return; // Avsluta metoden om det uppstår ett fel vid hämtning av lösenordet
-    }
-
-    if (jPasswordFieldNytt.getText().equals(jPasswordFieldUpprepa.getText()) && jPasswordNuvarandeLosenord.getText().equals(losenord)) {
-        try {
-            idb.update("UPDATE mibdb.alien SET Losenord='" + jPasswordFieldNytt.getText() + "' WHERE Epost='" + epost + "';");
-            JOptionPane.showMessageDialog(null, "Lösenordet har ändrats.");
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel vid uppdatering av lösenordet.");
+        if (!ValideringsKlass.validateTextFieldNotEmpty(jPassNuvarande.getText())
+                || !ValideringsKlass.validateTextFieldNotEmpty(jPassNytt.getText())
+                || !ValideringsKlass.validateTextFieldNotEmpty(jPassUpprepa.getText())) {
+            JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda. Försök igen.");
+            return;
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen.");
-    }
+
+        String losenord = "";
+        try {
+            String query = "SELECT Losenord FROM mibdb.alien WHERE epost = '" + epost + "'";
+            String losenOrdCheck = idb.fetchSingle(query);
+            losenord = losenOrdCheck;
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel, testa igen!");
+            return;
+        }
+
+        if (jPassNytt.getText().equals(jPassUpprepa.getText()) && jPassNuvarande.getText().equals(losenord)) {
+            try {
+                String query = "UPDATE mibdb.alien SET Losenord='" + jPassNytt.getText() + "' WHERE Epost='" + epost + "';";
+                idb.update(query);
+                JOptionPane.showMessageDialog(null, "Lösenordet har ändrats.");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Lösenordet får vara max sex tecken, försök igen.");
+            }
+        } else if (jPassNytt.getText().equals(jPassUpprepa.getText()) && !jPassNuvarande.getText().equals(losenord)) {
+            JOptionPane.showMessageDialog(null, "Felaktigt lösenord, försök igen.");
+        } else if (!jPassNytt.getText().equals(jPassUpprepa.getText())) {
+            JOptionPane.showMessageDialog(null, "Upprepat lösenord matchar inte önskat nytt lösenord, försök igen.");
+        }
     }//GEN-LAST:event_btnAndraActionPerformed
     // Denna knapp rensar det som står i lösenordfälten och fokuset sätts på nuvarande lösenord fältet.
     private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
-        jPasswordNuvarandeLosenord.setText("");
-        jPasswordFieldNytt.setText(""); 
-        jPasswordFieldUpprepa.setText(""); 
-        jPasswordNuvarandeLosenord.requestFocus();
+        jPassNuvarande.setText("");
+        jPassNytt.setText("");
+        jPassUpprepa.setText("");
+        jPassNuvarande.requestFocus();
     }//GEN-LAST:event_btnRensaActionPerformed
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndra;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRensa;
-    private javax.swing.JPasswordField jPasswordFieldNytt;
-    private javax.swing.JPasswordField jPasswordFieldUpprepa;
-    private javax.swing.JPasswordField jPasswordNuvarandeLosenord;
+    private javax.swing.JPasswordField jPassNuvarande;
+    private javax.swing.JPasswordField jPassNytt;
+    private javax.swing.JPasswordField jPassUpprepa;
     private javax.swing.JLabel lblAndraLosenord;
     private javax.swing.JLabel lblNuvarandeLosenord;
     private javax.swing.JLabel lblNyttLosenord;
