@@ -294,6 +294,11 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "E-postfältet får inte vara tom.");
             return;
         }
+        if(!ValideringsKlass.giltigEpost(eposten))
+        {
+        JOptionPane.showMessageDialog(null, "Ogiltig E-postadress, var god försök igen.");
+            return;
+        }
 
         if (!ValideringsKlass.validateTextFieldNotEmpty(telnr)) {
             JOptionPane.showMessageDialog(null, "Telefonnummerfältet får inte vara tomt.");
@@ -324,7 +329,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
             return;
         }
 
-        // Kontrollerar om e-postadressen redan finns registrerad, då E-post används för att unikt identifiera varje Alien.
+        
         if (ValideringsKlass.checkEpost(eposten)) {
             JOptionPane.showMessageDialog(null, "E-postadressen finns redan i databasen.");
             return;
