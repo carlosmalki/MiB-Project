@@ -117,6 +117,7 @@
           <Font name="MS Gothic" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Registrera alien"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du registrera en ny alien vid ankomst till Jorden.&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegisteraAlienActionPerformed"/>
@@ -154,6 +155,7 @@
           <Font name="MS Gothic" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra alieninfo"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du &#xe4;ndra info om valfri alien om n&#xe5;got&lt;br&gt; blev fel vid registreringen eller om en alien byter&lt;br&gt; t.ex plats eller ansvarig agent.&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAndraAlienInfoActionPerformed"/>
@@ -165,6 +167,7 @@
           <Font name="MS Gothic" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Utrustning"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r hittar du olika tj&#xe4;nster f&#xf6;r att exempelvis &lt;br&gt; se eller hantera din utrustning.&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUtrustningActionPerformed"/>
@@ -176,6 +179,7 @@
           <Font name="MS Gothic" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Hitta omr&#xe5;deschef"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du s&#xf6;ka fram vem som &#xe4;r chef &#xf6;ver&lt;br&gt;&#xa;ett valt omr&#xe5;de, och &#xe4;ven hitta dennes kontaktinfo.&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHittaOmradesChefActionPerformed"/>
@@ -238,6 +242,7 @@
           <Font name="MS Gothic" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Topplista"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du se en topplista &#xf6;ver de agenter&lt;br&gt;&#xa;med flest kontaktaliens i valt omr&#xe5;de.&lt;/html&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnToppListaActionPerformed"/>

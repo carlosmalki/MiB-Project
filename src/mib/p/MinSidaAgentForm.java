@@ -88,6 +88,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
         btnRegisteraAlien.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnRegisteraAlien.setText("Registrera alien");
+        btnRegisteraAlien.setToolTipText("<html>Här kan du registrera en ny alien vid ankomst till Jorden.</html>");
         btnRegisteraAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegisteraAlienActionPerformed(evt);
@@ -114,6 +115,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
         btnAndraAlienInfo.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAndraAlienInfo.setText("Ändra alieninfo");
+        btnAndraAlienInfo.setToolTipText("<html>Här kan du ändra info om valfri alien om något<br> blev fel vid registreringen eller om en alien byter<br> t.ex plats eller ansvarig agent.</html>");
         btnAndraAlienInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraAlienInfoActionPerformed(evt);
@@ -122,6 +124,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
         btnUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnUtrustning.setText("Utrustning");
+        btnUtrustning.setToolTipText("<html>Här hittar du olika tjänster för att exempelvis <br> se eller hantera din utrustning.</html>");
         btnUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUtrustningActionPerformed(evt);
@@ -130,6 +133,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
         btnHittaOmradesChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnHittaOmradesChef.setText("Hitta områdeschef");
+        btnHittaOmradesChef.setToolTipText("<html>Här kan du söka fram vem som är chef över<br>\nett valt område, och även hitta dennes kontaktinfo.</html>");
         btnHittaOmradesChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHittaOmradesChefActionPerformed(evt);
@@ -163,6 +167,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
         btnToppLista.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnToppLista.setText("Topplista");
+        btnToppLista.setToolTipText("<html>Här kan du se en topplista över de agenter<br>\nmed flest kontaktaliens i valt område.</html>");
         btnToppLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnToppListaActionPerformed(evt);
