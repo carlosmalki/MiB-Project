@@ -1,4 +1,3 @@
-
 package mib.p;
 
 import java.util.logging.Level;
@@ -14,6 +13,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
     private static InfDB idb;
     private String epost;
     private String isAdmin;
+    private ValideringsKlass validering;
 
     /**
      * Creates new form AndraInfoOmAgent
@@ -22,12 +22,13 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
+        validering = new ValideringsKlass();
         jPaneInfoAgent.setVisible(true);
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-           
+
         }
 
     }
@@ -59,11 +60,11 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         txtAdministrator = new javax.swing.JTextField();
         txtAndraLosenOrd = new javax.swing.JTextField();
         lblNyInfo = new javax.swing.JLabel();
-        jComboValjAdministrator = new javax.swing.JComboBox<>();
-        jComboValjOmrade = new javax.swing.JComboBox<>();
+        cbValjAdmin = new javax.swing.JComboBox<>();
+        cbValjOmrade = new javax.swing.JComboBox<>();
         txtAndraAnstallningsdatum = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxAgentBokstav = new javax.swing.JComboBox<>();
+        cbValjBokstav = new javax.swing.JComboBox<>();
         btnRensa = new javax.swing.JButton();
         lblAngeAgentID = new javax.swing.JLabel();
         txtAgentID = new javax.swing.JTextField();
@@ -105,14 +106,14 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         lblNyInfo.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblNyInfo.setText("Ny info");
 
-        jComboValjAdministrator.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Administratör", "Ja", "Nej" }));
-        jComboValjAdministrator.setToolTipText("");
+        cbValjAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Administratör", "Ja", "Nej" }));
+        cbValjAdmin.setToolTipText("");
 
-        jComboValjOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Område", "Svealand", "Götaland", "Norrland" }));
+        cbValjOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Område", "Svealand", "Götaland", "Norrland" }));
 
         jLabel1.setText("Agent");
 
-        jComboBoxAgentBokstav.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Bokstav", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö" }));
+        cbValjBokstav.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Bokstav", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö" }));
 
         javax.swing.GroupLayout jPaneInfoAgentLayout = new javax.swing.GroupLayout(jPaneInfoAgent);
         jPaneInfoAgent.setLayout(jPaneInfoAgentLayout);
@@ -144,13 +145,13 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                     .addComponent(txtAndraLosenOrd)
                     .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(lblNyInfo)
-                        .addComponent(jComboValjAdministrator, 0, 161, Short.MAX_VALUE)
-                        .addComponent(jComboValjOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbValjAdmin, 0, 161, Short.MAX_VALUE)
+                        .addComponent(cbValjOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtAndraAnstallningsdatum))
                     .addGroup(jPaneInfoAgentLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxAgentBokstav, 0, 117, Short.MAX_VALUE)))
+                        .addComponent(cbValjBokstav, 0, 117, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPaneInfoAgentLayout.setVerticalGroup(
@@ -164,7 +165,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                     .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNamn)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBoxAgentBokstav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbValjBokstav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAnstallningsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,12 +180,12 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdminstrator)
                     .addComponent(txtAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboValjAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbValjAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOmrade)
-                    .addComponent(jComboValjOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbValjOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPaneInfoAgentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLosenOrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,19 +280,21 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     // Sök knappen
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
-
-        // Tar agentID från textfältet.
-        String agentIDString = txtAgentID.getText();
-
-        // Om agentID fältet är tom.
-        if (agentIDString.equals("")) {
+        String agentIDString = "";
+        if (!ValideringsKlass.existerarAgentID(txtAgentID.getText()) && ValideringsKlass.validateTextFieldNotEmpty(txtAgentID.getText())) {
+            JOptionPane.showMessageDialog(null, "Valt Agent-ID existerar inte hos MiB. Var god försök igen.");
+            return;
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAgentID.getText())) {
+            agentIDString = txtAgentID.getText();
+        } else {
             JOptionPane.showMessageDialog(null, "Vänligen ange agent ID!");
             return;
         }
 
         // Omvandlar inmatningen av agent id till int version från String.
         int agentIDInt = Integer.parseInt(agentIDString);
-        
+
         try {
 
             // Nuvarande namn
@@ -342,107 +345,171 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         txtTelefon.setText("");
         txtAgentID.requestFocus();
         // jComboboxen omställs. 
-        jComboBoxAgentBokstav.setSelectedIndex(0);
-        jComboValjAdministrator.setSelectedIndex(0);
-        jComboValjOmrade.setSelectedIndex(0);
+        cbValjBokstav.setSelectedIndex(0);
+        cbValjAdmin.setSelectedIndex(0);
+        cbValjOmrade.setSelectedIndex(0);
 
 
     }//GEN-LAST:event_btnRensaActionPerformed
     // Denna knapp uppdaterar infon för agenten.
     private void btnUppdaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdaterActionPerformed
 
-        String agentidString = txtAgentID.getText();
-        
-        // Om agentID fältet är tom.
-        if (agentidString.equals("")) {
+        String agentIDString = "";
+        int agentIDInt = 0;
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAgentID.getText())) {
+            agentIDString = txtAgentID.getText();
+            agentIDInt = Integer.parseInt(agentIDString);
+        } else {
             JOptionPane.showMessageDialog(null, "Vänligen ange agent ID!");
             return;
         }
-        // Omvandlar String versionen av agent id till int typ
-        int agentidInt = Integer.parseInt(agentidString);
-
-        // Nya info:
-        String agentbokstav = (String) jComboBoxAgentBokstav.getSelectedItem();
-        // Om användaren inte väljer agent bokstav.
-        if (agentbokstav.equals("Välj Bokstav")) {
-            JOptionPane.showMessageDialog(null, "Vänligen välj agent bokstav!");
-            return;
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraLosenOrd.getText())) {
+            andraLosenOrd(agentIDInt);
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraTelefon.getText())) {
+            andraTelefon(agentIDInt);
+        }
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtAndraAnstallningsdatum.getText())) {
+            andraAnstDatum(agentIDInt);
+        }
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbValjAdmin)) {
+            andraAdminStatus(agentIDInt);
         }
 
-        String nyanstallningsdatum = txtAndraAnstallningsdatum.getText();
-        // Om datum fältet är tom.
-        if (nyanstallningsdatum.equals("")) {
-            JOptionPane.showMessageDialog(null, "Ange datum med rätt format (YYYY-MM-DD)!");
-            return;
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbValjOmrade)) {
+            andraOmrade(agentIDInt);
+        }
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbValjAdmin)) {
+            andraNamn(agentIDInt);
         }
 
-        String nytelefon = txtAndraTelefon.getText();
-        // Om telefonnummer fältet är tom
-        if (nytelefon.equals("")) {
-            JOptionPane.showMessageDialog(null, "Ange ett telefonnummer!");
-            return;
+        if (ValideringsKlass.valideraComboBoxAktivtVal(cbValjBokstav)) {
+            andraNamn(agentIDInt);
         }
-        // Om telefonnummret är giltig. Den får inte innehålla bokstäver.
-        for (int i = 0; i < nytelefon.length(); i++) {
-            if (Character.isLetter(nytelefon.charAt(i))) {
-                JOptionPane.showMessageDialog(null, "Ange ett giltigt telefonnummer!");
-                return;
+
+
+    }//GEN-LAST:event_btnUppdaterActionPerformed
+    public void andraLosenOrd(int agentID) {
+        String nyttLosenOrd = txtAndraLosenOrd.getText();
+        {
+
+            try {
+                String query = "UPDATE mibdb.agent SET Losenord = '" + nyttLosenOrd + "' WHERE Agent_ID = '" + agentID + "'";
+                idb.update(query);
+                JOptionPane.showMessageDialog(null, "Lösenordet uppdaterades. Nytt lösenord: " + nyttLosenOrd);
+                txtLosenOrd.setText(nyttLosenOrd);
+                txtAndraLosenOrd.setText("");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Lösenord för långt. Välj max sex tecken.");
             }
         }
 
-        // Telefon nummret får inte börja och sluta med bindestreck.
-        if (nytelefon.charAt(0) == ('-') || nytelefon.charAt(nytelefon.length() - 1) == ('-')) {
-            JOptionPane.showMessageDialog(null, "Ange ett giltigt telefonnummer!");
-            return;
-        } else if (nytelefon.charAt(0) == ('-') && nytelefon.charAt(-1) == ('-')) {
-            JOptionPane.showMessageDialog(null, "Ange ett giltigt telefonnummer!");
-            return;
-        }
+    }
 
-        String administrator = (String) jComboValjAdministrator.getSelectedItem();
-        // Omvandlar det som väljs från jComboValjAdministrator till J eller N bokstaver, för att kunna supporta databasen.
-        if (administrator.equals("Ja")) {
-            administrator = "J";
-        } else if (administrator.equals("Nej")) {
-            administrator = "N";
-        } // Om användaren inte väljer administratör.
-        else if (administrator.equals("Välj Administratör")) {
-            JOptionPane.showMessageDialog(null, "Vänligen välj administratör!");
-            return;
+    public void andraTelefon(int agentID) {
+        String nyttNummer = "";
+        if (ValideringsKlass.valideraTelefonNummer(txtAndraTelefon.getText())) {
+            nyttNummer = txtAndraTelefon.getText();
         } else {
-            JOptionPane.showMessageDialog(null, "Något gick fel. Försök igen!");
-        }
-
-        String nyomrade = (String) jComboValjOmrade.getSelectedItem();
-        // Om användaren inte väljer område.
-        if (nyomrade.equals("Välj Område")) {
-            JOptionPane.showMessageDialog(null, "Vänligen välj område!");
+            JOptionPane.showMessageDialog(null, "Ogiltigt telefonnummer. Telefonnummer får enbart innehålla siffor och max ett bindestreck. Försök igen.");
             return;
         }
 
-        // Om lösenord fältet är tom.
-        String nylosenord = txtAndraLosenOrd.getText();
-        if (nylosenord.equals("")) {
-            JOptionPane.showMessageDialog(null, "Vänligen ange ett lösenord!");
-            return;
-        }
         try {
-            // Här tas och omvandlas område id till int typ beroende på det som väljs i combobox.
-            String omradeidString = idb.fetchSingle("SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning ='" + nyomrade + "';");
-            int omradeidInt = Integer.parseInt(omradeidString);
-
-            // Uppdatera infon för agenten.
-            idb.update("UPDATE mibdb.agent SET Namn ='Agent " + agentbokstav + "', Telefon='" + nytelefon + "', Anstallningsdatum ='" + nyanstallningsdatum + "', Administrator ='" + administrator + "', Losenord='" + nylosenord + "', Omrade=" + omradeidInt + " WHERE Agent_ID = " + agentidInt + ";");
-            JOptionPane.showMessageDialog(null, "Informationen ändrades!");
-
-            // Fånga fel med catch clause. 
-        } catch (InfException ex) {
-            Logger.getLogger(AndraInfoOmAgent.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Ange rätt datum format (YYYY-MM-DD)!");
+            String query = "UPDATE mibdb.agent SET Telefon = '" + nyttNummer + "' WHERE Agent_ID = '" + agentID + "'";
+            idb.update(query);
+            JOptionPane.showMessageDialog(null, "Numret uppdaterades. Nytt nummer: " + nyttNummer);
+            txtTelefon.setText(nyttNummer);
+            txtAndraTelefon.setText("");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel inträffade vid uppdatering av telfonnummer.");
         }
 
-    }//GEN-LAST:event_btnUppdaterActionPerformed
-    // Denna knapp skickar en till AdminSidan. "AdminFunktionerForm".
+    }
+
+    public void andraAnstDatum(int agentID) {
+        String nyttAnstDatum = txtAndraAnstallningsdatum.getText();
+        if (ValideringsKlass.valideraDatum(nyttAnstDatum)) {
+            try {
+                String query = "UPDATE mibdb.agent SET Anstallningsdatum = '" + nyttAnstDatum + "' WHERE Agent_ID = '" + agentID + "'";
+                idb.update(query);
+                JOptionPane.showMessageDialog(null, "Anställningsdatum uppdaterades. Nytt datum: " + nyttAnstDatum);
+                txtAnstallningsdatum.setText(nyttAnstDatum);
+                txtAndraAnstallningsdatum.setText("");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, " Ogiltigt anställningssdatum. Ange datum enligt YYYY-MM-DD");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, " Ogiltigt anställningsdatum. Ange datum enligt YYYY-MM-DD");
+        }
+    }
+
+    public void andraAdminStatus(int agentID) {
+        String adminStatus = "";
+        if (cbValjAdmin.getSelectedItem().toString().equals("Ja")) {
+            adminStatus = "J";
+        } else {
+            adminStatus = "N";
+        }
+
+        try {
+            String query = "UPDATE mibdb.agent SET Administrator = '" + adminStatus + "' WHERE Agent_ID = '" + agentID + "'";
+            idb.update(query);
+            JOptionPane.showMessageDialog(null, "Adminstatus uppdaterades.");
+            txtAdministrator.setText(adminStatus);
+            cbValjAdmin.setSelectedIndex(0);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, " Något gick fel med uppdatering av adminstatus.");
+        }
+
+    }
+
+    public void andraOmrade(int agentID) {
+        int omrade = getOmradesID();
+        try {
+            String query = "UPDATE mibdb.agent SET Omrade = '" + omrade + "' WHERE Agent_ID = '" + agentID + "'";
+            idb.update(query);
+            JOptionPane.showMessageDialog(null, "Område uppdaterades.");
+            txtOmrade.setText(cbValjOmrade.getSelectedItem().toString());
+            cbValjOmrade.setSelectedIndex(0);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, " Något gick fel med uppdatering av område.");
+        }
+
+    }
+
+    public void andraNamn(int agentID) {
+        String nyttNamn = "Agent " + cbValjBokstav.getSelectedItem().toString();
+        try {
+            String query = "UPDATE mibdb.agent SET Namn = '" + nyttNamn + "' WHERE Agent_ID = '" + agentID + "'";
+            idb.update(query);
+            JOptionPane.showMessageDialog(null, "Agentens namn uppdaterades.");
+            txtNamn.setText(nyttNamn);
+            cbValjBokstav.setSelectedIndex(0);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, " Något gick fel med uppdatering av agentens namn.");
+        }
+
+    }
+
+    public int getOmradesID() {
+        String omrade = cbValjOmrade.getSelectedItem().toString();
+        String query = "SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "';";
+        int omradesID = 0;
+
+        try {
+            omradesID = Integer.parseInt(idb.fetchSingle(query));
+
+        } catch (InfException e) {
+
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Områdes-ID.");
+        }
+
+        return omradesID;
+    }
+
+// Denna knapp skickar en till AdminSidan. "AdminFunktionerForm".
     private void btnAdminSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AndraInfoOmAgent.this);
         frame.setContentPane(new AdminFunktionerForm(epost, isAdmin));
@@ -466,9 +533,9 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
     private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnSok;
     private javax.swing.JButton btnUppdater;
-    private javax.swing.JComboBox<String> jComboBoxAgentBokstav;
-    private javax.swing.JComboBox<String> jComboValjAdministrator;
-    private javax.swing.JComboBox<String> jComboValjOmrade;
+    private javax.swing.JComboBox<String> cbValjAdmin;
+    private javax.swing.JComboBox<String> cbValjBokstav;
+    private javax.swing.JComboBox<String> cbValjOmrade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPaneInfoAgent;
     private javax.swing.JLabel lblAdminstrator;

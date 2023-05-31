@@ -46,8 +46,8 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
         btnRegistreraAgent = new javax.swing.JButton();
         btnSokAgent = new javax.swing.JButton();
         btnAvRegAlien = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnMinSida = new javax.swing.JButton();
+        lblAdminFunktioner = new javax.swing.JLabel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
 
@@ -155,17 +155,17 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                 .addGap(28, 28, 28))
         );
 
-        jButton1.setBackground(new java.awt.Color(242, 242, 242));
-        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jButton1.setText("Min sida");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMinSida.setBackground(new java.awt.Color(242, 242, 242));
+        btnMinSida.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnMinSida.setText("Min sida");
+        btnMinSida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMinSidaActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
-        jLabel1.setText("Admin-funktioner");
+        lblAdminFunktioner.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
+        lblAdminFunktioner.setText("Admin-funktioner");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,24 +175,24 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jButton1))
+                        .addComponent(btnMinSida))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(177, 177, 177)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblAdminFunktioner)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+                .addComponent(lblAdminFunktioner)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnMinSida)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -253,13 +253,13 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnAvRegAlienActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(AdminFunktionerForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Startsida: Agent");
         frame.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnMinSidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -267,11 +267,11 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
     private javax.swing.JButton btnAvRegAlien;
     private javax.swing.JButton btnBefordaAgent;
     private javax.swing.JButton btnHanteraChef;
+    private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistreraAgent;
     private javax.swing.JButton btnSokAgent;
     private javax.swing.JButton btnTaBortAgent;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAdminFunktioner;
     // End of variables declaration//GEN-END:variables
 }

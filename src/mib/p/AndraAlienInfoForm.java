@@ -606,7 +606,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
      */
     public void andraTelefon(int alienID) {
         String nyttNummer = txtAndraTelefon.getText();
-        if (ValideringsKlass.valideraInt(nyttNummer)) {
+        if (ValideringsKlass.valideraTelefonNummer(nyttNummer)) {
 
             try {
                 String query = "UPDATE mibdb.alien SET Telefon = '" + nyttNummer + "' WHERE Alien_ID = '" + alienID + "'";
@@ -615,7 +615,7 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
                 txtTelefon.setText(nyttNummer);
                 txtAndraTelefon.setText("");
             } catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "Ett fel inträffade vid uppdatering av data.");
+                JOptionPane.showMessageDialog(null, "Ett fel inträffade vid uppdatering av telefonnumret.");
             }
         }
     }
