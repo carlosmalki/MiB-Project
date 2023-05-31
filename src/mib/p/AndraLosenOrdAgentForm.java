@@ -26,6 +26,7 @@ public class AndraLosenOrdAgentForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
+        jPassNuvarande.requestFocus();
     }
 
     /**

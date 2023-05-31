@@ -95,6 +95,7 @@
               <Font name="MS Gothic" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ta bort utrustning"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du som administrat&#xf6;r ta bort&lt;br&gt;&#xa;utrustning ur databasen, t.ex om MiB &lt;br&gt;&#xa;slutar att anv&#xe4;nda en viss typ av vapen.&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaBortUtrustningActionPerformed"/>
@@ -106,6 +107,7 @@
               <Font name="MS Gothic" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Registrera utrustning"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du registrera ny utrustning i databasen, &lt;br&gt;&#xa;t.ex en ny sorts vapen, eller n&#xe5;gon nyutvecklad teknisk&lt;br&gt;&#xa;utrustning.&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistreraUtrustningActionPerformed"/>
@@ -117,6 +119,7 @@
               <Font name="MS Gothic" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Se din utrustning"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r han du se vilken utrustning du&lt;br&gt;&#xa;har utkvitterad just nu, samt f&#xe5; lite &lt;br&gt;&#xa;information om utrustningen.&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeUtrustningActionPerformed"/>

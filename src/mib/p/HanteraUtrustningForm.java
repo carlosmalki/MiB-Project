@@ -53,6 +53,7 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
 
         btnTaBortUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnTaBortUtrustning.setText("Ta bort utrustning");
+        btnTaBortUtrustning.setToolTipText("<html>Här kan du som administratör ta bort<br>\nutrustning ur databasen, t.ex om MiB <br>\nslutar att använda en viss typ av vapen.</html>");
         btnTaBortUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTaBortUtrustningActionPerformed(evt);
@@ -61,6 +62,7 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
 
         btnRegistreraUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnRegistreraUtrustning.setText("Registrera utrustning");
+        btnRegistreraUtrustning.setToolTipText("<html>Här kan du registrera ny utrustning i databasen, <br>\nt.ex en ny sorts vapen, eller någon nyutvecklad teknisk<br>\nutrustning.</html>");
         btnRegistreraUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistreraUtrustningActionPerformed(evt);
@@ -69,6 +71,7 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
 
         btnSeUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSeUtrustning.setText("Se din utrustning");
+        btnSeUtrustning.setToolTipText("<html>Här han du se vilken utrustning du<br>\nhar utkvitterad just nu, samt få lite <br>\ninformation om utrustningen.</html>");
         btnSeUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeUtrustningActionPerformed(evt);
