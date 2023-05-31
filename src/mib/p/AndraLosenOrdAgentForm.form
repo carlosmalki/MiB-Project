@@ -32,10 +32,10 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jPasswordFieldNuvarandeLosenord" pref="111" max="32767" attributes="0"/>
-                              <Component id="jPasswordFieldNytt" max="32767" attributes="0"/>
+                              <Component id="jPassNuvarande" pref="111" max="32767" attributes="0"/>
+                              <Component id="jPassNytt" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPasswordFieldUpprepa" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Component id="jPassUpprepa" min="-2" pref="111" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -59,18 +59,18 @@
               <Component id="lblAndraLosenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="57" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jPasswordFieldNuvarandeLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPassNuvarande" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblNuvarandeLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNyttLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPasswordFieldNytt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPassNytt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblUpprepaLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPasswordFieldUpprepa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPassUpprepa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -149,11 +149,11 @@
         <Property name="text" type="java.lang.String" value="Upprepa L&#xf6;senord:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordFieldUpprepa">
+    <Component class="javax.swing.JPasswordField" name="jPassUpprepa">
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordFieldNytt">
+    <Component class="javax.swing.JPasswordField" name="jPassNytt">
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordFieldNuvarandeLosenord">
+    <Component class="javax.swing.JPasswordField" name="jPassNuvarande">
     </Component>
     <Component class="javax.swing.JButton" name="btnRensa">
       <Properties>
