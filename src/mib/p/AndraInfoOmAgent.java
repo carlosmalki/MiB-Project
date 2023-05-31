@@ -42,7 +42,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnUppdater = new javax.swing.JButton();
+        btnAndraInfo = new javax.swing.JButton();
         jPaneInfoAgent = new javax.swing.JPanel();
         lblAnstallningsDatum = new javax.swing.JLabel();
         txtNamn = new javax.swing.JTextField();
@@ -72,11 +72,11 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         btnMinSida = new javax.swing.JButton();
         btnAdminSida = new javax.swing.JButton();
 
-        btnUppdater.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnUppdater.setText("Ändra");
-        btnUppdater.addActionListener(new java.awt.event.ActionListener() {
+        btnAndraInfo.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAndraInfo.setText("Ändra");
+        btnAndraInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUppdaterActionPerformed(evt);
+                btnAndraInfoActionPerformed(evt);
             }
         });
 
@@ -252,7 +252,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(btnAdminSida)
                 .addGap(35, 35, 35)
-                .addComponent(btnUppdater)
+                .addComponent(btnAndraInfo)
                 .addGap(18, 18, 18)
                 .addComponent(btnRensa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -271,7 +271,7 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
                 .addComponent(jPaneInfoAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUppdater)
+                    .addComponent(btnAndraInfo)
                     .addComponent(btnRensa)
                     .addComponent(btnMinSida)
                     .addComponent(btnAdminSida))
@@ -351,8 +351,15 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnRensaActionPerformed
-    // Denna knapp uppdaterar infon för agenten.
-    private void btnUppdaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdaterActionPerformed
+    /**
+     * Metod kopplad till btnAndraInfo som genom metoder från valideringsklassen
+     * testar all input från användaren och sedan utfrån det antingen ger
+     * felmeddelande eller fortsätter med de olika metoderna för att utföra
+     * ändringarna.
+     *
+     * @param evt
+     */
+    private void btnAndraInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraInfoActionPerformed
 
         String agentIDString = "";
         int agentIDInt = 0;
@@ -388,7 +395,15 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
         }
 
 
-    }//GEN-LAST:event_btnUppdaterActionPerformed
+    }//GEN-LAST:event_btnAndraInfoActionPerformed
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumnen Losenord i
+     * alien-tabellen där aktuellt Agent_ID hittas, txtLosenord sätts sedan till
+     * det nyta lösenordet, och txtAndraLosenOrd återställs till "".
+     *
+     * @param agentID
+     */
+
     public void andraLosenOrd(int agentID) {
         String nyttLosenOrd = txtAndraLosenOrd.getText();
         {
@@ -406,6 +421,15 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumnen telefon i
+     * alien-tabellen där aktuellt Agent_ID hittas, efter att inputen validerats
+     * som telefonnummer genom ValideringKlass-metoden valideraTelefonNummer(),
+     * txtTelefon sätts sedan till det nyta telefonnumret, och txtAndraTelefon
+     * återställs till "".
+     *
+     * @param agentID
+     */
     public void andraTelefon(int agentID) {
         String nyttNummer = "";
         if (ValideringsKlass.valideraTelefonNummer(txtAndraTelefon.getText())) {
@@ -427,6 +451,15 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som först kontrollerar att inskrivet datum är ett godkänt sådant,
+     * genom valideringsklass-metoden valideraDatum(), och sedan använder
+     * InfDB-metoden update() för att uppdatera anställningssdatum för den agent
+     * där aktuellt Agent_ID hittas, txtAnstallningsdatum sätts med nytt datum
+     * och txtAndraAnstallningsdatum återställs till "".
+     *
+     * @param agentID
+     */
     public void andraAnstDatum(int agentID) {
         String nyttAnstDatum = txtAndraAnstallningsdatum.getText();
         if (ValideringsKlass.valideraDatum(nyttAnstDatum)) {
@@ -444,6 +477,15 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, " Ogiltigt anställningsdatum. Ange datum enligt YYYY-MM-DD");
         }
     }
+
+    /**
+     * Metod som uppdaterar admin-status hos den agent där akuellt Agent_ID
+     * hittas, genom InfDB-metoden update(), metoden tar texten från comboboxen,
+     * och sätter status till J om texten är "Ja" och annars till "Nej", då Ja
+     * och Nej är de enda aktiva val som kan göras i dena box.
+     *
+     * @param agentID
+     */
 
     public void andraAdminStatus(int agentID) {
         String adminStatus = "";
@@ -465,6 +507,14 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumen Omrade i
+     * agent-tabellen där aktuellt Agent_ID hittas,txtOmrade sätts med namnet på
+     * det nya området och cbValjOmrade återställs till index 0 ("Välj område").
+     *
+     * @param agentID
+     */
+
     public void andraOmrade(int agentID) {
         int omrade = getOmradesID();
         try {
@@ -479,6 +529,13 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som genom InfDB-metoden update() uppdaterar kolumnen Namn i
+     * agent-tabellen där aktuellt Agent_ID hittas,txtNamn sätts till till det
+     * nya namnet, och cbValjBokstav återställs till index 0 ("Välj bokstav").
+     *
+     * @param agentID
+     */
     public void andraNamn(int agentID) {
         String nyttNamn = "Agent " + cbValjBokstav.getSelectedItem().toString();
         try {
@@ -493,6 +550,13 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som hämtar ut Omrades_ID från området valt i cbOmrade-comboboxen
+     * via InfDB-metoden fetchSingle, och sedan returnerar det i form av ett
+     * int-värde efter att först ha använt Integer.parseInt på hämtat värde.
+     *
+     * @return
+     */
     public int getOmradesID() {
         String omrade = cbValjOmrade.getSelectedItem().toString();
         String query = "SELECT Omrades_ID FROM mibdb.omrade WHERE Benamning = '" + omrade + "';";
@@ -529,10 +593,10 @@ public class AndraInfoOmAgent extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminSida;
+    private javax.swing.JButton btnAndraInfo;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnSok;
-    private javax.swing.JButton btnUppdater;
     private javax.swing.JComboBox<String> cbValjAdmin;
     private javax.swing.JComboBox<String> cbValjBokstav;
     private javax.swing.JComboBox<String> cbValjOmrade;

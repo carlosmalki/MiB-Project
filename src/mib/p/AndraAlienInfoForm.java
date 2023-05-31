@@ -599,7 +599,8 @@ public class AndraAlienInfoForm extends javax.swing.JPanel {
     /**
      * Metod som genom InfDB-metoden update() uppdaterar kolumnen telefon i
      * alien-tabellen där aktuellt Alien_ID hittas, efter att inputen validerats
-     * som int, txtTelefon sätts sedan till det nyta telefonnumret, och
+     * som telefonnummer genom ValideringKlass-metoden 
+     * valideraTelefonNummer(), txtTelefon sätts sedan till det nyta telefonnumret, och
      * txtAndraTelefon återställs till "".
      *
      * @param alienID
