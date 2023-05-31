@@ -241,8 +241,8 @@ public class ValideringsKlass {
     }
     
    /**
-   * Metod avsedd för att kontrollera om ett Alien ID existerar i databasen,
-   * genom att skapa en ArrayList av allaIDs geno InfDB-metodn fetchColumn,
+   * Metod avsedd för att kontrollera om ett Agent ID existerar i databasen,
+   * genom att skapa en ArrayList av allaIDs genom InfDB-metodn fetchColumn,
    * och sedan loopa genom den för att se om listan innehåller valt ID,
    * hittas ID returneras true, annars false.
    * @param agentID
@@ -266,4 +266,35 @@ public class ValideringsKlass {
 
         return idExisterar;
     }
+
+/**
+ * Metod för att validera om en inmatad epost-adress anses giltig i systemet,
+ * de krav vi valt på en epost är: måste innehålla "@" och ".", @ får inte vara
+ * först eller sist eller komma före punkten, och punkten måste ha två eller tre
+ * tecken efter sig.
+ * @param epost
+ * @return 
+ */
+public static boolean giltigEpost(String epost) {
+    boolean isGiltig = true;
+
+    if (!epost.contains("@") || !epost.contains(".")) {
+        isGiltig = false;
+    }
+
+    if (epost.indexOf("@") > epost.indexOf(".")) {
+        isGiltig = false;
+    }
+
+    if (epost.indexOf("@") == epost.length() - 1 || epost.indexOf("@") == 0) {
+        isGiltig = false;
+    }
+
+    if (!(epost.indexOf(".") == epost.length() - 3 || epost.indexOf(".") == epost.length() - 4)) {
+        isGiltig = false;
+    }
+
+    return isGiltig;
+
+}
 }

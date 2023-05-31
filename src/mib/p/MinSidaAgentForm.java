@@ -96,6 +96,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
 
         btnSokFunktioner.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSokFunktioner.setText("Sökfunktioner");
+        btnSokFunktioner.setToolTipText("<html>Här kan du söka efter aliens utifrån olika<br>kriterier, t.ex plats, ras och registreringsdatum.</html>");
         btnSokFunktioner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokFunktionerActionPerformed(evt);
