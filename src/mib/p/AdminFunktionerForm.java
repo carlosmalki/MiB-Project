@@ -53,6 +53,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnAndraInfoOmAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAndraInfoOmAgent.setText("Ändra agentinfo");
+        btnAndraInfoOmAgent.setToolTipText("<html>Här kan du som administratör ändra information<br>\nom valfri agent, t.ex om något blivit fel vid registrering<br>\neller om en agent byter område.</html>");
         btnAndraInfoOmAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraInfoOmAgentActionPerformed(evt);
@@ -61,6 +62,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnHanteraChef.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnHanteraChef.setText("Hantera chefer");
+        btnHanteraChef.setToolTipText("<html>Här kan du som administratör byta chef över<br>\nområden och kontor.</html>");
         btnHanteraChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHanteraChefActionPerformed(evt);
@@ -69,6 +71,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnBefordaAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnBefordaAgent.setText("Befordra Agent");
+        btnBefordaAgent.setToolTipText("<html>Här kan du som administratör ge andra<br>\nagenter adminstatus.</html>");
         btnBefordaAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBefordaAgentActionPerformed(evt);
@@ -77,6 +80,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnTaBortAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnTaBortAgent.setText("Avregistrera Agent");
+        btnTaBortAgent.setToolTipText("<html>Här kan du som administratör avregistrera<br>\nen agent, t.ex om denne slutar arbeta för MiB eller<br>\nomkommer under tjänstgöring.</html>");
         btnTaBortAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTaBortAgentActionPerformed(evt);
@@ -85,6 +89,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnRegistreraAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnRegistreraAgent.setText("Registrera Agent");
+        btnRegistreraAgent.setToolTipText("<html>Här kan du som administratör registrera <br>\nagenter vid nyanställningar hos MiB.</html>");
         btnRegistreraAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistreraAgentActionPerformed(evt);
@@ -93,6 +98,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnSokAgent.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnSokAgent.setText("Sök agent");
+        btnSokAgent.setToolTipText("<html>Här kan du som administratör söka fram all<br>\ninformation om en vald agent, utifrån dennes<br>\nAgent-ID.</html>");
         btnSokAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokAgentActionPerformed(evt);
@@ -101,6 +107,7 @@ public class AdminFunktionerForm extends javax.swing.JPanel {
 
         btnAvRegAlien.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         btnAvRegAlien.setText("Avregistrera Alien");
+        btnAvRegAlien.setToolTipText("<html>Här kan du som administratör avregistrera<br>\nen alien, om denne lämnar Jorden eller är tvungen<br>\natt termineras.</html>");
         btnAvRegAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvRegAlienActionPerformed(evt);
