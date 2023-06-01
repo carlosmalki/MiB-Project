@@ -49,10 +49,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         this.isAdmin = isAdmin;
         agentID = getAgentID();
 
-        getAllUtrustning();
-        getVapenNamn();
-        getTeknikNamn();
-        getKommunikationNamn();
+        getAllAllUtrustning();
         lblVarierande.setText("Information:          ");
         lblVarierande2.setVisible(true);
         lblUtkvitterad.setVisible(true);
@@ -60,13 +57,14 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblUtkvitterad.setText("           ");
 
         txtVarierande.setVisible(false);
+        txtVarierande.setEditable(false);
         txtUtKvittDatum.setVisible(false);
+        txtUtKvittDatum.setEditable(false);
+
+        btnAterLamna.setVisible(false);
 
         validering = new ValideringsKlass();
-
-        fyllVapenComboBox();
-        fyllTeknikComboBox();
-        fyllKommunikationComboBox();
+        fyllComboBoxar();
 
     }
 
@@ -97,7 +95,8 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblVarierande = new javax.swing.JLabel();
         lblVarierande2 = new javax.swing.JLabel();
         lblUtkvitterad = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAterLamna = new javax.swing.JButton();
+        btnHanteraUtrustning = new javax.swing.JButton();
 
         setFocusTraversalPolicyProvider(true);
         setMaximumSize(new java.awt.Dimension(550, 343));
@@ -209,6 +208,14 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         lblUtkvitterad.setFont(new java.awt.Font("MS Gothic", 1, 12)); // NOI18N
         lblUtkvitterad.setText("Utkvitterad:");
 
+        btnAterLamna.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnAterLamna.setText("Återlämna");
+        btnAterLamna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAterLamnaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnVarierandeLayout = new javax.swing.GroupLayout(pnVarierande);
         pnVarierande.setLayout(pnVarierandeLayout);
         pnVarierandeLayout.setHorizontalGroup(
@@ -225,7 +232,8 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
                             .addGap(7, 7, 7)
                             .addComponent(lblVarierande2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAterLamna, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addGroup(pnVarierandeLayout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(lblVarierande)))
@@ -244,15 +252,17 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
                 .addGroup(pnVarierandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUtkvitterad)
                     .addComponent(txtUtKvittDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAterLamna)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(242, 242, 242));
-        jButton1.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jButton1.setText("Utrustning");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnHanteraUtrustning.setBackground(new java.awt.Color(242, 242, 242));
+        btnHanteraUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnHanteraUtrustning.setText("Utrustning");
+        btnHanteraUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnHanteraUtrustningActionPerformed(evt);
             }
         });
 
@@ -261,40 +271,39 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(lblUtrustning)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnMinSida)
-                            .addComponent(jButton1))
-                        .addGap(18, 18, 18)
-                        .addComponent(pnVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                            .addComponent(btnHanteraUtrustning))
+                        .addGap(41, 41, 41)
+                        .addComponent(pnVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(lblUtrustning))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addComponent(lblUtrustning)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pnVarierande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addComponent(btnMinSida)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(10, 10, 10))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnHanteraUtrustning)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
    /**
@@ -337,6 +346,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             lblVarierande2.setText("          Kaliber:");
             lblVarierande.setText(vapenNamn);
             visaInfo();
+            btnAterLamna.setVisible(true);
         }
     }//GEN-LAST:event_btnVapenInfoActionPerformed
     /**
@@ -362,6 +372,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             lblVarierande2.setText("       Kraftkälla:");
             lblVarierande.setText(teknikNamn);
             visaInfo();
+            btnAterLamna.setVisible(true);
         }
 
     }//GEN-LAST:event_btnTeknikInfoActionPerformed
@@ -388,16 +399,26 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             lblVarierande2.setText("Överföringsteknik:");
             lblVarierande.setText(kommNamn);
             visaInfo();
+            btnAterLamna.setVisible(true);
         }
     }//GEN-LAST:event_btnKommInfoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnHanteraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraUtrustningActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SeDinUtrustningForm.this);
         frame.setContentPane(new HanteraUtrustningForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Hantera utrustning");
         frame.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnHanteraUtrustningActionPerformed
+
+    private void btnAterLamnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAterLamnaActionPerformed
+        aterLamnaUtrustning();
+        txtVarierande.setText("");
+        txtUtKvittDatum.setText("");
+        rensaComboBoxar();
+        getAllAllUtrustning();
+        fyllComboBoxar();
+    }//GEN-LAST:event_btnAterLamnaActionPerformed
 
     /**
      * Metod som hämtar ut Agent_ID utifrån den i applikationen unika
@@ -423,8 +444,10 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * hämtar hem all utrustning aktuell inloggada Agent för tillfället har
      * utkvitterad ock skapar en ArrayList<String> av det genom InfDB-metoden
      * fetchColumn().
+     *
+     * @return
      */
-    private void getAllUtrustning() {
+    public ArrayList<String> getAllUtrustning() {
         String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN "
                 + "(SELECT mibdb.innehar_utrustning.Utrustnings_ID FROM mibdb.innehar_utrustning "
                 + "WHERE mibdb.innehar_utrustning.Agent_ID = " + agentID + ")";
@@ -435,7 +458,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av utrustning.");
         }
-
+        return allUtrustning;
     }
 
     /**
@@ -443,7 +466,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * "Utrustning", där Utrustnings_ID också finns i tabellen "vapen", och
      * skapar en ArrayList<String> av dessa via InfDB-metoden fetchColumn().
      */
-    private void getVapenNamn() {
+    public ArrayList<String> getVapenNamn() {
         String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.vapen);";
         try {
             vapen = idb.fetchColumn(query);
@@ -451,6 +474,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Vapen-namn.");
         }
+        return vapen;
     }
 
     /**
@@ -458,7 +482,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * "Utrustning", där Utrustnings_ID också finns i tabellen "teknik", och
      * skapar en ArrayList<String> av dessa via InfDB-metoden fetchColumn().
      */
-    private void getTeknikNamn() {
+    public ArrayList<String> getTeknikNamn() {
         String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.teknik);";
         try {
             teknik = idb.fetchColumn(query);
@@ -466,14 +490,17 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Teknik-namn.");
         }
+        return teknik;
     }
 
     /**
      * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
      * "Utrustning", där Utrustnings_ID också finns i tabellen "kommunikation",
-     * och skapar en ArrayList<String> av dessa via InfDB-metoden fetchColumn().
+     * och skapar en ArrayList av dessa via InfDB-metoden fetchColumn().
+     *
+     * @return
      */
-    private void getKommunikationNamn() {
+    public ArrayList<String> getKommunikationNamn() {
         String query = "SELECT Benamning FROM mibdb.utrustning WHERE mibdb.utrustning.Utrustnings_ID IN (SELECT Utrustnings_ID FROM mibdb.kommunikation);";
         try {
             kommunikation = idb.fetchColumn(query);
@@ -481,13 +508,14 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "Ett fel uppstod vid hämtning av Kommunikationsutrustning.");
         }
+        return kommunikation;
     }
 
     /**
      * Metod som fyller upp jComboVapen med värden genom en for each loop av
      * ArrayListan "vapen" som skapats i metoden getVapenNamn().
      */
-    private void fyllVapenComboBox() {
+    public void fyllVapenComboBox() {
         for (String vapen : vapen) {
             if (allUtrustning.contains(vapen)) {
                 cbVapen.addItem(vapen);
@@ -500,7 +528,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * Metod som fyller upp jComboTeknik med värden genom en for each loop av
      * ArrayListan "teknik" som skapats i metoden getTeknikNamn().
      */
-    private void fyllTeknikComboBox() {
+    public void fyllTeknikComboBox() {
         for (String teknik : teknik) {
             if (allUtrustning.contains(teknik)) {
                 cbTeknik.addItem(teknik);
@@ -514,7 +542,7 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
      * loop av ArrayListan "kommunikation" som skapats i metoden
      * getKommunikationNamn().
      */
-    private void fyllKommunikationComboBox() {
+    public void fyllKommunikationComboBox() {
         for (String kom : kommunikation) {
             if (allUtrustning.contains(kom)) {
                 cbKommunikation.addItem(kom);
@@ -672,7 +700,57 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         }
     }
 
+    private int getUtrustningsID() {
+        int utrustningsID = 0;
+        String utrustning = lblVarierande.getText();
+        String query = "SELECT Utrustnings_ID "
+                + "FROM mibdb.utrustning "
+                + "WHERE Benamning = '" + utrustning + "'";
+
+        try {
+            utrustningsID = Integer.parseInt(idb.fetchSingle(query));
+        } catch (NumberFormatException | InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av utrustningsID.");
+
+        }
+
+        return utrustningsID;
+    }
+
+    private void getAllAllUtrustning() {
+        getAllUtrustning();
+        getVapenNamn();
+        getTeknikNamn();
+        getKommunikationNamn();
+    }
+
+    private void fyllComboBoxar() {
+        fyllVapenComboBox();
+        fyllTeknikComboBox();
+        fyllKommunikationComboBox();
+
+    }
+
+    private void aterLamnaUtrustning() {
+        int utrustningsID = getUtrustningsID();
+        String query = "DELETE FROM mibdb.innehar_utrustning "
+                + "WHERE Agent_ID = " + agentID + " AND Utrustnings_ID = " + utrustningsID + ";";
+        try {
+            idb.delete(query);
+            JOptionPane.showMessageDialog(null, "Utrustningen är nu återlämnad.");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel vid borttagning av utrustning.");
+        }
+    }
+    private void rensaComboBoxar()
+    {
+    cbVapen.removeAllItems();
+    cbTeknik.removeAllItems();
+    cbKommunikation.removeAllItems();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAterLamna;
+    private javax.swing.JButton btnHanteraUtrustning;
     private javax.swing.JButton btnKommInfo;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnTeknikInfo;
@@ -680,7 +758,6 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbKommunikation;
     private javax.swing.JComboBox<String> cbTeknik;
     private javax.swing.JComboBox<String> cbVapen;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblKommunikation;
     private javax.swing.JLabel lblTeknik;

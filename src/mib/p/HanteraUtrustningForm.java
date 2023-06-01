@@ -46,6 +46,7 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         btnTaBortUtrustning = new javax.swing.JButton();
         btnRegistreraUtrustning = new javax.swing.JButton();
         btnSeUtrustning = new javax.swing.JButton();
+        btnHanteraDinUtrust = new javax.swing.JButton();
         lblRubrik = new javax.swing.JLabel();
         btnMinSida = new javax.swing.JButton();
 
@@ -78,6 +79,15 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
             }
         });
 
+        btnHanteraDinUtrust.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
+        btnHanteraDinUtrust.setText("Hantera din utrustning");
+        btnHanteraDinUtrust.setToolTipText("<html>Här kan du hantera din egen utrustning, <br>\nt.ex kvittera ut ny, eller lämna tillbaka utrustning<br>\ndu redan har utkvitterad.</htmal>");
+        btnHanteraDinUtrust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHanteraDinUtrustActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,14 +97,17 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRegistreraUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSeUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(btnHanteraDinUtrust, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addComponent(btnSeUtrustning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(btnHanteraDinUtrust)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistreraUtrustning)
                 .addGap(18, 18, 18)
@@ -134,11 +147,11 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addComponent(lblRubrik)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
                 .addComponent(btnMinSida)
                 .addGap(16, 16, 16))
         );
@@ -176,8 +189,18 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
+    private void btnHanteraDinUtrustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraDinUtrustActionPerformed
+       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HanteraUtrustningForm.this);
+        frame.setContentPane(new KvitteraUtForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Kvittera ut och lämna tillbaka utrustning.");
+        frame.repaint();
+
+    }//GEN-LAST:event_btnHanteraDinUtrustActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHanteraDinUtrust;
     private javax.swing.JButton btnMinSida;
     private javax.swing.JButton btnRegistreraUtrustning;
     private javax.swing.JButton btnSeUtrustning;
