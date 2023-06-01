@@ -412,12 +412,17 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnHanteraUtrustningActionPerformed
 
     private void btnAterLamnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAterLamnaActionPerformed
-        aterLamnaUtrustning();
-        txtVarierande.setText("");
-        txtUtKvittDatum.setText("");
-        rensaComboBoxar();
-        getAllAllUtrustning();
-        fyllComboBoxar();
+
+        if (ValideringsKlass.validateTextFieldNotEmpty(txtVarierande.getText()) && ValideringsKlass.validateTextFieldNotEmpty(txtUtKvittDatum.getText())) {
+            aterLamnaUtrustning();
+            txtVarierande.setText("");
+            txtUtKvittDatum.setText("");
+            rensaComboBoxar();
+            getAllAllUtrustning();
+            fyllComboBoxar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Var god välj först utrustning att återlämna.");
+        }
     }//GEN-LAST:event_btnAterLamnaActionPerformed
 
     /**
