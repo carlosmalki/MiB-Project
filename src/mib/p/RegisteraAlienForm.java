@@ -428,7 +428,7 @@ public class RegisteraAlienForm extends javax.swing.JPanel {
      * @param evt
      */
     private void cbRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRasActionPerformed
-        String ras = ((String) cbRas.getSelectedItem()).trim();
+        String ras = cbRas.getSelectedItem().toString();
 
         if (ras.equals("Squid")) {
             lblVarierande.setText("Antal armar:");

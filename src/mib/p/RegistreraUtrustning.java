@@ -11,19 +11,19 @@ import javax.swing.SwingUtilities;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
-
 /**
- * Registrera utrustning låter agenten skapa nya instanser av utrustning. 
- * De behöver välja utrustningstyp, vilket leder till separata fönster där data 
+ * Registrera utrustning låter agenten skapa nya instanser av utrustning. De
+ * behöver välja utrustningstyp, vilket leder till separata fönster där data
  * lagras i respektive tabell eftersom det inte bara är en utrustningstabell.
+ *
  * @author samsung
  */
 public class RegistreraUtrustning extends javax.swing.JPanel {
+
     private String epost;
     private String isAdmin;
     private static InfDB idb;
@@ -35,14 +35,14 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
         initComponents();
         this.epost = epost;
         this.isAdmin = isAdmin;
-        fyllTypLista();
-        
+
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
+        fyllTypLista();
     }
 
     /**
@@ -176,74 +176,80 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
                 .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
-                frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();
+        frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Startsida: Agent");
+        frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
 
     private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
-        JComboBox box = cbUtrustningsTyp;
-        String utrustningsTyp = cbUtrustningsTyp.getSelectedItem().toString();
-        String benamning = tfAngivetNamn.getText();
-        if (ValideringsKlass.giltigtNamn(benamning) && ValideringsKlass.valideraComboBoxAktivtVal(box)) {
-            try {
-                ArrayList<String> existerandeUtrustningsBenamningar = idb.fetchColumn("select benamning from utrustning");
-                if (!ValideringsKlass.vardeFinns(benamning, existerandeUtrustningsBenamningar)) {
-                    String id = idb.getAutoIncrement("utrustning", "utrustnings_id");
-                    idb.insert("insert into utrustning values (" + id + ", " + "'" + benamning + "')");
-                    kollaTyp(utrustningsTyp, id);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Det finns redan utrustning registrerad med angiven benamning!");
-                }
-            } catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, "Något gick fel!");
-            }
+        if (!ValideringsKlass.valideraComboBoxAktivtVal(cbUtrustningsTyp) || !ValideringsKlass.validateTextFieldNotEmpty(tfAngivetNamn.getText())) {
+            JOptionPane.showMessageDialog(null, "Välj utrustningstyp och/eller utrustningsnamn.");
         }
+        if (ValideringsKlass.validateTextFieldNotEmpty(tfAngivetNamn.getText())) {
+            JComboBox box = cbUtrustningsTyp;
+            String utrustningsTyp = cbUtrustningsTyp.getSelectedItem().toString();
+            String benamning = tfAngivetNamn.getText();
+            if (ValideringsKlass.giltigtNamn(benamning) && ValideringsKlass.valideraComboBoxAktivtVal(box)) {
+                try {
+                    ArrayList<String> existerandeUtrustningsBenamningar = idb.fetchColumn("select benamning from utrustning");
+                    if (!ValideringsKlass.vardeFinns(benamning, existerandeUtrustningsBenamningar)) {
+                        String id = idb.getAutoIncrement("utrustning", "utrustnings_id");
+                        idb.insert("insert into utrustning values (" + id + ", " + "'" + benamning + "')");
+                        kollaTyp(utrustningsTyp, id);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Det finns redan utrustning registrerad med angiven benamning!");
+                    }
+                } catch (InfException ex) {
+                    JOptionPane.showMessageDialog(null, "Något gick fel!");
+                }
+            }
+        } 
     }//GEN-LAST:event_btnLaggTillActionPerformed
 
     private void btnHanteraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraUtrustningActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
-                frame.setContentPane(new HanteraUtrustningForm(epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Hantera utrustning");
-                frame.repaint();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
+        frame.setContentPane(new HanteraUtrustningForm(epost, isAdmin));
+        frame.revalidate();
+        frame.setTitle("Hantera utrustning");
+        frame.repaint();
     }//GEN-LAST:event_btnHanteraUtrustningActionPerformed
-    
+
     //Denna metod gör det möjligt att välja typ i en "drop down meny" istället
     //för att användaren ska behöva skriva in det manuellt
     private void fyllTypLista() {
         cbUtrustningsTyp.removeAllItems();
+        cbUtrustningsTyp.addItem("Välj typ");
         cbUtrustningsTyp.addItem("Vapen");
         cbUtrustningsTyp.addItem("Kommunikation");
         cbUtrustningsTyp.addItem("Teknik");
     }
-    
+
     //Denna metod används i LaggTillknappens actionperformed. 
     //Kontrollerar vilken sorts utrustningstyp man vill registrera och
     //öppnar sedan rätt fortsättningsfönster för vidare datainput.
     private void kollaTyp(String utrustningsTyp, String id) {
         if (utrustningsTyp.equals("Vapen")) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
-                frame.setContentPane(new RegistreraVapen(id, epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Registrera vapen");
-                frame.repaint();
+            frame.setContentPane(new RegistreraVapen(id, epost, isAdmin));
+            frame.revalidate();
+            frame.setTitle("Registrera vapen");
+            frame.repaint();
         } else if (utrustningsTyp.equals("Kommunikation")) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
-                frame.setContentPane(new RegistreraKommunikation(id, epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Registrera kommunikation");
-                frame.repaint();
+            frame.setContentPane(new RegistreraKommunikation(id, epost, isAdmin));
+            frame.revalidate();
+            frame.setTitle("Registrera kommunikation");
+            frame.repaint();
         } else if (utrustningsTyp.equals("Teknik")) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(RegistreraUtrustning.this);
-                frame.setContentPane(new RegistreraTeknik(id, epost, isAdmin));
-                frame.revalidate();
-                frame.setTitle("Registrera teknik");
-                frame.repaint();
+            frame.setContentPane(new RegistreraTeknik(id, epost, isAdmin));
+            frame.revalidate();
+            frame.setTitle("Registrera teknik");
+            frame.repaint();
         }
     }
 

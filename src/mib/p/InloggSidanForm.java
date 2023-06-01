@@ -54,9 +54,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
         lblLosenord = new javax.swing.JLabel();
         txtAnvandarnamn = new javax.swing.JTextField();
         jPasswordFieldLoseonrd = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
@@ -81,27 +78,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
 
         lblLosenord.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLosenord.setText("Lösenord:");
-
-        jButton1.setText("alien");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("agent");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("admin");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         jButton4.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
         jButton4.setText("HuvudSidan");
@@ -135,16 +111,9 @@ public class InloggSidanForm extends javax.swing.JPanel {
                                 .addGap(215, 215, 215)
                                 .addComponent(btnLoggaIn))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
-                                .addComponent(jButton1)
-                                .addGap(36, 36, 36)
-                                .addComponent(jButton2)
-                                .addGap(44, 44, 44)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(243, 243, 243)
                                 .addComponent(lblAlienOrAgent)))
-                        .addGap(0, 128, Short.MAX_VALUE))
+                        .addGap(0, 244, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton4)))
@@ -167,12 +136,7 @@ public class InloggSidanForm extends javax.swing.JPanel {
                     .addComponent(jPasswordFieldLoseonrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLoggaIn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
         );
@@ -255,31 +219,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
        }
            
     }//GEN-LAST:event_btnLoggaInActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(InloggSidanForm.this);
-                frame.setContentPane(new MinSidaAlienForm("blomma@angen.nu"));
-                frame.revalidate();
-                frame.setTitle("Startsida: Alien");
-                frame.repaint();    
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(InloggSidanForm.this);
-                frame.setContentPane(new MinSidaAgentForm("aj@mib.net","N"));
-                frame.revalidate();
-                frame.setTitle("Startsida: Agent");
-                frame.repaint();  
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-  JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(InloggSidanForm.this);
-                frame.setContentPane(new MinSidaAgentForm("ao@mib.net","J"));
-                frame.revalidate();
-                frame.setTitle("Startsida: Admin");
-                frame.repaint();  
-    }//GEN-LAST:event_jButton3ActionPerformed
     // Denna knapp skickar en till HuvudSidan, Alien/Agent
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
@@ -297,9 +236,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JPasswordField jPasswordFieldLoseonrd;
     private javax.swing.JLabel lblAlienOrAgent;

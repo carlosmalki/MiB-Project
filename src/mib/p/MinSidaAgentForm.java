@@ -23,6 +23,7 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
     private final String epost;
     private final String isAdmin;
     public boolean tryckNrTva;
+
     /**
      * Creates new form MinSidaAgentForm
      *
@@ -245,9 +246,10 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
  /**
-  * Metod som genon InfDB-metoden fetchSingle hämtar namnet på den agent som precis loggat in
-  * för att fylla lblAgentNamn med detta som välkomnsthälsning.
-  */
+     * Metod som genon InfDB-metoden fetchSingle hämtar namnet på den agent som
+     * precis loggat in för att fylla lblAgentNamn med detta som
+     * välkomnsthälsning.
+     */
     private void setValkommen() {
         try {
             lblAgentNamn.setText(idb.fetchSingle("SELECT Namn FROM mibdb.agent WHERE Epost = '" + epost + "'"));
@@ -318,28 +320,29 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         frame.setTitle("Topplista: Kontaktagenter");
         frame.repaint();
     }//GEN-LAST:event_btnToppListaActionPerformed
-/**
- * Metod kopplad till btnLoggaUt, som vid första trycket ställer en kontrollfråga om man verkligen vill
- * logga ut, och vid andra trycket (vilket hålls reda på via boolean-variabel tryckNrTva) låter
- * användaren logga ut.
- * @param evt 
- */
+    /**
+     * Metod kopplad till btnLoggaUt, som skapar en array med två alternativ "Logga ut" och "Avbryt",
+     * en JOptionPane får sina knappar satta med dessa alternativ och en tryckning sätter värdet
+     * på int-variabeln "val" utifrån
+     *
+     * @param evt
+     */
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-         if(tryckNrTva)
-       {
-           JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
-        frame.setContentPane(new InloggSidanForm("Agent"));
-        frame.revalidate();
-        frame.setTitle("Välkommen till MiB");
-        frame.repaint();
-       
-       }
-       else
-       {
-       JOptionPane.showMessageDialog(null, "Är du säker på att du vill logga ut? Klicka i såfall 'Logga ut' igen.");
-       tryckNrTva = true;
-       }
+        Object[] alternativ = {"Logga ut", "Avbryt"};
+
+        int val = JOptionPane.showOptionDialog(null, "Är du säker på att du vill logga ut?",
+                "Bekräftelse", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, alternativ, alternativ[1]);
+
+        if (val == 0) {
+            
+            JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
+            frame.setContentPane(new InloggSidanForm("Agent"));
+            frame.revalidate();
+            frame.setTitle("Välkommen till MiB");
+            frame.repaint();
+        }
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
 
