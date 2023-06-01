@@ -700,6 +700,14 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som hämtar och returnerar Utrustnings_ID på vald utrustning utifrån
+     * dess Benämning, via InfDB- metoden fetchSingle() genom att hämta texten
+     * på lblVarierande som är namnet på för tillfället vald utrustning.
+     *
+     *
+     * @return
+     */
     private int getUtrustningsID() {
         int utrustningsID = 0;
         String utrustning = lblVarierande.getText();
@@ -717,6 +725,12 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         return utrustningsID;
     }
 
+    /**
+     * Metod som hämtar benämningar på samtliga utrustningar i databasen, via
+     * metoderna getAllUtrustning(); getVapenNamn(); getTeknikNamn();
+     * getKommunikationNamn(); som skapar ArrayListor över respektive
+     * utrustnings-typ för att använda till att fylla comboboxarna.
+     */
     private void getAllAllUtrustning() {
         getAllUtrustning();
         getVapenNamn();
@@ -724,6 +738,10 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
         getKommunikationNamn();
     }
 
+    /**
+     * Metod som fyller upp alla comboboxar med värden från respektive
+     * utrustnings- tabeller.
+     */
     private void fyllComboBoxar() {
         fyllVapenComboBox();
         fyllTeknikComboBox();
@@ -731,6 +749,12 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Metod som tar bort en rad från tabellen innehar_utrustning där agentID
+     * som skapas via getAgentID()-metoden när SeDinUtrustningsForm
+     * initialiseras, och Utrustnings_ID som hämtas via
+     * getUtrustningsID()-metoden, återfinns.
+     */
     private void aterLamnaUtrustning() {
         int utrustningsID = getUtrustningsID();
         String query = "DELETE FROM mibdb.innehar_utrustning "
@@ -742,11 +766,15 @@ public class SeDinUtrustningForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Något gick fel vid borttagning av utrustning.");
         }
     }
-    private void rensaComboBoxar()
-    {
-    cbVapen.removeAllItems();
-    cbTeknik.removeAllItems();
-    cbKommunikation.removeAllItems();
+
+    /**
+     * Metod som tömmer alla comboboxar på värden inför nya sökningar när
+     * utrustning tagits bort.
+     */
+    private void rensaComboBoxar() {
+        cbVapen.removeAllItems();
+        cbTeknik.removeAllItems();
+        cbKommunikation.removeAllItems();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAterLamna;
