@@ -121,8 +121,8 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="MS Gothic" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Se din utrustning"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r han du se vilken utrustning du&lt;br&gt;&#xa;har utkvitterad just nu, samt f&#xe5; lite &lt;br&gt;&#xa;information om utrustningen.&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="Din utrustning"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r han du se vilken utrustning du&lt;br&gt;&#xa;har utkvitterad just nu, samt f&#xe5; lite &lt;br&gt;&#xa;information om utrustningen,&lt;br&gt;&#xa;och &#xe4;ven l&#xe4;mna tillbaka utrustning du&lt;br&gt;&#xa;inte l&#xe4;ngre beh&#xf6;ver.&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeUtrustningActionPerformed"/>
@@ -133,8 +133,8 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="MS Gothic" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Hantera din utrustning"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du hantera din egen utrustning, &lt;br&gt;&#xa;t.ex kvittera ut ny, eller l&#xe4;mna tillbaka utrustning&lt;br&gt;&#xa;du redan har utkvitterad.&lt;/htmal&gt;"/>
+            <Property name="text" type="java.lang.String" value="Kvittera ut utrustning"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;H&#xe4;r kan du kvittera ut ny utrustning&lt;br&gt;&#xa;om du t.ex beh&#xf6;ver ett  vapen eller n&#xe5;gon&lt;br&gt;&#xa;teknisk utrustning inf&#xf6;r ett uppdrag.&lt;/html&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHanteraDinUtrustActionPerformed"/>

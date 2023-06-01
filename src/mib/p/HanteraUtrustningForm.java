@@ -71,8 +71,8 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         });
 
         btnSeUtrustning.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnSeUtrustning.setText("Se din utrustning");
-        btnSeUtrustning.setToolTipText("<html>Här han du se vilken utrustning du<br>\nhar utkvitterad just nu, samt få lite <br>\ninformation om utrustningen.</html>");
+        btnSeUtrustning.setText("Din utrustning");
+        btnSeUtrustning.setToolTipText("<html>Här han du se vilken utrustning du<br>\nhar utkvitterad just nu, samt få lite <br>\ninformation om utrustningen,<br>\noch även lämna tillbaka utrustning du<br>\ninte längre behöver.</html>");
         btnSeUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeUtrustningActionPerformed(evt);
@@ -80,8 +80,8 @@ public class HanteraUtrustningForm extends javax.swing.JPanel {
         });
 
         btnHanteraDinUtrust.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        btnHanteraDinUtrust.setText("Hantera din utrustning");
-        btnHanteraDinUtrust.setToolTipText("<html>Här kan du hantera din egen utrustning, <br>\nt.ex kvittera ut ny, eller lämna tillbaka utrustning<br>\ndu redan har utkvitterad.</htmal>");
+        btnHanteraDinUtrust.setText("Kvittera ut utrustning");
+        btnHanteraDinUtrust.setToolTipText("<html>Här kan du kvittera ut ny utrustning<br>\nom du t.ex behöver ett  vapen eller någon<br>\nteknisk utrustning inför ett uppdrag.</html>");
         btnHanteraDinUtrust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHanteraDinUtrustActionPerformed(evt);
