@@ -12,6 +12,10 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * KvitteraUtForm är en JPanel-klass där användaren kan kvittera ut ny
+ * utrustning som då registreras i tabellen innehar_utrustning, klassen tar in
+ * String epost, och String isAdmin som håller reda på vilken agent som är
+ * inloggad, och om denne är admin.
  *
  * @author ASUS
  */
@@ -219,7 +223,15 @@ public class KvitteraUtForm extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metod kopplat till btnKvitteraVapen som när den trycks först via
+     * ValideringsKlassen kontrollerar så att datum är ifyllt, och om det är det
+     * går vidare med att sätta variabeln "varierande" med namnet på valt
+     * utrustning utifrån cbKvitteraVapen-comboboxen, och sedan köra metoden
+     * kvitteraUtUtrustning() med datum-variabeln som parameter in i metoden.
+     *
+     * @param evt
+     */
     private void btnKvitteraVapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKvitteraVapenActionPerformed
         String datum;
         String vapen;
@@ -236,7 +248,15 @@ public class KvitteraUtForm extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnKvitteraVapenActionPerformed
-
+    /**
+     * Metod kopplat till btnKvitteraTeknik som när den trycks först via
+     * ValideringsKlassen kontrollerar så att datum är ifyllt, och om det är det
+     * går vidare med att sätta variabeln "varierande" med namnet på valt
+     * utrustning utifrån cbKvitteraTeknik-comboboxen, och sedan köra metoden
+     * kvitteraUtUtrustning() med datum-variabeln som parameter in i metoden.
+     *
+     * @param evt
+     */
     private void btnKvitteraTeknikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKvitteraTeknikActionPerformed
         String datum;
         String teknik;
@@ -253,9 +273,17 @@ public class KvitteraUtForm extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnKvitteraTeknikActionPerformed
-
+    /**
+     * Metod kopplat till btnKvitteraKomm som när den trycks först via
+     * ValideringsKlassen kontrollerar så att datum är ifyllt, och om det är det
+     * går vidare med att sätta variabeln "varierande" med namnet på valt
+     * utrustning utifrån cbKvitteraKomm-comboboxen, och sedan köra metoden
+     * kvitteraUtUtrustning() med datum-variabeln som parameter in i metoden.
+     *
+     * @param evt
+     */
     private void btnKvitteraKommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKvitteraKommActionPerformed
-         String datum;
+        String datum;
         String komm;
         if (ValideringsKlass.valideraDatum(txtDatum.getText()) && ValideringsKlass.validateTextFieldNotEmpty(txtDatum.getText())) {
             datum = txtDatum.getText();
@@ -280,13 +308,19 @@ public class KvitteraUtForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUtrustningActionPerformed
 
     private void btnMinSidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinSidaActionPerformed
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(KvitteraUtForm.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(KvitteraUtForm.this);
         frame.setContentPane(new MinSidaAgentForm(epost, isAdmin));
         frame.revalidate();
         frame.setTitle("Startsida: Agent");
         frame.repaint();
     }//GEN-LAST:event_btnMinSidaActionPerformed
-
+    /**
+     * Metod som hämtar och returnerar Agent_ID för inloggad agent via
+     * InfDB-metoden fetchSingle, med hjälp av variabeln "epost" som hela tiden
+     * skickas med mellan de olika panelerna i systemet.
+     *
+     * @return
+     */
     private int getAgentID() {
 
         String query = "SELECT Agent_ID FROM mibdb.agent WHERE Epost = '" + epost + "'";
@@ -299,6 +333,15 @@ public class KvitteraUtForm extends javax.swing.JPanel {
         return -1;
     }
 
+    /**
+     * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
+     * "Utrustning", där Utrustnings_ID också finns i tabellen "teknik", och
+     * skapar en ArrayList av dessa via InfDB-metoden fetchColumn(), och sedan
+     * genom en for each loop lägger till alla värden från ArrayListan i
+     * cbKvitteraTeknik-comboboxen.
+     *
+     * @return
+     */
     private void getAllTeknik() {
         String query = "SELECT benamning "
                 + "FROM mibdb.utrustning "
@@ -317,6 +360,15 @@ public class KvitteraUtForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
+     * "Utrustning", där Utrustnings_ID också finns i tabellen "vapen", och
+     * skapar en ArrayList av dessa via InfDB-metoden fetchColumn(), och sedan
+     * genom en for each loop lägger till alla värden från ArrayListan i
+     * cbKvitteraVapen-comboboxen.
+     *
+     *
+     */
     private void getAllaVapen() {
         String query = "SELECT benamning "
                 + "FROM mibdb.utrustning "
@@ -335,6 +387,15 @@ public class KvitteraUtForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som hämtar alla värden från kolumnen "Benamning" i tabellen
+     * "Utrustning", där Utrustnings_ID också finns i tabellen "kommunikation",
+     * och skapar en ArrayList av dessa via InfDB-metoden fetchColumn(), och
+     * sedan genom en for each loop lägger till alla värden från ArrayListan i
+     * cbKvitteraKomm-comboboxen.
+     *
+     *
+     */
     private void getAllKomm() {
         String query = "SELECT benamning "
                 + "FROM mibdb.utrustning "
@@ -353,6 +414,15 @@ public class KvitteraUtForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som utför själva infogandet av data i tabellen innehar_utrustning
+     * via InfDB-metoden insert(), med hjälp av Agent_ID som sätts redan när
+     * KvitteraUtForm initieras via getAgentID()-metoden, Utrustnings_ID som
+     * hämtas via getUtrustningsID()-metoden och Utkvitteringsdatum som skickas
+     * med som parameter in i metoden från "kvittera"-knappara.
+     *
+     * @param datum
+     */
     public void kvitteraUtUtrustning(String datum) {
         int utrustningsID = getUtrustningsID();
         String query = "INSERT INTO mibdb.innehar_utrustning (Agent_ID, Utrustnings_ID, Utkvitteringsdatum) "
@@ -366,6 +436,14 @@ public class KvitteraUtForm extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Metod som hämtar och returnerar Utrustnings_ID på vald utrustning utifrån
+     * dess Benämning, via InfDB- metoden fetchSingle() med hjälp av variabeln
+     * "varierande" som är namnet på vald utrustning som ges värde när någon av
+     * "kvittera"-knapparna trycks.
+     *
+     * @return
+     */
     private int getUtrustningsID() {
         int utrustningsID = 0;
         String utrustning = varierande;
