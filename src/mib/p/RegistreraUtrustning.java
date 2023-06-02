@@ -207,7 +207,7 @@ public class RegistreraUtrustning extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Något gick fel!");
                 }
             }
-        } 
+        }
     }//GEN-LAST:event_btnLaggTillActionPerformed
 
     private void btnHanteraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraUtrustningActionPerformed

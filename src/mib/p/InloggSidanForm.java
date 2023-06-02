@@ -54,7 +54,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
         lblLosenord = new javax.swing.JLabel();
         txtAnvandarnamn = new javax.swing.JTextField();
         jPasswordFieldLoseonrd = new javax.swing.JPasswordField();
-        jButton4 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(550, 343));
         setMinimumSize(new java.awt.Dimension(550, 343));
@@ -79,14 +78,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
         lblLosenord.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLosenord.setText("Lösenord:");
 
-        jButton4.setFont(new java.awt.Font("MS Gothic", 1, 14)); // NOI18N
-        jButton4.setText("HuvudSidan");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,30 +85,24 @@ public class InloggSidanForm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEpost)
+                            .addComponent(lblLosenord))
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordFieldLoseonrd, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblEpost)
-                                    .addComponent(lblLosenord))
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPasswordFieldLoseonrd, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(lblMiB))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(215, 215, 215)
-                                .addComponent(btnLoggaIn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(243, 243, 243)
-                                .addComponent(lblAlienOrAgent)))
-                        .addGap(0, 244, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addContainerGap())
+                                .addGap(9, 9, 9)
+                                .addComponent(lblMiB))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(btnLoggaIn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(lblAlienOrAgent)))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,9 +121,7 @@ public class InloggSidanForm extends javax.swing.JPanel {
                     .addComponent(jPasswordFieldLoseonrd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLoggaIn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addContainerGap())
+                .addContainerGap(113, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -219,13 +202,8 @@ public class InloggSidanForm extends javax.swing.JPanel {
        }
            
     }//GEN-LAST:event_btnLoggaInActionPerformed
-    // Denna knapp skickar en till HuvudSidan, Alien/Agent
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-        HuvudSidan HS = new HuvudSidan(idb);
-        HS.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-  
+
+ 
   
     private void setAlienOrAgent()
   {
@@ -236,7 +214,6 @@ public class InloggSidanForm extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPasswordField jPasswordFieldLoseonrd;
     private javax.swing.JLabel lblAlienOrAgent;
     private javax.swing.JLabel lblEpost;

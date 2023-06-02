@@ -320,22 +320,24 @@ public class MinSidaAgentForm extends javax.swing.JPanel {
         frame.setTitle("Topplista: Kontaktagenter");
         frame.repaint();
     }//GEN-LAST:event_btnToppListaActionPerformed
-    /**
-     * Metod kopplad till btnLoggaUt, som skapar en array med två alternativ "Logga ut" och "Avbryt",
-     * en JOptionPane får sina knappar satta med dessa alternativ och en tryckning sätter värdet
-     * på int-variabeln "val" utifrån
+   /**
+     * Metod kopplad till btnLoggaUt, som visar en JOptionPane med alternativen
+     * "Avbryt" eller "Logga ut", väljer man avbryt händer inget annat än att JOptionPane
+     * stängs ner, väljer man "Logga ut så fortsätter utloggningen. 
+     * Utförligare kommentarer finns i koden.
      *
      * @param evt
      */
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        Object[] alternativ = {"Logga ut", "Avbryt"};
+        String[] alternativ = {"Logga ut", "Avbryt"};//En string-array("alternativ") skapas med strängarna "Logga ut och "Avbryt".
 
         int val = JOptionPane.showOptionDialog(null, "Är du säker på att du vill logga ut?",
-                "Bekräftelse", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                null, alternativ, alternativ[1]);
-
-        if (val == 0) {
-            
+                "Bekräfta utloggning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, alternativ, alternativ[1]);//Strängarna från "alternativ" sätts som text till JOptionPane-knapparna, index 1("Avbryt") blir standardvalet.
+               // int val får värde genom knapptryckning på JOptionPane utifrån valets plats i alternativ-arrayen.
+               // 1 = "Arvbyt" och 0 = "Logga ut".
+        if (val == 0) { //int val kollas med if-satsen och är värdet 0 ("Logga ut") så fortsätter utloggning
+                        // och man tas till inloggningssidan, är värdet 1 så händer ingenting.
             JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAgentForm.this);
             frame.setContentPane(new InloggSidanForm("Agent"));

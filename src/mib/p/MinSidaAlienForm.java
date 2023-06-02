@@ -23,7 +23,6 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
 
     String epost;
     String omradet;
-    private boolean tryckNrTva;
 
     private static InfDB idb;
 
@@ -35,7 +34,6 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
     public MinSidaAlienForm(String epost) {
         initComponents();
         this.epost = epost;
-        tryckNrTva = false;
 
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
@@ -258,27 +256,30 @@ public class MinSidaAlienForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnChefKontaktActionPerformed
     /**
-     * Metod kopplad till btnLoggaUt, som vid första trycket ställer en
-     * kontrollfråga om man verkligen vill logga ut, och vid andra trycket
-     * (vilket hålls reda på via boolean-variabel tryckNrTva) låter användaren
-     * logga ut.
+     * Metod kopplad till btnLoggaUt, som visar en JOptionPane med alternativen
+     * "Avbryt" eller "Logga ut", väljer man avbryt händer inget annat än att JOptionPane
+     * stängs ner, väljer man "Logga ut så fortsätter utloggningen. 
+     * Utförligare kommentarer finns i koden.
      *
      * @param evt
      */
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        if (tryckNrTva) {
+        String[] alternativ = {"Logga ut", "Avbryt"};//En string-array("alternativ") skapas med strängarna "Logga ut och "Avbryt".
+
+        int val = JOptionPane.showOptionDialog(null, "Är du säker på att du vill logga ut?",
+                "Bekräfta utloggning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                null, alternativ, alternativ[1]);//Strängarna från "alternativ" sätts som text till JOptionPane-knapparna, index 1("Avbryt") blir standardvalet.
+        // int val får värde genom knapptryckning på JOptionPane utifrån valets plats i alternativ-arrayen.
+        // 1 = "Avrbryt" och 0 = "Logga ut".
+        if (val == 0) { //int val kollas med if-satsen och är värdet 0 ("Logga ut") så fortsätter utloggning
+            // och man tas till inloggningssidan, är värdet 1 så händer ingenting.
             JOptionPane.showMessageDialog(null, "Hejdå, välkommen tillbaka!");
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(MinSidaAlienForm.this);
             frame.setContentPane(new InloggSidanForm("Alien"));
             frame.revalidate();
             frame.setTitle("Välkommen till MiB");
             frame.repaint();
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Är du säker på att du vill logga ut? Klicka i såfall 'Logga ut' igen.");
-            tryckNrTva = true;
         }
-
     }//GEN-LAST:event_btnLoggaUtActionPerformed
     /**
      * Metod som genom InfDB-metoden fetchSingle hämtar namnet på inloggad alien
